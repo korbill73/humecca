@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ucloud DB - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
+    
+    <script src="cloud-content-data.js"></script>
+    <script src="cloud-router.js" defer></script>
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <section class="cloud-hero">
+        <div class="container">
+            <span class="badge">KT Cloud Partner</span>
+            <h1>ucloud DB</h1>
+            <p>KT Cloud 기반 관계형 데이터베이스 서비스</p>
+        </div>
+    </section>
+
+    <div class="cloud-layout">
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html"><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html" class="active"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+                
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html"><i class="fas fa-info-circle"></i> 서비스별 제한사항</a></li>
+            </ul>
+        </aside>
+
+        <main class="cloud-content">
+            <div class="content-header">
+                <h2><i class="fas fa-database"></i> ucloud DB</h2>
+                <p>고가용성 관계형 데이터베이스 서비스. MySQL, MariaDB를 손쉽게 관리하세요.</p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">데이터베이스 엔진</div>
+                <div class="engine-tabs">
+                    <span class="engine-tab active" onclick="showTab('mysql')">MySQL</span>
+                    <span class="engine-tab" onclick="showTab('mariadb')">MariaDB</span>
+                </div>
+                <p class="section-note">* 모든 요금은 VAT 별도이며, 월 단위 요금 기준입니다. (단위: 원)</p>
+
+                <div id="mysql" class="tab-content active">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>vCore</th>
+                                <th>Memory (GB)</th>
+                                <th>Storage (GB)</th>
+                                <th class="highlight">월 요금</th>
+                                <th class="highlight">할인가 (10%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>100</td>
+                                <td class="price-original">66,000</td>
+                                <td class="price-discount">59,400</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>100</td>
+                                <td class="price-original">132,000</td>
+                                <td class="price-discount">118,800</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>200</td>
+                                <td class="price-original">264,000</td>
+                                <td class="price-discount">237,600</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>16</td>
+                                <td>500</td>
+                                <td class="price-original">528,000</td>
+                                <td class="price-discount">475,200</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>32</td>
+                                <td>1000</td>
+                                <td class="price-original">1,056,000</td>
+                                <td class="price-discount">950,400</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="mariadb" class="tab-content">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>vCore</th>
+                                <th>Memory (GB)</th>
+                                <th>Storage (GB)</th>
+                                <th class="highlight">월 요금</th>
+                                <th class="highlight">할인가 (10%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>100</td>
+                                <td class="price-original">60,500</td>
+                                <td class="price-discount">54,450</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>100</td>
+                                <td class="price-original">121,000</td>
+                                <td class="price-discount">108,900</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>200</td>
+                                <td class="price-original">242,000</td>
+                                <td class="price-discount">217,800</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>16</td>
+                                <td>500</td>
+                                <td class="price-original">484,000</td>
+                                <td class="price-discount">435,600</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">추가 스토리지</div>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>타입</th>
+                            <th>단위</th>
+                            <th class="highlight">월 요금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SSD 스토리지</td>
+                            <td>10GB당</td>
+                            <td class="price">1,100원</td>
+                        </tr>
+                        <tr>
+                            <td>백업 스토리지</td>
+                            <td>10GB당</td>
+                            <td class="price">550원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">주요 기능</div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4><i class="fas fa-sync-alt"></i> 자동 백업</h4>
+                        <table class="info-card-table">
+                            <tr>
+                                <td>기능</td>
+                                <td>매일 자동 백업</td>
+                            </tr>
+                            <tr>
+                                <td>보관 기간</td>
+                                <td>최대 7일</td>
+                            </tr>
+                            <tr>
+                                <td>비용</td>
+                                <td>무료</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-copy"></i> 읽기 복제본</h4>
+                        <table class="info-card-table">
+                            <tr>
+                                <td>기능</td>
+                                <td>읽기 부하 분산</td>
+                            </tr>
+                            <tr>
+                                <td>최대 개수</td>
+                                <td>5개</td>
+                            </tr>
+                            <tr>
+                                <td>비용</td>
+                                <td>DB 인스턴스 요금과 동일</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-shield-alt"></i> 고가용성 (HA)</h4>
+                        <table class="info-card-table">
+                            <tr>
+                                <td>기능</td>
+                                <td>자동 장애 조치</td>
+                            </tr>
+                            <tr>
+                                <td>SLA</td>
+                                <td>99.9%</td>
+                            </tr>
+                            <tr>
+                                <td>추가 비용</td>
+                                <td>기본 요금의 50%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== FOOTER (공통 컴포넌트) ========== -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=2.0"></script>
+    <script src="script.js"></script>
+
+
+<script>
+    // Improved Menu Interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const menu = item.querySelector('.dropdown-menu');
+            if(!menu) return;
+
+            // When link inside menu is clicked, hide menu immediately
+            const links = menu.querySelectorAll('a.dropdown-item');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.style.display = 'none'; // Force hide to prevent ghosting
+                });
+            });
+
+            // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+            // This ensures that next time the user hovers, CSS :hover works again.
+            item.addEventListener('mouseleave', () => {
+                menu.style.display = ''; 
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+            });
+            
+             // Safety: Ensure it's clean (visible) when mouse enters
+            item.addEventListener('mouseenter', () => {
+                menu.style.display = ''; 
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

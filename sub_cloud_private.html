@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Cloud - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
+    
+    <script src="cloud-content-data.js"></script>
+    <script src="cloud-router.js" defer></script>
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <!-- ========== CLOUD HERO ========== -->
+    <section class="cloud-hero">
+        <div class="container">
+            <span class="badge">KT Cloud Partner</span>
+            <h1>Private Cloud</h1>
+            <p>KT Cloud 기반 전용 프라이빗 클라우드</p>
+        </div>
+    </section>
+
+    <!-- ========== CLOUD LAYOUT ========== -->
+    <div class="cloud-layout">
+        <!-- Left Sidebar -->
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html"><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+                
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html" class="active"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html"><i class="fas fa-info-circle"></i> 서비스별 제한사항</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cloud-content">
+            <div class="content-header">
+                <h2>Private Cloud</h2>
+                <p>Private Cloud는 기업 전용으로 구축된 클라우드 인프라로, 퍼블릭 클라우드의 유연성과
+                    온프레미스의 보안성을 동시에 제공합니다. 민감한 데이터를 다루는 기업에 최적화된 솔루션입니다.</p>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>독립적 보안</h3>
+                    <p>전용 인프라로 다른 고객과 격리된 환경에서 운영됩니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sliders-h"></i>
+                    <h3>맞춤 설정</h3>
+                    <p>기업 요구사항에 맞게 인프라를 자유롭게 구성할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>안정적 성능</h3>
+                    <p>전용 자원으로 일관된 고성능을 보장합니다.</p>
+                </div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="content-section">
+                <div class="section-title">Public vs Private Cloud 비교</div>
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>Public Cloud</th>
+                            <th>Private Cloud</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>인프라</td>
+                            <td>공유 인프라</td>
+                            <td>전용 인프라</td>
+                        </tr>
+                        <tr>
+                            <td>보안</td>
+                            <td>표준 보안</td>
+                            <td>강화된 보안</td>
+                        </tr>
+                        <tr>
+                            <td>커스터마이징</td>
+                            <td>제한적</td>
+                            <td>자유로움</td>
+                        </tr>
+                        <tr>
+                            <td>비용</td>
+                            <td>사용량 기반</td>
+                            <td>고정 비용</td>
+                        </tr>
+                        <tr>
+                            <td>컴플라이언스</td>
+                            <td>일반</td>
+                            <td>규제 산업 대응</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Benefits -->
+            <div class="content-section">
+                <div class="section-title">Private Cloud 장점</div>
+                <ul class="info-list">
+                    <li>규제 준수: 금융, 공공, 의료 등 규제 산업의 컴플라이언스 요구사항 충족</li>
+                    <li>데이터 주권: 데이터가 지정된 위치에만 저장되어 법적 요구사항 충족</li>
+                    <li>성능 보장: 전용 하드웨어로 "노이지 네이버" 문제 없음</li>
+                    <li>보안 강화: 물리적, 논리적 격리로 최고 수준의 보안 제공</li>
+                    <li>유연한 확장: 필요에 따라 인프라를 유연하게 확장 가능</li>
+                </ul>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="content-section">
+                <div class="section-title">적합한 기업</div>
+                <ul class="info-list">
+                    <li>금융기관: 고객 금융정보 보호 및 금융위원회 규정 준수</li>
+                    <li>공공기관: 국가 보안 요구사항 충족 및 데이터 주권 확보</li>
+                    <li>의료기관: 환자 정보 보호 및 HIPAA 등 규정 준수</li>
+                    <li>대기업: 민감한 기업 데이터 보호 및 맞춤형 인프라 구축</li>
+                    <li>연구기관: 연구 데이터 보안 및 고성능 컴퓨팅 환경</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div id="footer-placeholder"></div>
+    <script src="components/loader.js?v=2.0"></script>
+    <script src="script.js"></script>
+
+
+<script>
+    // Improved Menu Interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const menu = item.querySelector('.dropdown-menu');
+            if(!menu) return;
+
+            // When link inside menu is clicked, hide menu immediately
+            const links = menu.querySelectorAll('a.dropdown-item');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.style.display = 'none'; // Force hide to prevent ghosting
+                });
+            });
+
+            // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+            // This ensures that next time the user hovers, CSS :hover works again.
+            item.addEventListener('mouseleave', () => {
+                menu.style.display = ''; 
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+            });
+            
+             // Safety: Ensure it's clean (visible) when mouse enters
+            item.addEventListener('mouseenter', () => {
+                menu.style.display = ''; 
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

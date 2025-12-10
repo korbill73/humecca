@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객사 데이터 추가</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f7fa;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #EF4444;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #DC2626;
+        }
+
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>고객사 데이터 일괄 추가</h1>
+        <p>아래 버튼을 클릭하면 이미지에 있는 모든 고객사가 추가됩니다.</p>
+
+        <div style="margin-bottom: 20px; padding: 15px; background: #f0f9ff; border-radius: 8px;">
+            <strong>현재 저장된 고객사:</strong> <span id="current-count" style="font-size: 24px; color: #EF4444;">0</span>개
+        </div>
+
+        <button onclick="addCustomers()">고객사 추가하기</button>
+        <button onclick="window.location.href='admin.html'" style="background: #64748b; margin-left: 10px;">관리자 페이지로
+            이동</button>
+
+        <div id="result"></div>
+    </div>
+
+    <div class="card">
+        <h2>추가될 고객사 목록</h2>
+        <pre id="customer-list"></pre>
+    </div>
+
+    <script>
+        const newCustomers = [
+            // 첫 번째 이미지
+            { name: 'METACITY', logo: '' },
+            { name: 'e-대구은행', logo: '' },
+            { name: 'JNESS', logo: '' },
+
+            // 두 번째 이미지 - 모든 회사
+            { name: '피넷', logo: '' },
+            { name: '원데이', logo: '' },
+            { name: 'NDS (녹십자데이터시스템)', logo: '' },
+            { name: '한국전교역사기념관', logo: '' },
+            { name: '서울창업창업재단', logo: '' },
+            { name: 'PFIN', logo: '' },
+
+            { name: '메타디씨', logo: '' },
+            { name: '디담365', logo: '' },
+            { name: '블랭에이아이', logo: '' },
+            { name: '버튼스카드', logo: '' },
+            { name: '네오스포트', logo: '' },
+            { name: '제이니스', logo: '' },
+
+            { name: '알파스포트', logo: '' },
+            { name: '아이티더블유유피엠엘프코리아', logo: '' },
+            { name: '푸퍼스트', logo: '' },
+            { name: '지엔뎬바로보스', logo: '' },
+            { name: '세계무용엠앰', logo: '' },
+            { name: '아이에이엠', logo: '' },
+
+            { name: '즐거움푸드', logo: '' },
+            { name: '엑시즌씨엠앤스', logo: '' },
+            { name: '메디스쿱가스', logo: '' },
+            { name: '아트앤달려버니', logo: '' },
+            { name: '민플릿', logo: '' },
+            { name: '마인스포트', logo: '' },
+
+            { name: '비아이엠솔루션선', logo: '' },
+            { name: '당페이나에이엔시', logo: '' },
+            { name: '스카이엠켑', logo: '' },
+            { name: '아이디엠스', logo: '' },
+            { name: '에이티브애일', logo: '' },
+            { name: '브랜드스탭', logo: '' },
+
+            { name: '쓰리앰시스', logo: '' },
+            { name: '그림닷컴', logo: '' },
+            { name: '아이비스코퍼레이션', logo: '' },
+            { name: '아롬아이디자인', logo: '' },
+            { name: '포스제이스', logo: '' },
+            { name: '마이드스탭', logo: '' },
+
+            { name: '가이드코인', logo: '' },
+            { name: '메타비티', logo: '' }
+        ];
+
+        // 목록 표시
+        document.getElementById('customer-list').textContent = JSON.stringify(newCustomers, null, 2);
+
+        // 현재 고객사 수 업데이트
+        function updateCount() {
+            const existingData = localStorage.getItem('humecca_customers');
+            const existingCustomers = existingData ? JSON.parse(existingData) : [];
+            document.getElementById('current-count').textContent = existingCustomers.length;
+        }
+
+        // 페이지 로드 시 카운트 업데이트
+        updateCount();
+
+        function addCustomers() {
+            try {
+                // 기존 데이터 가져오기
+                const existingData = localStorage.getItem('humecca_customers');
+                const existingCustomers = existingData ? JSON.parse(existingData) : [];
+
+                // 중복 제거를 위한 Set 사용
+                const existingNames = new Set(existingCustomers.map(c => c.name.toLowerCase()));
+
+                // 새로운 고객사 중 중복되지 않은 것만 추가
+                let addedCount = 0;
+                newCustomers.forEach(customer => {
+                    if (!existingNames.has(customer.name.toLowerCase())) {
+                        existingCustomers.push(customer);
+                        addedCount++;
+                    }
+                });
+
+                // 저장
+                localStorage.setItem('humecca_customers', JSON.stringify(existingCustomers));
+
+                // 카운트 업데이트
+                updateCount();
+
+                // 결과 표시
+                document.getElementById('result').innerHTML = `
+                    <div class="success">
+                        <strong>✓ 완료!</strong><br>
+                        ${addedCount}개의 고객사가 추가되었습니다.<br>
+                        (중복 ${newCustomers.length - addedCount}개 제외)<br>
+                        총 ${existingCustomers.length}개의 고객사가 등록되어 있습니다.
+                        <br><br>
+                        <strong>다음 단계:</strong><br>
+                        1. <a href="admin.html" target="_blank" style="color: #065f46; font-weight: 600;">관리자 페이지</a>에서 확인<br>
+                        2. <a href="index.html" target="_blank" style="color: #065f46; font-weight: 600;">홈페이지</a>에서 확인 (Ctrl+F5로 새로고침)
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `
+                    <div style="background: #fee2e2; color: #991b1b; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <strong>오류 발생:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+    </script>
+
+
+<script>
+    // Improved Menu Interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const menu = item.querySelector('.dropdown-menu');
+            if(!menu) return;
+
+            // When link inside menu is clicked, hide menu immediately
+            const links = menu.querySelectorAll('a.dropdown-item');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.style.display = 'none'; // Force hide to prevent ghosting
+                });
+            });
+
+            // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+            // This ensures that next time the user hovers, CSS :hover works again.
+            item.addEventListener('mouseleave', () => {
+                menu.style.display = ''; 
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+            });
+            
+             // Safety: Ensure it's clean (visible) when mouse enters
+            item.addEventListener('mouseenter', () => {
+                menu.style.display = ''; 
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

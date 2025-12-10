@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN 전용선 - HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <script src="js/vpn_data.js"></script>
+
+    <style>
+        /* IDC Style Background Override for Hero */
+        .vpn-hero {
+            background-color: #0f172a;
+            /* IDC Footer BG color used in IDC Hero */
+            padding: 100px 0 100px;
+            text-align: center;
+            position: relative;
+            /* Changed from sticky to relative for natural scroll */
+        }
+
+        /* Sticky removed as requested */
+
+        /* VPN Specific Styles (Full Width Design) */
+        .vpn-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .vpn-feature-card {
+            padding: 30px;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .vpn-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-color: #ffdacc;
+        }
+
+        .vpn-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vpn-plan-card {
+            border: 1px solid #eee;
+            padding: 40px;
+            border-radius: 20px;
+            background: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+        }
+
+        .vpn-plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .vpn-plan-card.popular {
+            border: 2px solid #E94D36;
+            box-shadow: 0 10px 30px rgba(233, 77, 54, 0.1);
+        }
+
+        .vpn-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #E94D36;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .vpn-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            margin-top: 15px;
+            letter-spacing: -1px;
+        }
+
+        .vpn-price span {
+            font-size: 16px;
+            color: #6b7280;
+            font-weight: 500;
+            letter-spacing: normal;
+        }
+
+        .vpn-plan-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .vpn-specs {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px 0;
+            flex-grow: 1;
+        }
+
+        .vpn-specs li {
+            padding: 12px 0;
+            color: #4b5563;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .vpn-specs li i {
+            color: #10b981;
+            margin-right: 12px;
+            background: #d1fae5;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .btn-apply {
+            text-align: center;
+            display: block;
+            background: #1f2937;
+            padding: 16px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .vpn-plan-card.popular .btn-apply {
+            background: #E94D36;
+        }
+
+        .btn-apply:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header (Using existing header code) -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+
+
+    <!-- Hero Section -->
+    <section class="sw-hero" style="background-color: #0f172a;">
+        <div class="container">
+            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                네트워크 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> VPN 전용선
+            </div>
+            <div
+                style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-network-wired" style="font-size: 30px; color: white;"></i>
+            </div>
+            <h1>VPN 전용선 서비스</h1>
+            <p style="max-width: 800px; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                본사-지사 간 안전하고 빠른 네트워크 연결을 위한 최고의 선택.<br>
+                HUMECCA가 제공하는 차세대 기업 통신망을 경험하세요.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content (Full Width) -->
+    <main style="padding: 100px 0; background: white;">
+        <div class="container">
+
+            <div style="text-align:center; max-width:800px; margin:0 auto 80px;">
+                <h2 style="font-size:36px; font-weight:800; margin-bottom:15px; color:#111827;">Why HUMECCA VPN?</h2>
+                <p style="color:#666; font-size:18px;">비용은 줄이고 보안은 강화하는 최적의 네트워크 솔루션</p>
+            </div>
+
+            <!-- Global Features (Generic) -->
+            <div class="vpn-features-grid">
+                <div class="vpn-feature-card">
+                    <div
+                        style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">IPSec / SSL VPN</h3>
+                    <p style="color:#666; font-size:16px; line-height:1.6;">표준 IPSec 및 SSL 프로토콜을 모두 지원하여 다양한 네트워크 환경에
+                        유연하게 대응합니다.</p>
+                </div>
+
+                <div class="vpn-feature-card">
+                    <div
+                        style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">AES-256 암호화</h3>
+                    <p style="color:#666; font-size:16px; line-height:1.6;">금융권 수준의 강력한 AES-256 암호화 알고리즘을 적용하여 데이터를 안전하게
+                        보호합니다.</p>
+                </div>
+
+                <div class="vpn-feature-card">
+                    <div
+                        style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">Mesh 네트워크</h3>
+                    <p style="color:#666; font-size:16px; line-height:1.6;">본사와 여러 지사 간의 다중 거점 연결(Mesh) 구성을 손쉽고 안정적으로
+                        처리합니다.</p>
+                </div>
+
+                <div class="vpn-feature-card">
+                    <div
+                        style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">대역폭 100% 보장</h3>
+                    <p style="color:#666; font-size:16px; line-height:1.6;">계약된 속도(CIR)를 100% 보장하여 트래픽이 몰려도 끊김 없는 업무 환경을
+                        제공합니다.</p>
+                </div>
+            </div>
+
+            <div style="margin: 120px 0 60px; text-align:center;">
+                <h2 style="font-size:36px; font-weight:800; margin-bottom:15px; color:#111827;">서비스 요금제</h2>
+                <p style="color:#666; font-size:18px;">합리적인 가격으로 기업 전용선을 구축하세요.</p>
+            </div>
+
+            <!-- Dynamic Product List -->
+            <div id="vpn-list-container" class="vpn-pricing-grid">
+                <!-- JS Rendering Area -->
+            </div>
+
+            <!-- Bottom CTA -->
+            <div
+                style="margin-top:120px; background:#111827; padding:80px; border-radius:24px; text-align:center; color:white; background-image: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); background-size:cover; background-position:center;">
+                <h3 style="font-size:32px; font-weight:700; margin-bottom:20px;">맞춤형 네트워크 설계가 필요하신가요?</h3>
+                <p
+                    style="color:#e5e7eb; margin-bottom:40px; font-size:18px; max-width:600px; margin-left:auto; margin-right:auto;">
+                    전문 네트워크 엔지니어가 귀사의 비즈니스 환경과 예산에 맞춰<br>최적의 VPN 구성을 무료로 제안해 드립니다.</p>
+                <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+                    <a href="sub_support.html" class="btn btn-primary"
+                        style="padding:16px 40px; font-size:18px; background:#E94D36; color:white; border-radius:8px; text-decoration:none; display:inline-block; font-weight:600; border:none; transition:all 0.3s; box-shadow: 0 4px 15px rgba(233,77,54,0.4);">무료
+                        상담 신청</a>
+                    <a href="tel:02-1234-5678"
+                        style="padding:16px 40px; font-size:18px; background:transparent; color:white; border:2px solid white; border-radius:8px; text-decoration:none; display:inline-block; font-weight:600; transition:all 0.3s;">전화
+                        문의하기</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Correct Footer ID for Loader -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initial Render
+            // 1. Initial Render
+            renderVpnList();
+
+            // 3. Mobile Menu
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('.nav');
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
+        });
+
+        function renderVpnList() {
+            const container = document.getElementById('vpn-list-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            // Try to load from js/vpn_data.js (global var)
+            let products = [];
+            if (typeof vpnProducts !== 'undefined') products = vpnProducts;
+
+            // Filter active
+            const activeProducts = products.filter(p => p.isActive);
+            if (activeProducts.length === 0) {
+                container.innerHTML = '<p style="grid-column:1/-1; text-align:center;">판매 중인 상품이 없습니다.</p>';
+                return;
+            }
+
+            activeProducts.sort((a, b) => (a.sortOrder || 99) - (b.sortOrder || 99));
+
+            activeProducts.forEach(p => {
+                const isPopular = p.popular;
+                const cardClass = isPopular ? 'vpn-plan-card popular' : 'vpn-plan-card';
+                const badgeHtml = p.badge ? `<span class="vpn-badge">${p.badge}</span>` : '';
+
+                const specs = p.specs || {};
+                let featureListHtml = '';
+                if (p.features && p.features.length > 0) {
+                    featureListHtml = p.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
+                } else {
+                    if (specs.speed) featureListHtml += `<li><i class="fas fa-check"></i> ${specs.speed} 보장</li>`;
+                    if (specs.sites) featureListHtml += `<li><i class="fas fa-check"></i> ${specs.sites}</li>`;
+                    if (specs.users) featureListHtml += `<li><i class="fas fa-check"></i> ${specs.users}</li>`;
+                }
+
+                let displayPrice = p.price;
+                if (!isNaN(p.price)) displayPrice = Number(p.price).toLocaleString();
+
+                const html = `
+                    <div class="${cardClass}">
+                        ${badgeHtml}
+                        <div class="vpn-plan-header">
+                            <h3 style="font-size:24px; font-weight:700; color:#111827;">${p.name}</h3>
+                            <div class="vpn-price">₩${displayPrice}<span style="font-size:16px;"> / ${p.period}</span></div>
+                            ${p.summary ? `<p style="font-size:14px; color:#6b7280; margin-top:12px;">${p.summary}</p>` : ''}
+                        </div>
+                        <ul class="vpn-specs">
+                            ${featureListHtml}
+                        </ul>
+                        <a href="sub_support.html" class="btn-apply">신청하기</a>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+    </script>
+
+    <!-- Load Header and Footer -->
+    <script src="components/loader.js?v=2.0"></script>
+</body>
+
+</html>

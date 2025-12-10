@@ -1,0 +1,130 @@
+<!-- HUMECCA 공통 푸터 -->
+<footer class="footer-new">
+    <div class="container footer-grid">
+        <!-- Col 1: Info -->
+        <div>
+            <h3>전문가와 부담 없이 상담하세요</h3>
+            <p style="margin-bottom:20px; color:#94a3b8; line-height:1.6;">
+                간편하게 무엇이든 물어보세요<br>
+                더욱 정확한 상담을 원하신다면 로그인 후 1:1 문의를 이용하실 수 있습니다.
+            </p>
+            <div style="display:flex; gap:16px; font-size:14px;">
+                <a href="sub_support.html" style="color:#EF4444; display:flex; align-items:center; gap:6px;">
+                    1:1 문의 <i class="fas fa-external-link-alt" style="font-size:10px;"></i>
+                </a>
+                <a href="https://login.humecca.co.kr/Login/Join" target="_blank"
+                    style="color:#EF4444; display:flex; align-items:center; gap:6px;">
+                    회원가입 <i class="fas fa-external-link-alt" style="font-size:10px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Col 2: Phone -->
+        <div>
+            <h4>서비스 문의</h4>
+            <a href="tel:02-418-7766" class="footer-phone">02-418-7766</a>
+            <div style="font-size:13px; color:#94a3b8; margin-top:12px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                    <span>평일</span> <span>09:00 ~ 18:00</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                    <span>점심</span> <span>12:00 ~ 13:00</span>
+                </div>
+                <div style="font-size:11px; margin-top:8px;">*주말, 공휴일 휴무</div>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Col 3: Company Info -->
+        <div>
+            <div
+                style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #334155; font-size:13px;">
+                <a href="javascript:void(0)" style="cursor: default;">(주) 휴메카</a>
+                <a href="javascript:void(0)" onclick="showLayerTerm('privacy')"
+                    style="font-weight:700; color:white; cursor:pointer;">개인정보처리방침</a>
+                <a href="javascript:void(0)" onclick="showLayerTerm('terms')" style="cursor:pointer;">이용약관</a>
+                <a href="javascript:void(0)" onclick="showLayerTerm('member')" style="cursor:pointer;">회원약관</a>
+            </div>
+            <div style="font-size:12px; color:#64748b; line-height:1.8;">
+                <p>(주)휴메카 | 대표이사: 박제군 | 사업자등록번호: 101-81-89952</p>
+                <p>본사: 서울특별시 강남구 언주로 517 (역삼동, KT영동지사) KT IDC 4층</p>
+                <p style="margin-top:16px; font-size:11px;">Copyright © 2024 Humecca. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 약관 모달 -->
+<div id="term-modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div
+        style="background: white; width: 90%; max-width: 800px; max-height: 90vh; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+        <div
+            style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+            <h3 id="term-modal-title" style="font-size: 20px; font-weight: 700; color: #1e293b;">약관</h3>
+            <button onclick="closeTermModal()"
+                style="background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; line-height: 1;">&times;</button>
+        </div>
+        <div id="term-modal-content"
+            style="padding: 30px; overflow-y: auto; line-height: 1.8; color: #333; font-size: 15px; white-space: pre-wrap; font-family: 'Pretendard', 'Noto Sans KR', sans-serif;">
+            <!-- 내용이 여기에 로드됩니다 -->
+        </div>
+        <div style="padding: 20px; border-top: 1px solid #e5e7eb; text-align: right;">
+            <button onclick="closeTermModal()"
+                style="background: #1a1a2e; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">닫기</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 약관 모달 기능
+    function showLayerTerm(type) {
+        // LocalStorage 우선 확인 (v4 - 텍스트 모드)
+        let content = localStorage.getItem('humecca_term_v4_' + type);
+
+        // 데이터가 없으면 안내 메시지 표시
+        if (!content) content = `<div style="text-align:center; padding: 40px;">
+            <p>등록된 약관 내용이 없습니다.</p>
+            <p style="color:#666; margin-top:10px;">관리자 페이지에서 내용을 등록해주세요.</p>
+        </div>`;
+
+        let title = '약관';
+        if (type === 'privacy') title = '개인정보처리방침';
+        else if (type === 'terms') title = '이용약관';
+        else if (type === 'member') title = '회원약관';
+
+        document.getElementById('term-modal-title').textContent = title;
+        document.getElementById('term-modal-content').innerHTML = content;
+
+        const modal = document.getElementById('term-modal');
+        modal.style.display = 'flex';
+
+        // 페이드 인 효과
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            modal.style.transition = 'opacity 0.2s';
+        }, 10);
+
+        document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+    }
+
+    function closeTermModal() {
+        const modal = document.getElementById('term-modal');
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 200);
+    }
+
+    // 모달 바깥 클릭 시 닫기
+    document.getElementById('term-modal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeTermModal();
+        }
+    });
+</script>

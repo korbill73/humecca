@@ -1,0 +1,2111 @@
+/* HUMECCA Website - Complete Replit Clone */
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    font-display: block;
+    src: local('Pretendard ExtraBold'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-display: block;
+    src: local('Pretendard Bold'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-display: block;
+    src: local('Pretendard SemiBold'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-display: block;
+    src: local('Pretendard Medium'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-display: block;
+    src: local('Pretendard Regular'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    font-display: block;
+    src: local('Pretendard Light'), url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/web/static/woff2/Pretendard-Light.woff2') format('woff2');
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    color: #0f172a;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+/* Primary Color (Red) */
+:root {
+    --primary-red: #EF4444;
+    --dark-navy: #1a237e;
+    --border-gray: #e2e8f0;
+}
+
+/* Header - Sticky */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: white;
+    border-bottom: 1px solid var(--border-gray);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    overflow: visible !important;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    overflow: visible !important;
+}
+
+.nav {
+    height: 100%;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+}
+
+/* Logo */
+.logo-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-red);
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.logo-text:hover {
+    opacity: 0.9;
+}
+
+
+
+/* Navigation */
+.nav {
+    display: flex;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.nav-list {
+    display: flex;
+    /* Removed gap: 36px to prevent hover dead zones */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* ... (Existing Nav Item styles) ... */
+
+/* Hero Slider Styles */
+.hero-slider-stack {
+    display: grid;
+    grid-template-areas: "stack";
+    align-items: center;
+    width: 100%;
+}
+
+.hero-slide {
+    grid-area: stack;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    pointer-events: none;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* Add padding here instead of gap in list */
+    padding: 0 18px;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 14px;
+    color: #334155;
+    text-decoration: none;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: var(--primary-red);
+}
+
+.nav-link .fa-chevron-down {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* Dropdown Menu - Enhanced to prevent ghosting */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    padding: 8px;
+    /* CRITICAL: Start completely hidden */
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    min-width: 280px;
+    z-index: 10000;
+}
+
+/* Show dropdown on hover */
+.nav-item:hover>.dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Ensure no other nav-item's dropdown is shown */
+.nav-item:not(:hover)>.dropdown-menu {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Fix for right-aligned menus (prevent off-screen) */
+.nav-item:nth-last-child(1) .dropdown-menu,
+.nav-item:nth-last-child(2) .dropdown-menu {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+/* Ensure Mega Menus on the right don't overflow */
+.nav-item:nth-last-child(1) .mega-menu,
+.nav-item:nth-last-child(2) .mega-menu,
+.nav-item:nth-last-child(3) .mega-menu {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #334155;
+    transition: background 0.15s;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}
+
+.dropdown-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--primary-red);
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.dropdown-text {
+    flex: 1;
+}
+
+.dropdown-title {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #0f172a;
+}
+
+.dropdown-desc {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* Mega Menu (Cloud) */
+.mega-menu {
+    min-width: 400px;
+    /* Removed max-width to prevents content clipping */
+}
+
+.mega-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 12px 0 6px 12px;
+}
+
+.mega-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+}
+
+.mega-grid .dropdown-item {
+    padding: 8px 10px;
+}
+
+.mega-grid .dropdown-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+}
+
+.mega-grid .dropdown-title {
+    font-size: 12px;
+}
+
+.mega-cta {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-gray);
+}
+
+.mega-cta a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--primary-red);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.mega-cta a:hover {
+    background: #dc2626;
+}
+
+.mega-cta .fa-external-link-alt {
+    font-size: 12px;
+}
+
+/* Buttons */
+.header-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* Logo */
+.logo-link img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    margin: 0 auto;
+}
+
+/* ... (skip to btn) ... */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-outline {
+    border: 1px solid var(--border-gray);
+    color: #334155;
+    background: white;
+}
+
+.btn-outline:hover {
+    background: #f8fafc;
+}
+
+.hero-btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+    /* Glassy */
+    backdrop-filter: blur(4px);
+}
+
+.hero-btn-outline:hover {
+    background: white;
+    color: #0f172a;
+    border-color: white;
+}
+
+.hero-dots {
+    display: none !important;
+}
+
+.btn-primary {
+    background: var(--primary-red);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #dc2626;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Hero Section */
+/* Hero Section - Replit Clone */
+.hero-section {
+    position: relative;
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e2a4a 0%, #2d3e5f 50%, #1e2a4a 100%);
+    padding: 80px 0 20px 0;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+');
+}
+
+/* Container alignment handled by base .container class */
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    position: relative;
+    z-index: 10;
+    align-items: start;
+    justify-items: start;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr 400px;
+        gap: 60px;
+    }
+}
+
+.hero-content {
+    color: white;
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.hero-slider-stack {
+    text-align: left;
+}
+
+.hero-slide {
+    text-align: left;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 56px;
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.glass-card {
+    background: linear-gradient(135deg, rgba(80, 60, 65, 0.85), rgba(65, 50, 55, 0.9));
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 60px rgba(239, 68, 68, 0.35), inset 0 0 80px rgba(239, 68, 68, 0.12);
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.glass-card h3 {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.glass-card>p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    margin-bottom: 21px;
+}
+
+.quick-link-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    border-radius: 9px;
+    margin-bottom: 7px;
+    padding: 11px 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.1), inset 0 0 20px rgba(239, 68, 68, 0.03);
+}
+
+.quick-link-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(239, 68, 68, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.25), inset 0 0 30px rgba(239, 68, 68, 0.05);
+}
+
+.quick-link-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.quick-link-icon-box {
+    width: 36px;
+    height: 36px;
+    background: rgba(239, 68, 68, 0.15);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EF4444;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.quick-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.quick-link-title {
+    display: block;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.quick-link-desc {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+}
+
+.quick-link-item i.fa-chevron-right {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 13px;
+}
+
+.btn-white-full {
+    display: block;
+    width: 100%;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-top: 18px;
+}
+
+.btn-white-full:hover {
+    background: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.text-primary {
+    color: var(--primary-red);
+}
+
+
+
+.hero-content .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    color: #cbd5e1;
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+/* Quick Menu Cards */
+.quick-menu {
+    padding: 80px 0;
+    background: white;
+}
+
+.quick-menu h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.quick-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.quick-card {
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.quick-card:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15);
+    transform: translateY(-4px);
+}
+
+.quick-card .icon {
+    font-size: 48px;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+}
+
+.quick-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.quick-card p {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* Service Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin: 60px 0;
+}
+
+.service-card {
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s;
+}
+
+.service-card:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.service-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-red);
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.service-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-red);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Pricing Cards */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+.plan-card {
+    border: 2px solid var(--border-gray);
+    border-radius: 16px;
+    padding: 40px;
+    background: white;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.plan-card:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 12px 32px rgba(239, 68, 68, 0.15);
+}
+
+.plan-card.popular {
+    border-color: var(--primary-red);
+    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+    /* transform: scale(1.05); Removed per user request */
+    z-index: 10;
+}
+
+.plan-card .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-red);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.plan-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.plan-card .price {
+    text-align: center;
+    margin: 24px 0;
+}
+
+.plan-card .price .amount {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--primary-red);
+}
+
+.plan-card .price .period {
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.plan-card ul {
+    list-style: none;
+    margin-bottom: 32px;
+}
+
+.plan-card ul li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-card ul li i {
+    color: var(--primary-red);
+}
+
+/* Footer */
+.footer-new {
+    background: #1a1a2e;
+    color: #cbd5e1;
+    padding: 60px 0 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr auto 300px auto 2fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.separator {
+    width: 1px;
+    background: #334155;
+    align-self: stretch;
+    min-height: 200px;
+}
+
+.footer-new h3 {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.footer-new h4 {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.footer-phone {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 16px;
+}
+
+.footer-phone:hover {
+    color: var(--primary-red);
+}
+
+.footer-new a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+.footer-new a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer-links {
+    list-style: none;
+    margin-top: 16px;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        font-size: 24px;
+        color: #334155;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .mobile-menu-btn {
+        display: none;
+    }
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.py-12 {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.py-16 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.bg-white {
+    background: white;
+}
+
+.bg-gray-50 {
+    background: #f8fafc;
+}
+
+/* =========================================
+   Centralized Styles from Cloud Sub-pages
+   ========================================= */
+
+/* --- Styles from sub_cloud_intro.html --- */
+
+/* Cloud Sub-Page Layout */
+.cloud-hero {
+    background: #fff5f5;
+    padding: 16px 0 14px;
+    margin-top: 0;
+    border-bottom: 1px solid #fecaca;
+}
+
+.cloud-hero .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cloud-hero .badge {
+    display: inline-block;
+    font-size: 12px;
+    color: #EF4444;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.cloud-hero h1 {
+    color: #1f2937;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.cloud-hero p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Two Column Layout */
+.cloud-layout {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    padding: 60px 80px;
+    /* Align with Header Container (Logo) */
+    align-items: flex-start;
+}
+
+/* Sidebar Wrapper */
+.cloud-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    position: sticky;
+    /* Keeps menu visible while scrolling if height permits */
+    top: 100px;
+    z-index: 10;
+}
+
+/* Sidebar Menu List */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 6px;
+}
+
+/* Sidebar Links */
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    color: #111827;
+    /* Changed from Gray to Black per request */
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+/* Hover State */
+.sidebar-menu li a:hover {
+    background-color: #f3f4f6;
+    /* Gray-100 */
+    color: #111827;
+    /* Gray-900 */
+}
+
+/* Active State (Red Button Style as requested) */
+.sidebar-menu li a.active {
+    background-color: #dc2626;
+    /* Red-600 */
+    color: white !important;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
+}
+
+.sidebar-menu li a i {
+    width: 24px;
+    text-align: center;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.sidebar-menu li a.active i {
+    color: white !important;
+}
+
+/* Main Content Area */
+.cloud-content {
+    flex: 1;
+    min-width: 0;
+    /* Prevent overflow */
+    width: 100%;
+    /* For full width within flex item */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .cloud-layout {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 30px;
+    }
+
+    .cloud-sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 0;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        gap: 10px;
+    }
+
+    .sidebar-menu li {
+        min-width: fit-content;
+        margin-bottom: 0;
+    }
+
+    .sidebar-menu li a {
+        white-space: nowrap;
+    }
+}
+
+/* ==========================================================================
+   Restored Cloud Content Styles (Typography & Spacing)
+   ========================================================================== */
+.cloud-content {
+    flex: 1;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #334155;
+    /* Slate-700 for good readability */
+}
+
+/* Headings within content */
+.cloud-content h2,
+.cloud-content .content-header h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #0f172a;
+    /* Slate-900 */
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.cloud-content h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
+.cloud-content p {
+    margin-bottom: 16px;
+}
+
+/* Adjust layout gap slightly to ensure content isn't squeezed */
+.cloud-layout {
+    gap: 50px;
+}
+
+/* Global Table Styles (Restored) */
+.cloud-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 30px 0 50px;
+    font-size: 14px;
+    border-top: 2px solid #334155;
+    /* Dark top border for emphasis */
+}
+
+.cloud-content th {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-weight: 700;
+    padding: 16px;
+    border-bottom: 1px solid #cbd5e1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.cloud-content td {
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    text-align: center;
+    background: white;
+    vertical-align: middle;
+}
+
+.cloud-content tr:last-child td {
+    border-bottom: 1px solid #cbd5e1;
+    /* Bottom closure */
+}
+
+.cloud-content tr:hover td {
+    background-color: #f8fafc;
+    /* Hover effect */
+}
+
+/* Price Highlight Text */
+.cloud-content strong {
+    font-weight: 700;
+}
+
+/* Tab Button Style Restoration (Ensures tabs look like buttons, not text) */
+.engine-tab {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 4px;
+}
+
+.engine-tab button {
+    padding: 12px 24px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-bottom: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #64748b;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.engine-tab button:hover {
+    color: #dc2626;
+    background: #fef2f2;
+}
+
+.engine-tab button.active {
+    background: #dc2626;
+    color: white;
+    border-color: #dc2626;
+}
+
+/* ==========================================================================
+   Pricing & Design Updates (User Request)
+   ========================================================================== */
+
+/* 1. Pricing Highlight (Logo Color) */
+.cloud-content td.price {
+    color: #dc2626 !important;
+    /* Humecca Red */
+    font-weight: 700;
+}
+
+.cloud-content .highlight-sub {
+    background-color: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+}
+
+/* 2. Stylish Service Overview (Feature Cards) */
+/* Replaces simple text with a modern card grid layout */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 40px 0 60px;
+}
+
+.feature-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    /* Soft shadow */
+    border-color: #fca5a5;
+    /* Red tint border */
+}
+
+/* Icon Styling */
+.feature-card .icon {
+    width: 64px;
+    height: 64px;
+    background: #fef2f2;
+    /* Light Red bg */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #dc2626;
+    font-size: 24px;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover .icon {
+    transform: scale(1.1) rotate(5deg);
+    background: #dc2626;
+    color: white;
+}
+
+/* Typography for Features */
+.feature-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    font-size: 15px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Content Header Tweaks */
+.content-header {
+    margin-bottom: 40px;
+}
+
+.content-header p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #475569;
+}
+
+/* =========================================
+   New Intro Page Design Styles (User Request)
+   ========================================= */
+
+/* Server Generation Cards */
+.gen-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.gen-card {
+    flex: 1;
+    min-width: 250px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.gen-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.gen-card h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.gen-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.gen-card.gen-1 {
+    border-top: 4px solid #94a3b8;
+}
+
+.gen-card.gen-2 {
+    border-top: 4px solid #3b82f6;
+}
+
+.gen-card.gen-3 {
+    border-top: 4px solid #dc2626;
+}
+
+/* Key Function Boxes */
+.func-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.func-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.func-box:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.func-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.func-icon {
+    width: 40px;
+    height: 40px;
+    background: #f1f5f9;
+    color: #475569;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.func-box h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.func-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.func-list li {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.func-list li::before {
+    content: "•";
+    color: #3b82f6;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Related Product Badges */
+.related-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.product-badge {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.product-badge:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #f0f9ff;
+    transform: translateY(-2px);
+}
+
+.product-badge i {
+    color: #94a3b8;
+    transition: color 0.2s;
+}
+
+.product-badge:hover i {
+    color: #3b82f6;
+}
+
+/* Case Study Box */
+.case-study-box {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.case-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.case-img {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.case-content h4 {
+    font-size: 18px;
+    color: #1e293b;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.case-tag {
+    font-size: 12px;
+    background: #eff6ff;
+    color: #3b82f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   GLOBAL CLOUD PAGE STYLES (STANDARD)
+   Applied to ALL cloud subpages
+   ========================================= */
+
+/* Sticky Hero Section - REMOVED sticky to allow scrolling */
+.cloud-hero {
+    position: relative;
+    /* was sticky top: 80px */
+    z-index: 1;
+    /* Reduced z-index */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Hero Container - Left aligned, indented 1.5cm */
+.cloud-hero .container {
+    padding-left: 60px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Hero Text Elements - Ensure left alignment */
+.cloud-hero h1,
+.cloud-hero p,
+.cloud-hero .badge {
+    text-align: left;
+    margin-left: 0;
+    align-self: flex-start;
+}
+
+/* Cloud Layout Container - Consistent spacing */
+.cloud-layout {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    padding: 60px 80px;
+    align-items: flex-start;
+}
+
+/* Sidebar - Fixed width and standard styling */
+.cloud-sidebar {
+    width: 240px;
+    min-width: 240px;
+    position: sticky;
+    top: 100px;
+    /* Adjusted for static hero: Header (80px) + Gap (20px) */
+}
+
+.cloud-sidebar .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cloud-sidebar .sidebar-menu li {
+    margin-bottom: 4px;
+}
+
+.cloud-sidebar .sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.cloud-sidebar .sidebar-menu a:hover {
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+.cloud-sidebar .sidebar-menu a.active {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.cloud-sidebar .sidebar-menu a i {
+    width: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Main Content Area */
+.cloud-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Content Header */
+.cloud-content .content-header {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.cloud-content .content-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.cloud-content .content-header p {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+/* Section Title */
+.cloud-content .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Content Section */
+.cloud-content .content-section {
+    margin-bottom: 50px;
+}
+
+/* =========================================
+   FIX: Nested Container Layout Alignment
+   For pages with .container > .cloud-layout structure
+   (IDC, Security, VPN pages etc.)
+   ========================================= */
+
+/* When cloud-layout is inside a container, reset its padding */
+.container .cloud-layout,
+.sub-content .cloud-layout,
+main.sub-content .container .cloud-layout {
+    padding: 60px 0 !important;
+    /* Remove horizontal padding since container already has it */
+    margin: 0;
+    max-width: none;
+}
+
+/* Ensure .container doesn't add extra horizontal padding when wrapping cloud-layout */
+.sub-content>.container {
+    padding-left: 80px;
+    padding-right: 80px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Override top padding from sub-content wrapper */
+main.sub-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Ensure sidebar position matches cloud pages */
+.sub-content .cloud-sidebar,
+.container .cloud-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+/* Add-on Menu Styles (Global) */
+.dropdown-item.icon-left {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 20px;
+    border-bottom: 1px solid #f9fafb;
+    text-decoration: none;
+}
+
+.dropdown-item.icon-left:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item.icon-left:hover {
+    background-color: #fef2f2;
+}
+
+.dropdown-item.icon-left .icon-box {
+    width: 40px;
+    height: 40px;
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-size: 18px;
+}
+
+.dropdown-item.icon-left .text-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-item.icon-left .title {
+    font-weight: 700;
+    color: #1f2937;
+    font-size: 15px;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.dropdown-item.icon-left .desc {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.4;
+    display: block;
+}
+
+/* Service Page Specific Styles (Added for Enterprise/Addon Pages) */
+.sw-hero {
+    background-color: #111827;
+    padding: 80px 0;
+    text-align: center;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /* Default overlay is mostly handled per page or can be here */
+}
+
+.sw-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.7);
+    z-index: 1;
+}
+
+.sw-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.sw-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.sw-hero p {
+    font-size: 18px;
+    color: #e2e8f0;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.section-header p {
+    font-size: 18px;
+    color: #64748b;
+}
+
+.pricing-grid-custom {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.price-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+    position: relative;
+    height: 100%;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.price-card.recommended {
+    border: 2px solid #EF4444;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.15);
+    z-index: 10;
+}
+
+.price-card .badge-rec {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #EF4444;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.plan-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #0f172a;
+}
+
+.plan-price {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #0f172a;
+}
+
+.plan-price sub {
+    font-size: 16px;
+    font-weight: 500;
+    color: #64748b;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.plan-desc {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+    flex-grow: 1;
+}
+
+.feature-list li {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #334155;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+}
+
+.feature-list li i {
+    color: #EF4444;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.btn-price {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    transition: all 0.2s;
+}
+
+.btn-price:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.price-card.recommended .btn-price {
+    background: #EF4444;
+    color: white;
+    border-color: #EF4444;
+}
+
+.price-card.recommended .btn-price:hover {
+    background: #dc2626;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 40px 30px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+    font-size: 40px;
+    color: #EF4444;
+    margin-bottom: 20px;
+}
+
+.feature-item h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.feature-item p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Theme Modifiers */
+.theme-blue .price-card.recommended {
+    border-color: #2563eb;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+}
+
+.theme-blue .badge-rec {
+    background: #2563eb;
+}
+
+.theme-blue .feature-list li i {
+    color: #2563eb;
+}
+
+.theme-blue .price-card.recommended .btn-price {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.theme-blue .price-card.recommended .btn-price:hover {
+    background: #1d4ed8;
+}
+
+.theme-blue .feature-icon {
+    color: #2563eb;
+}
+
+.theme-green .price-card.recommended {
+    border-color: #10b981;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+}
+
+.theme-green .badge-rec {
+    background: #10b981;
+}
+
+.theme-green .feature-list li i {
+    color: #10b981;
+}
+
+.theme-green .price-card.recommended .btn-price {
+    background: #10b981;
+    border-color: #10b981;
+}
+
+.theme-green .price-card.recommended .btn-price:hover {
+    background: #059669;
+}
+
+.theme-green .feature-icon {
+    color: #10b981;
+}
+
+/* ========== Standard Hero Section (sw-hero) ========== */
+/* 모든 서비스 페이지의 Hero 섹션 표준 스타일 */
+/* 기준: sub_sol_ms365.html - 높이 100px padding */
+
+.sw-hero {
+    padding: 100px 0 !important;
+    text-align: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.sw-hero .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.sw-hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 20px 0;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+.sw-hero p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* 반응형 - 모바일 */
+@media (max-width: 768px) {
+    .sw-hero {
+        padding: 60px 0 !important;
+    }
+
+    .sw-hero h1 {
+        font-size: 32px;
+    }
+
+    .sw-hero p {
+        font-size: 16px;
+    }
+}

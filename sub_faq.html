@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="sw-hero" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="container">
+            <span
+                style="display:inline-block; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); font-size: 14px; margin-bottom: 20px; color: #cbd5e1;">
+                FAQ
+            </span>
+            <h1>자주 묻는 질문</h1>
+            <p>휴메카 서비스에 대한 궁금증을 해결하세요.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" style="padding: 100px 0;">
+        <div class="container">
+            <!-- Category Tabs -->
+            <div id="category-tabs"
+                style="display: flex; gap: 15px; justify-content: center; margin-bottom: 60px; flex-wrap: wrap;">
+                <button class="category-tab active" data-category="all"
+                    style="padding: 12px 30px; border: 2px solid #dc2626; background: #dc2626; color: white; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    전체
+                </button>
+                <button class="category-tab" data-category="general"
+                    style="padding: 12px 30px; border: 2px solid #e5e7eb; background: white; color: #4b5563; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    일반
+                </button>
+                <button class="category-tab" data-category="technical"
+                    style="padding: 12px 30px; border: 2px solid #e5e7eb; background: white; color: #4b5563; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    기술
+                </button>
+                <button class="category-tab" data-category="billing"
+                    style="padding: 12px 30px; border: 2px solid #e5e7eb; background: white; color: #4b5563; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    요금
+                </button>
+                <button class="category-tab" data-category="service"
+                    style="padding: 12px 30px; border: 2px solid #e5e7eb; background: white; color: #4b5563; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    서비스
+                </button>
+            </div>
+
+            <div id="faq-list" style="max-width: 900px; margin: 0 auto;">
+                <!-- Loading -->
+                <div id="faq-loading" style="text-align: center; padding: 60px; color: #9ca3af;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <p>FAQ를 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+
+    <script>
+        let allFaqs = [];
+        let currentCategory = 'all';
+
+        const categoryNames = {
+            general: '일반',
+            technical: '기술',
+            billing: '요금',
+            service: '서비스'
+        };
+
+        async function loadFaqs() {
+            if (!supabase) {
+                document.getElementById('faq-loading').innerHTML = '<p style="color: #dc2626;">FAQ를 불러올 수 없습니다.</p>';
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('faqs')
+                    .select('*')
+                    .eq('active', true)
+                    .order('category', { ascending: true })
+                    .order('sort_order', { ascending: true });
+
+                if (error) throw error;
+
+                const loading = document.getElementById('faq-loading');
+
+                if (!data || data.length === 0) {
+                    loading.innerHTML = '<p style="color: #9ca3af;">등록된 FAQ가 없습니다.</p>';
+                    return;
+                }
+
+                loading.remove();
+                allFaqs = data;
+                renderFaqs();
+
+                console.log('✅ FAQ 로드 완료:', data.length, '개');
+
+            } catch (error) {
+                console.error('FAQ 로드 오류:', error);
+                document.getElementById('faq-loading').innerHTML = `
+                    <p style="color: #dc2626;">FAQ를 불러오는 중 오류가 발생했습니다.</p>
+                    <p style="color: #9ca3af; font-size: 0.9rem;">${error.message}</p>
+                `;
+            }
+        }
+
+        function renderFaqs() {
+            const listContainer = document.getElementById('faq-list');
+            listContainer.innerHTML = '';
+
+            const filteredFaqs = currentCategory === 'all'
+                ? allFaqs
+                : allFaqs.filter(faq => faq.category === currentCategory);
+
+            if (filteredFaqs.length === 0) {
+                listContainer.innerHTML = '<p style="text-align: center; color: #9ca3af; padding: 60px;">해당 카테고리에 FAQ가 없습니다.</p>';
+                return;
+            }
+
+            // 카테고리별 그룹화
+            const grouped = {};
+            filteredFaqs.forEach(faq => {
+                if (!grouped[faq.category]) {
+                    grouped[faq.category] = [];
+                }
+                grouped[faq.category].push(faq);
+            });
+
+            Object.keys(grouped).forEach(category => {
+                // 카테고리 헤더
+                if (currentCategory === 'all') {
+                    const categoryHeader = document.createElement('h3');
+                    categoryHeader.style.cssText = 'font-size: 1.5rem; font-weight: 700; color: #111827; margin: 40px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #dc2626;';
+                    categoryHeader.textContent = categoryNames[category] || category;
+                    listContainer.appendChild(categoryHeader);
+                }
+
+                grouped[category].forEach((faq, index) => {
+                    const faqDiv = document.createElement('div');
+                    faqDiv.classList.add('faq-item');
+                    faqDiv.style.cssText = `
+                        background: white;
+                        padding: 25px;
+                        margin-bottom: 15px;
+                        border-radius: 12px;
+                        border: 1px solid #e5e7eb;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    `;
+
+                    faqDiv.innerHTML = `
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                                <span style="background: #3b82f6; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">Q</span>
+                                <h4 style="font-size: 1.1rem; font-weight: 600; color: #111827; margin: 0;">${faq.question}</h4>
+                            </div>
+                            <i class="fas fa-chevron-down" style="color: #9ca3af; transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                            <div style="display: flex; gap: 15px;">
+                                <span style="background: #dc2626; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">A</span>
+                                <div style="color: #4b5563; line-height: 1.8; flex: 1;">${faq.answer}</div>
+                            </div>
+                        </div>
+                    `;
+
+                    faqDiv.addEventListener('click', () => {
+                        const answer = faqDiv.querySelector('.faq-answer');
+                        const icon = faqDiv.querySelector('.fa-chevron-down');
+                        const isOpen = answer.style.display === 'block';
+
+                        if (isOpen) {
+                            answer.style.display = 'none';
+                            icon.style.transform = 'rotate(0deg)';
+                            faqDiv.style.background = 'white';
+                        } else {
+                            answer.style.display = 'block';
+                            icon.style.transform = 'rotate(180deg)';
+                            faqDiv.style.background = '#f9fafb';
+                        }
+                    });
+
+                    faqDiv.addEventListener('mouseenter', () => {
+                        faqDiv.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+                        faqDiv.style.borderColor = '#3b82f6';
+                    });
+
+                    faqDiv.addEventListener('mouseleave', () => {
+                        faqDiv.style.boxShadow = 'none';
+                        faqDiv.style.borderColor = '#e5e7eb';
+                    });
+
+                    listContainer.appendChild(faqDiv);
+                });
+            });
+        }
+
+        // 카테고리 탭 클릭 이벤트
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadFaqs, 500);
+
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 모든 탭 비활성화
+                    document.querySelectorAll('.category-tab').forEach(t => {
+                        t.style.background = 'white';
+                        t.style.color = '#4b5563';
+                        t.style.borderColor = '#e5e7eb';
+                        t.classList.remove('active');
+                    });
+
+                    // 선택된 탭 활성화
+                    tab.style.background = '#dc2626';
+                    tab.style.color = 'white';
+                    tab.style.borderColor = '#dc2626';
+                    tab.classList.add('active');
+
+                    currentCategory = tab.dataset.category;
+                    renderFaqs();
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

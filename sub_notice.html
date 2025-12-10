@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 - HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="sw-hero" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="container">
+            <span
+                style="display:inline-block; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); font-size: 14px; margin-bottom: 20px; color: #cbd5e1;">
+                Notice
+            </span>
+            <h1>공지사항</h1>
+            <p>휴메카의 최신 소식과 공지사항을 확인하세요.</p>
+        </div>
+    </section>
+
+    <!-- Notice List -->
+    <section class="section" style="padding: 100px 0;">
+        <div class="container">
+            <div id="notice-list" style="max-width: 900px; margin: 0 auto;">
+                <!-- Loading -->
+                <div id="notice-loading" style="text-align: center; padding: 60px; color: #9ca3af;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <p>공지사항을 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+
+    <script>
+        async function loadNotices() {
+            if (!supabase) {
+                document.getElementById('notice-loading').innerHTML = '<p style="color: #dc2626;">공지사항을 불러올 수 없습니다.</p>';
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('notices')
+                    .select('*')
+                    .eq('active', true)
+                    .order('is_pinned', { ascending: false })
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                const loading = document.getElementById('notice-loading');
+                const listContainer = document.getElementById('notice-list');
+
+                if (!data || data.length === 0) {
+                    loading.innerHTML = '<p style="color: #9ca3af;">등록된 공지사항이 없습니다.</p>';
+                    return;
+                }
+
+                loading.remove();
+
+                data.forEach(notice => {
+                    const date = new Date(notice.created_at).toLocaleDateString('ko-KR');
+
+                    const noticeDiv = document.createElement('div');
+                    noticeDiv.style.cssText = `
+                        background: white;
+                        padding: 30px;
+                        margin-bottom: 20px;
+                        border-radius: 12px;
+                        border-left: 4px solid ${notice.is_pinned ? '#dc2626' : '#3b82f6'};
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                        transition: all 0.3s ease;
+                    `;
+
+                    noticeDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div>
+                                ${notice.is_pinned ? '<span style="background: #dc2626; color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; margin-right: 10px;">공지</span>' : ''}
+                                <h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; display: inline;">${notice.title}</h3>
+                            </div>
+                            <div style="color: #9ca3af; font-size: 0.9rem; white-space: nowrap;">
+                                <i class="fas fa-calendar"></i> ${date}
+                            </div>
+                        </div>
+                        <div style="color: #4b5563; line-height: 1.8; margin-bottom: 15px;">
+                            ${notice.content}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #e5e7eb;">
+                            <div style="color: #6b7280; font-size: 0.9rem;">
+                                <i class="fas fa-user"></i> ${notice.author}
+                            </div>
+                            <div style="color: #9ca3af; font-size: 0.9rem;">
+                                <i class="fas fa-eye"></i> 조회 ${notice.views || 0}
+                            </div>
+                        </div>
+                    `;
+
+                    noticeDiv.addEventListener('mouseenter', () => {
+                        noticeDiv.style.transform = 'translateY(-4px)';
+                        noticeDiv.style.boxShadow = '0 8px 16px rgba(0,0,0,0.1)';
+                    });
+
+                    noticeDiv.addEventListener('mouseleave', () => {
+                        noticeDiv.style.transform = 'translateY(0)';
+                        noticeDiv.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+                    });
+
+                    listContainer.appendChild(noticeDiv);
+                });
+
+                console.log('✅ 공지사항 로드 완료:', data.length, '개');
+
+            } catch (error) {
+                console.error('공지사항 로드 오류:', error);
+                document.getElementById('notice-loading').innerHTML = `
+                    <p style="color: #dc2626;">공지사항을 불러오는 중 오류가 발생했습니다.</p>
+                    <p style="color: #9ca3af; font-size: 0.9rem;">${error.message}</p>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadNotices, 500);
+        });
+    </script>
+
+</body>
+
+</html>

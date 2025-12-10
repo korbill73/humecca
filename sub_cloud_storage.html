@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDN / Storage - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
+    
+    <script src="cloud-content-data.js"></script>
+    <script src="cloud-router.js" defer></script>
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <section class="cloud-hero">
+        <div class="container">
+            <span class="badge">KT Cloud Partner</span>
+            <h1>CDN / Storage</h1>
+            <p>KT Cloud 기반 스토리지 및 콘텐츠 전송 서비스</p>
+        </div>
+    </section>
+
+    <div class="cloud-layout">
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html"><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html" class="active"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+                
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html"><i class="fas fa-info-circle"></i> 서비스별 제한사항</a></li>
+            </ul>
+        </aside>
+
+        <main class="cloud-content">
+            <div class="content-header">
+                <h2><i class="fas fa-hdd"></i> CDN / Storage</h2>
+                <p>글로벌 콘텐츠 전송 및 대용량 오브젝트 스토리지 서비스</p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">CDN (Content Delivery Network)</div>
+                <p class="section-note">* 국내 및 해외 PoP을 통해 콘텐츠를 빠르게 전송합니다.</p>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>트래픽 구간</th>
+                            <th class="highlight">국내 (원/GB)</th>
+                            <th class="highlight">아시아 (원/GB)</th>
+                            <th class="highlight">글로벌 (원/GB)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>~1TB</td>
+                            <td class="price">70</td>
+                            <td class="price">100</td>
+                            <td class="price">150</td>
+                        </tr>
+                        <tr>
+                            <td>1TB ~ 10TB</td>
+                            <td class="price">65</td>
+                            <td class="price">90</td>
+                            <td class="price">130</td>
+                        </tr>
+                        <tr>
+                            <td>10TB ~ 50TB</td>
+                            <td class="price">55</td>
+                            <td class="price">80</td>
+                            <td class="price">110</td>
+                        </tr>
+                        <tr>
+                            <td>50TB 초과</td>
+                            <td class="price">협의</td>
+                            <td class="price">협의</td>
+                            <td class="price">협의</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">Object Storage</div>
+                <p class="section-note">* S3 호환 API로 쉽게 연동 가능합니다.</p>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>단위</th>
+                            <th class="highlight">월 요금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>스토리지 저장</td>
+                            <td>1GB당</td>
+                            <td class="price">33원</td>
+                        </tr>
+                        <tr>
+                            <td>API 요청 (PUT/COPY/POST/LIST)</td>
+                            <td>10,000건당</td>
+                            <td class="price">55원</td>
+                        </tr>
+                        <tr>
+                            <td>API 요청 (GET, 기타)</td>
+                            <td>10,000건당</td>
+                            <td class="price">44원</td>
+                        </tr>
+                        <tr>
+                            <td>데이터 전송 (외부)</td>
+                            <td>1GB당</td>
+                            <td class="price">100원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">Block Storage</div>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>타입</th>
+                            <th>성능</th>
+                            <th class="highlight">월 요금 (10GB당)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SSD</td>
+                            <td>고성능 (IOPS 최대 16,000)</td>
+                            <td class="price">1,100원</td>
+                        </tr>
+                        <tr>
+                            <td>HDD</td>
+                            <td>표준 (IOPS 최대 3,000)</td>
+                            <td class="price">550원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">주요 특징</div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4><i class="fas fa-globe"></i> CDN 특징</h4>
+                        <table class="info-card-table">
+                            <tr>
+                                <td>국내 PoP</td>
+                                <td>서울, 부산, 대전</td>
+                            </tr>
+                            <tr>
+                                <td>해외 PoP</td>
+                                <td>도쿄, 싱가포르, LA 등</td>
+                            </tr>
+                            <tr>
+                                <td>지원 프로토콜</td>
+                                <td>HTTP/HTTPS, HLS</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-database"></i> Object Storage</h4>
+                        <table class="info-card-table">
+                            <tr>
+                                <td>호환성</td>
+                                <td>AWS S3 API</td>
+                            </tr>
+                            <tr>
+                                <td>내구성</td>
+                                <td>99.999999999%</td>
+                            </tr>
+                            <tr>
+                                <td>최대 객체 크기</td>
+                                <td>5TB</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-hdd"></i> Block Storage</h4>
+                        <table class="info-card-table">
+                            <tr>
+                                <td>최대 용량</td>
+                                <td>16TB</td>
+                            </tr>
+                            <tr>
+                                <td>스냅샷</td>
+                                <td>지원</td>
+                            </tr>
+                            <tr>
+                                <td>암호화</td>
+                                <td>AES-256</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== FOOTER (공통 컴포넌트) ========== -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=2.0"></script>
+    <script src="script.js"></script>
+
+
+<script>
+    // Improved Menu Interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const menu = item.querySelector('.dropdown-menu');
+            if(!menu) return;
+
+            // When link inside menu is clicked, hide menu immediately
+            const links = menu.querySelectorAll('a.dropdown-item');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.style.display = 'none'; // Force hide to prevent ghosting
+                });
+            });
+
+            // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+            // This ensures that next time the user hovers, CSS :hover works again.
+            item.addEventListener('mouseleave', () => {
+                menu.style.display = ''; 
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+            });
+            
+             // Safety: Ensure it's clean (visible) when mouse enters
+            item.addEventListener('mouseenter', () => {
+                menu.style.display = ''; 
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

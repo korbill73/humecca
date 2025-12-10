@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Subpage Hero -->
+    <section class="sw-hero" style="background: #1a1f3c;">
+        <div class="container">
+            <h1>로드밸런싱</h1>
+            <p>HUMECCA Load Balancing</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="page-content" style="padding: 100px 0">
+        <div class="container">
+            <div class="content-box"
+                style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: center; max-width: 800px; margin: 0 auto; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <i class="fas fa-cog fa-spin" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+                <h2 style="font-size: 1.8rem; margin-bottom: 20px; color: #333;">페이지 준비중입니다</h2>
+                <p style="color: #666; width: 100%;">이 페이지는 현재 업데이트 중입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=2.0"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+                const links = menu.querySelectorAll('a.dropdown-item');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.style.display = 'none';
+                    });
+                });
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = '';
+                    menu.style.opacity = '';
+                    menu.style.visibility = '';
+                });
+                item.addEventListener('mouseenter', () => {
+                    menu.style.display = '';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

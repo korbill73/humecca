@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA - 휴메카</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
+</head>
+
+<body>
+    <!-- Header -->
+                        <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <!-- Sub Page Header -->
+    <section class="sub-header" style="background: #111827; padding: 100px 0 60px; color: white;">
+        <div class="container">
+            <h1 class="page-title text-4xl font-bold mb-4">{{Title}}</h1>
+            <p class="page-desc text-gray-400 text-lg">{{Description}}</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="sub-content py-16">
+        <div class="container">
+            {{Content}}
+        </div>
+    </main>
+
+    <!-- Footer (Updated) -->
+    <!-- ========== FOOTER (공통 컴포넌트) ========== -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=2.0"></script>
+
+
+<script>
+    // Improved Menu Interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const menu = item.querySelector('.dropdown-menu');
+            if(!menu) return;
+
+            // When link inside menu is clicked, hide menu immediately
+            const links = menu.querySelectorAll('a.dropdown-item');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.style.display = 'none'; // Force hide to prevent ghosting
+                });
+            });
+
+            // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+            // This ensures that next time the user hovers, CSS :hover works again.
+            item.addEventListener('mouseleave', () => {
+                menu.style.display = ''; 
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+            });
+            
+             // Safety: Ensure it's clean (visible) when mouse enters
+            item.addEventListener('mouseenter', () => {
+                menu.style.display = ''; 
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
