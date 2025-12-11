@@ -13,6 +13,8 @@ try {
     // Supabase CDN에서 createClient 함수를 가져옵니다
     const { createClient } = window.supabase;
     supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Expose globally as window.sb for data_loader.js usage
+    window.sb = supabase;
     console.log('✅ Supabase 연결 성공!');
 } catch (error) {
     console.error('❌ Supabase 초기화 실패:', error);

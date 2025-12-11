@@ -10,20 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
         rel="stylesheet">
     <style>
-        
-
-        
-
-        
-
         .content-section {
             padding: 80px 0;
             background: white;
         }
 
-        @media (max-width: 640px) {
-            
-        }
+        @media (max-width: 640px) {}
     </style>
 </head>
 
@@ -163,34 +155,10 @@
                 <p>트래픽 규모와 서비스 유형에 맞는 최적의 로드밸런싱 요금제입니다.</p>
             </div>
 
-            <div class="pricing-grid-custom" style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
-                <!-- L4 LB -->
-                <div class="price-card">
-                    <div class="plan-name">L4 로드밸런싱</div>
-                    <div class="plan-price">50,000<sub>원 / 월</sub></div>
-                    <div class="plan-desc">초기 설치비 100,000원 (1회)</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> IP/Port 기반 부하 분산</li>
-                        <li><i class="fas fa-check"></i> Connection/Throughput 보장</li>
-                        <li><i class="fas fa-check"></i> 헬스체크 및 Failover</li>
-                        <li><i class="fas fa-check"></i> 기본 리포트 제공</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">견적 요청</a>
-                </div>
-
-                <!-- L7 LB -->
-                <div class="price-card recommended">
-                    <div class="badge-rec">추천</div>
-                    <div class="plan-name">L7 로드밸런싱</div>
-                    <div class="plan-price">100,000<sub>원 / 월</sub></div>
-                    <div class="plan-desc">초기 설치비 100,000원 (1회)</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> <strong>URL/Cookie 기반 정교한 분산</strong></li>
-                        <li><i class="fas fa-check"></i> SSL Termination (인증서 관리)</li>
-                        <li><i class="fas fa-check"></i> 보안 및 필터링 기능</li>
-                        <li><i class="fas fa-check"></i> 상세 트래픽 분석 리포트</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">견적 요청</a>
+            <div id="pricing-grid-lb" class="pricing-grid-custom"
+                style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin"></i> 로딩 중...
                 </div>
             </div>
 
@@ -205,6 +173,16 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
     <script src="components/loader.js?v=2.0"></script>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('addon-lb');
+        });
+    </script>
 </body>
 
 </html>

@@ -148,45 +148,10 @@
                 <p>진단은 무료! 데이터 복구 성공 시에만 비용이 청구됩니다 (No Cure, No Pay).</p>
             </div>
 
-            <div class="pricing-grid-custom" style="grid-template-columns: repeat(3, 1fr); max-width: 1000px;">
-                <!-- Logical -->
-                <div class="price-card">
-                    <div class="plan-name">논리적 손상</div>
-                    <div class="plan-price">200,000<sub>원~</sub></div>
-                    <div class="plan-desc">삭제, 포맷, OS 재설치 등</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> 무료 정밀 진단</li>
-                        <li><i class="fas fa-check"></i> 복구 불가시 0원</li>
-                        <li><i class="fas fa-check"></i> 긴급 복구 지원</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">견적 요청</a>
-                </div>
-
-                <!-- Physical -->
-                <div class="price-card recommended">
-                    <div class="badge-rec">Best</div>
-                    <div class="plan-name">물리적 손상</div>
-                    <div class="plan-price">300,000<sub>원~</sub></div>
-                    <div class="plan-desc">HDD 인식불가, 소음, 침수 등</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> <strong>클린룸 정밀 작업</strong></li>
-                        <li><i class="fas fa-check"></i> 부품 교체 비용 포함</li>
-                        <li><i class="fas fa-check"></i> 타사 실패 건 복구 가능</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">견적 요청</a>
-                </div>
-
-                <!-- Server/Ransomware -->
-                <div class="price-card">
-                    <div class="plan-name">서버/랜섬웨어</div>
-                    <div class="plan-price">별도 상담</div>
-                    <div class="plan-desc">RAID 서버, 랜섬웨어 감염 등</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> RAID 재구성(Rebuild)</li>
-                        <li><i class="fas fa-check"></i> 랜섬웨어 복호화 분석</li>
-                        <li><i class="fas fa-check"></i> 긴급 출장 서비스 가능</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">상담 하기</a>
+            <div id="pricing-grid-recovery" class="pricing-grid-custom"
+                style="grid-template-columns: repeat(3, 1fr); max-width: 1000px;">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin"></i> 로딩 중...
                 </div>
             </div>
 
@@ -201,6 +166,16 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
     <script src="components/loader.js?v=2.0"></script>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('addon-recovery');
+        });
+    </script>
 </body>
 
 </html>

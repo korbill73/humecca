@@ -1,0 +1,232 @@
+// Data Loader - Supabase Integration
+// This script fetches product data from Supabase and updates the DOM elements.
+
+// Data Loader - Supabase Integration
+// This script fetches product data from Supabase and updates the DOM elements.
+
+const PRODUCT_CATEGORIES = {
+    // Hosting
+    'hosting': { category: 'idc', subcategory: 'hosting', renderType: 'hosting', containerId: 'pricing-container' },
+
+    // VPN
+    'vpn': { category: 'vpn', subcategory: 'vpn-service', renderType: 'vpn', containerId: 'vpn-list-container' },
+
+    // Colocation
+    'colocation': { category: 'idc', subcategory: 'colocation', renderType: 'colocation', containerId: 'pricing-grid-colocation' },
+
+    // Security
+    'security-waf': { category: 'security', subcategory: 'sec-waf', containerId: 'pricing-waf' },
+    'security-waf-pro': { category: 'security', subcategory: 'sec-waf-pro', containerId: 'pricing-waf-pro' },
+    'security-cleanzone': { category: 'security', subcategory: 'sec-cleanzone', containerId: 'pricing-cleanzone' },
+    'security-private-ca': { category: 'security', subcategory: 'sec-private-ca', containerId: 'pricing-private-ca' },
+    'security-ssl': { category: 'security', subcategory: 'sec-ssl', containerId: 'pricing-ssl' },
+    'security-v3': { category: 'security', subcategory: 'sec-v3', containerId: 'pricing-v3' },
+    'security-dbsafer': { category: 'security', subcategory: 'sec-dbsafer', containerId: 'pricing-dbsafer' },
+
+    // Add-on Services
+    'addon-software': { category: 'addon', subcategory: 'addon-license', containerId: 'pricing-grid-software' },
+    'addon-backup': { category: 'addon', subcategory: 'addon-backup', containerId: 'pricing-grid-backup' },
+    'addon-ha': { category: 'addon', subcategory: 'addon-ha', containerId: 'pricing-grid-ha' },
+    'addon-monitoring': { category: 'addon', subcategory: 'addon-monitoring', containerId: 'pricing-grid-monitoring' },
+    'addon-lb': { category: 'addon', subcategory: 'addon-lb', containerId: 'pricing-grid-lb' },
+    'addon-cdn': { category: 'addon', subcategory: 'addon-cdn', containerId: 'pricing-grid-cdn' },
+    'addon-recovery': { category: 'addon', subcategory: 'addon-recovery', containerId: 'pricing-grid-recovery' },
+    'addon-management': { category: 'addon', subcategory: 'addon-management', containerId: 'pricing-grid-management' },
+    'addon-etc': { category: 'addon', subcategory: 'addon-etc', containerId: 'pricing-grid-etc' }
+};
+
+async function loadProductData(pageKey) {
+    if (!window.sb) {
+        console.error('Supabase client not initialized. Make sure supabase_config.js is loaded.');
+        return;
+    }
+
+    const config = PRODUCT_CATEGORIES[pageKey];
+    if (!config) {
+        console.warn(`No configuration found for page key: ${pageKey}`);
+        return;
+    }
+
+    // 1. Get Product ID
+    const { data: product, error: prodError } = await window.sb.from('products')
+        .select('id')
+        .eq('category', config.category)
+        .eq('subcategory', config.subcategory)
+        .maybeSingle();
+
+    if (prodError || !product) {
+        console.warn('Product group not found in DB.', prodError);
+        return;
+    }
+
+    // 2. Get Plans
+    const { data: plans, error: planError } = await window.sb.from('product_plans')
+        .select('*')
+        .eq('product_id', product.id)
+        .eq('active', true) // Only active plans
+        .order('sort_order', { ascending: true });
+
+    if (planError) {
+        console.error('Error fetching plans:', planError);
+        return;
+    }
+
+    if (!plans || plans.length === 0) {
+        console.log('No active plans found.');
+        return;
+    }
+
+    renderPlans(pageKey, plans, config);
+}
+
+function renderPlans(pageKey, plans, config) {
+    const container = document.getElementById(config.containerId) || document.querySelector('.pricing-grid-custom') || document.querySelector('.pricing-grid');
+    if (!container) {
+        console.warn('Container not found for rendering plans.');
+        return;
+    }
+
+    container.innerHTML = ''; // Clear existing content
+
+    const type = config.renderType || 'addon';
+
+    if (type === 'hosting') {
+        renderHosting(container, plans);
+    } else if (type === 'vpn') {
+        renderVpn(container, plans);
+    } else if (type === 'colocation') {
+        renderColocation(container, plans);
+    } else {
+        renderAddon(container, plans);
+    }
+}
+
+// --- Specific Render Functions ---
+
+function renderAddon(container, plans) {
+    plans.forEach(plan => {
+        const features = parseFeatures(plan.features);
+        let featureListHtml = '';
+        features.forEach(f => {
+            if (f.trim()) featureListHtml += `<li><i class="fas fa-check-circle"></i> ${f.trim()}</li>`;
+        });
+
+        // Determine Badge
+        let badgeHtml = '';
+        if (plan.badge) badgeHtml = `<div class="badge-rec">${plan.badge}</div>`;
+        else if (plan.popular) badgeHtml = `<div class="badge-rec">인기</div>`;
+
+        const priceDisplay = formatPrice(plan.price, plan.period);
+        const cardHtml = `
+            <div class="price-card ${plan.popular ? 'recommended' : ''}">
+                ${badgeHtml}
+                <div class="plan-name">${plan.plan_name}</div>
+                <div class="plan-price">${priceDisplay}</div>
+                <ul class="feature-list">
+                    ${featureListHtml}
+                </ul>
+                <a href="sub_support.html" class="btn-price">신청하기</a>
+            </div>
+        `;
+        container.innerHTML += cardHtml;
+    });
+}
+
+function renderHosting(container, plans) {
+    plans.forEach(p => {
+        const specs = {
+            CPU: p.cpu || '-',
+            RAM: p.ram || '-',
+            Storage: p.storage || '-',
+            Traffic: p.traffic || p.bandwidth || '-'
+        };
+
+        const specHtml = Object.entries(specs).map(([k, v]) => `
+            <div class="spec-item">
+                <span class="spec-label">${k}</span>
+                <span class="spec-value">${v}</span>
+            </div>
+        `).join('');
+
+        const features = parseFeatures(p.features);
+        const featureHtml = features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
+
+        const displayPrice = formatPrice(p.price, p.period || '월');
+
+        const html = `
+            <div class="plan-card ${p.popular ? 'popular' : ''}">
+                ${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
+                <h3 class="plan-title">${p.plan_name}</h3>
+                <div class="plan-summary">${p.summary || ''}</div>
+                <div class="plan-price">${displayPrice}</div>
+                
+                <div class="specs-list">${specHtml}</div>
+
+                <ul class="plan-features">${featureHtml}</ul>
+                <a href="sub_support.html" class="plan-btn ${p.popular ? 'solid' : 'outline'}">신청하기</a>
+            </div>
+        `;
+        container.innerHTML += html;
+    });
+}
+
+function renderVpn(container, plans) {
+    plans.forEach(p => {
+        const isPopular = p.popular;
+        const cardClass = isPopular ? 'vpn-plan-card popular' : 'vpn-plan-card';
+        const badgeHtml = p.badge ? `<span class="vpn-badge">${p.badge}</span>` : '';
+        const displayPrice = formatPrice(p.price, p.period);
+
+        const features = parseFeatures(p.features);
+        const featureHtml = features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
+
+        const html = `
+            <div class="${cardClass}">
+                ${badgeHtml}
+                <div class="vpn-plan-header">
+                    <h3 style="font-size:24px; font-weight:700; color:#111827;">${p.plan_name}</h3>
+                    <div class="vpn-price">${displayPrice}</div>
+                    ${p.summary ? `<p style="font-size:14px; color:#6b7280; margin-top:12px;">${p.summary}</p>` : ''}
+                </div>
+                <ul class="vpn-specs">
+                    ${featureHtml}
+                </ul>
+                <a href="sub_support.html" class="btn-apply">신청하기</a>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+}
+
+function renderColocation(container, plans) {
+    plans.forEach(p => {
+        const displayPrice = formatPrice(p.price, p.period);
+        const features = parseFeatures(p.features);
+        const featureHtml = features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
+
+        const html = `
+            <div class="plan-card ${p.popular ? 'popular' : ''}">
+                ${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
+                <h3 class="plan-title">${p.plan_name}</h3>
+                <div class="plan-price">${displayPrice}</div>
+                <ul class="plan-features">${featureHtml}</ul>
+                <a href="sub_support.html" class="plan-btn ${p.popular ? 'solid' : 'outline'}">신청하기</a>
+            </div>
+        `;
+        container.innerHTML += html;
+    });
+}
+
+// Helpers
+function parseFeatures(features) {
+    if (!features) return [];
+    return typeof features === 'string' ? features.split('\n') : (Array.isArray(features) ? features : []);
+}
+
+function formatPrice(price, period) {
+    if (!price || price === '문의') return '<span class="amount">문의</span>';
+    // If number
+    const num = Number(price.toString().replace(/,/g, ''));
+    if (isNaN(num)) return `<span class="amount">${price}</span>`;
+    return `<span class="amount">₩${num.toLocaleString()}</span><span class="period">/${period || '월'}</span>`;
+}

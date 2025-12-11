@@ -272,16 +272,19 @@
     </main>
 
     <!-- Correct Footer ID for Loader -->
+    <!-- Footer -->
     <div id="footer-placeholder"></div>
 
-    <!-- Scripts -->
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="components/loader.js?v=2.0"></script>
+    <script src="js/data_loader.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Initial Render
-            // 1. Initial Render
-            renderVpnList();
+            loadProductData('vpn');
 
-            // 3. Mobile Menu
+            // Mobile Menu Logic (Preserving existing logic)
             const mobileBtn = document.querySelector('.mobile-menu-btn');
             const nav = document.querySelector('.nav');
             if (mobileBtn) {
@@ -290,60 +293,6 @@
                 });
             }
         });
-
-        function renderVpnList() {
-            const container = document.getElementById('vpn-list-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            // Try to load from js/vpn_data.js (global var)
-            let products = [];
-            if (typeof vpnProducts !== 'undefined') products = vpnProducts;
-
-            // Filter active
-            const activeProducts = products.filter(p => p.isActive);
-            if (activeProducts.length === 0) {
-                container.innerHTML = '<p style="grid-column:1/-1; text-align:center;">판매 중인 상품이 없습니다.</p>';
-                return;
-            }
-
-            activeProducts.sort((a, b) => (a.sortOrder || 99) - (b.sortOrder || 99));
-
-            activeProducts.forEach(p => {
-                const isPopular = p.popular;
-                const cardClass = isPopular ? 'vpn-plan-card popular' : 'vpn-plan-card';
-                const badgeHtml = p.badge ? `<span class="vpn-badge">${p.badge}</span>` : '';
-
-                const specs = p.specs || {};
-                let featureListHtml = '';
-                if (p.features && p.features.length > 0) {
-                    featureListHtml = p.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
-                } else {
-                    if (specs.speed) featureListHtml += `<li><i class="fas fa-check"></i> ${specs.speed} 보장</li>`;
-                    if (specs.sites) featureListHtml += `<li><i class="fas fa-check"></i> ${specs.sites}</li>`;
-                    if (specs.users) featureListHtml += `<li><i class="fas fa-check"></i> ${specs.users}</li>`;
-                }
-
-                let displayPrice = p.price;
-                if (!isNaN(p.price)) displayPrice = Number(p.price).toLocaleString();
-
-                const html = `
-                    <div class="${cardClass}">
-                        ${badgeHtml}
-                        <div class="vpn-plan-header">
-                            <h3 style="font-size:24px; font-weight:700; color:#111827;">${p.name}</h3>
-                            <div class="vpn-price">₩${displayPrice}<span style="font-size:16px;"> / ${p.period}</span></div>
-                            ${p.summary ? `<p style="font-size:14px; color:#6b7280; margin-top:12px;">${p.summary}</p>` : ''}
-                        </div>
-                        <ul class="vpn-specs">
-                            ${featureListHtml}
-                        </ul>
-                        <a href="sub_support.html" class="btn-apply">신청하기</a>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', html);
-            });
-        }
     </script>
 
     <!-- Load Header and Footer -->

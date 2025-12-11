@@ -148,34 +148,10 @@
                 <p>사용한 만큼 지불하거나, 약정하여 할인받는 합리적인 요금제를 확인하세요.</p>
             </div>
 
-            <div class="pricing-grid-custom" style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
-                <!-- Starter -->
-                <div class="price-card">
-                    <div class="plan-name">Starter Plan</div>
-                    <div class="plan-price">50,000<sub>원 / 월</sub></div>
-                    <div class="plan-desc">기본 전송량 500GB 제공</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> 초기 설치비 무료</li>
-                        <li><i class="fas fa-check"></i> 초과시 100원 / GB</li>
-                        <li><i class="fas fa-check"></i> 전 세계 엣지 사용 가능</li>
-                        <li><i class="fas fa-check"></i> HTTPS 보안 전송 지원</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">신청하기</a>
-                </div>
-
-                <!-- Business -->
-                <div class="price-card recommended">
-                    <div class="badge-rec">추천</div>
-                    <div class="plan-name">Business Plan</div>
-                    <div class="plan-price">100,000<sub>원 / 월</sub></div>
-                    <div class="plan-desc">기본 전송량 1.5TB 제공</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> <strong>대용량 트래픽 할인 적용</strong></li>
-                        <li><i class="fas fa-check"></i> 초과시 80원 / GB</li>
-                        <li><i class="fas fa-check"></i> 실시간 트래픽 분석 대시보드</li>
-                        <li><i class="fas fa-check"></i> 전담 엔지니어 기술지원</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">신청하기</a>
+            <div id="pricing-grid-cdn" class="pricing-grid-custom"
+                style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin"></i> 로딩 중...
                 </div>
             </div>
 
@@ -189,7 +165,16 @@
 
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
     <script src="components/loader.js?v=2.0"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('addon-cdn');
+        });
+    </script>
 </body>
 
 </html>

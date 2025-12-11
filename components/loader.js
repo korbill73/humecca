@@ -9,7 +9,36 @@ document.addEventListener('DOMContentLoaded', function () {
     loadComponent('header-placeholder', 'components/header.html', initHeaderScripts);
     // 푸터 로드
     loadComponent('footer-placeholder', 'components/footer.html', initTermsModal);
+
+    // [New] Web Analytics Logging
+    // Supabase가 로드되었는지 확인 후 없으면 CDN 로드 후 실행 (admin.html 등에서 중복 로드 방지)
+    if (typeof supabase === 'undefined') {
+        // 동적으로 Supabase Config 및 CDN 로드 시도하지 않음 (복잡도 증가 방지)
+        // 실제 운영 시에는 모든 페이지 헤드에 cdn 스크립트가 있어야 함.
+        // 여기서는 임시로 console log만 남김.
+        // console.log('Analytics: Supabase SDK not found on this page.');
+    } else {
+        logVisit();
+    }
 });
+
+async function logVisit() {
+    try {
+        const path = window.location.pathname;
+        const referrer = document.referrer;
+        const ua = navigator.userAgent;
+
+        // Simple insert
+        await supabase.from('visit_logs').insert([{
+            page_path: path,
+            referrer: referrer,
+            user_agent: ua
+        }]);
+    } catch (e) {
+        // Silent fail
+        console.warn('Analytics log failed:', e);
+    }
+}
 
 /**
  * 공통 컴포넌트를 로드하여 placeholder에 삽입
@@ -443,85 +472,143 @@ function getInlineHeader() {
  * components/footer.html 내용과 동일하게 유지 (스크립트 제외)
  */
 function getInlineFooter() {
-    return `<footer class="footer-new">
-    <div class="container footer-grid">
-        <!-- Col 1: Info -->
-        <div>
-            <h3>전문가와 부담 없이 상담하세요</h3>
-            <p style="margin-bottom:20px; color:#94a3b8; line-height:1.6;">
-                간편하게 무엇이든 물어보세요<br>
-                더욱 정확한 상담을 원하신다면 로그인 후 1:1 문의를 이용하실 수 있습니다.
-            </p>
-            <div style="display:flex; gap:16px; font-size:14px;">
-                <a href="sub_support.html" style="color:#EF4444; display:flex; align-items:center; gap:6px;">
-                    1:1 문의 <i class="fas fa-external-link-alt" style="font-size:10px;"></i>
-                </a>
-                <a href="https://login.humecca.co.kr/Login/Join" target="_blank"
-                    style="color:#EF4444; display:flex; align-items:center; gap:6px;">
-                    회원가입 <i class="fas fa-external-link-alt" style="font-size:10px;"></i>
-                </a>
+    return `<footer class="footer-new" style="background-color: #111; padding: 80px 0 60px; color: #9ca3af; font-size: 13px; font-family: 'Pretendard', sans-serif; border-top: 1px solid #222;">
+        <div class="container">
+            <!-- Top Section: 3-Column Grid for Better Balance -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-bottom: 60px;">
+                
+                <!-- 1. Consultation (Left) -->
+                <div>
+                    <h3 style="color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">전문가와의<br>부담 없는 상담</h3>
+                    <p style="margin-bottom: 24px; line-height: 1.6; color: #6b7280;">
+                        궁금한 점이 있으신가요?<br>
+                        로그인 후 1:1 문의를 남겨주시면<br>
+                        전문 엔지니어가 상세히 답변해 드립니다.
+                    </p>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="sub_support.html" style="background: #dc2626; color: white; padding: 10px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                            1:1 문의하기 <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
+                        </a>
+                        <a href="https://login.humecca.co.kr/Login/Join" target="_blank" style="background: #374151; color: white; padding: 10px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                            회원가입
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Service Contact (Center) -->
+                <div style="padding-left: 20px; border-left: 1px solid #222;">
+                    <h4 style="color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 20px;">서비스 문의</h4>
+                    <div style="margin-bottom: 20px;">
+                        <a href="tel:02-418-7766" style="color: #fff; font-size: 32px; font-weight: 700; text-decoration: none; letter-spacing: -1px;">02-418-7766</a>
+                    </div>
+                    <div style="font-size: 13px;">
+                        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding-bottom: 8px; margin-bottom: 8px;">
+                            <span>평일</span>
+                            <span style="color: #e5e7eb;">09:00 ~ 18:00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>점심시간</span>
+                            <span style="color: #e5e7eb;">12:00 ~ 13:00</span>
+                        </div>
+                        <div style="margin-top: 12px; font-size: 12px; color: #6b7280;">*주말 및 공휴일 휴무</div>
+                    </div>
+                </div>
+
+                <!-- 3. Emergency & Social (Right) -->
+                <div style="padding-left: 20px; border-left: 1px solid #222;">
+                    <h4 style="color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 20px;">긴급 장애 대응 센터</h4>
+                   
+                     <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px;">
+                        <span style="color: #ef4444; font-weight: 700;">KT-IDC</span>
+                        <a href="tel:02-418-4442" style="color: #fff; font-size: 24px; font-weight: 700; text-decoration: none;">02-418-4442</a>
+                    </div>
+                    <p style="color: #9ca3af; font-size: 13px; margin-bottom: 30px;">
+                        365일 24시간 연중무휴 보안 관제 및 기술 지원
+                    </p>
+
+                    <div style="display: flex; gap: 10px;">
+                         <a href="https://blog.naver.com/humecca" target="_blank" style="flex: 1; background: #03C75A; color: white; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px;">
+                            <span style="margin-right: 6px;">N</span> 블로그
+                        </a>
+                        <a href="http://pf.kakao.com/_xxxx" target="_blank" style="flex: 1; background: #FAE100; color: #371c1d; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px;">
+                            <i class="fas fa-comment" style="margin-right: 6px;"></i> 카카오톡
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid #222; margin-bottom: 40px;"></div>
+
+            <!-- Bottom Section: Company Info -->
+            <div>
+                <!-- Links -->
+                <!-- Links -->
+                <div style="display: flex; gap: 30px; font-size: 13px;">
+                     <a href="javascript:void(0)" onclick="showLayerTerm('privacy')" style="color: #fff; font-weight: 600; text-decoration: none;">개인정보처리방침</a>
+                    <a href="javascript:void(0)" onclick="showLayerTerm('terms')" style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">이용약관</a>
+                    <a href="javascript:void(0)" onclick="showLayerTerm('member')" style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">회원약관</a>
+                    <a href="sub_company_intro.html#location" style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">오시는 길</a>
+                </div>
+
+            <!-- Info Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; font-size: 12px; line-height: 1.7; color: #6b7280;">
+                <!-- Company Info -->
+                <div>
+                    <strong style="color: #e5e7eb; display: block; margin-bottom: 8px;">(주) 휴메카</strong>
+                    <p>
+                        대표이사 : 박제군 &nbsp;|&nbsp; 사업자등록번호 : 101-81-89952<br>
+                        통신판매업신고 : 제 2024-서울강남-00000호
+                    </p>
+                    <p style="margin-top: 15px; color: #4b5563;">Copyright © 2024 HUMECCA Inc. All Rights Reserved.</p>
+                </div>
+
+                <!-- Addresses -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">본사</span><br>
+                        서울특별시 강남구 언주로 517길 KT 강남IDC B2
+                    </div>
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">기술센터 (KT-IDC)</span><br>
+                        서울특별시 강남구 언주로 517길 KT 강남IDC 10F
+                    </div>
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">KINX-IDC</span><br>
+                        서울특별시 강남구 언주로 30길, 13 대림아크로텔
+                    </div>
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">SK-IDC</span><br>
+                        서울특별시 서초구 법원로 1길 6 SK브로드밴드
+                    </div>
+                </div>
+            </div>
+
+
             </div>
         </div>
-
-        <div class="separator"></div>
-
-        <!-- Col 2: Phone -->
-        <div>
-            <h4>서비스 문의</h4>
-            <a href="tel:02-418-7766" class="footer-phone">02-418-7766</a>
-            <div style="font-size:13px; color:#94a3b8; margin-top:12px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                    <span>평일</span> <span>09:00 ~ 18:00</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                    <span>점심</span> <span>12:00 ~ 13:00</span>
-                </div>
-                <div style="font-size:11px; margin-top:8px;">*주말, 공휴일 휴무</div>
-            </div>
-        </div>
-
-        <div class="separator"></div>
-
-        <!-- Col 3: Company Info -->
-        <div>
+    </footer>
+    
+    <!-- 약관 모달 -->
+        <div id="term-modal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
             <div
-                style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #334155; font-size:13px;">
-                <a href="javascript:void(0)" style="cursor: default;">(주) 휴메카</a>
-                <a href="javascript:void(0)" onclick="showLayerTerm('privacy')"
-                    style="font-weight:700; color:white; cursor:pointer;">개인정보처리방침</a>
-                <a href="javascript:void(0)" onclick="showLayerTerm('terms')" style="cursor:pointer;">이용약관</a>
-                <a href="javascript:void(0)" onclick="showLayerTerm('member')" style="cursor:pointer;">회원약관</a>
+                style="background: white; width: 90%; max-width: 800px; max-height: 90vh; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                <div
+                    style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 id="term-modal-title" style="font-size: 20px; font-weight: 700; color: #1e293b;">약관</h3>
+                    <button onclick="closeTermModal()"
+                        style="background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; line-height: 1;">&times;</button>
+                </div>
+                <div id="term-modal-content"
+                    style="padding: 30px; overflow-y: auto; line-height: 1.8; color: #333; font-size: 15px; white-space: pre-wrap; font-family: 'Pretendard', 'Noto Sans KR', sans-serif;">
+                    <!-- 내용이 여기에 로드됩니다 -->
+                </div>
+                <div style="padding: 20px; border-top: 1px solid #e5e7eb; text-align: right;">
+                    <button onclick="closeTermModal()"
+                        style="background: #1a1a2e; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">닫기</button>
+                </div>
             </div>
-            <div style="font-size:12px; color:#64748b; line-height:1.8;">
-                <p>(주)휴메카 | 대표이사: 박제군 | 사업자등록번호: 101-81-89952</p>
-                <p>본사: 서울특별시 강남구 언주로 517 (역삼동, KT영동지사) KT IDC 4층</p>
-                <p style="margin-top:16px; font-size:11px;">Copyright © 2024 Humecca. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- 약관 모달 -->
-<div id="term-modal"
-    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
-    <div
-        style="background: white; width: 90%; max-width: 800px; max-height: 90vh; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-        <div
-            style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
-            <h3 id="term-modal-title" style="font-size: 20px; font-weight: 700; color: #1e293b;">약관</h3>
-            <button onclick="closeTermModal()"
-                style="background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; line-height: 1;">&times;</button>
-        </div>
-        <div id="term-modal-content"
-            style="padding: 30px; overflow-y: auto; line-height: 1.8; color: #333; font-size: 15px; white-space: pre-wrap; font-family: 'Pretendard', 'Noto Sans KR', sans-serif;">
-            <!-- 내용이 여기에 로드됩니다 -->
-        </div>
-        <div style="padding: 20px; border-top: 1px solid #e5e7eb; text-align: right;">
-            <button onclick="closeTermModal()"
-                style="background: #1a1a2e; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">닫기</button>
-        </div>
-    </div>
-</div>`;
+        </div>`;
 }
 
 /**
@@ -547,30 +634,30 @@ function showLayerTerm(type) {
 
     // 데이터가 없으면 안내 메시지 표시
     if (!content) content = `
-        <div style="
-            text-align: center; 
-            padding: 60px 40px;
-            color: #64748b;
-        ">
-            <div style="
-                width: 64px;
-                height: 64px;
-                background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-                border-radius: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto 20px;
-            ">
-                <i class="fas fa-file-alt" style="font-size: 24px; color: #94a3b8;"></i>
-            </div>
+            < div style = "
+    text - align: center;
+    padding: 60px 40px;
+    color: #64748b;
+    ">
+        < div style = "
+    width: 64px;
+    height: 64px;
+    background: linear - gradient(135deg, #f1f5f9 0 %, #e2e8f0 100 %);
+    border - radius: 16px;
+    display: flex;
+    align - items: center;
+    justify - content: center;
+    margin: 0 auto 20px;
+    ">
+        < i class="fas fa-file-alt" style = "font-size: 24px; color: #94a3b8;" ></i >
+            </div >
             <p style="font-size: 16px; font-weight: 600; color: #475569; margin-bottom: 8px;">
                 등록된 약관 내용이 없습니다
             </p>
             <p style="font-size: 14px; color: #94a3b8;">
                 관리자 페이지에서 내용을 등록해주세요
             </p>
-        </div>`;
+        </div > `;
 
     let title = '약관';
     if (type === 'privacy') title = '개인정보처리방침';

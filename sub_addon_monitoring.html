@@ -148,34 +148,10 @@
                 <p>서버 안정성을 위한 필수 선택, 부담 없는 가격으로 시작하세요.</p>
             </div>
 
-            <div class="pricing-grid-custom" style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
-                <!-- Basic -->
-                <div class="price-card">
-                    <div class="plan-name">Basic</div>
-                    <div class="plan-price">무료<sub> / 서버</sub></div>
-                    <div class="plan-desc">서버호스팅 이용 고객 기본 제공</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> 서버 Ping 체크 (30분 주기)</li>
-                        <li><i class="fas fa-check"></i> 기본 리소스 상태표지판</li>
-                        <li><i class="fas fa-check"></i> 이메일 알림</li>
-                        <li><i class="fas fa-check"></i> 월간 리포트 미제공</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">신청하기</a>
-                </div>
-
-                <!-- Pro -->
-                <div class="price-card recommended">
-                    <div class="badge-rec">추천</div>
-                    <div class="plan-name">Pro</div>
-                    <div class="plan-price">30,000<sub>원 / 월</sub></div>
-                    <div class="plan-desc">실시간 정밀 감시 및 즉각 알림</div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> <strong>5분 주기 정밀 체크</strong></li>
-                        <li><i class="fas fa-check"></i> SMS / 카카오톡 즉시 알림</li>
-                        <li><i class="fas fa-check"></i> CPU/Memory/Disk 임계치 설정</li>
-                        <li><i class="fas fa-check"></i> 장애 원인 분석 리포트 제공</li>
-                    </ul>
-                    <a href="sub_support.html" class="btn-price">신청하기</a>
+            <div id="pricing-grid-monitoring" class="pricing-grid-custom"
+                style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin"></i> 로딩 중...
                 </div>
             </div>
 
@@ -189,7 +165,16 @@
 
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
     <script src="components/loader.js?v=2.0"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('addon-monitoring');
+        });
+    </script>
 </body>
 
 </html>

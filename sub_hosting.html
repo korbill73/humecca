@@ -381,56 +381,17 @@
         </section>
     </div>
 
+    <!-- Footer -->
     <div id="footer-placeholder"></div>
 
-    <!-- Data Source -->
-    <script src="js/hosting_data.js"></script>
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
     <script src="components/loader.js?v=2.0"></script>
-
-    <!-- Product Renderer -->
+    <script src="js/data_loader.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('pricing-container');
-
-            if (typeof hostingProducts === 'undefined' || !Array.isArray(hostingProducts)) {
-                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">상품 데이터를 불러올 수 없습니다.</div>';
-                return;
-            }
-
-            // Filter active and sort
-            const displayProducts = hostingProducts
-                .filter(p => p.isActive !== false)
-                .sort((a, b) => (a.sortOrder || 99) - (b.sortOrder || 99));
-
-            if (displayProducts.length === 0) {
-                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">등록된 상품이 없습니다.</div>';
-                return;
-            }
-
-            container.innerHTML = displayProducts.map(p => `
-                <div class="plan-card ${p.popular ? 'popular' : ''}">
-                    ${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
-                    <h3 class="plan-title">${p.name}</h3>
-                    <div class="plan-summary">${p.summary || ''}</div>
-                    <div class="plan-price">
-                        <span class="amount">₩${p.price}</span><span class="period">/${p.period || '월'}</span>
-                    </div>
-                    
-                    <div class="specs-list">
-                        ${Object.entries(p.specs || {}).map(([key, val]) => `
-                            <div class="spec-item">
-                                <span class="spec-label">${key.toUpperCase()}</span>
-                                <span class="spec-value">${val}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <ul class="plan-features">
-                        ${(p.features || []).map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
-                    </ul>
-                    <a href="sub_support.html" class="plan-btn ${p.popular ? 'solid' : 'outline'}">신청하기</a>
-                </div>
-            `).join('');
+            loadProductData('hosting');
         });
     </script>
     <script src="script.js"></script>

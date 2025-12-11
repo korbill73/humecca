@@ -423,49 +423,10 @@
                     <h2 class="idc-sec-title">상면 임대 요금</h2>
                     <p class="idc-sec-desc">필요한 공간만큼 합리적으로 이용하세요</p>
                 </div>
-                <div class="pricing-grid">
-                    <!-- 1U -->
-                    <div class="plan-card">
-                        <h3 class="plan-title">1U 랙 마운트</h3>
-                        <div class="plan-price">
-                            <span class="amount">₩80,000</span><span class="period">/월</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 1U 전용 공간</li>
-                            <li><i class="fas fa-check"></i> 1A 이하 전력 제공</li>
-                            <li><i class="fas fa-check"></i> 100Mbps Shared</li>
-                            <li><i class="fas fa-check"></i> 기본 관제 서비스</li>
-                        </ul>
-                        <a href="sub_support.html" class="plan-btn outline">신청하기</a>
-                    </div>
-                    <!-- QP -->
-                    <div class="plan-card popular">
-                        <span class="plan-badge">BEST CHOICE</span>
-                        <h3 class="plan-title">쿼터 랙 (10U)</h3>
-                        <div class="plan-price">
-                            <span class="amount">₩450,000</span><span class="period">/월</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 10U 독립 공간</li>
-                            <li><i class="fas fa-check"></i> 2.2kW (10A) 전력</li>
-                            <li><i class="fas fa-check"></i> 1Gbps Dedicated</li>
-                            <li><i class="fas fa-check"></i> 독립 잠금 장치</li>
-                        </ul>
-                        <a href="sub_support.html" class="plan-btn solid">신청하기</a>
-                    </div>
-                    <!-- Full -->
-                    <div class="plan-card">
-                        <h3 class="plan-title">풀 랙 (42U)</h3>
-                        <div class="plan-price">
-                            <span class="amount">₩1,500,000</span><span class="period">/월</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 42U 전체 랙 제공</li>
-                            <li><i class="fas fa-check"></i> 4.4kW (20A) 전력</li>
-                            <li><i class="fas fa-check"></i> 10Gbps Ready</li>
-                            <li><i class="fas fa-check"></i> CCTV 개별 설치 가능</li>
-                        </ul>
-                        <a href="sub_support.html" class="plan-btn outline">신청하기</a>
+                <div class="pricing-grid" id="pricing-grid-colocation">
+                    <!-- Loaded via data_loader.js -->
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-spinner fa-spin"></i> 로딩 중...
                     </div>
                 </div>
             </div>
@@ -487,8 +448,19 @@
         </section>
     </div>
 
+    <!-- Footer -->
     <div id="footer-placeholder"></div>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
     <script src="components/loader.js?v=2.0"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('colocation');
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 

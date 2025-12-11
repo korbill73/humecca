@@ -146,52 +146,105 @@
     </section>
 
     <!-- Location -->
+    <!-- Location -->
     <section id="location" class="section" style="background-color: #f8fafc; padding: 100px 0;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
                 <span
                     style="color: #dc2626; font-weight: 600; font-size: 14px; display: block; margin-bottom: 10px;">Location</span>
                 <h2 style="font-size: 2.25rem; font-weight: 700; color: #111827;">오시는 길</h2>
+                <p style="color: #64748b; margin-top: 10px;">휴메카의 주요 업무 공간을 안내해 드립니다.</p>
             </div>
 
+            <!-- Location Tabs -->
+            <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;">
+                <button onclick="switchLocation('hq')" id="btn-hq" class="loc-btn active"
+                    style="padding: 12px 30px; border-radius: 30px; border: 1px solid #dc2626; background: #dc2626; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    본사 & 기술센터
+                </button>
+                <button onclick="switchLocation('kinx')" id="btn-kinx" class="loc-btn"
+                    style="padding: 12px 30px; border-radius: 30px; border: 1px solid #e5e7eb; background: white; color: #4b5563; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    KINX IDC
+                </button>
+                <button onclick="switchLocation('sk')" id="btn-sk" class="loc-btn"
+                    style="padding: 12px 30px; border-radius: 30px; border: 1px solid #e5e7eb; background: white; color: #4b5563; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    SK IDC
+                </button>
+            </div>
+
+            <!-- Map Container with Premium Style -->
             <div
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);">
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 1px solid rgba(0,0,0,0.05); height: 550px;">
+
                 <!-- Map Area -->
-                <div id="map"
-                    style="min-height: 400px; display: flex; align-items: center; justify-content: center; position: relative;">
+                <div id="map-container" style="position: relative; width: 100%; height: 100%;">
+                    <!-- Maps will be injected here via JS -->
+                    <iframe id="map-frame"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.846875865239!2d127.0396033153102!3d37.51139497980831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3f7c462319f%3A0xc3c4578028741366!2zS1Qg6rCV64KoSURD!5e0!3m2!1sko!2skr!4v1709620000000!5m2!1sko!2skr"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
 
                 <!-- Info Area -->
-                <div style="padding: 60px 40px; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="margin-bottom: 40px;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 20px;">본사</h3>
-                        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-                            <i class="fas fa-map-marker-alt" style="color: #dc2626; margin-top: 5px;"></i>
-                            <span style="color: #4b5563; line-height: 1.6;">서울시 강남구 언주로 517 KTIDC</span>
+                <!-- Info Area -->
+                <div id="info-container"
+                    style="padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; background: #fff;">
+
+                    <!-- Content will be updated via JS -->
+                    <div id="loc-content">
+                        <div style="margin-bottom: 40px;">
+                            <div
+                                style="display:inline-block; padding: 6px 16px; background: #fef2f2; color: #dc2626; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px;">
+                                HEADQUARTERS</div>
+                            <h3
+                                style="font-size: 2rem; font-weight: 800; color: #111827; margin-bottom: 24px; line-height: 1.2;">
+                                본사 & 기술센터<br>(KT-IDC)</h3>
+
+                            <div style="display: flex; gap: 18px; margin-bottom: 20px; align-items: flex-start;">
+                                <div
+                                    style="width: 40px; height: 40px; border-radius: 12px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <i class="fas fa-map-marker-alt" style="color: #dc2626; font-size: 18px;"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 13px; color: #9ca3af; margin-bottom: 4px;">ADDRESS</div>
+                                    <span
+                                        style="color: #374151; font-weight: 500; font-size: 1.05rem; line-height: 1.6;">
+                                        서울특별시 강남구 언주로 517<br>
+                                        (역삼동, KT영동지사)<br>
+                                        KT 강남 IDC 10층 / B2
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 18px; margin-bottom: 20px; align-items: flex-start;">
+                                <div
+                                    style="width: 40px; height: 40px; border-radius: 12px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <i class="fas fa-phone-alt" style="color: #dc2626; font-size: 18px;"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 13px; color: #9ca3af; margin-bottom: 4px;">TEL</div>
+                                    <span
+                                        style="color: #374151; font-weight: 500; font-size: 1.05rem;">02-418-7766</span>
+                                </div>
+                            </div>
                         </div>
-                        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-                            <i class="fas fa-phone-alt" style="color: #dc2626; margin-top: 5px;"></i>
-                            <span style="color: #4b5563; line-height: 1.6;">02-418-7766</span>
-                        </div>
-                        <div style="display: flex; gap: 15px;">
-                            <i class="fas fa-envelope" style="color: #dc2626; margin-top: 5px;"></i>
-                            <span style="color: #4b5563; line-height: 1.6;">support@humecca.co.kr</span>
+
+                        <div style="padding-top: 30px; border-top: 1px solid #f3f4f6;">
+                            <div style="margin-bottom: 15px;">
+                                <strong style="color: #111827; display: block; margin-bottom: 8px;">🚇 지하철</strong>
+                                <p style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">
+                                    <span style="color:#2db400; font-weight:700;">2호선</span> 역삼역 6,7번 출구 (도보 10분)<br>
+                                    <span style="color:#d4a027; font-weight:700;">9호선</span> 언주역 5,6번 출구 (도보 5분)
+                                </p>
+                            </div>
+                            <div>
+                                <strong style="color: #111827; display: block; margin-bottom: 8px;">🚌 버스</strong>
+                                <p style="color: #6b7280; font-size: 0.95rem;">KT영동지사 앞 하차 (147, 241, 463)</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div style="padding-top: 40px; border-top: 1px solid #e5e7eb;">
-                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 15px;">대중교통 안내
-                        </h4>
-                        <p style="color: #6b7280; font-size: 0.95rem; margin-bottom: 10px;">
-                            <strong>지하철:</strong> 2호선 선릉역 5번 출구 도보 10분 / 역삼역 8번 출구 도보 9분
-                        </p>
-                        <p style="color: #6b7280; font-size: 0.95rem; margin-bottom: 10px;">
-                            <strong>버스:</strong> 147, 241, 463, 3412, 3422, 4211 (차병원사거리 하차)
-                        </p>
-                        <p style="color: #6b7280; font-size: 0.95rem;">
-                            <strong>주차:</strong> 건물 지하 주차장 이용
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -207,16 +260,167 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase_config.js"></script>
 
-    <!-- Kakao Maps API -->
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_API_KEY&libraries=services"></script>
-
     <script>
+        // ==================== CSS Injection for Animations ====================
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes slideUpFade {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .history-item-anim {
+                opacity: 0;
+            }
+            .history-item-anim.visible {
+                animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .loc-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+            }
+            .loc-btn.active {
+                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // ==================== Location Tabs Logic ====================
+        const locations = {
+            'hq': {
+                name: '본사 & 기술센터<br>(KT-IDC)',
+                tag: 'HEADQUARTERS',
+                address: '서울특별시 강남구 언주로 517<br>(역삼동, KT영동지사)<br>KT 강남 IDC 10층 / B2',
+                tel: '02-418-7766',
+                mapUrl: 'https://maps.google.com/maps?q=KT영동지사&t=&z=16&ie=UTF8&iwloc=&output=embed',
+
+                // Structured Data for Layout
+                subwayLabel: '🚇 지하철',
+                subway: '<span style="color:#2db400; font-weight:700;">2호선</span> 역삼역 6,7번 (도보 10분)<br><span style="color:#d4a027; font-weight:700;">9호선</span> 언주역 5,6번 (도보 5분)',
+
+                transport2Label: '🚌 버스',
+                transport2: 'KT영동지사 앞 하차<br>(147, 241, 463번)'
+            },
+            'kinx': {
+                name: 'KINX IDC 센터',
+                tag: 'KINX IDC',
+                address: '서울특별시 강남구 언주로 30길 13<br>대림아크로텔<br>KINX IDC',
+                tel: '02-418-7766',
+                mapUrl: 'https://maps.google.com/maps?q=서울특별시 강남구 언주로 30길 13 대림아크로텔&t=&z=16&ie=UTF8&iwloc=&output=embed',
+
+                subwayLabel: '🚇 지하철 (분당선)',
+                subway: '<span style="color:#e6b600; font-weight:700;">수인분당선</span><br>도곡역 3번 출구 (도보 5분)',
+
+                transport2Label: '🚇 지하철 (3호선)',
+                transport2: '<span style="color:#e94f18; font-weight:700;">3호선</span><br>매봉역 3번 출구 (도보 7분)'
+            },
+            'sk': {
+                name: 'SK IDC 센터',
+                tag: 'SK IDC',
+                address: '서울특별시 서초구 법원로 1길 6<br>SK브로드밴드 서초 IDC',
+                tel: '02-418-7766',
+                mapUrl: 'https://maps.google.com/maps?q=서울특별시 서초구 법원로 1길 6&t=&z=16&ie=UTF8&iwloc=&output=embed',
+
+                subwayLabel: '🚇 지하철 (2호선)',
+                subway: '<span style="color:#2db400; font-weight:700;">2호선</span><br>서초역 3,4번 출구 (도보 8분)',
+
+                transport2Label: '🚇 지하철 (3호선)',
+                transport2: '<span style="color:#e94f18; font-weight:700;">3호선</span><br>교대역 10번 출구 (도보 10분)'
+            }
+        };
+
+        function switchLocation(id) {
+            // Update Buttons
+            document.querySelectorAll('.loc-btn').forEach(btn => {
+                if (btn.id === `btn-${id}`) {
+                    btn.classList.add('active');
+                    btn.style.background = '#dc2626';
+                    btn.style.color = 'white';
+                    btn.style.border = '1px solid #dc2626';
+                    btn.style.boxShadow = '0 4px 12px rgba(220, 38, 38, 0.3)';
+                } else {
+                    btn.classList.remove('active');
+                    btn.style.background = 'white';
+                    btn.style.color = '#4b5563';
+                    btn.style.border = '1px solid #e5e7eb';
+                    btn.style.boxShadow = 'none';
+                }
+            });
+
+            // Update Content
+            const loc = locations[id];
+
+            // Map
+            const mapFrame = document.getElementById('map-frame');
+            mapFrame.style.opacity = '0';
+            setTimeout(() => {
+                mapFrame.src = loc.mapUrl;
+                mapFrame.onload = () => { mapFrame.style.opacity = '1'; };
+                // Fallback fade in just in case onload fires too fast
+                setTimeout(() => mapFrame.style.opacity = '1', 500);
+            }, 200);
+
+            // Info - Balanced 2-Column Grid Layout
+            const contentHTML = `
+                <div style="animation: slideUpFade 0.5s ease-out;">
+                    <div style="margin-bottom: 25px;">
+                        <div style="display:inline-block; padding: 4px 12px; background: #fef2f2; color: #dc2626; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 10px;">${loc.tag}</div>
+                        <h3 style="font-size: 1.6rem; font-weight: 800; color: #111827; margin: 0; line-height: 1.2;">${loc.name}</h3>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                        <!-- Left Column: Address + Subway -->
+                        <div>
+                            <!-- Address -->
+                            <div style="margin-bottom: 30px;">
+                                <div style="display: flex; gap: 10px; margin-bottom: 6px; align-items: center;">
+                                    <i class="fas fa-map-marker-alt" style="color: #dc2626; font-size: 14px;"></i>
+                                    <span style="font-size: 11px; color: #9ca3af; font-weight: 600;">ADDRESS</span>
+                                </div>
+                                <span style="display: block; color: #374151; font-weight: 500; font-size: 0.95rem; line-height: 1.5; padding-left: 24px;">
+                                    ${loc.address}
+                                </span>
+                            </div>
+
+                            <!-- Transport 1 (Subway) -->
+                            <div style="padding-left: 24px;">
+                                <strong style="color: #111827; display: block; margin-bottom: 8px; font-size: 0.95rem;">${loc.subwayLabel}</strong>
+                                <p style="color: #6b7280; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+                                    ${loc.subway}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Phone + Bus/Other -->
+                        <div>
+                             <!-- Phone -->
+                            <div style="margin-bottom: 30px;">
+                                <div style="display: flex; gap: 10px; margin-bottom: 6px; align-items: center;">
+                                    <i class="fas fa-phone-alt" style="color: #dc2626; font-size: 14px;"></i>
+                                    <span style="font-size: 11px; color: #9ca3af; font-weight: 600;">TEL</span>
+                                </div>
+                                <span style="display: block; color: #374151; font-weight: 700; font-size: 1.1rem; padding-left: 24px;">
+                                    ${loc.tel}
+                                </span>
+                            </div>
+
+                            <!-- Transport 2 (Bus / Other Subway) -->
+                            <div style="padding-left: 24px;">
+                                <strong style="color: #111827; display: block; margin-bottom: 8px; font-size: 0.95rem;">${loc.transport2Label}</strong>
+                                <p style="color: #6b7280; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+                                    ${loc.transport2}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('loc-content').innerHTML = contentHTML;
+        }
+
         // ==================== 연혁 불러오기 ====================
         async function loadHistory() {
             if (!supabase) {
                 console.error('Supabase not initialized');
-                document.getElementById('history-loading').innerHTML = '<p style="color: #dc2626;">연혁을 불러올 수 없습니다.</p>';
                 return;
             }
 
@@ -239,154 +443,92 @@
                     return;
                 }
 
-                // 로딩 제거
                 loading.remove();
 
-                // 연도별 그룹화
                 const groupedByYear = {};
                 data.forEach(item => {
-                    if (!groupedByYear[item.year]) {
-                        groupedByYear[item.year] = [];
-                    }
+                    if (!groupedByYear[item.year]) groupedByYear[item.year] = [];
                     groupedByYear[item.year].push(item);
                 });
 
-                // 타임라인 생성
                 const years = Object.keys(groupedByYear).sort((a, b) => b - a);
                 const currentYear = new Date().getFullYear();
 
                 years.forEach((year, index) => {
                     const isRecent = parseInt(year) >= currentYear - 2;
-                    const isFirst = parseInt(year) === parseInt(years[0]);
                     const isLast = index === years.length - 1;
                     const isOdd = index % 2 === 0;
-
                     const events = groupedByYear[year];
 
                     const yearDiv = document.createElement('div');
-                    yearDiv.style.cssText = 'display: flex; justify-content: space-between; margin-bottom: 50px; position: relative;';
+                    yearDiv.className = 'history-item-anim';
+                    yearDiv.style.cssText = 'display: flex; justify-content: space-between; margin-bottom: 60px; position: relative;';
 
-                    // 연도와 이벤트 배치 (지그재그)
                     const yearHTML = `
-                        <div style="font-size: 2rem; font-weight: 800; color: ${isRecent || isLast ? '#dc2626' : '#9ca3af'}; margin-bottom: 5px;">
-                            ${year}
+                        <div style="color: ${isRecent ? '#dc2626' : '#6b7280'}; margin-bottom: 5px;">
+                            <span style="font-size: 3.5rem; font-weight: 800; line-height: 1; letter-spacing: -2px;">${year}</span>
                         </div>
                     `;
 
                     const eventsHTML = events.map(event => {
-                        const monthText = event.month ? `${String(event.month).padStart(2, '0')}월` : '';
+                        const monthText = event.month ? `${String(event.month).padStart(2, '0')}.` : '';
                         return `
-                            <li style="margin-bottom: ${event.description ? '15px' : '10px'};">
-                                ${monthText ? `<strong style="color: #111827;">${monthText}</strong> ` : ''}
-                                ${event.title}
-                                ${event.description ? `<div style="color: #6b7280; font-size: 0.9rem; margin-top: 5px;">${event.description}</div>` : ''}
+                            <li style="margin-bottom: 20px; padding-left: 20px; border-left: 2px solid ${isRecent ? '#fee2e2' : '#f3f4f6'};">
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #1f2937; margin-bottom: 4px;">
+                                    <span style="color: #dc2626; margin-right: 8px;">${monthText}</span>${event.title}
+                                </div>
+                                ${event.description ? `<div style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">${event.description}</div>` : ''}
                             </li>
                         `;
                     }).join('');
 
-                    const dotColor = isRecent || isLast ? '#dc2626' : '#4b5563';
-                    const dotBorder = isRecent || isLast ? '#dc2626' : '#e5e7eb';
+                    const dotColor = isRecent ? '#dc2626' : '#9ca3af';
+                    const listHTML = `<ul style="list-style: none; padding: 0;">${eventsHTML}</ul>`;
 
                     yearDiv.innerHTML = `
-                        <div style="width: 45%; text-align: right; padding-right: 30px;">
-                            ${isOdd ? yearHTML : `<ul style="list-style: none; padding: 0; color: #4b5563;">${eventsHTML}</ul>`}
+                        <div style="width: 45%; text-align: right; padding-right: 40px;">
+                            ${isOdd ? yearHTML : listHTML}
                         </div>
-                        <div style="position: absolute; left: 50%; width: 18px; height: 18px; background: ${dotColor}; border-radius: 50%; transform: translateX(-50%); border: 4px solid white; box-shadow: 0 0 0 3px ${dotBorder};"></div>
-                        <div style="width: 45%; padding-left: 30px;">
-                            ${isOdd ? `<ul style="list-style: none; padding: 0; color: #4b5563;">${eventsHTML}</ul>` : yearHTML}
+                        <div style="position: absolute; left: 50%; top: 10px; width: 16px; height: 16px; background: white; border-radius: 50%; transform: translateX(-50%); border: 3px solid ${dotColor}; box-shadow: 0 0 0 4px white;"></div>
+                        <div style="width: 45%; padding-left: 40px;">
+                            ${isOdd ? listHTML : yearHTML}
                         </div>
                     `;
 
                     timeline.appendChild(yearDiv);
                 });
 
-                console.log('✅ 연혁 로드 완료:', data.length, '개');
+                // Intersection Observer for Animation
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.history-item-anim').forEach(item => observer.observe(item));
 
             } catch (error) {
-                console.error('연혁 로드 오류:', error);
-                document.getElementById('history-loading').innerHTML = `
-                    <p style="color: #dc2626;">연혁을 불러오는 중 오류가 발생했습니다.</p>
-                    <p style="color: #9ca3af; font-size: 0.9rem;">${error.message}</p>
-                `;
+                console.error(error);
             }
         }
 
-        // ==================== 카카오 지도 초기화 ====================
-        function initMap() {
-            // 회사 위치: 서울시 강남구 언주로 517 KTIDC
-            const position = new kakao.maps.LatLng(37.5015, 127.0428);
-
-            const mapContainer = document.getElementById('map');
-            const mapOption = {
-                center: position,
-                level: 3
-            };
-
-            const map = new kakao.maps.Map(mapContainer, mapOption);
-
-            // 마커 생성
-            const marker = new kakao.maps.Marker({
-                position: position,
-                map: map
-            });
-
-            // 인포윈도우 생성
-            const infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:10px; font-weight:600; color:#111827; min-width:150px; text-align:center;">휴메카<br><span style="font-weight:400; font-size:0.9rem; color:#6b7280;">HUMECCA</span></div>'
-            });
-
-            infowindow.open(map, marker);
-
-            // 마커 클릭시 인포윈도우 토글
-            kakao.maps.event.addListener(marker, 'click', function () {
-                if (infowindow.getMap()) {
-                    infowindow.close();
-                } else {
-                    infowindow.open(map, marker);
-                }
-            });
-        }
-
-        // 페이지 로드 시 실행
         document.addEventListener('DOMContentLoaded', () => {
-            // 연혁 로드
-            setTimeout(loadHistory, 500); // Supabase 초기화 대기
+            setTimeout(loadHistory, 500);
 
-            // 지도 초기화 (Kakao Maps API가 로드되면)
-            if (typeof kakao !== 'undefined' && kakao.maps) {
-                initMap();
-            } else {
-                console.warn('Kakao Maps API not loaded. Please add your API key.');
-                document.getElementById('map').innerHTML = '<div style="background: #e5e7eb; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #6b7280;">지도를 불러올 수 없습니다. API 키를 확인해주세요.</div>';
-            }
-        });
-
-        // Improved Menu Interaction
-        document.addEventListener('DOMContentLoaded', () => {
+            // Menu Fixes
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
                 const menu = item.querySelector('.dropdown-menu');
                 if (!menu) return;
 
-                // When link inside menu is clicked, hide menu immediately
-                const links = menu.querySelectorAll('a.dropdown-item');
-                links.forEach(link => {
-                    link.addEventListener('click', () => {
-                        menu.style.display = 'none'; // Force hide to prevent ghosting
-                    });
-                });
+                // Hide on click
+                menu.querySelectorAll('a.dropdown-item').forEach(l => l.addEventListener('click', () => menu.style.display = 'none'));
 
-                // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
-                // This ensures that next time the user hovers, CSS :hover works again.
+                // Mouse logic
                 item.addEventListener('mouseleave', () => {
-                    menu.style.display = '';
-                    menu.style.opacity = '';
-                    menu.style.visibility = '';
-                });
-
-                // Safety: Ensure it's clean (visible) when mouse enters
-                item.addEventListener('mouseenter', () => {
-                    menu.style.display = '';
+                    menu.style.display = ''; menu.style.opacity = '';
                 });
             });
         });
