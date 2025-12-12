@@ -1,80 +1,59 @@
 /**
- * HUMECCA 공통 컴포넌트 로더
- * 헤더, 푸터 등 공통 컴포넌트를 동적으로 로드합니다.
+ * Component Loader (components/loader.js)
+ * - Loads HTML components (header, footer) dynamically
+ * - Supports caching (memoization) to prevent redundant fetches
+ * - Executes <script> tags inside loaded components
+ * - Supports versioning for cache busting (?v=...)
+ * - Fallback for local file:// protocol
  */
 
-// 페이지 로드 시 공통 컴포넌트 로드
-// [Fallback] openAppModal 정의 (스크립트 로드 지연 방지)
-if (typeof window.openAppModal === 'undefined') {
-    window.openAppModal = function (name, type, details) {
-        console.warn('AppModal script not loaded yet. Waiting...');
-        alert('시스템 로딩 중입니다. 1~2초 후 다시 시도해주세요.');
-    };
-}
+const componentCache = {};
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 헤더 로드
-    loadComponent('header-placeholder', 'components/header.html', initHeaderScripts);
-    // 푸터 로드
-    loadComponent('footer-placeholder', 'components/footer.html', initTermsModal);
-
-    // [New] Web Analytics Logging
-    // Supabase가 로드되었는지 확인 후 없으면 CDN 로드 후 실행 (admin.html 등에서 중복 로드 방지)
-    if (typeof supabase === 'undefined') {
-        // 동적으로 Supabase Config 및 CDN 로드 시도하지 않음 (복잡도 증가 방지)
-        // 실제 운영 시에는 모든 페이지 헤드에 cdn 스크립트가 있어야 함.
-        // 여기서는 임시로 console log만 남김.
-        // console.log('Analytics: Supabase SDK not found on this page.');
-    } else {
-        logVisit();
-    }
-});
-
-async function logVisit() {
-    try {
-        const path = window.location.pathname;
-        const referrer = document.referrer;
-        const ua = navigator.userAgent;
-
-        // Simple insert
-        await supabase.from('visit_logs').insert([{
-            page_path: path,
-            referrer: referrer,
-            user_agent: ua
-        }]);
-    } catch (e) {
-        // Silent fail
-        console.warn('Analytics log failed:', e);
-    }
-}
-
-/**
- * 공통 컴포넌트를 로드하여 placeholder에 삽입
- * @param {string} placeholderId - 컴포넌트가 삽입될 요소의 ID
- * @param {string} componentPath - 컴포넌트 파일 경로
- * @param {Function} callback - 로드 완료 후 실행할 콜백 함수 (선택)
- */
 function loadComponent(placeholderId, componentPath, callback) {
     const placeholder = document.getElementById(placeholderId);
     if (!placeholder) return;
 
-    // Cache Busting: Add timestamp to force reload of components
-    // This solves issues where updated header.html is not reflected on live site
-    const version = new Date().getTime();
+    // 1. 이미 로드된 컴포넌트인지 확인 (메모리 캐싱)
+    if (componentCache[componentPath]) {
+        // console.log(`Serving ${componentPath} from cache`);
+        placeholder.innerHTML = componentCache[componentPath];
+        // 비록 캐시에서 가져왔더라도 스크립트는 다시 실행하지 않음 (일반적으로)
+        // 하지만 DOM에 새로 삽입되었으므로 이벤트 리스너 등은 다시 붙여야 할 수 있음.
+        // 여기서는 구조만 삽입하고, 콜백(initHeaderScripts 등)을 호출하여 기능 복구.
+        if (callback) callback();
+        return;
+    }
+
+    // Version Control (Cache Busting) extraction
+    // index.html에서 <script src="loader.js?v=2.0"></script> 형태로 호출했을 때
+    // 그 버전을 가져와서 컴포넌트 fetch 시에도 적용
+    const scripts = document.querySelectorAll('script');
+    let version = '';
+    scripts.forEach(s => {
+        if (s.src && s.src.includes('loader.js?v=')) {
+            version = s.src.split('v=')[1];
+        }
+    });
+
+    if (!version) version = new Date().getTime(); // Fallback to timestamp if no version
+
+    // 2. Fetch Component with version query param
     const separator = componentPath.includes('?') ? '&' : '?';
     const pathWithVersion = `${componentPath}${separator}v=${version}`;
 
     fetch(pathWithVersion)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Component not found: ' + componentPath);
-            }
+            if (!response.ok) throw new Error('Network response was not ok');
             return response.text();
         })
-        .then(html => {
-            placeholder.innerHTML = html;
+        .then(data => {
+            // 캐시에 저장
+            componentCache[componentPath] = data;
 
-            // 스크립트 태그 실행
+            placeholder.innerHTML = data;
+
+            // 3. 안에 있는 <script> 태그 실행
+            // innerHTML로 넣은 스크립트는 실행되지 않으므로 수동으로 실행해줘야 함
             const scripts = placeholder.querySelectorAll('script');
             scripts.forEach(script => {
                 const newScript = document.createElement('script');
@@ -234,7 +213,7 @@ function getInlineHeader() {
                     <a href="sub_cloud_intro.html" class="nav-link">
                         클라우드 <i class="fas fa-chevron-down"></i>
                     </a>
-                    <div class="dropdown-menu mega-menu">
+                    <div class="dropdown-menu mega-menu" style="min-width: 580px; overflow: hidden; padding: 15px;">
                         <a href="sub_cloud_intro.html" class="dropdown-item">
                             <div class="dropdown-icon"><i class="fas fa-cloud"></i></div>
                             <div class="dropdown-text">
@@ -280,10 +259,12 @@ function getInlineHeader() {
                                 <div class="dropdown-text"><span class="dropdown-title">서비스별 제한사항</span></div>
                             </a>
                         </div>
-                        
-                        <div class="mega-cta">
-                            <a href="https://login.humecca.co.kr" target="_blank">
-                                <i class="fas fa-cloud"></i> 서비스 바로 가기 <i class="fas fa-external-link-alt"></i>
+
+                        <div class="mega-cta"
+                            style="position: relative; width: 100%; text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; clear: both;">
+                            <a href="https://login.humecca.co.kr" target="_blank"
+                                style="display: inline-block; padding: 10px 20px; background: #fff; border: 1px solid #e94d36; color: #e94d36; border-radius: 6px; text-decoration: none; font-weight: bold;">
+                                <i class="fas fa-cloud"></i> 서비스 콘솔 바로가기 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
@@ -339,7 +320,9 @@ function getInlineHeader() {
                                 <div class="dropdown-text"><span class="dropdown-title">클린존</span></div>
                             </a>
                         </div>
-                        <p class="mega-section-title" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">System & Data Security</p>
+                        <p class="mega-section-title"
+                            style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">System & Data
+                            Security</p>
                         <div class="mega-grid">
                             <a href="sub_security.html" class="dropdown-item">
                                 <div class="dropdown-icon"><i class="fas fa-certificate"></i></div>
@@ -363,46 +346,57 @@ function getInlineHeader() {
 
                 <!-- 5. Addon -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">부가서비스 <i class="fas fa-chevron-down"></i></a>
+                    <a href="sub_addon_software.html" class="nav-link">부가서비스 <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu mega-menu" style="min-width: 400px;">
-                         <div class="menu-list" style="padding: 10px 0;">
+                        <div class="menu-list" style="padding: 10px 0;">
                             <a href="sub_addon_software.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-window-maximize"></i></div>
-                                <div class="text-box"><span class="title">소프트웨어</span><span class="desc">라이선스 임대</span></div>
+                                <div class="text-box"><span class="title">소프트웨어</span><span class="desc">라이선스 임대</span>
+                                </div>
                             </a>
                             <a href="sub_addon_backup.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-database"></i></div>
-                                <div class="text-box"><span class="title">백업</span><span class="desc">데이터 보호</span></div>
+                                <div class="text-box"><span class="title">백업</span><span class="desc">데이터 보호</span>
+                                </div>
                             </a>
                             <a href="sub_addon_ha.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-layer-group"></i></div>
-                                <div class="text-box"><span class="title">HA(고가용성)</span><span class="desc">무중단 서비스</span></div>
+                                <div class="text-box"><span class="title">HA(고가용성)</span><span class="desc">무중단
+                                        서비스</span></div>
                             </a>
                             <a href="sub_addon_loadbalancing.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-wave-square"></i></div>
-                                <div class="text-box"><span class="title">로드밸런싱</span><span class="desc">트래픽 분산</span></div>
+                                <div class="text-box"><span class="title">로드밸런싱</span><span class="desc">트래픽 분산</span>
+                                </div>
                             </a>
                             <a href="sub_addon_cdn.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-bolt"></i></div>
-                                <div class="text-box"><span class="title">CDN</span><span class="desc">속도 가속</span></div>
+                                <div class="text-box"><span class="title">CDN</span><span class="desc">속도 가속</span>
+                                </div>
                             </a>
-                             <a href="sub_addon_recovery.html" class="dropdown-item icon-left">
+                            <a href="sub_addon_recovery.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-undo"></i></div>
-                                <div class="text-box"><span class="title">데이터 복구</span><span class="desc">데이터 손상 복원</span></div>
+                                <div class="text-box"><span class="title">데이터 복구</span><span class="desc">데이터 손상
+                                        복원</span></div>
                             </a>
                             <a href="sub_addon_monitoring.html" class="dropdown-item icon-left">
                                 <div class="icon-box"><i class="fas fa-desktop"></i></div>
-                                <div class="text-box"><span class="title">모니터링</span><span class="desc">실시간 감시</span></div>
+                                <div class="text-box"><span class="title">모니터링</span><span class="desc">실시간 감시</span>
+                                </div>
                             </a>
+                        </div>
+                        <div class="menu-footer"
+                            style="border-top: 1px solid #f3f4f6; padding: 12px; text-align: center; background: #f9fafb;">
+                            <a href="#" style="color: #dc2626; font-size: 14px; font-weight: 500;">전체 부가서비스 보기</a>
                         </div>
                     </div>
                 </li>
 
                 <!-- 6. Enterprise Solutions -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">기업솔루션 <i class="fas fa-chevron-down"></i></a>
+                    <a href="sub_sol_ms365.html" class="nav-link">기업솔루션 <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                         <a href="sub_sol_ms365.html" class="dropdown-item">
+                        <a href="sub_sol_ms365.html" class="dropdown-item">
                             <div class="dropdown-icon"><i class="fab fa-microsoft"></i></div>
                             <div class="dropdown-text"><span class="dropdown-title">MS 365</span></div>
                         </a>

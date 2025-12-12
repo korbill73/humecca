@@ -7,11 +7,11 @@ foreach ($file in $files) {
     $content = Get-Content $file.FullName -Raw -Encoding UTF8
     $originalContent = $content
 
-    # Update styles.css version to 3.3
-    $content = $content -replace 'styles\.css\?v=[0-9.]+', 'styles.css?v=3.3'
+    # Update styles.css version to 3.4
+    $content = $content -replace 'styles\.css\?v=[0-9.]+', 'styles.css?v=3.4'
     
-    # Update loader.js version to 3.3
-    $content = $content -replace 'components/loader\.js\?v=[0-9.]+', 'components/loader.js?v=3.3'
+    # Update loader.js version to 3.4
+    $content = $content -replace 'components/loader\.js\?v=[0-9.]+', 'components/loader.js?v=3.4'
 
     if ($content -ne $originalContent) {
         Set-Content -Path $file.FullName -Value $content -Encoding UTF8
