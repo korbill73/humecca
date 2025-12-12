@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Component Loader (components/loader.js)
  * - Loads HTML components (header, footer) dynamically
  * - Supports caching (memoization) to prevent redundant fetches
@@ -13,20 +13,14 @@ function loadComponent(placeholderId, componentPath, callback) {
     const placeholder = document.getElementById(placeholderId);
     if (!placeholder) return;
 
-    // 1. 이미 로드된 컴포넌트인지 확인 (메모리 캐싱)
+    // 1. ?대? 濡쒕뱶??而댄룷?뚰듃?몄? ?뺤씤 (硫붾え由?罹먯떛)
     if (componentCache[componentPath]) {
-        // console.log(`Serving ${componentPath} from cache`);
         placeholder.innerHTML = componentCache[componentPath];
-        // 비록 캐시에서 가져왔더라도 스크립트는 다시 실행하지 않음 (일반적으로)
-        // 하지만 DOM에 새로 삽입되었으므로 이벤트 리스너 등은 다시 붙여야 할 수 있음.
-        // 여기서는 구조만 삽입하고, 콜백(initHeaderScripts 등)을 호출하여 기능 복구.
         if (callback) callback();
         return;
     }
 
     // Version Control (Cache Busting) extraction
-    // index.html에서 <script src="loader.js?v=2.0"></script> 형태로 호출했을 때
-    // 그 버전을 가져와서 컴포넌트 fetch 시에도 적용
     const scripts = document.querySelectorAll('script');
     let version = '';
     scripts.forEach(s => {
@@ -47,13 +41,11 @@ function loadComponent(placeholderId, componentPath, callback) {
             return response.text();
         })
         .then(data => {
-            // 캐시에 저장
-            componentCache[componentPath] = data;
+            // 罹먯떆?????            componentCache[componentPath] = data;
 
             placeholder.innerHTML = data;
 
-            // 3. 안에 있는 <script> 태그 실행
-            // innerHTML로 넣은 스크립트는 실행되지 않으므로 수동으로 실행해줘야 함
+            // 3. ?덉뿉 ?덈뒗 <script> ?쒓렇 ?ㅽ뻾
             const scripts = placeholder.querySelectorAll('script');
             scripts.forEach(script => {
                 const newScript = document.createElement('script');
@@ -65,19 +57,18 @@ function loadComponent(placeholderId, componentPath, callback) {
                 document.body.appendChild(newScript);
             });
 
-            // 콜백 실행
+            // 肄쒕갚 ?ㅽ뻾
             if (callback) callback();
         })
         .catch(error => {
             console.warn('Component load error (' + componentPath + '):', error);
-            // 로컬 파일 시스템에서는 fetch가 작동하지 않으므로
-            // 대체 로딩 시도 (iframe 방식)
+            // 濡쒖뺄 ?뚯씪 ?쒖뒪?쒖뿉?쒕뒗 fetch媛 ?묐룞?섏? ?딆쑝誘濡?            // ?泥?濡쒕뵫 ?쒕룄 (iframe 諛⑹떇)
             loadComponentViaFallback(placeholderId, componentPath, callback);
         });
 }
 
 /**
- * 대체 로딩 방식 (로컬 파일용)
+ * ?泥?濡쒕뵫 諛⑹떇 (濡쒖뺄 ?뚯씪??
  */
 function loadComponentViaFallback(placeholderId, componentPath, callback) {
     const placeholder = document.getElementById(placeholderId);
@@ -93,7 +84,7 @@ function loadComponentViaFallback(placeholderId, componentPath, callback) {
     if (content) {
         placeholder.innerHTML = content;
 
-        // 스크립트 실행 로직 추가 (fetch 방식과 동일하게)
+        // ?ㅽ겕由쏀듃 ?ㅽ뻾 濡쒖쭅 異붽? (fetch 諛⑹떇怨??숈씪?섍쾶)
         const scripts = placeholder.querySelectorAll('script');
         scripts.forEach(script => {
             const newScript = document.createElement('script');
@@ -110,8 +101,7 @@ function loadComponentViaFallback(placeholderId, componentPath, callback) {
 }
 
 /**
- * 헤더 스크립트 초기화
- */
+ * ?ㅻ뜑 ?ㅽ겕由쏀듃 珥덇린?? */
 function initHeaderScripts() {
     // Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -193,8 +183,8 @@ function initHeaderScripts() {
 
 
 /**
- * 인라인 헤더 HTML 반환 (로컬 개발 환경용)
- * components/header.html 내용과 동일하게 유지
+ * ?몃씪???ㅻ뜑 HTML 諛섑솚 (濡쒖뺄 媛쒕컻 ?섍꼍??
+ * components/header.html ?댁슜怨??숈씪?섍쾶 ?좎?
  */
 function getInlineHeader() {
     return `<!-- ========== HEADER (Centralized) ========== -->
@@ -411,7 +401,7 @@ function getInlineHeader() {
                     </div>
                 </li>
 
-                <!-- 7. Company (Added Icons, Adjusted Position) -->
+                <!-- 7. Company -->
                 <li class="nav-item">
                     <a href="sub_company_intro.html" class="nav-link">회사소개 <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
@@ -420,7 +410,7 @@ function getInlineHeader() {
                             <div class="dropdown-text"><span class="dropdown-title">회사소개</span></div>
                         </a>
                         <a href="sub_company_intro.html#history" class="dropdown-item">
-                             <div class="dropdown-icon"><i class="fas fa-history"></i></div>
+                            <div class="dropdown-icon"><i class="fas fa-history"></i></div>
                             <div class="dropdown-text"><span class="dropdown-title">연혁</span></div>
                         </a>
                         <a href="sub_company_intro.html#location" class="dropdown-item">
@@ -430,7 +420,7 @@ function getInlineHeader() {
                     </div>
                 </li>
 
-                <!-- 8. Customer Center (Added Icons) -->
+                <!-- 8. Customer Center -->
                 <li class="nav-item">
                     <a href="sub_support.html" class="nav-link">고객센터</a>
                 </li>
@@ -450,269 +440,354 @@ function getInlineHeader() {
 }
 
 /**
- * 인라인 푸터 HTML 반환 (로컬 개발 환경용)
- * components/footer.html 내용과 동일하게 유지 (스크립트 제외)
+ * ?몃씪???명꽣 HTML 諛섑솚 (濡쒖뺄 媛쒕컻 ?섍꼍??
+ * components/footer.html ?댁슜怨??숈씪?섍쾶 ?좎? (?ㅽ겕由쏀듃 ?쒖쇅)
  */
 function getInlineFooter() {
-    return `<footer class="footer-new" style="background-color: #111; padding: 80px 0 60px; color: #9ca3af; font-size: 13px; font-family: 'Pretendard', sans-serif; border-top: 1px solid #222;">
-        <div class="container">
-            <!-- Top Section -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-bottom: 60px;">
-                <!-- 1. Consultation -->
-                <div>
-                     <h3 style="color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">전문가와의<br>부담 없는 상담</h3>
-                    <p style="margin-bottom: 24px; line-height: 1.6; color: #6b7280;">
-                        궁금한 점이 있으신가요?<br>
-                        로그인 후 1:1 문의를 남겨주시면<br>
-                        전문 엔지니어가 상세히 답변해 드립니다.
-                    </p>
-                    <div style="display: flex; gap: 12px;">
-                        <a href="sub_support.html" style="background: #dc2626; color: white; padding: 10px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
-                            1:1 문의하기 <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
-                        </a>
-                        <a href="javascript:void(0)" onclick="window.open('https://login.humecca.co.kr/Login/Join', 'joinPop', 'width=1000,height=800,scrollbars=yes,resizable=yes'); return false;" style="background: #374151; color: white; padding: 10px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
-                            회원가입
-                        </a>
-                    </div>
-                </div>
-                <!-- 2. Contact -->
-                <div style="padding-left: 20px; border-left: 1px solid #222;">
-                     <h4 style="color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 20px;">서비스 문의</h4>
-                    <div style="margin-bottom: 20px;">
-                        <a href="tel:02-418-7766" style="color: #fff; font-size: 32px; font-weight: 700; text-decoration: none; letter-spacing: -1px;">02-418-7766</a>
-                    </div>
-                    <div style="font-size: 13px;">
-                        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding-bottom: 8px; margin-bottom: 8px;">
-                            <span>평일</span>
-                            <span style="color: #e5e7eb;">09:00 ~ 18:00</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>점심시간</span>
-                            <span style="color: #e5e7eb;">12:00 ~ 13:00</span>
-                        </div>
-                        <div style="margin-top: 12px; font-size: 12px; color: #6b7280;">*주말 및 공휴일 휴무</div>
-                    </div>
-                </div>
-                <!-- 3. Emergency & Social -->
-                <div style="padding-left: 20px; border-left: 1px solid #222;">
-                    <h4 style="color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 20px;">긴급 장애 대응 센터</h4>
-                     <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px;">
-                        <span style="color: #ef4444; font-weight: 700;">KT-IDC</span>
-                        <a href="tel:02-418-4442" style="color: #fff; font-size: 24px; font-weight: 700; text-decoration: none;">02-418-4442</a>
-                    </div>
-                    <p style="color: #9ca3af; font-size: 13px; margin-bottom: 30px;">
-                        365일 24시간 연중무휴 보안 관제 및 기술 지원
-                    </p>
-                    <div style="display: flex; gap: 10px;">
-                         <a href="https://blog.naver.com/humecca_blog" target="_blank" style="flex: 1; background: #03C75A; color: white; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px;">
-                            <span style="margin-right: 6px;">N</span> 블로그
-                        </a>
-                        <a href="https://pf.kakao.com/_ZAWBC/chat" target="_blank" style="flex: 1; background: #FAE100; color: #371c1d; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px;">
-                            <i class="fas fa-comment" style="margin-right: 6px;"></i> 카카오톡
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div style="border-top: 1px solid #222; margin-bottom: 40px;"></div>
-            <!-- Bottom Section -->
+    return `<!-- HUMECCA 공통 푸터 -->
+<footer class="footer-new"
+    style="background-color: #111; padding: 80px 0 60px; color: #9ca3af; font-size: 13px; font-family: 'Pretendard', sans-serif; border-top: 1px solid #222;">
+    <div class="container">
+        <!-- Top Section: 3-Column Grid for Better Balance -->
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-bottom: 60px;">
+
+            <!-- 1. Consultation (Left) -->
             <div>
-                 <div style="display: flex; gap: 30px; font-size: 13px;">
-                     <a href="javascript:void(0)" onclick="showLayerTerm('privacy')" style="color: #fff; font-weight: 600; text-decoration: none;">개인정보처리방침</a>
-                    <a href="javascript:void(0)" onclick="showLayerTerm('terms')" style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">이용약관</a>
-                    <a href="javascript:void(0)" onclick="showLayerTerm('member')" style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">회원약관</a>
-                    <a href="sub_company_intro.html#location" style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">오시는 길</a>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; font-size: 12px; line-height: 1.7; color: #6b7280; margin-top:20px;">
-                    <div>
-                        <strong style="color: #e5e7eb; display: block; margin-bottom: 8px;">(주) 휴메카</strong>
-                        <p>
-                            대표이사 : 박제군 &nbsp;|&nbsp; 사업자등록번호 : 101-81-89952<br>
-                            통신판매업신고 : 제 2024-서울강남-00000호
-                        </p>
-                        <p style="margin-top: 15px; color: #4b5563;">Copyright © 2024 HUMECCA Inc. All Rights Reserved.</p>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div>
-                            <span style="color: #9ca3af; font-weight: 600;">본사</span><br>
-                            서울특별시 강남구 언주로 517길 KT 강남IDC B2
-                        </div>
-                        <div>
-                            <span style="color: #9ca3af; font-weight: 600;">기술센터 (KT-IDC)</span><br>
-                            서울특별시 강남구 언주로 517길 KT 강남IDC 10F
-                        </div>
-                        <div>
-                            <span style="color: #9ca3af; font-weight: 600;">KINX-IDC</span><br>
-                            서울특별시 강남구 언주로 30길, 13 대림아크로텔
-                        </div>
-                        <div>
-                            <span style="color: #9ca3af; font-weight: 600;">SK-IDC</span><br>
-                            서울특별시 서초구 법원로 1길 6 SK브로드밴드
-                        </div>
-                    </div>
+                <h3
+                    style="color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">
+                    전문가와의<br>부담 없는 상담</h3>
+                <p style="margin-bottom: 24px; line-height: 1.6; color: #6b7280;">
+                    궁금한 점이 있으신가요?<br>
+                    로그인 후 1:1 문의를 남겨주시면<br>
+                    전문 엔지니어가 상세히 답변해 드립니다.
+                </p>
+                <div style="display: flex; gap: 12px;">
+                    <a href="sub_support.html"
+                        style="background: #dc2626; color: white; padding: 10px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                        1:1 문의하기 <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
+                    </a>
+                    <a href="javascript:void(0)"
+                        onclick="window.open('https://login.humecca.co.kr/Login/Join', 'joinPop', 'width=1000,height=800,scrollbars=yes,resizable=yes'); return false;"
+                        style="background: #374151; color: white; padding: 10px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                        회원가입
+                    </a>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- 약관 모달 -->
-    <div id="term-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
-        <div style="background: white; width: 90%; max-width: 800px; max-height: 90vh; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-            <div style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
-                <h3 id="term-modal-title" style="font-size: 20px; font-weight: 700; color: #1e293b;">약관</h3>
-                <button onclick="closeTermModal()" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; line-height: 1;">&times;</button>
-            </div>
-            <div id="term-modal-content" style="padding: 30px; overflow-y: auto; line-height: 1.8; color: #333; font-size: 15px; white-space: pre-wrap; font-family: 'Pretendard', 'Noto Sans KR', sans-serif;">
-                <!-- 내용이 여기에 로드됩니다 -->
-            </div>
-            <div style="padding: 20px; border-top: 1px solid #e5e7eb; text-align: right;">
-                <button onclick="closeTermModal()" style="background: #1a1a2e; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">닫기</button>
-            </div>
-        </div>
-    </div>
-    <!-- 간편 신청 모달 (Applications Modal) - Premium Design -->
-    <div id="app-modal"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
 
-        <div class="app-modal-content"
-            style="background: white; width: 90%; max-width: 520px; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: translateY(20px); transition: transform 0.3s ease; font-family: 'Pretendard', sans-serif;">
-
-            <!-- Header -->
-            <div
-                style="background: #1e293b; padding: 24px 30px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #334155;">
-                <div>
-                    <h3 style="color: white; font-size: 1.25rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">견적/상담
-                        신청</h3>
-                    <p style="color: #94a3b8; font-size: 0.875rem; margin: 6px 0 0; line-height: 1.4;">전문 엔지니어가 빠르고 정확하게 안내해
-                        드립니다.</p>
+            <!-- 2. Service Contact (Center) -->
+            <div style="padding-left: 20px; border-left: 1px solid #222;">
+                <h4 style="color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 20px;">서비스 문의</h4>
+                <div style="margin-bottom: 20px;">
+                    <a href="tel:02-418-7766"
+                        style="color: #fff; font-size: 32px; font-weight: 700; text-decoration: none; letter-spacing: -1px;">02-418-7766</a>
                 </div>
-                <button onclick="closeAppModal()"
-                    style="background: rgba(255,255,255,0.1); border: none; color: #cbd5e1; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;">
-                    <i class="fas fa-times" style="font-size: 16px;"></i>
-                </button>
-            </div>
-
-            <!-- Body -->
-            <div style="padding: 30px; max-height: 80vh; overflow-y: auto;">
-
-                <!-- Selected Product Summary Card -->
-                <div
-                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
-                    <label
-                        style="display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">선택한
-                        서비스</label>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div
-                            style="width: 40px; height: 40px; background: #e0f2fe; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #0284c7;">
-                            <i class="fas fa-server" style="font-size: 18px;"></i>
-                        </div>
-                        <div>
-                            <div id="app-product-name-display" style="font-weight: 700; color: #0f172a; font-size: 1rem;">서버
-                                호스팅</div>
-                            <div id="app-product-details-display"
-                                style="font-size: 0.85rem; color: #475569; margin-top: 2px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <form id="application-form" onsubmit="submitApplication(event)">
-                    <input type="hidden" id="app-product-type" name="product_type">
-                    <input type="hidden" id="app-product-name" name="product_name">
-                    <input type="hidden" id="app-product-details" name="product_details">
-
-                    <!-- Honeypot (Spam Trap) -->
-                    <div style="display:none; position:absolute; left:-9999px;">
-                        <label for="app-website-url">Website</label>
-                        <input type="text" id="app-website-url" name="website_url" tabindex="-1" autocomplete="off">
-                    </div>
-
-                    <div style="margin-bottom: 20px;">
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">회사명
-                            / 단체명 <span style="color:#ef4444">*</span></label>
-                        <input type="text" id="app-company" name="company" required placeholder="예: (주)휴메카"
-                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
-                            onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
-                            onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-                        <div>
-                            <label
-                                style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">담당자
-                                성함 <span style="color:#ef4444">*</span></label>
-                            <input type="text" id="app-name" name="name" required placeholder="홍길동"
-                                style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
-                                onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
-                                onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
-                        </div>
-                        <div>
-                            <label
-                                style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">연락처
-                                <span style="color:#ef4444">*</span></label>
-                            <input type="tel" id="app-phone" name="phone" required placeholder="010-0000-0000"
-                                style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
-                                onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
-                                onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 20px;">
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">이메일
-                            <span style="color:#ef4444">*</span></label>
-                        <input type="email" id="app-email" name="email" required placeholder="example@company.com"
-                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
-                            onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
-                            onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
-                    </div>
-
-                    <div style="margin-bottom: 24px;">
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">문의
-                            / 요청사항</label>
-                        <textarea id="app-memo" name="memo" rows="3" placeholder="궁금하신 점이나 추가 요청사항을 적어주세요."
-                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; resize: vertical; transition: all 0.2s; outline: none; box-sizing: border-box;"
-                            onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
-                            onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';"></textarea>
-                    </div>
-
-                    <!-- Math Challenge -->
+                <div style="font-size: 13px;">
                     <div
-                        style="background: #f1f5f9; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-                        <label
-                            style="font-size: 0.875rem; font-weight: 600; color: #475569; display: flex; align-items: center; gap: 6px;">
-                            <i class="fas fa-shield-alt" style="color: #64748b;"></i> 자동입력 방지
-                        </label>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span id="math-challenge-q"
-                                style="background: white; padding: 6px 12px; border-radius: 6px; font-weight: bold; color: #334155; font-family: monospace; letter-spacing: 2px; border: 1px solid #cbd5e1;">3
-                                + 5 = ?</span>
-                            <input type="number" id="math-challenge-a" required placeholder="정답"
-                                style="width: 70px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; text-align: center; font-weight: 600; outline: none;"
-                                onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#cbd5e1';">
-                        </div>
-                        <input type="hidden" id="math-challenge-real">
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding-bottom: 8px; margin-bottom: 8px;">
+                        <span>평일</span>
+                        <span style="color: #e5e7eb;">09:00 ~ 18:00</span>
                     </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>점심시간</span>
+                        <span style="color: #e5e7eb;">12:00 ~ 13:00</span>
+                    </div>
+                    <div style="margin-top: 12px; font-size: 12px; color: #6b7280;">*주말 및 공휴일 휴무</div>
+                </div>
+            </div>
 
-                    <!-- Action Buttons -->
-                    <button type="submit" id="btn-app-submit"
-                        style="width: 100%; background: #dc2626; color: white; padding: 16px; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);">
-                        상담 신청하기
-                    </button>
-                </form>
+            <!-- 3. Emergency & Social (Right) -->
+            <div style="padding-left: 20px; border-left: 1px solid #222;">
+                <h4 style="color: #fff; font-size: 15px; font-weight: 600; margin-bottom: 20px;">긴급 장애 대응 센터</h4>
+
+                <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px;">
+                    <span style="color: #ef4444; font-weight: 700;">KT-IDC</span>
+                    <a href="tel:02-418-4442"
+                        style="color: #fff; font-size: 24px; font-weight: 700; text-decoration: none;">02-418-4442</a>
+                </div>
+                <p style="color: #9ca3af; font-size: 13px; margin-bottom: 30px;">
+                    365일 24시간 연중무휴 보안 관제 및 기술 지원
+                </p>
+
+                <div style="display: flex; gap: 10px;">
+                    <a href="https://blog.naver.com/humecca_blog" target="_blank"
+                        style="flex: 1; background: #03C75A; color: white; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px;">
+                        <span style="margin-right: 6px;">N</span> 블로그
+                    </a>
+                    <a href="https://pf.kakao.com/_ZAWBC/chat" target="_blank"
+                        style="flex: 1; background: #FAE100; color: #371c1d; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px;">
+                        <i class="fas fa-comment" style="margin-right: 6px;"></i> 카카오톡
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #222; margin-bottom: 40px;"></div>
+
+        <!-- Bottom Section -->
+        <div style="display: flex; flex-direction: column; gap: 30px;">
+            <!-- Links -->
+            <div style="display: flex; gap: 30px; font-size: 13px;">
+                <a href="javascript:void(0)" onclick="showLayerTerm('privacy')"
+                    style="color: #fff; font-weight: 600; text-decoration: none;">개인정보처리방침</a>
+                <a href="javascript:void(0)" onclick="showLayerTerm('terms')"
+                    style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">이용약관</a>
+                <a href="javascript:void(0)" onclick="showLayerTerm('member')"
+                    style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">회원약관</a>
+                <a href="sub_company_intro.html#location"
+                    style="text-decoration: none; color: #9ca3af; transition: color 0.2s;">오시는 길</a>
+            </div>
+
+            <!-- Info Grid -->
+            <div
+                style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; font-size: 12px; line-height: 1.7; color: #6b7280;">
+                <!-- Company Info -->
+                <div>
+                    <strong style="color: #e5e7eb; display: block; margin-bottom: 8px;">(주) 휴메카</strong>
+                    <p>
+                        대표이사 : 박제군 &nbsp;|&nbsp; 사업자등록번호 : 101-81-89952<br>
+                        통신판매업신고 : 제 2024-서울강남-00000호
+                    </p>
+                    <p style="margin-top: 15px; color: #4b5563;">Copyright © 2024 HUMECCA Inc. All Rights Reserved.</p>
+                </div>
+
+                <!-- Addresses -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">본사</span><br>
+                        서울특별시 강남구 언주로 517길 KT 강남IDC B2
+                    </div>
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">기술센터 (KT-IDC)</span><br>
+                        서울특별시 강남구 언주로 517길 KT 강남IDC 10F
+                    </div>
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">KINX-IDC</span><br>
+                        서울특별시 강남구 언주로 30길, 13 대림아크로텔
+                    </div>
+                    <div>
+                        <span style="color: #9ca3af; font-weight: 600;">SK-IDC</span><br>
+                        서울특별시 서초구 법원로 1길 6 SK브로드밴드
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- 앱 모달 스크립트 로드 -->
-    <script src="js/application_modal.js"></script>`;
+</footer>
+
+<!-- 약관 모달 -->
+<div id="term-modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div
+        style="background: white; width: 90%; max-width: 800px; max-height: 90vh; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+        <div
+            style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+            <h3 id="term-modal-title" style="font-size: 20px; font-weight: 700; color: #1e293b;">약관</h3>
+            <button onclick="closeTermModal()"
+                style="background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; line-height: 1;">&times;</button>
+        </div>
+        <div id="term-modal-content"
+            style="padding: 30px; overflow-y: auto; line-height: 1.8; color: #333; font-size: 15px; white-space: pre-wrap; font-family: 'Pretendard', 'Noto Sans KR', sans-serif;">
+            <!-- 내용이 여기에 로드됩니다 -->
+        </div>
+        <div style="padding: 20px; border-top: 1px solid #e5e7eb; text-align: right;">
+            <button onclick="closeTermModal()"
+                style="background: #1a1a2e; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">닫기</button>
+        </div>
+    </div>
+</div>
+
+<!-- 간편 신청 모달 (Applications Modal) - Premium Design -->
+<div id="app-modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+
+    <div class="app-modal-content"
+        style="background: white; width: 90%; max-width: 520px; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: translateY(20px); transition: transform 0.3s ease; font-family: 'Pretendard', sans-serif;">
+
+        <!-- Header -->
+        <div
+            style="background: #1e293b; padding: 24px 30px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #334155;">
+            <div>
+                <h3 style="color: white; font-size: 1.25rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">견적/상담
+                    신청</h3>
+                <p style="color: #94a3b8; font-size: 0.875rem; margin: 6px 0 0; line-height: 1.4;">전문 엔지니어가 빠르고 정확하게 안내해
+                    드립니다.</p>
+            </div>
+            <button onclick="closeAppModal()"
+                style="background: rgba(255,255,255,0.1); border: none; color: #cbd5e1; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;">
+                <i class="fas fa-times" style="font-size: 16px;"></i>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 30px; max-height: 80vh; overflow-y: auto;">
+
+            <!-- Selected Product Summary Card -->
+            <div
+                style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                <label
+                    style="display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">선택한
+                    서비스</label>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div
+                        style="width: 40px; height: 40px; background: #e0f2fe; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #0284c7;">
+                        <i class="fas fa-server" style="font-size: 18px;"></i>
+                    </div>
+                    <div>
+                        <div id="app-product-name-display" style="font-weight: 700; color: #0f172a; font-size: 1rem;">서버
+                            호스팅</div>
+                        <div id="app-product-details-display"
+                            style="font-size: 0.85rem; color: #475569; margin-top: 2px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="application-form" onsubmit="submitApplication(event)">
+                <input type="hidden" id="app-product-type" name="product_type">
+                <input type="hidden" id="app-product-name" name="product_name">
+                <input type="hidden" id="app-product-details" name="product_details">
+
+                <!-- Honeypot (Spam Trap) -->
+                <div style="display:none; position:absolute; left:-9999px;">
+                    <label for="app-website-url">Website</label>
+                    <input type="text" id="app-website-url" name="website_url" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label
+                        style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">회사명
+                        / 단체명 <span style="color:#ef4444">*</span></label>
+                    <input type="text" id="app-company" name="company" required placeholder="예: (주)휴메카"
+                        style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
+                        onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                        onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">담당자
+                            성함 <span style="color:#ef4444">*</span></label>
+                        <input type="text" id="app-name" name="name" required placeholder="홍길동"
+                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
+                            onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                            onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">연락처
+                            <span style="color:#ef4444">*</span></label>
+                        <input type="tel" id="app-phone" name="phone" required placeholder="010-0000-0000"
+                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
+                            onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                            onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label
+                        style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">이메일
+                        <span style="color:#ef4444">*</span></label>
+                    <input type="email" id="app-email" name="email" required placeholder="example@company.com"
+                        style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; outline: none; box-sizing: border-box;"
+                        onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                        onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
+                </div>
+
+                <div style="margin-bottom: 24px;">
+                    <label
+                        style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">문의
+                        / 요청사항</label>
+                    <textarea id="app-memo" name="memo" rows="3" placeholder="궁금하신 점이나 추가 요청사항을 적어주세요."
+                        style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; resize: vertical; transition: all 0.2s; outline: none; box-sizing: border-box;"
+                        onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                        onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';"></textarea>
+                </div>
+
+                <!-- Math Challenge -->
+                <div
+                    style="background: #f1f5f9; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+                    <label
+                        style="font-size: 0.875rem; font-weight: 600; color: #475569; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-shield-alt" style="color: #64748b;"></i> 자동입력 방지
+                    </label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span id="math-challenge-q"
+                            style="background: white; padding: 6px 12px; border-radius: 6px; font-weight: bold; color: #334155; font-family: monospace; letter-spacing: 2px; border: 1px solid #cbd5e1;">3
+                            + 5 = ?</span>
+                        <input type="number" id="math-challenge-a" required placeholder="정답"
+                            style="width: 70px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; text-align: center; font-weight: 600; outline: none;"
+                            onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#cbd5e1';">
+                    </div>
+                    <input type="hidden" id="math-challenge-real">
+                </div>
+
+                <!-- Action Buttons -->
+                <button type="submit" id="btn-app-submit"
+                    style="width: 100%; background: #dc2626; color: white; padding: 16px; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);">
+                    상담 신청하기
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 앱 모달 스크립트 로드 -->
+<script src="js/application_modal.js"></script>
+
+<script>
+    // 약관 모달 기능
+    function showLayerTerm(type) {
+        // LocalStorage 우선 확인 (v4 - 텍스트 모드)
+        let content = localStorage.getItem('humecca_term_v4_' + type);
+
+        // 데이터가 없으면 안내 메시지 표시
+        if (!content) content = `<div style="text-align:center; padding: 40px;">
+            <p>등록된 약관 내용이 없습니다.</p>
+            <p style="color:#666; margin-top:10px;">관리자 페이지에서 내용을 등록해주세요.</p>
+        </div>`;
+
+        let title = '약관';
+        if (type === 'privacy') title = '개인정보처리방침';
+        else if (type === 'terms') title = '이용약관';
+        else if (type === 'member') title = '회원약관';
+
+        document.getElementById('term-modal-title').textContent = title;
+        document.getElementById('term-modal-content').innerHTML = content;
+
+        const modal = document.getElementById('term-modal');
+        modal.style.display = 'flex';
+
+        // 페이드 인 효과
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            modal.style.transition = 'opacity 0.2s';
+        }, 10);
+
+        document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+    }
+
+    function closeTermModal() {
+        const modal = document.getElementById('term-modal');
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 200);
+    }
+
+    // 모달 바깥 클릭 시 닫기
+    document.getElementById('term-modal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeTermModal();
+        }
+    });
+</script>`;
 }
 
 /**
- * 약관 모달 기능 초기화
- */
-/**
- * 약관 레이어 팝업 표시
- * @param {string} type - 'privacy' | 'terms' | 'member'
- */
+ * ?쎄? 紐⑤떖 湲곕뒫 珥덇린?? */
 function showLayerTerm(type) {
     let modal = document.getElementById('term-modal-wrapper');
     if (!modal) {
@@ -722,7 +797,7 @@ function showLayerTerm(type) {
         modal.innerHTML = `
             <div class="term-modal">
                 <div class="term-header">
-                    <h3 id="term-modal-title">약관</h3>
+                    <h3 id="term-modal-title">?쎄?</h3>
                     <button class="term-close-btn" onclick="hideLayerTerm()"><i class="fas fa-times"></i></button>
                 </div>
                  <div class="term-body" id="term-modal-content">
@@ -740,7 +815,7 @@ function showLayerTerm(type) {
         });
     }
 
-    // Scroll Lock with padding adjustment to prevent shift
+    // Scroll Lock
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.paddingRight = `${scrollbarWidth}px`;
     document.body.style.overflow = 'hidden';
@@ -753,10 +828,10 @@ function showLayerTerm(type) {
     const titleEl = document.getElementById('term-modal-title');
     const contentEl = document.getElementById('term-modal-content');
 
-    let title = '약관';
-    if (type === 'privacy') title = '개인정보처리방침';
-    else if (type === 'terms') title = '이용약관';
-    else if (type === 'member') title = '회원약관';
+    let title = '?쎄?';
+    if (type === 'privacy') title = '媛쒖씤?뺣낫泥섎━諛⑹묠';
+    else if (type === 'terms') title = '?댁슜?쎄?';
+    else if (type === 'member') title = '?뚯썝?쎄?';
     titleEl.textContent = title;
 
     // Load content
@@ -776,7 +851,7 @@ function showLayerTerm(type) {
                     if (localContent) {
                         contentEl.innerHTML = localContent;
                     } else {
-                        contentEl.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">등록된 약관 내용이 없습니다.</div>';
+                        contentEl.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">?깅줉???쎄? ?댁슜???놁뒿?덈떎.</div>';
                     }
                 }
             });
@@ -786,13 +861,13 @@ function showLayerTerm(type) {
         if (localContent) {
             contentEl.innerHTML = localContent;
         } else {
-            contentEl.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">약관 내용을 불러올 수 없습니다.</div>';
+            contentEl.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">?쎄? ?댁슜??遺덈윭?????놁뒿?덈떎.</div>';
         }
     }
 }
 
 /**
- * 약관 레이어 숨김
+ * ?쎄? ?덉씠???④?
  */
 function hideLayerTerm() {
     const modal = document.getElementById('term-modal-wrapper');
