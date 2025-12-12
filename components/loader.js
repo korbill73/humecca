@@ -58,7 +58,13 @@ function loadComponent(placeholderId, componentPath, callback) {
     const placeholder = document.getElementById(placeholderId);
     if (!placeholder) return;
 
-    fetch(componentPath)
+    // Cache Busting: Add timestamp to force reload of components
+    // This solves issues where updated header.html is not reflected on live site
+    const version = new Date().getTime();
+    const separator = componentPath.includes('?') ? '&' : '?';
+    const pathWithVersion = `${componentPath}${separator}v=${version}`;
+
+    fetch(pathWithVersion)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Component not found: ' + componentPath);
