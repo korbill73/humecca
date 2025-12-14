@@ -536,3 +536,225 @@ function runDataRingsEffect(ctx, getSize, mouse) {
     }
     animate();
 }
+
+/**
+ * 7. Purple Light Ray (Addon Services) - NEW
+ * VPN-style light ray effect with purple color scheme
+ */
+function runPurpleLightRayEffect(ctx, getSize, mouse) {
+    const STAR_COUNT = 150;
+    const COMET_SPEED = 0.3;
+    const TRAIL_RATE = 12;
+    const SPARK_RATE = 6;
+
+    const stars = [];
+    const particles = [];
+    const sparks = [];
+    const comet = {
+        x: 0,
+        y: 0,
+        targetX: 0,
+        targetY: 0,
+        angle: 0,
+        autoMode: true
+    };
+
+    class Star {
+        constructor() {
+            this.reset();
+            const { h } = getSize();
+            this.y = Math.random() * h;
+        }
+        reset() {
+            const { w } = getSize();
+            this.x = Math.random() * w;
+            this.y = -10;
+            this.size = Math.random() * 2 + 0.5;
+            this.speed = Math.random() * 0.5 + 0.1;
+            this.alpha = Math.random();
+            this.twinkleDir = Math.random() > 0.5 ? 0.02 : -0.02;
+        }
+        update() {
+            const { w, h } = getSize();
+            this.y += this.speed;
+            this.alpha += this.twinkleDir;
+            if (this.alpha > 1 || this.alpha < 0.2) this.twinkleDir *= -1;
+            if (this.y > h) {
+                this.y = -10;
+                this.x = Math.random() * w;
+            }
+        }
+        draw() {
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    class TrailParticle {
+        constructor(x, y, angle) {
+            this.x = x;
+            this.y = y;
+            this.life = 1.0;
+            this.decay = Math.random() * 0.005 + 0.005;
+
+            const spread = (Math.random() - 0.5) * 0.3;
+            const speed = Math.random() * 0.2;
+
+            this.vx = Math.cos(angle + Math.PI + spread) * speed;
+            this.vy = Math.sin(angle + Math.PI + spread) * speed;
+
+            this.size = Math.random() * 4 + 1;
+            const r = Math.random();
+            this.color = r > 0.6 ? '#A78BFA' : (r > 0.3 ? '#C084FC' : '#E0E7FF');
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.life -= this.decay;
+            if (this.size > 0.5) this.size *= 0.98;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.life * 0.8;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+        }
+    }
+
+    class Spark {
+        constructor(x, y, angle) {
+            this.x = x;
+            this.y = y;
+            this.life = 1.0;
+            this.decay = Math.random() * 0.04 + 0.02;
+
+            const ejectAngle = angle + Math.PI + (Math.random() - 0.5) * 2.5;
+            const speed = Math.random() * 4 + 2;
+
+            this.vx = Math.cos(ejectAngle) * speed;
+            this.vy = Math.sin(ejectAngle) * speed;
+
+            this.size = Math.random() * 3 + 1;
+            this.color = Math.random() > 0.5 ? '#DDD6FE' : '#C4B5FD';
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.life -= this.decay;
+            this.size *= 0.95;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.life;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+        }
+    }
+
+    function init() {
+        const { w, h } = getSize();
+        stars.length = 0;
+        for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+
+        if (comet.x === 0) {
+            comet.x = -50;
+            comet.y = h * 0.5;
+        }
+    }
+    init();
+    window.addEventListener('resize', init);
+
+    function animate() {
+        const { w, h } = getSize();
+        ctx.clearRect(0, 0, w, h);
+
+        stars.forEach(star => {
+            star.update();
+            star.draw();
+        });
+
+        if (mouse.x != null && mouse.y != null) {
+            comet.targetX = mouse.x;
+            comet.targetY = mouse.y;
+            comet.autoMode = false;
+        } else {
+comet.autoMode = true;
+        }
+
+        if (comet.autoMode) {
+            const t = Date.now() / 1000;
+            const speedPixelPerSec = w * 0.3;
+            comet.targetX = (t * speedPixelPerSec) % (w + 300) - 150;
+
+            comet.targetY = (h * 0.5) 
+                + Math.sin(t * 1.2) * (h * 0.15)
+                + Math.cos(t * 2.5) * (h * 0.08);
+
+            if (comet.targetX < -140 && comet.x > w) {
+                comet.x = comet.targetX;
+                comet.y = comet.targetY;
+            }
+        }
+
+        const dx = comet.targetX - comet.x;
+        const dy = comet.targetY - comet.y;
+
+        if (Math.abs(dx) > w * 0.9) {
+            comet.x = comet.targetX;
+            comet.y = comet.targetY;
+        } else {
+            comet.x += dx * (comet.autoMode ? 0.2 : COMET_SPEED);
+            comet.y += dy * (comet.autoMode ? 0.2 : COMET_SPEED);
+        }
+
+        comet.angle = Math.atan2(dy, dx);
+        const vTotal = Math.sqrt(dx * dx + dy * dy);
+
+        for (let i = 0; i < TRAIL_RATE; i++) {
+            const p = Math.random();
+            const jx = comet.x - (Math.cos(comet.angle) * vTotal * p * 0.5);
+            const jy = comet.y - (Math.sin(comet.angle) * vTotal * p * 0.5);
+            particles.push(new TrailParticle(jx, jy, comet.angle));
+        }
+
+        const sparkCount = SPARK_RATE + Math.floor(vTotal * 0.2);
+        for (let i = 0; i < sparkCount; i++) {
+            sparks.push(new Spark(comet.x, comet.y, comet.angle));
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            if (particles[i].life <= 0) {
+                particles.splice(i, 1);
+            } else {
+                particles[i].draw();
+            }
+        }
+
+        for (let i = sparks.length - 1; i >= 0; i--) {
+            sparks[i].update();
+            if (sparks[i].life <= 0) {
+                sparks.splice(i, 1);
+            } else {
+                sparks[i].draw();
+            }
+        }
+
+        ctx.fillStyle = '#F5F3FF';
+        ctx.globalAlpha = 0.9;
+        ctx.beginPath();
+        ctx.arc(comet.x, comet.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
