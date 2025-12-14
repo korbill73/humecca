@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -43,8 +43,13 @@
     <!-- (I will put the full header in the tool call) -->
 
     <!-- Hero -->
-    <section class="sw-hero" style="background-color: #1a237e;">
-        <div class="container">
+    <section class="sw-hero" style="background-color: #1a237e; position: relative; overflow: hidden;">
+        
+        <!-- Canvas Background for Light Ray Effect -->
+        <canvas id="addon-canvas"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+
+        <div class="container" style="position: relative; z-index: 10;">
             <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
                 부가서비스 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> HA(고가용성)
             </div>
@@ -64,7 +69,7 @@
 
     <!-- Content Section -->
     <section class="content-section">
-        <div class="container">
+        <div class="container" style="position: relative; z-index: 10;">
             <div style="display: flex; gap: 40px; flex-wrap: wrap;">
                 <!-- Left Content -->
                 <div style="flex: 1; min-width: 600px;">
@@ -168,7 +173,7 @@
     <!-- Pricing / CTA -->
     <!-- Pricing Table -->
     <section class="pricing-section" style="padding: 80px 0; background: #ffffff;">
-        <div class="container">
+        <div class="container" style="position: relative; z-index: 10;">
             <div class="section-header">
                 <h2>서비스 요금 안내</h2>
                 <p>시스템 규모와 요구사항에 맞춘 합리적인 요금제를 제공합니다.</p>
@@ -191,7 +196,7 @@
     <div id="footer-placeholder"></div>
     <script src="components/loader.js?v=3.18"></script>
 
-    <script src="js/subpage-canvas.js"></script>
+    <script src="js/addon_light_effect.html"></script>
 </body>
 
 </html>
