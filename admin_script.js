@@ -826,15 +826,22 @@ window.loadTermEditor = async (type) => {
     if (!textarea) return;
     textarea.value = '로딩중...';
 
-    // Check if table 'terms' exists, if not maybe just store in localStorage for MVP as requested by user originally?
-    // User said "Address missing content for 'Terms Management' ... investigate why not appearing".
-    // I'll assume 'terms' table in DB.
+    // Try LocalStorage first (for footer compatibility)
+    let content = localStorage.getItem(`humecca_term_v4_${type}`);
 
-    const { data, error } = await supabase.from('terms').select('content').eq('type', type).single();
-    if (data) {
-        textarea.value = data.content;
+    if (content) {
+        // Found in LocalStorage
+        textarea.value = content;
     } else {
-        textarea.value = '';
+        // Fallback to Supabase DB
+        const { data, error } = await supabase.from('terms').select('content').eq('type', type).single();
+        if (data) {
+            textarea.value = data.content;
+            // Sync to LocalStorage
+            localStorage.setItem(`humecca_term_v4_${type}`, data.content);
+        } else {
+            textarea.value = '';
+        }
     }
 };
 
@@ -842,13 +849,16 @@ window.saveCurrentTerm = async () => {
     const content = document.getElementById('term-content').value;
     if (!content) return;
 
-    // Upsert
+    // Save to Supabase DB
     const { error } = await supabase.from('terms').upsert({ type: currentTermType, content: content }, { onConflict: 'type' });
+
+    // ALSO save to LocalStorage for footer compatibility
+    localStorage.setItem(`humecca_term_v4_${currentTermType}`, content);
 
     if (error) {
         alert('저장 실패: ' + error.message);
     } else {
-        alert('저장되었습니다.');
+        alert('저장되었습니다. (DB + LocalStorage)');
     }
 };
 
