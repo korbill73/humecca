@@ -291,35 +291,54 @@
 
 <script>
     // 약관 모달 기능
-    function showLayerTerm(type) {
-        // LocalStorage 우선 확인 (v4 - 텍스트 모드)
-        let content = localStorage.getItem('humecca_term_v4_' + type);
+    async function showLayerTerm(type) {
+        const modal = document.getElementById('term-modal');
+        const titleEl = document.getElementById('term-modal-title');
+        const contentEl = document.getElementById('term-modal-content');
 
-        // 데이터가 없으면 안내 메시지 표시
-        if (!content) content = `<div style="text-align:center; padding: 40px;">
-            <p>등록된 약관 내용이 없습니다.</p>
-            <p style="color:#666; margin-top:10px;">관리자 페이지에서 내용을 등록해주세요.</p>
-        </div>`;
-
+        // 제목 설정
         let title = '약관';
         if (type === 'privacy') title = '개인정보처리방침';
         else if (type === 'terms') title = '이용약관';
         else if (type === 'member') title = '회원약관';
 
-        document.getElementById('term-modal-title').textContent = title;
-        document.getElementById('term-modal-content').innerHTML = content;
+        titleEl.textContent = title;
+        contentEl.innerHTML = '<div style="text-align:center; padding: 40px;"><i class="fas fa-spinner fa-spin" style="font-size:24px; color:#dc2626;"></i><br><br>로딩 중...</div>';
 
-        const modal = document.getElementById('term-modal');
+        // 모달 표시
         modal.style.display = 'flex';
-
-        // 페이드 인 효과
         modal.style.opacity = '0';
         setTimeout(() => {
             modal.style.opacity = '1';
             modal.style.transition = 'opacity 0.2s';
         }, 10);
+        document.body.style.overflow = 'hidden';
 
-        document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        // Supabase에서 데이터 로드
+        try {
+            const { data, error } = await supabase
+                .from('terms')
+                .select('content')
+                .eq('type', type)
+                .single();
+
+            if (error) throw error;
+
+            if (data && data.content) {
+                contentEl.innerHTML = '<div style="white-space: pre-wrap;">' + data.content + '</div>';
+            } else {
+                contentEl.innerHTML = `<div style="text-align:center; padding: 40px;">
+                    <p>등록된 약관 내용이 없습니다.</p>
+                    <p style="color:#666; margin-top:10px;">관리자 페이지에서 내용을 등록해주세요.</p>
+                </div>`;
+            }
+        } catch (error) {
+            console.error('약관 로드 실패:', error);
+            contentEl.innerHTML = `<div style="text-align:center; padding: 40px;">
+                <p style="color:#dc2626;">약관 로드에 실패했습니다.</p>
+                <p style="color:#666; margin-top:10px;">${error.message}</p>
+            </div>`;
+        }
     }
 
     function closeTermModal() {

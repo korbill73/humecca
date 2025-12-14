@@ -826,29 +826,21 @@ window.loadTermEditor = async (type) => {
     if (!textarea) return;
     textarea.value = '로딩 중...';
 
-    // Try LocalStorage first
-    let content = localStorage.getItem(`humecca_term_v4_${type}`);
+    // Load from Supabase DB
+    try {
+        const { data, error } = await supabase
+            .from('terms')
+            .select('content')
+            .eq('type', type)
+            .single();
 
-    if (content) {
-        textarea.value = content;
-    } else {
-        // Fallback to Supabase
-        try {
-            const { data, error } = await supabase
-                .from('terms')
-                .select('content')
-                .eq('type', type)
-                .single();
+        if (error) throw error;
 
-            if (data && data.content) {
-                content = data.content;
-                // Sync to LocalStorage
-                localStorage.setItem(`humecca_term_v4_${type}`, content);
-            }
-        } catch (err) {
-            console.log('Supabase load failed, using LocalStorage only:', err);
-        }
-        textarea.value = content || '';
+        textarea.value = data?.content || '';
+    } catch (err) {
+        console.error('약관 로드 실패:', err);
+        textarea.value = '';
+        alert('약관 로드 실패: ' + err.message + '\n\nSupabase 테이블 설정을 확인해주세요.');
     }
 };
 
@@ -859,10 +851,7 @@ window.saveCurrentTerm = async () => {
         return;
     }
 
-    // 1. Save to LocalStorage (always works)
-    localStorage.setItem(`humecca_term_v4_${currentTermType}`, content);
-
-    // 2. Try to save to Supabase
+    // Save to Supabase DB only
     try {
         const { error } = await supabase
             .from('terms')
@@ -875,15 +864,12 @@ window.saveCurrentTerm = async () => {
                 onConflict: 'type'
             });
 
-        if (error) {
-            console.error('Supabase save error:', error);
-            alert('저장되었습니다! (LocalStorage만)\n\nSupabase 저장 실패: ' + error.message);
-        } else {
-            alert('저장되었습니다! (Supabase + LocalStorage)');
-        }
+        if (error) throw error;
+
+        alert('저장되었습니다!');
     } catch (err) {
-        console.error('Supabase error:', err);
-        alert('저장되었습니다! (LocalStorage만)\n\nSupabase 테이블 설정이 필요합니다.');
+        console.error('저장 실패:', err);
+        alert('저장 실패: ' + err.message + '\n\nSupabase 테이블 설정을 확인해주세요.');
     }
 };
 
