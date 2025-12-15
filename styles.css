@@ -3323,3 +3323,143 @@ main.sub-content {
 .logo-card:hover span {
     color: #EF4444 !important;
 }
+
+/* =========================================
+   MOBILE MENU STYLES (Added for Fix)
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* 1. Header Layout Adjustments */
+    .header-container {
+        padding: 0 20px;
+        /* Reduces padding on mobile */
+        height: 60px;
+        /* Slightly smaller header */
+    }
+
+    .logo-link img {
+        height: 32px !important;
+        /* Smaller logo */
+    }
+
+    /* 2. Mobile Menu Button */
+    .mobile-menu-btn {
+        display: block !important;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #1e293b;
+        cursor: pointer;
+        z-index: 10001;
+        /* Above mobile menu */
+        margin-left: auto;
+        /* Push to right */
+        padding: 8px;
+    }
+
+    /* 3. Navigation Container (The Slide-out Menu) */
+    .nav {
+        position: fixed;
+        top: 60px;
+        /* Below header */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: white;
+        z-index: 10000;
+        transform: translateX(100%);
+        /* Hidden by default */
+        transition: transform 0.3s ease-in-out;
+        overflow-y: auto;
+        padding-bottom: 40px;
+        border-top: 1px solid var(--border-light);
+    }
+
+    .nav.active {
+        transform: translateX(0) !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* 4. Navigation List */
+    .nav-list {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .nav-item {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #f1f5f9;
+        display: block;
+        /* Stack vertically */
+        padding: 0;
+    }
+
+    .nav-link {
+        padding: 16px 0;
+        font-size: 16px;
+        font-weight: 600;
+        justify-content: space-between;
+        /* Arrow to right */
+        width: 100%;
+    }
+
+    /* 5. Submenus (Dropdowns) */
+    .dropdown-menu,
+    .dropdown-menu.mega-menu {
+        position: static;
+        /* Flow within the list */
+        visibility: visible;
+        /* Always visible in DOM flow if parent open, but we use display */
+        opacity: 1;
+        width: 100% !important;
+        min-width: 100% !important;
+        box-shadow: none;
+        border: none;
+        background: #f8fafc;
+        padding: 0;
+        margin: 0;
+        transform: none;
+        pointer-events: auto;
+
+        /* Hide by default on mobile, show via JS toggle class if needed, 
+           OR simplified: just show all for now or rely on specific mobile-toggle class.
+           For now, let's make them visible to verify layout first, or check JS.
+           Loader.js logic toggles .active on nav, but doesn't toggle submenus.
+           Existing CSS hides them. We need to override. */
+        display: none;
+    }
+
+    /* Show submenu when nav-item has 'open' class (will add JS for this) */
+    .nav-item.open>.dropdown-menu {
+        display: block !important;
+    }
+
+    .dropdown-item {
+        padding: 12px 20px;
+        background: transparent;
+    }
+
+    .mega-grid {
+        grid-template-columns: 1fr;
+        /* 1 column for mega menu items */
+    }
+
+    .mega-menu {
+        padding: 10px !important;
+    }
+
+    /* 6. Hide Desktop-only elements if needed */
+    .header-buttons .btn {
+        display: none;
+        /* Hide login button text or button itself if too crowded */
+    }
+
+    /* Keep the V.version text but maybe smaller */
+    .header-buttons span {
+        display: none;
+        /* Hide version on mobile to save space */
+    }
+}

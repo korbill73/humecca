@@ -171,7 +171,11 @@ function initHeaderScripts() {
             dropdown.style.opacity = '0';
             dropdown.style.visibility = 'hidden';
             dropdown.style.pointerEvents = 'none';
+            // Also remove display override for mobile if any
+            dropdown.style.display = '';
         });
+        // Remove 'open' class from all nav items
+        navItems.forEach(item => item.classList.remove('open'));
     }
 
     // Function to reset dropdown styles (let CSS take over)
@@ -183,43 +187,61 @@ function initHeaderScripts() {
 
     navItems.forEach(item => {
         const menu = item.querySelector('.dropdown-menu');
+        const link = item.querySelector('.nav-link');
 
-        // When mouse enters a nav-item
-        item.addEventListener('mouseenter', () => {
-            // First, force hide ALL dropdowns immediately
-            hideAllDropdowns();
+        // [Mobile] Click to Toggle
+        if (link && menu) {
+            link.addEventListener('click', (e) => {
+                // If mobile menu is active (check width or body class)
+                if (window.innerWidth <= 768) {
+                    e.preventDefault(); // Prevent navigation
 
-            // Then reset this item's dropdown to let CSS show it
-            if (menu) {
-                // Small delay to ensure clean transition
-                setTimeout(() => {
-                    resetDropdownStyles(menu);
-                }, 10);
-            }
-        });
+                    // Toggle 'open' class
+                    const isOpen = item.classList.contains('open');
 
-        // When mouse leaves a nav-item
-        item.addEventListener('mouseleave', () => {
-            if (menu) {
-                // Force hide immediately
-                menu.style.opacity = '0';
-                menu.style.visibility = 'hidden';
-                menu.style.pointerEvents = 'none';
+                    // Close others
+                    navItems.forEach(i => {
+                        if (i !== item) i.classList.remove('open');
+                    });
 
-                // Reset after animation completes
-                setTimeout(() => {
-                    resetDropdownStyles(menu);
-                }, 200);
-            }
-        });
+                    if (isOpen) {
+                        item.classList.remove('open');
+                    } else {
+                        item.classList.add('open');
+                    }
+                }
+            });
+        }
 
-        // When clicking a link inside dropdown
-        if (menu) {
-            const links = menu.querySelectorAll('a.dropdown-item');
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    hideAllDropdowns();
-                });
+        // [Desktop] Hover Interaction
+        if (window.innerWidth > 768) {
+            // When mouse enters a nav-item
+            item.addEventListener('mouseenter', () => {
+                // First, force hide ALL dropdowns immediately
+                hideAllDropdowns();
+
+                // Then reset this item's dropdown to let CSS show it
+                if (menu) {
+                    // Small delay to ensure clean transition
+                    setTimeout(() => {
+                        resetDropdownStyles(menu);
+                    }, 10);
+                }
+            });
+
+            // When mouse leaves a nav-item
+            item.addEventListener('mouseleave', () => {
+                if (menu) {
+                    // Force hide immediately
+                    menu.style.opacity = '0';
+                    menu.style.visibility = 'hidden';
+                    menu.style.pointerEvents = 'none';
+
+                    // Reset after animation completes
+                    setTimeout(() => {
+                        resetDropdownStyles(menu);
+                    }, 200);
+                }
             });
         }
     });
