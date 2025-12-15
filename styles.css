@@ -3585,6 +3585,37 @@ main.sub-content {
     .section-title {
         font-size: 32px;
     }
+
+    /* 모든 그리드 레이아웃 모바일 최적화 */
+    div[style*="grid-template-columns"],
+    .service-grid,
+    .feature-grid,
+    .pricing-grid,
+    [class*="-grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 서비스 카드 */
+    .service-card,
+    [class*="card"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* 요금제 카드 특별 처리 */
+    div[style*="display: grid"][style*="gap"] {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 카드 내부 패딩 조정 */
+    .service-card,
+    [class*="pricing"],
+    [class*="plan"] {
+        padding: 24px 20px !important;
+    }
 }
 
 /* Small Mobile (480px 이하) */
