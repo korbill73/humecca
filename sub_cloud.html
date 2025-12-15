@@ -9,1812 +9,1825 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v=3.18">
     <link rel="stylesheet" href="service_premium.css">
-    <style>
-        .cloud-tab {
-            display: none;
-        }
 
-        .cloud-tab.active {
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
 
-    <section class="cloud-hero">
-        <div class="container">
-            <div class="cloud-badgetext">KT Cloud Partner</div>
-            <h1>클라우드 서비스</h1>
-            <p>비즈니스 혁신을 위한 최적의 클라우드 플랫폼</p>
-            <a href="https://login.humecca.co.kr" class="hero-shortcut" target="_blank"><i
-                    class="fas fa-sign-in-alt"></i> 서비스 바로가기</a>
-        </div>
-    </section>
-
-    <div class="cloud-layout">
-        <aside class="cloud-sidebar">
-            <ul class="sidebar-menu">
-                <li class="active"><a href="javascript:void(0)" onclick="switchCloudTab('intro', this)"><i
-                            class="fas fa-info-circle"></i> 서비스 개요</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('server', this)"><i class="fas fa-server"></i>
-                        Server</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('db', this)"><i class="fas fa-database"></i>
-                        데이터베이스</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('storage', this)"><i class="fas fa-hdd"></i>
-                        스토리지/CDN</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('network', this)"><i
-                            class="fas fa-network-wired"></i> 네트워크</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('management', this)"><i
-                            class="fas fa-tasks"></i> 매니지먼트</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('vdi', this)"><i class="fas fa-desktop"></i>
-                        VDI</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('private', this)"><i class="fas fa-lock"></i>
-                        Private Cloud</a></li>
-                <li><a href="javascript:void(0)" onclick="switchCloudTab('limits', this)"><i class="fas fa-ban"></i>
-                        서비스별 제한사항</a></li>
-            </ul>
-            <a href="https://login.humecca.co.kr" class="sidebar-shortcut" target="_blank"><i
-                    class="fas fa-external-link-alt"></i> 클라우드 콘솔 바로가기</a>
-        </aside>
-
-        <main class="cloud-content">
-            <div id="intro" class="cloud-tab active">
-                <!-- 1. Intro Header -->
-                <div class="content-header">
-                    <h2>서비스 개요</h2>
-                    <p>
-                        Server는 안전하고 크기 조정이 가능한 컴퓨팅 인프라를 가상화하여 제공하는 서비스입니다.<br>
-                        웹 인터페이스나 API를 통해 필요한 서버 인프라를 간편하게 구성할 수 있습니다.<br>
-                        해당 서비스로 구성된 서버들의 리소스는 <strong style="color:#E94D36;">kt cloud</strong>에서 안전하게 관리하며, 고객 단독 사용이
-                        보장됩니다.
-                    </p>
-                </div>
-
-                <!-- 2. Features Grid (Premium Style) -->
-                <div class="content-section">
-                    <div class="section-title">서비스 특징</div>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-expand-arrows-alt"></i></div>
-                            <h3>확장성</h3>
-                            <p>· Open API/SDK 제공으로 유연한 연동<br>· 비즈니스 확장에 따른 즉각적 자원 증설<br>· Incubation Center 지원</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-shield-alt"></i></div>
-                            <h3>안정성</h3>
-                            <p>· 실시간 Monitoring 및 알림 서비스<br>· Load Balancer, Auto Scaling 지원<br>· 안전한 VM 관리 및 백업</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-bolt"></i></div>
-                            <h3>신속성</h3>
-                            <p>· 수십 종의 검증된 서버 스펙/OS 제공<br>· 웹 콘솔을 통한 5분 내 서버 생성<br>· 즉시 사용 가능한 환경 제공</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-coins"></i></div>
-                            <h3>비용 절감</h3>
-                            <p>· 초기 투자비 및 유지보수 비용 0원<br>· 사용한 만큼 지불하는 종량제<br>· 저렴한 네트워크 전송 비용</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
-                            <h3>고성능</h3>
-                            <p>· 최신 Intel CPU 및 고성능 SSD 적용<br>· 40Gbps 대역폭의 안정적인 백본망<br>· 벤치마크 상위권 성능 입증</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-lock"></i></div>
-                            <h3>보안</h3>
-                            <p>· VM별 방화벽(Firewall) 기본 제공<br>· 이중화된 백본망으로 재난 상황 대비<br>· 철저한 물리적/논리적 보안</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 서비스 구성 (서버 세대) - Restored with Images -->
-                <div class="content-section">
-                    <div class="section-title">서비스 구성 (서버 세대)</div>
-                    <div class="gen-grid">
-                        <div class="gen-card gen-1" style="text-align:center;">
-                            <img src="images/server_gen_1.png" alt="1st Gen Server"
-                                style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
-                            <h4 style="border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">1세대 서버
-                                구성
-                            </h4>
-                            <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
-                                기존세대 Haswell CPU까지 적용되는 1세대 서버입니다. 고성능 I/O 서버 필요시 SSD Server를 신청 가능합니다.
-                            </p>
-                        </div>
-                        <div class="gen-card gen-2" style="text-align:center;">
-                            <img src="images/server_gen_2.png" alt="2nd Gen Server"
-                                style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
-                            <h4 style="border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">2세대 서버
-                                구성
-                            </h4>
-                            <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
-                                Skylake, Broadwell 기반의 고성능 CPU 적용되는 2세대 서버 입니다. 기본적으로 SSD 루트 디스크가 제공되며, 데이터 디스크를 자유롭게 선택
-                                가능합니다.
-                            </p>
-                        </div>
-                        <div class="gen-card gen-3" style="text-align:center;">
-                            <img src="images/server_gen_3.png" alt="3rd Gen Server"
-                                style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
-                            <h4
-                                style="color:#d92e2e; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">
-                                3세대 서버 구성 (New)</h4>
-                            <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
-                                Cascade 기반의 고성능 CPU 적용되는 3세대 서버 입니다. Openstack플랫폼을 기반으로 고성능 VM을 제공합니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. 주요 기능 - Restored with Icons per Screenshot -->
-                <div class="content-section">
-                    <div class="section-title">주요 기능</div>
-                    <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
-                        <div class="feature-card" style="text-align:left; padding:25px;">
-                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                                <div class="process-icon-box"
-                                    style="width:40px; height:40px; font-size:18px; margin:0;"><i
-                                        class="fas fa-server"></i></div>
-                                <h4 style="font-size:16px; margin:0;">VM 구성 및 관리</h4>
-                            </div>
-                            <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
-                                <li>가상화된 VM 생성 (CPU/Disk 자유 조회)</li>
-                                <li>최적화된 VM 템플릿 제공</li>
-                            </ul>
-                        </div>
-                        <div class="feature-card" style="text-align:left; padding:25px;">
-                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                                <div class="process-icon-box"
-                                    style="width:40px; height:40px; font-size:18px; margin:0;"><i
-                                        class="fas fa-network-wired"></i></div>
-                                <h4 style="font-size:16px; margin:0;">Network 제어</h4>
-                            </div>
-                            <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
-                                <li>방화벽 설정 및 포트포워딩</li>
-                                <li>WAF 연동 보안 강화 및 LB 구성</li>
-                            </ul>
-                        </div>
-                        <div class="feature-card" style="text-align:left; padding:25px;">
-                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                                <div class="process-icon-box"
-                                    style="width:40px; height:40px; font-size:18px; margin:0;"><i
-                                        class="fas fa-save"></i></div>
-                                <h4 style="font-size:16px; margin:0;">백업과 이중화</h4>
-                            </div>
-                            <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
-                                <li>스냅샷/이미지 백업 및 복원</li>
-                                <li>디스크, 백본망, 서버(HA) 이중화</li>
-                            </ul>
-                        </div>
-                        <div class="feature-card" style="text-align:left; padding:25px;">
-                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                                <div class="process-icon-box"
-                                    style="width:40px; height:40px; font-size:18px; margin:0;"><i
-                                        class="fas fa-chart-line"></i></div>
-                                <h4 style="font-size:16px; margin:0;">Monitoring</h4>
-                            </div>
-                            <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
-                                <li>로그 히스토리/트래픽 통계</li>
-                                <li>리소스 사용량 체크 및 알림(Watch)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. 고객 성공 사례 -->
-                <div class="content-section">
-                    <div class="section-title">고객 성공 사례</div>
-                    <div
-                        style="background:#f8fafc; padding:30px; border-radius:16px; display:flex; gap:40px; margin-bottom:30px; align-items:center; border:1px solid #e2e8f0;">
-                        <div style="flex:1;">
-                            <span
-                                style="background:#eff6ff; color:#3b82f6; font-size:12px; font-weight:700; padding:4px 8px; border-radius:4px;">금융</span>
-                            <h4 style="font-size:20px; margin:10px 0;">증권사 솔루션 사례</h4>
-                            <ul style="color:#475569; line-height:1.8; font-size:14px; padding-left:20px;">
-                                <li><strong>Needs:</strong> 실시간 시세 제공을 위한 초저지연 급변 대응</li>
-                                <li><strong>Solution:</strong> API 스케줄링 자동화, Load Balancer 트래픽 분산</li>
-                            </ul>
-                            <div
-                                style="margin-top:15px; background:#e0f2fe; color:#0369a1; padding:10px; border-radius:8px; font-size:13px; font-weight:600;">
-                                기대효과: 예상치 못한 트래픽/장애에 빠른 대응 가능</div>
-                        </div>
-                        <div style="flex:1; text-align:center;">
-                            <img src="images/usecase_finance.png" alt="Finance Diagram"
-                                style="max-width:100%; border-radius:8px; border:1px solid #cbd5e1;">
-                        </div>
-                    </div>
-
-                    <div
-                        style="background:#f8fafc; padding:30px; border-radius:16px; display:flex; gap:40px; align-items:center; border:1px solid #e2e8f0;">
-                        <div style="flex:1;">
-                            <span
-                                style="background:#eff6ff; color:#3b82f6; font-size:12px; font-weight:700; padding:4px 8px; border-radius:4px;">교육</span>
-                            <h4 style="font-size:20px; margin:10px 0;">OO 어학원 솔루션 사례</h4>
-                            <ul style="color:#475569; line-height:1.8; font-size:14px; padding-left:20px;">
-                                <li><strong>Needs:</strong> 대형 VM 및 부하분산, 세션 폭주로 인한 다운 해결</li>
-                                <li><strong>Solution:</strong> 40대 서버 구성, CIP 연동, WAF 방화벽 안심</li>
-                            </ul>
-                            <div
-                                style="margin-top:15px; background:#e0f2fe; color:#0369a1; padding:10px; border-radius:8px; font-size:13px; font-weight:600;">
-                                고객 평가: "이벤트 성공적 진행 및 안정성 개선 효과"</div>
-                        </div>
-                        <div style="flex:1; text-align:center;">
-                            <img src="images/usecase_edu.png" alt="Edu Diagram"
-                                style="max-width:100%; border-radius:8px; border:1px solid #cbd5e1;">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6. Server Pricing (Restored) -->
-                <div class="content-section">
-                    <div class="section-title">Server 요금 비교</div>
-                    <div
-                        style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
-                        <p style="margin: 0; color: #475569; font-size: 14px;">대용량 Linux 1년, 선 결제 없이 예약 30대 Outbound
-                            Network
-                            월 30TB 이용 시 타사와 월별 비용을 비교했을 때의 가격표입니다.</p>
-                    </div>
-                    <table class="table"
-                        style="width:100%; border-collapse:collapse; text-align:center; margin:0; border:1px solid #e2e8f0;">
-                        <thead>
-                            <tr style="background:#f1f5f9;">
-                                <th colspan="2" style="padding:15px; border-bottom:1px solid #cbd5e1;">kt cloud 예약모드
-                                </th>
-                                <th colspan="2" style="padding:15px; border-bottom:1px solid #cbd5e1;">A사</th>
-                            </tr>
-                            <tr style="font-size:14px; background:#f8fafc;">
-                                <td style="padding:10px; font-weight:600; border-bottom:1px solid #e2e8f0;">사양</td>
-                                <td style="padding:10px; font-weight:600; border-bottom:1px solid #e2e8f0;">요금</td>
-                                <td style="padding:10px; border-bottom:1px solid #e2e8f0; color:#64748b;">사양</td>
-                                <td style="padding:10px; border-bottom:1px solid #e2e8f0; color:#64748b;">요금</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding:12px; border-bottom:1px solid #f1f5f9;">1core | 1GB</td>
-                                <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">948,000원
-                                </td>
-                                <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">T2.micro</td>
-                                <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">5,298,854 원</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:12px; border-bottom:1px solid #f1f5f9;">2core | 4GB</td>
-                                <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">2,219,000
-                                    원
-                                </td>
-                                <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">T3.medium</td>
-                                <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">6,568,270 원</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:12px; border-bottom:1px solid #f1f5f9;">4core | 8GB</td>
-                                <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">4,638,000
-                                    원
-                                </td>
-                                <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">C5.xlarge</td>
-                                <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">10,473,371 원</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:12px;">8core | 16GB</td>
-                                <td style="color:#d92e2e; font-weight:bold;">9,279,000 원</td>
-                                <td style="color:#64748b;">C5.2xlarge</td>
-                                <td style="color:#64748b;">15,975,050 원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p style="text-align:right; font-size:12px; color:#94a3b8; margin-top:10px;">* 각 사이트 요금 계산기 기준</p>
-                </div>
-                <!-- 5. Related Badges (Updated) -->
-                <div class="content-section" style="text-align:center;">
-                    <div class="section-title">연관 상품</div>
-                    <div class="related-badges">
-                        <div class="product-badge"><i class="fas fa-sync-alt"></i> Auto Scaling</div>
-                        <div class="product-badge"><i class="fas fa-random"></i> Load Balancer</div>
-                        <div class="product-badge"><i class="fas fa-project-diagram"></i> Connect Hub</div>
-                        <div class="product-badge"><i class="fas fa-database"></i> NAS</div>
-                        <div class="product-badge"><i class="fas fa-shield-alt"></i> WAF</div>
-                    </div>
-                </div>
-
-                <div style="height:80px;"></div>
-
+    <main id="main-content">
+        <section class="cloud-hero">
+            <div class="container">
+                <div class="cloud-badgetext">KT Cloud Partner</div>
+                <h1>클라우드 서비스</h1>
+                <p>비즈니스 혁신을 위한 최적의 클라우드 플랫폼</p>
+                <a href="https://login.humecca.co.kr" class="hero-shortcut" target="_blank"><i
+                        class="fas fa-sign-in-alt"></i> 서비스 바로가기</a>
             </div>
-            <div id="server" class="cloud-tab">
+        </section>
 
+        <div class="cloud-layout">
+            <aside class="cloud-sidebar">
+                <ul class="sidebar-menu">
+                    <li class="active"><a href="javascript:void(0)" onclick="switchCloudTab('intro', this)"><i
+                                class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('server', this)"><i
+                                class="fas fa-server"></i>
+                            Server</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('db', this)"><i
+                                class="fas fa-database"></i>
+                            데이터베이스</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('storage', this)"><i
+                                class="fas fa-hdd"></i>
+                            스토리지/CDN</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('network', this)"><i
+                                class="fas fa-network-wired"></i> 네트워크</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('management', this)"><i
+                                class="fas fa-tasks"></i> 매니지먼트</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('vdi', this)"><i
+                                class="fas fa-desktop"></i>
+                            VDI</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('private', this)"><i
+                                class="fas fa-lock"></i>
+                            Private Cloud</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchCloudTab('limits', this)"><i class="fas fa-ban"></i>
+                            서비스별 제한사항</a></li>
+                </ul>
+                <a href="https://login.humecca.co.kr" class="sidebar-shortcut" target="_blank"><i
+                        class="fas fa-external-link-alt"></i> 클라우드 콘솔 바로가기</a>
+            </aside>
 
-                <div class="content-header">
-                    <h2>ucloud Server</h2>
-                    <p>kt 클라우드 플랫폼 기반에서 신속하고 안정적인 고품질의 클라우드 서버 자원 (CPU, Memory, Disk, Network)을 제공하는 서비스로, 웹 인터페이스를 통하여
-                        사용자가
-                        매우 간단하게 필요한 컴퓨팅 자원을 구성할 수 있습니다.</p>
-                </div>
-
-                <div style="height:40px;"></div>
-
-                <!-- Server Pricing Section -->
-                <div class="content-section">
-                    <div class="section-title">표준 server 및 High memory server 요금표 (G1/G2)</div>
-
-
-                    <div class="engine-tabs">
-                        <span class="engine-tab active" onclick="showTab('standard')">표준 Memory Server</span>
-                        <span class="engine-tab" onclick="showTab('highmem')">High Memory Server</span>
-                    </div>
-
-                    <!-- Standard Server Tab -->
-                    <div id="standard" class="tab-content active">
-                        <table class="pricing-table">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">구분</th>
-                                    <th rowspan="2">CPU<br>(vCore)</th>
-                                    <th rowspan="2">Memory<br>(GB)</th>
-                                    <th colspan="2" class="highlight">G1 (기존 Zone)</th>
-                                    <th colspan="2" class="highlight">G2 (Seoul M2)</th>
-                                </tr>
-                                <tr>
-                                    <th class="highlight-sub">소비자가격</th>
-                                    <th class="highlight-sub">제공가격<br>(10% 할인)</th>
-                                    <th class="highlight-sub">소비자가격</th>
-                                    <th class="highlight-sub">제공가격<br>(10% 할인)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="16" class="row-header">표준<br>Memory<br>Server</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>22,500원</td>
-                                    <td class="price">20,250원</td>
-                                    <td>22,500원</td>
-                                    <td class="price">20,250원</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>38,500원</td>
-                                    <td class="price">34,650원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2</td>
-                                    <td>49,500원</td>
-                                    <td class="price">44,550원</td>
-                                    <td>46,700원</td>
-                                    <td class="price">42,030원</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>79,500원</td>
-                                    <td class="price">71,550원</td>
-                                    <td>77,300원</td>
-                                    <td class="price">69,570원</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>101,500원</td>
-                                    <td class="price">91,350원</td>
-                                    <td>93,500원</td>
-                                    <td class="price">84,150원</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>8</td>
-                                    <td>163,500원</td>
-                                    <td class="price">147,150원</td>
-                                    <td>154,600원</td>
-                                    <td class="price">139,140원</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>8</td>
-                                    <td>207,100원</td>
-                                    <td class="price">186,750원</td>
-                                    <td>187,100원</td>
-                                    <td class="price">168,390원</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>16</td>
-                                    <td>329,500원</td>
-                                    <td class="price">296,550원</td>
-                                    <td>309,300원</td>
-                                    <td class="price">278,370원</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>16</td>
-                                    <td>373,500원</td>
-                                    <td class="price">336,150원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>32</td>
-                                    <td>550,080원</td>
-                                    <td class="price">495,072원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>16</td>
-                                    <td>418,500원</td>
-                                    <td class="price">376,650원</td>
-                                    <td>374,300원</td>
-                                    <td class="price">336,870원</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>32</td>
-                                    <td>663,500원</td>
-                                    <td class="price">597,150원</td>
-                                    <td>618,600원</td>
-                                    <td class="price">556,740원</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td>558,300원</td>
-                                    <td class="price">502,470원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td>40</td>
-                                    <td>761,580원</td>
-                                    <td class="price">685,422원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    <td>24</td>
-                                    <td>670,660원</td>
-                                    <td class="price">603,594원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    <td>48</td>
-                                    <td>914,590원</td>
-                                    <td class="price">823,131원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- High Memory Server Tab (New Data) -->
-                    <div id="highmem" class="tab-content">
-                        <table class="pricing-table">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">구분</th>
-                                    <th rowspan="2">CPU<br>(vCore)</th>
-                                    <th rowspan="2">Memory<br>(GB)</th>
-                                    <th colspan="2" class="highlight">G1 (기존 Zone)</th>
-                                    <th colspan="2" class="highlight">G2 (Seoul M2)</th>
-                                </tr>
-                                <tr>
-                                    <th class="highlight-sub">소비자가격</th>
-                                    <th class="highlight-sub">제공가격<br>(10% 할인)</th>
-                                    <th class="highlight-sub">소비자가격</th>
-                                    <th class="highlight-sub">제공가격<br>(10% 할인)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="9" class="row-header">High<br>Memory<br>Server</td>
-                                    <td>2</td>
-                                    <td>8</td>
-                                    <td>107,850원</td>
-                                    <td class="price">97,065원</td>
-                                    <td>98,800원</td>
-                                    <td class="price">88,920원</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>16</td>
-                                    <td>166,500원</td>
-                                    <td class="price">149,850원</td>
-                                    <td>120,400원</td>
-                                    <td class="price">108,360원</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>16</td>
-                                    <td>218,350원</td>
-                                    <td class="price">196,515원</td>
-                                    <td>197,700원</td>
-                                    <td class="price">177,930원</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>32</td>
-                                    <td>338,200원</td>
-                                    <td class="price">304,380원</td>
-                                    <td>240,800원</td>
-                                    <td class="price">216,720원</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>32</td>
-                                    <td>439,350원</td>
-                                    <td class="price">395,415원</td>
-                                    <td>395,500원</td>
-                                    <td class="price">355,950원</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>62</td>
-                                    <td>653,500원</td>
-                                    <td class="price">583,550원</td>
-                                    <td>470,000원</td>
-                                    <td class="price">423,000원</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>62</td>
-                                    <td>842,500원</td>
-                                    <td class="price">758,250원</td>
-                                    <td>773,100원</td>
-                                    <td class="price">695,790원</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>124</td>
-                                    <td>1,322,500원</td>
-                                    <td class="price">1,190,250원</td>
-                                    <td>940,100원</td>
-                                    <td class="price">848,090원</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>160</td>
-                                    <td>1,460,120원</td>
-                                    <td class="price">1,314,108원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="4" class="row-header">High<br>Memory</td>
-                                    <td>20</td>
-                                    <td>80</td>
-                                    <td>1,027,690원</td>
-                                    <td class="price">924,921원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td>160</td>
-                                    <td>1,559,910원</td>
-                                    <td class="price">1,403,919원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    <td>96</td>
-                                    <td>1,233,930원</td>
-                                    <td class="price">1,110,537원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    <td>160</td>
-                                    <td>1,659,700원</td>
-                                    <td class="price">1,493,730원</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2" class="row-header">High<br>Memory<br>(D1)</td>
-                                    <td>32</td>
-                                    <td>124</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>1,546,200원</td>
-                                    <td class="price">1,391,580원</td>
-                                </tr>
-                                <tr>
-                                    <td>32</td>
-                                    <td>160</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>1,869,500원</td>
-                                    <td class="price">1,682,550원</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="notes-list">
-                        <p>※ Data Disk 미제공: OS영역을 위한 기본디스크(Linux 20GB, Windows 50GB)만 제공, Data DISK는 미제공되며 DISK를 추가하실 수
-                            있습니다.</p>
-                        <p>※ 각 cloud 서버 사양별 선택 가능한 OS가 다르니, 반드시 확인하시기 바랍니다.</p>
-                        <p>※ 서버 사용요금은 서버 해지 전까지 이용요금이 발생합니다. 다만, 서버를 정지 시 정지요금으로 반영됩니다.</p>
-                        <p>※ server 정지 시에는 정지요금만 부과되며(12,000원/월) 월요금제는 일단위로(약 400원/일) 입니다.</p>
-                        <p>※ server 정지 시에는 VM 별로 제공되는 네트워크 무료 트래픽(1TB~2TB)도 정지 기간만큼 조정되어 제공됩니다.</p>
-                        <p>※ 124GB 이상의 High-Memory server는 추후제공합니다. 운영센터/컨설팅담당자께 문의해주세요.</p>
-                    </div>
-                </div>
-
-                <!-- Network Section -->
-                <div class="content-section">
-                    <div class="section-title">네트워크 (Outbound 트래픽)</div>
-                    <div class="section-subtitle">Inbound 트래픽은 무료, Outbound만 과금 (단위: 원/월, 부가세별도)<br>국내 기준 (Seoul-M zone,
-                        Central-A/B zone, HA zone)</div>
-
-                    <p style="font-size: 13px; color: #374151; margin-bottom: 8px;"><strong>16GB Memory 이상 VM:</strong>
-                        월
-                        사용량 2TB 이하 무료</p>
-
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">구분</th>
-                                <th colspan="4" class="highlight">사용 구간</th>
-                            </tr>
-                            <tr>
-                                <th>Cloud 서버 당 2TB 이하</th>
-                                <th>2TB ~ 10TB</th>
-                                <th>10TB ~ 20TB</th>
-                                <th>20TB 이상</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>종량제 (GB당)</td>
-                                <td class="price">무료</td>
-                                <td>90원</td>
-                                <td>80원</td>
-                                <td>70원</td>
-                            </tr>
-                            <tr>
-                                <td>정액제 30TB</td>
-                                <td colspan="4">2,000,000원/월</td>
-                            </tr>
-                            <tr>
-                                <td>정액제 50TB</td>
-                                <td colspan="4">3,000,000원/월</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p style="font-size: 13px; color: #374151; margin-top: 16px; margin-bottom: 8px;"><strong>16GB
-                            Memory 미만
-                            VM:</strong> 월 사용량 1TB 이하 무료</p>
-
-                    <div class="notes-list">
-                        <p>* 예시) 동일계정에서 4vCore 4GB 1대, 4vCore 16GB 1대를 사용하면 해당계정의 트래픽은 outbound 총 3TB(1TB + 2TB)까지
-                            무료입니다.
+            <main class="cloud-content">
+                <div id="intro" class="cloud-tab active">
+                    <!-- 1. Intro Header -->
+                    <div class="content-header">
+                        <h2>서비스 개요</h2>
+                        <p>
+                            Server는 안전하고 크기 조정이 가능한 컴퓨팅 인프라를 가상화하여 제공하는 서비스입니다.<br>
+                            웹 인터페이스나 API를 통해 필요한 서버 인프라를 간편하게 구성할 수 있습니다.<br>
+                            해당 서비스로 구성된 서버들의 리소스는 <strong style="color:#E94D36;">kt cloud</strong>에서 안전하게 관리하며, 고객 단독
+                            사용이
+                            보장됩니다.
                         </p>
-                        <p>* server 정지 시에는 VM 별로 제공되는 네트워크 무료 트래픽(1TB~2TB)이 정지 기간만큼 조정되어 제공됩니다.</p>
                     </div>
-                </div>
 
-                <!-- DISK Section -->
-                <div class="content-section">
-                    <div class="section-title">ucloud server용 DISK</div>
-                    <div class="section-subtitle">단위: 원/월, 부가세별도</div>
-
-                    <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">NAS (Network
-                        Attached Storage)</h4>
-                    <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">고성능의 NAS를 네트워크를 통해 복수의 ucloud
-                        server에
-                        공유 구성할 수 있는 서비스</p>
-
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>상품유형</th>
-                                <th>월요금</th>
-                                <th>IOPS 참고</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="2">HDD NAS</td>
-                                <td>기본용량 (1,000GB)</td>
-                                <td class="price">70,000원</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>추가용량 (100GB)</td>
-                                <td class="price">7,000원</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">SSD NAS</td>
-                                <td>기본용량 (1,000GB)</td>
-                                <td class="price">210,000원</td>
-                                <td>4,000 ~ 10,000</td>
-                                <td>seoul-M2 존 우선 제공</td>
-                            </tr>
-                            <tr>
-                                <td>추가용량 (100GB)</td>
-                                <td class="price">21,000원</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">Server Disk</h4>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>상품유형</th>
-                                <th>월요금</th>
-                                <th>IOPS 참고</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>HDD(일반) DISK</td>
-                                <td>10GB</td>
-                                <td class="price">700원</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>SSD DISK</td>
-                                <td>10GB</td>
-                                <td class="price">1,400원</td>
-                                <td>4,000 ~ 10,000</td>
-                                <td>seoul-M2 존 우선 제공</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">SSD-Provisioned
-                        (구
-                        SSD Volume)</h4>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>월요금</th>
-                                <th>구간</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>용량 (100GB 당)</td>
-                                <td class="price">10,000원</td>
-                                <td>100GB ~ 800GB 선택</td>
-                            </tr>
-                            <tr>
-                                <td>성능 (1,000 IOPS 당)</td>
-                                <td class="price">35,000원</td>
-                                <td>6,000 IOPS ~ 20,000 IOPS 선택</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- IP Section -->
-                <div class="content-section">
-                    <div class="table-grid">
-                        <div class="table-grid-item">
-                            <div class="section-title" style="font-size:20px;">공인 IP 추가</div>
-                            <table class="pricing-table">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>단위</th>
-                                        <th>월요금</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>공인 IP 추가</td>
-                                        <td>1 IP당</td>
-                                        <td class="price">5,000원</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="table-grid-item">
-                            <div class="section-title" style="font-size:20px;">CIP 추가</div>
-                            <table class="pricing-table">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>단위</th>
-                                        <th>월요금</th>
-                                        <th>비고</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Cloud DC 내부 CIP</td>
-                                        <td>1 CIP당</td>
-                                        <td class="price">20,000원</td>
-                                        <td style="text-align: left; font-size: 11px;">Subnet 별 차등</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cloud DC 외부 CIP</td>
-                                        <td>1 CIP당</td>
-                                        <td class="price">100,000원</td>
-                                        <td style="text-align: left; font-size: 11px;">Inter-AZ</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <!-- 2. Features Grid (Premium Style) -->
+                    <div class="content-section">
+                        <div class="section-title">서비스 특징</div>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                <h3>확장성</h3>
+                                <p>· Open API/SDK 제공으로 유연한 연동<br>· 비즈니스 확장에 따른 즉각적 자원 증설<br>· Incubation Center 지원</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                                <h3>안정성</h3>
+                                <p>· 실시간 Monitoring 및 알림 서비스<br>· Load Balancer, Auto Scaling 지원<br>· 안전한 VM 관리 및 백업</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas fa-bolt"></i></div>
+                                <h3>신속성</h3>
+                                <p>· 수십 종의 검증된 서버 스펙/OS 제공<br>· 웹 콘솔을 통한 5분 내 서버 생성<br>· 즉시 사용 가능한 환경 제공</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas fa-coins"></i></div>
+                                <h3>비용 절감</h3>
+                                <p>· 초기 투자비 및 유지보수 비용 0원<br>· 사용한 만큼 지불하는 종량제<br>· 저렴한 네트워크 전송 비용</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <h3>고성능</h3>
+                                <p>· 최신 Intel CPU 및 고성능 SSD 적용<br>· 40Gbps 대역폭의 안정적인 백본망<br>· 벤치마크 상위권 성능 입증</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas fa-lock"></i></div>
+                                <h3>보안</h3>
+                                <p>· VM별 방화벽(Firewall) 기본 제공<br>· 이중화된 백본망으로 재난 상황 대비<br>· 철저한 물리적/논리적 보안</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- OS Section -->
-                <div class="content-section">
-                    <div class="section-title">Operating System (OS)</div>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>운영체제</th>
-                                <th>버전</th>
-                                <th>월요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="row-header">Windows</td>
-                                <td>Windows Server 2008 / 2012 / 2016 / 2019</td>
-                                <td class="price">25,300원</td>
-                            </tr>
-                            <tr>
-                                <td class="row-header">Linux</td>
-                                <td>CentOS, Ubuntu, Debian</td>
-                                <td class="price" style="color:#16a34a !important;">무료</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-            <div id="db" class="cloud-tab">
-                <div class="content-header">
-                    <h2><i class="fas fa-database"></i> ucloud DB</h2>
-                    <p>고가용성 관계형 데이터베이스 서비스. MySQL, MariaDB를 손쉽게 관리하세요.</p>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">데이터베이스 엔진</div>
-                    <div class="engine-tabs">
-                        <span class="engine-tab active" onclick="showTab('mysql')">MySQL</span>
-                        <span class="engine-tab" onclick="showTab('mariadb')">MariaDB</span>
+                    <!-- 3. 서비스 구성 (서버 세대) - Restored with Images -->
+                    <div class="content-section">
+                        <div class="section-title">서비스 구성 (서버 세대)</div>
+                        <div class="gen-grid">
+                            <div class="gen-card gen-1" style="text-align:center;">
+                                <img src="images/server_gen_1.png" alt="1st Gen Server"
+                                    style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
+                                <h4 style="border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">
+                                    1세대 서버
+                                    구성
+                                </h4>
+                                <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
+                                    기존세대 Haswell CPU까지 적용되는 1세대 서버입니다. 고성능 I/O 서버 필요시 SSD Server를 신청 가능합니다.
+                                </p>
+                            </div>
+                            <div class="gen-card gen-2" style="text-align:center;">
+                                <img src="images/server_gen_2.png" alt="2nd Gen Server"
+                                    style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
+                                <h4 style="border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">
+                                    2세대 서버
+                                    구성
+                                </h4>
+                                <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
+                                    Skylake, Broadwell 기반의 고성능 CPU 적용되는 2세대 서버 입니다. 기본적으로 SSD 루트 디스크가 제공되며, 데이터 디스크를
+                                    자유롭게 선택
+                                    가능합니다.
+                                </p>
+                            </div>
+                            <div class="gen-card gen-3" style="text-align:center;">
+                                <img src="images/server_gen_3.png" alt="3rd Gen Server"
+                                    style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
+                                <h4
+                                    style="color:#d92e2e; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">
+                                    3세대 서버 구성 (New)</h4>
+                                <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
+                                    Cascade 기반의 고성능 CPU 적용되는 3세대 서버 입니다. Openstack플랫폼을 기반으로 고성능 VM을 제공합니다.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="section-note">* 모든 요금은 VAT 별도이며, 월 단위 요금 기준입니다. (단위: 원)</p>
 
-                    <div id="mysql" class="tab-content active">
-                        <table class="pricing-table">
+                    <!-- 4. 주요 기능 - Restored with Icons per Screenshot -->
+                    <div class="content-section">
+                        <div class="section-title">주요 기능</div>
+                        <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                            <div class="feature-card" style="text-align:left; padding:25px;">
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                    <div class="process-icon-box"
+                                        style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                            class="fas fa-server"></i></div>
+                                    <h4 style="font-size:16px; margin:0;">VM 구성 및 관리</h4>
+                                </div>
+                                <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                                    <li>가상화된 VM 생성 (CPU/Disk 자유 조회)</li>
+                                    <li>최적화된 VM 템플릿 제공</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card" style="text-align:left; padding:25px;">
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                    <div class="process-icon-box"
+                                        style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                            class="fas fa-network-wired"></i></div>
+                                    <h4 style="font-size:16px; margin:0;">Network 제어</h4>
+                                </div>
+                                <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                                    <li>방화벽 설정 및 포트포워딩</li>
+                                    <li>WAF 연동 보안 강화 및 LB 구성</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card" style="text-align:left; padding:25px;">
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                    <div class="process-icon-box"
+                                        style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                            class="fas fa-save"></i></div>
+                                    <h4 style="font-size:16px; margin:0;">백업과 이중화</h4>
+                                </div>
+                                <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                                    <li>스냅샷/이미지 백업 및 복원</li>
+                                    <li>디스크, 백본망, 서버(HA) 이중화</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card" style="text-align:left; padding:25px;">
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                    <div class="process-icon-box"
+                                        style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                            class="fas fa-chart-line"></i></div>
+                                    <h4 style="font-size:16px; margin:0;">Monitoring</h4>
+                                </div>
+                                <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                                    <li>로그 히스토리/트래픽 통계</li>
+                                    <li>리소스 사용량 체크 및 알림(Watch)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. 고객 성공 사례 -->
+                    <div class="content-section">
+                        <div class="section-title">고객 성공 사례</div>
+                        <div
+                            style="background:#f8fafc; padding:30px; border-radius:16px; display:flex; gap:40px; margin-bottom:30px; align-items:center; border:1px solid #e2e8f0;">
+                            <div style="flex:1;">
+                                <span
+                                    style="background:#eff6ff; color:#3b82f6; font-size:12px; font-weight:700; padding:4px 8px; border-radius:4px;">금융</span>
+                                <h4 style="font-size:20px; margin:10px 0;">증권사 솔루션 사례</h4>
+                                <ul style="color:#475569; line-height:1.8; font-size:14px; padding-left:20px;">
+                                    <li><strong>Needs:</strong> 실시간 시세 제공을 위한 초저지연 급변 대응</li>
+                                    <li><strong>Solution:</strong> API 스케줄링 자동화, Load Balancer 트래픽 분산</li>
+                                </ul>
+                                <div
+                                    style="margin-top:15px; background:#e0f2fe; color:#0369a1; padding:10px; border-radius:8px; font-size:13px; font-weight:600;">
+                                    기대효과: 예상치 못한 트래픽/장애에 빠른 대응 가능</div>
+                            </div>
+                            <div style="flex:1; text-align:center;">
+                                <img src="images/usecase_finance.png" alt="Finance Diagram"
+                                    style="max-width:100%; border-radius:8px; border:1px solid #cbd5e1;">
+                            </div>
+                        </div>
+
+                        <div
+                            style="background:#f8fafc; padding:30px; border-radius:16px; display:flex; gap:40px; align-items:center; border:1px solid #e2e8f0;">
+                            <div style="flex:1;">
+                                <span
+                                    style="background:#eff6ff; color:#3b82f6; font-size:12px; font-weight:700; padding:4px 8px; border-radius:4px;">교육</span>
+                                <h4 style="font-size:20px; margin:10px 0;">OO 어학원 솔루션 사례</h4>
+                                <ul style="color:#475569; line-height:1.8; font-size:14px; padding-left:20px;">
+                                    <li><strong>Needs:</strong> 대형 VM 및 부하분산, 세션 폭주로 인한 다운 해결</li>
+                                    <li><strong>Solution:</strong> 40대 서버 구성, CIP 연동, WAF 방화벽 안심</li>
+                                </ul>
+                                <div
+                                    style="margin-top:15px; background:#e0f2fe; color:#0369a1; padding:10px; border-radius:8px; font-size:13px; font-weight:600;">
+                                    고객 평가: "이벤트 성공적 진행 및 안정성 개선 효과"</div>
+                            </div>
+                            <div style="flex:1; text-align:center;">
+                                <img src="images/usecase_edu.png" alt="Edu Diagram"
+                                    style="max-width:100%; border-radius:8px; border:1px solid #cbd5e1;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Server Pricing (Restored) -->
+                    <div class="content-section">
+                        <div class="section-title">Server 요금 비교</div>
+                        <div
+                            style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                            <p style="margin: 0; color: #475569; font-size: 14px;">대용량 Linux 1년, 선 결제 없이 예약 30대 Outbound
+                                Network
+                                월 30TB 이용 시 타사와 월별 비용을 비교했을 때의 가격표입니다.</p>
+                        </div>
+                        <table class="table"
+                            style="width:100%; border-collapse:collapse; text-align:center; margin:0; border:1px solid #e2e8f0;">
                             <thead>
-                                <tr>
-                                    <th>vCore</th>
-                                    <th>Memory (GB)</th>
-                                    <th>Storage (GB)</th>
-                                    <th class="highlight">월 요금</th>
-                                    <th class="highlight">할인가 (10%)</th>
+                                <tr style="background:#f1f5f9;">
+                                    <th colspan="2" style="padding:15px; border-bottom:1px solid #cbd5e1;">kt cloud 예약모드
+                                    </th>
+                                    <th colspan="2" style="padding:15px; border-bottom:1px solid #cbd5e1;">A사</th>
+                                </tr>
+                                <tr style="font-size:14px; background:#f8fafc;">
+                                    <td style="padding:10px; font-weight:600; border-bottom:1px solid #e2e8f0;">사양</td>
+                                    <td style="padding:10px; font-weight:600; border-bottom:1px solid #e2e8f0;">요금</td>
+                                    <td style="padding:10px; border-bottom:1px solid #e2e8f0; color:#64748b;">사양</td>
+                                    <td style="padding:10px; border-bottom:1px solid #e2e8f0; color:#64748b;">요금</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>100</td>
-                                    <td class="price-original">66,000</td>
-                                    <td class="price-discount">59,400</td>
+                                    <td style="padding:12px; border-bottom:1px solid #f1f5f9;">1core | 1GB</td>
+                                    <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">
+                                        948,000원
+                                    </td>
+                                    <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">T2.micro</td>
+                                    <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">5,298,854 원</td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>100</td>
-                                    <td class="price-original">132,000</td>
-                                    <td class="price-discount">118,800</td>
+                                    <td style="padding:12px; border-bottom:1px solid #f1f5f9;">2core | 4GB</td>
+                                    <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">
+                                        2,219,000
+                                        원
+                                    </td>
+                                    <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">T3.medium</td>
+                                    <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">6,568,270 원</td>
                                 </tr>
                                 <tr>
-                                    <td>4</td>
-                                    <td>8</td>
-                                    <td>200</td>
-                                    <td class="price-original">264,000</td>
-                                    <td class="price-discount">237,600</td>
+                                    <td style="padding:12px; border-bottom:1px solid #f1f5f9;">4core | 8GB</td>
+                                    <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">
+                                        4,638,000
+                                        원
+                                    </td>
+                                    <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">C5.xlarge</td>
+                                    <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">10,473,371 원</td>
                                 </tr>
                                 <tr>
-                                    <td>8</td>
-                                    <td>16</td>
-                                    <td>500</td>
-                                    <td class="price-original">528,000</td>
-                                    <td class="price-discount">475,200</td>
+                                    <td style="padding:12px;">8core | 16GB</td>
+                                    <td style="color:#d92e2e; font-weight:bold;">9,279,000 원</td>
+                                    <td style="color:#64748b;">C5.2xlarge</td>
+                                    <td style="color:#64748b;">15,975,050 원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align:right; font-size:12px; color:#94a3b8; margin-top:10px;">* 각 사이트 요금 계산기 기준
+                        </p>
+                    </div>
+                    <!-- 5. Related Badges (Updated) -->
+                    <div class="content-section" style="text-align:center;">
+                        <div class="section-title">연관 상품</div>
+                        <div class="related-badges">
+                            <div class="product-badge"><i class="fas fa-sync-alt"></i> Auto Scaling</div>
+                            <div class="product-badge"><i class="fas fa-random"></i> Load Balancer</div>
+                            <div class="product-badge"><i class="fas fa-project-diagram"></i> Connect Hub</div>
+                            <div class="product-badge"><i class="fas fa-database"></i> NAS</div>
+                            <div class="product-badge"><i class="fas fa-shield-alt"></i> WAF</div>
+                        </div>
+                    </div>
+
+                    <div style="height:80px;"></div>
+
+                </div>
+                <div id="server" class="cloud-tab">
+
+
+                    <div class="content-header">
+                        <h2>ucloud Server</h2>
+                        <p>kt 클라우드 플랫폼 기반에서 신속하고 안정적인 고품질의 클라우드 서버 자원 (CPU, Memory, Disk, Network)을 제공하는 서비스로, 웹 인터페이스를
+                            통하여
+                            사용자가
+                            매우 간단하게 필요한 컴퓨팅 자원을 구성할 수 있습니다.</p>
+                    </div>
+
+                    <div style="height:40px;"></div>
+
+                    <!-- Server Pricing Section -->
+                    <div class="content-section">
+                        <div class="section-title">표준 server 및 High memory server 요금표 (G1/G2)</div>
+
+
+                        <div class="engine-tabs">
+                            <span class="engine-tab active" onclick="showTab('standard')">표준 Memory Server</span>
+                            <span class="engine-tab" onclick="showTab('highmem')">High Memory Server</span>
+                        </div>
+
+                        <!-- Standard Server Tab -->
+                        <div id="standard" class="tab-content active">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">구분</th>
+                                        <th rowspan="2">CPU<br>(vCore)</th>
+                                        <th rowspan="2">Memory<br>(GB)</th>
+                                        <th colspan="2" class="highlight">G1 (기존 Zone)</th>
+                                        <th colspan="2" class="highlight">G2 (Seoul M2)</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="highlight-sub">소비자가격</th>
+                                        <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                                        <th class="highlight-sub">소비자가격</th>
+                                        <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="16" class="row-header">표준<br>Memory<br>Server</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>22,500원</td>
+                                        <td class="price">20,250원</td>
+                                        <td>22,500원</td>
+                                        <td class="price">20,250원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>38,500원</td>
+                                        <td class="price">34,650원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>49,500원</td>
+                                        <td class="price">44,550원</td>
+                                        <td>46,700원</td>
+                                        <td class="price">42,030원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>4</td>
+                                        <td>79,500원</td>
+                                        <td class="price">71,550원</td>
+                                        <td>77,300원</td>
+                                        <td class="price">69,570원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>4</td>
+                                        <td>101,500원</td>
+                                        <td class="price">91,350원</td>
+                                        <td>93,500원</td>
+                                        <td class="price">84,150원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>8</td>
+                                        <td>163,500원</td>
+                                        <td class="price">147,150원</td>
+                                        <td>154,600원</td>
+                                        <td class="price">139,140원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>8</td>
+                                        <td>207,100원</td>
+                                        <td class="price">186,750원</td>
+                                        <td>187,100원</td>
+                                        <td class="price">168,390원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>16</td>
+                                        <td>329,500원</td>
+                                        <td class="price">296,550원</td>
+                                        <td>309,300원</td>
+                                        <td class="price">278,370원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>16</td>
+                                        <td>373,500원</td>
+                                        <td class="price">336,150원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>32</td>
+                                        <td>550,080원</td>
+                                        <td class="price">495,072원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>16</td>
+                                        <td>418,500원</td>
+                                        <td class="price">376,650원</td>
+                                        <td>374,300원</td>
+                                        <td class="price">336,870원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>32</td>
+                                        <td>663,500원</td>
+                                        <td class="price">597,150원</td>
+                                        <td>618,600원</td>
+                                        <td class="price">556,740원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>20</td>
+                                        <td>558,300원</td>
+                                        <td class="price">502,470원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>40</td>
+                                        <td>761,580원</td>
+                                        <td class="price">685,422원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>24</td>
+                                        <td>670,660원</td>
+                                        <td class="price">603,594원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>48</td>
+                                        <td>914,590원</td>
+                                        <td class="price">823,131원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- High Memory Server Tab (New Data) -->
+                        <div id="highmem" class="tab-content">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">구분</th>
+                                        <th rowspan="2">CPU<br>(vCore)</th>
+                                        <th rowspan="2">Memory<br>(GB)</th>
+                                        <th colspan="2" class="highlight">G1 (기존 Zone)</th>
+                                        <th colspan="2" class="highlight">G2 (Seoul M2)</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="highlight-sub">소비자가격</th>
+                                        <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                                        <th class="highlight-sub">소비자가격</th>
+                                        <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="9" class="row-header">High<br>Memory<br>Server</td>
+                                        <td>2</td>
+                                        <td>8</td>
+                                        <td>107,850원</td>
+                                        <td class="price">97,065원</td>
+                                        <td>98,800원</td>
+                                        <td class="price">88,920원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>16</td>
+                                        <td>166,500원</td>
+                                        <td class="price">149,850원</td>
+                                        <td>120,400원</td>
+                                        <td class="price">108,360원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>16</td>
+                                        <td>218,350원</td>
+                                        <td class="price">196,515원</td>
+                                        <td>197,700원</td>
+                                        <td class="price">177,930원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>32</td>
+                                        <td>338,200원</td>
+                                        <td class="price">304,380원</td>
+                                        <td>240,800원</td>
+                                        <td class="price">216,720원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>32</td>
+                                        <td>439,350원</td>
+                                        <td class="price">395,415원</td>
+                                        <td>395,500원</td>
+                                        <td class="price">355,950원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>62</td>
+                                        <td>653,500원</td>
+                                        <td class="price">583,550원</td>
+                                        <td>470,000원</td>
+                                        <td class="price">423,000원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>62</td>
+                                        <td>842,500원</td>
+                                        <td class="price">758,250원</td>
+                                        <td>773,100원</td>
+                                        <td class="price">695,790원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>124</td>
+                                        <td>1,322,500원</td>
+                                        <td class="price">1,190,250원</td>
+                                        <td>940,100원</td>
+                                        <td class="price">848,090원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>160</td>
+                                        <td>1,460,120원</td>
+                                        <td class="price">1,314,108원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="4" class="row-header">High<br>Memory</td>
+                                        <td>20</td>
+                                        <td>80</td>
+                                        <td>1,027,690원</td>
+                                        <td class="price">924,921원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>160</td>
+                                        <td>1,559,910원</td>
+                                        <td class="price">1,403,919원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>96</td>
+                                        <td>1,233,930원</td>
+                                        <td class="price">1,110,537원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>160</td>
+                                        <td>1,659,700원</td>
+                                        <td class="price">1,493,730원</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" class="row-header">High<br>Memory<br>(D1)</td>
+                                        <td>32</td>
+                                        <td>124</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>1,546,200원</td>
+                                        <td class="price">1,391,580원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>32</td>
+                                        <td>160</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>1,869,500원</td>
+                                        <td class="price">1,682,550원</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="notes-list">
+                            <p>※ Data Disk 미제공: OS영역을 위한 기본디스크(Linux 20GB, Windows 50GB)만 제공, Data DISK는 미제공되며 DISK를
+                                추가하실 수
+                                있습니다.</p>
+                            <p>※ 각 cloud 서버 사양별 선택 가능한 OS가 다르니, 반드시 확인하시기 바랍니다.</p>
+                            <p>※ 서버 사용요금은 서버 해지 전까지 이용요금이 발생합니다. 다만, 서버를 정지 시 정지요금으로 반영됩니다.</p>
+                            <p>※ server 정지 시에는 정지요금만 부과되며(12,000원/월) 월요금제는 일단위로(약 400원/일) 입니다.</p>
+                            <p>※ server 정지 시에는 VM 별로 제공되는 네트워크 무료 트래픽(1TB~2TB)도 정지 기간만큼 조정되어 제공됩니다.</p>
+                            <p>※ 124GB 이상의 High-Memory server는 추후제공합니다. 운영센터/컨설팅담당자께 문의해주세요.</p>
+                        </div>
+                    </div>
+
+                    <!-- Network Section -->
+                    <div class="content-section">
+                        <div class="section-title">네트워크 (Outbound 트래픽)</div>
+                        <div class="section-subtitle">Inbound 트래픽은 무료, Outbound만 과금 (단위: 원/월, 부가세별도)<br>국내 기준 (Seoul-M
+                            zone,
+                            Central-A/B zone, HA zone)</div>
+
+                        <p style="font-size: 13px; color: #374151; margin-bottom: 8px;"><strong>16GB Memory 이상
+                                VM:</strong>
+                            월
+                            사용량 2TB 이하 무료</p>
+
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">구분</th>
+                                    <th colspan="4" class="highlight">사용 구간</th>
                                 </tr>
                                 <tr>
-                                    <td>16</td>
-                                    <td>32</td>
-                                    <td>1000</td>
-                                    <td class="price-original">1,056,000</td>
-                                    <td class="price-discount">950,400</td>
+                                    <th>Cloud 서버 당 2TB 이하</th>
+                                    <th>2TB ~ 10TB</th>
+                                    <th>10TB ~ 20TB</th>
+                                    <th>20TB 이상</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>종량제 (GB당)</td>
+                                    <td class="price">무료</td>
+                                    <td>90원</td>
+                                    <td>80원</td>
+                                    <td>70원</td>
+                                </tr>
+                                <tr>
+                                    <td>정액제 30TB</td>
+                                    <td colspan="4">2,000,000원/월</td>
+                                </tr>
+                                <tr>
+                                    <td>정액제 50TB</td>
+                                    <td colspan="4">3,000,000원/월</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size: 13px; color: #374151; margin-top: 16px; margin-bottom: 8px;"><strong>16GB
+                                Memory 미만
+                                VM:</strong> 월 사용량 1TB 이하 무료</p>
+
+                        <div class="notes-list">
+                            <p>* 예시) 동일계정에서 4vCore 4GB 1대, 4vCore 16GB 1대를 사용하면 해당계정의 트래픽은 outbound 총 3TB(1TB + 2TB)까지
+                                무료입니다.
+                            </p>
+                            <p>* server 정지 시에는 VM 별로 제공되는 네트워크 무료 트래픽(1TB~2TB)이 정지 기간만큼 조정되어 제공됩니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- DISK Section -->
+                    <div class="content-section">
+                        <div class="section-title">ucloud server용 DISK</div>
+                        <div class="section-subtitle">단위: 원/월, 부가세별도</div>
+
+                        <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">NAS (Network
+                            Attached Storage)</h4>
+                        <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">고성능의 NAS를 네트워크를 통해 복수의 ucloud
+                            server에
+                            공유 구성할 수 있는 서비스</p>
+
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>상품유형</th>
+                                    <th>월요금</th>
+                                    <th>IOPS 참고</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">HDD NAS</td>
+                                    <td>기본용량 (1,000GB)</td>
+                                    <td class="price">70,000원</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>추가용량 (100GB)</td>
+                                    <td class="price">7,000원</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">SSD NAS</td>
+                                    <td>기본용량 (1,000GB)</td>
+                                    <td class="price">210,000원</td>
+                                    <td>4,000 ~ 10,000</td>
+                                    <td>seoul-M2 존 우선 제공</td>
+                                </tr>
+                                <tr>
+                                    <td>추가용량 (100GB)</td>
+                                    <td class="price">21,000원</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">Server Disk
+                        </h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>상품유형</th>
+                                    <th>월요금</th>
+                                    <th>IOPS 참고</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>HDD(일반) DISK</td>
+                                    <td>10GB</td>
+                                    <td class="price">700원</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>SSD DISK</td>
+                                    <td>10GB</td>
+                                    <td class="price">1,400원</td>
+                                    <td>4,000 ~ 10,000</td>
+                                    <td>seoul-M2 존 우선 제공</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">
+                            SSD-Provisioned
+                            (구
+                            SSD Volume)</h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>월요금</th>
+                                    <th>구간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>용량 (100GB 당)</td>
+                                    <td class="price">10,000원</td>
+                                    <td>100GB ~ 800GB 선택</td>
+                                </tr>
+                                <tr>
+                                    <td>성능 (1,000 IOPS 당)</td>
+                                    <td class="price">35,000원</td>
+                                    <td>6,000 IOPS ~ 20,000 IOPS 선택</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div id="mariadb" class="tab-content">
+                    <!-- IP Section -->
+                    <div class="content-section">
+                        <div class="table-grid">
+                            <div class="table-grid-item">
+                                <div class="section-title" style="font-size:20px;">공인 IP 추가</div>
+                                <table class="pricing-table">
+                                    <thead>
+                                        <tr>
+                                            <th>구분</th>
+                                            <th>단위</th>
+                                            <th>월요금</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>공인 IP 추가</td>
+                                            <td>1 IP당</td>
+                                            <td class="price">5,000원</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-grid-item">
+                                <div class="section-title" style="font-size:20px;">CIP 추가</div>
+                                <table class="pricing-table">
+                                    <thead>
+                                        <tr>
+                                            <th>구분</th>
+                                            <th>단위</th>
+                                            <th>월요금</th>
+                                            <th>비고</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Cloud DC 내부 CIP</td>
+                                            <td>1 CIP당</td>
+                                            <td class="price">20,000원</td>
+                                            <td style="text-align: left; font-size: 11px;">Subnet 별 차등</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cloud DC 외부 CIP</td>
+                                            <td>1 CIP당</td>
+                                            <td class="price">100,000원</td>
+                                            <td style="text-align: left; font-size: 11px;">Inter-AZ</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OS Section -->
+                    <div class="content-section">
+                        <div class="section-title">Operating System (OS)</div>
                         <table class="pricing-table">
                             <thead>
                                 <tr>
-                                    <th>vCore</th>
-                                    <th>Memory (GB)</th>
-                                    <th>Storage (GB)</th>
-                                    <th class="highlight">월 요금</th>
-                                    <th class="highlight">할인가 (10%)</th>
+                                    <th>운영체제</th>
+                                    <th>버전</th>
+                                    <th>월요금</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>100</td>
-                                    <td class="price-original">60,500</td>
-                                    <td class="price-discount">54,450</td>
+                                    <td class="row-header">Windows</td>
+                                    <td>Windows Server 2008 / 2012 / 2016 / 2019</td>
+                                    <td class="price">25,300원</td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>100</td>
-                                    <td class="price-original">121,000</td>
-                                    <td class="price-discount">108,900</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>8</td>
-                                    <td>200</td>
-                                    <td class="price-original">242,000</td>
-                                    <td class="price-discount">217,800</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>16</td>
-                                    <td>500</td>
-                                    <td class="price-original">484,000</td>
-                                    <td class="price-discount">435,600</td>
+                                    <td class="row-header">Linux</td>
+                                    <td>CentOS, Ubuntu, Debian</td>
+                                    <td class="price" style="color:#16a34a !important;">무료</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
 
-                <div class="content-section">
-                    <div class="section-title">추가 스토리지</div>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>타입</th>
-                                <th>단위</th>
-                                <th class="highlight">월 요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>SSD 스토리지</td>
-                                <td>10GB당</td>
-                                <td class="price">1,100원</td>
-                            </tr>
-                            <tr>
-                                <td>백업 스토리지</td>
-                                <td>10GB당</td>
-                                <td class="price">550원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="content-section">
-                    <div class="section-title">주요 기능</div>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h4><i class="fas fa-sync-alt"></i> 자동 백업</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>기능</td>
-                                    <td>매일 자동 백업</td>
-                                </tr>
-                                <tr>
-                                    <td>보관 기간</td>
-                                    <td>최대 7일</td>
-                                </tr>
-                                <tr>
-                                    <td>비용</td>
-                                    <td>무료</td>
-                                </tr>
+                </div>
+                <div id="db" class="cloud-tab">
+                    <div class="content-header">
+                        <h2><i class="fas fa-database"></i> ucloud DB</h2>
+                        <p>고가용성 관계형 데이터베이스 서비스. MySQL, MariaDB를 손쉽게 관리하세요.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">데이터베이스 엔진</div>
+                        <div class="engine-tabs">
+                            <span class="engine-tab active" onclick="showTab('mysql')">MySQL</span>
+                            <span class="engine-tab" onclick="showTab('mariadb')">MariaDB</span>
+                        </div>
+                        <p class="section-note">* 모든 요금은 VAT 별도이며, 월 단위 요금 기준입니다. (단위: 원)</p>
+
+                        <div id="mysql" class="tab-content active">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th>vCore</th>
+                                        <th>Memory (GB)</th>
+                                        <th>Storage (GB)</th>
+                                        <th class="highlight">월 요금</th>
+                                        <th class="highlight">할인가 (10%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>100</td>
+                                        <td class="price-original">66,000</td>
+                                        <td class="price-discount">59,400</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>4</td>
+                                        <td>100</td>
+                                        <td class="price-original">132,000</td>
+                                        <td class="price-discount">118,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>8</td>
+                                        <td>200</td>
+                                        <td class="price-original">264,000</td>
+                                        <td class="price-discount">237,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>16</td>
+                                        <td>500</td>
+                                        <td class="price-original">528,000</td>
+                                        <td class="price-discount">475,200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>32</td>
+                                        <td>1000</td>
+                                        <td class="price-original">1,056,000</td>
+                                        <td class="price-discount">950,400</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-copy"></i> 읽기 복제본</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>기능</td>
-                                    <td>읽기 부하 분산</td>
-                                </tr>
-                                <tr>
-                                    <td>최대 개수</td>
-                                    <td>5개</td>
-                                </tr>
-                                <tr>
-                                    <td>비용</td>
-                                    <td>DB 인스턴스 요금과 동일</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-shield-alt"></i> 고가용성 (HA)</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>기능</td>
-                                    <td>자동 장애 조치</td>
-                                </tr>
-                                <tr>
-                                    <td>SLA</td>
-                                    <td>99.9%</td>
-                                </tr>
-                                <tr>
-                                    <td>추가 비용</td>
-                                    <td>기본 요금의 50%</td>
-                                </tr>
+
+                        <div id="mariadb" class="tab-content">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th>vCore</th>
+                                        <th>Memory (GB)</th>
+                                        <th>Storage (GB)</th>
+                                        <th class="highlight">월 요금</th>
+                                        <th class="highlight">할인가 (10%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>100</td>
+                                        <td class="price-original">60,500</td>
+                                        <td class="price-discount">54,450</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>4</td>
+                                        <td>100</td>
+                                        <td class="price-original">121,000</td>
+                                        <td class="price-discount">108,900</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>8</td>
+                                        <td>200</td>
+                                        <td class="price-original">242,000</td>
+                                        <td class="price-discount">217,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>16</td>
+                                        <td>500</td>
+                                        <td class="price-original">484,000</td>
+                                        <td class="price-discount">435,600</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
 
-            </div>
-            <div id="storage" class="cloud-tab">
-                <div class="content-header">
-                    <h2><i class="fas fa-hdd"></i> CDN / Storage</h2>
-                    <p>글로벌 콘텐츠 전송 및 대용량 오브젝트 스토리지 서비스</p>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">CDN (Content Delivery Network)</div>
-                    <p class="section-note">* 국내 및 해외 PoP을 통해 콘텐츠를 빠르게 전송합니다.</p>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>트래픽 구간</th>
-                                <th class="highlight">국내 (원/GB)</th>
-                                <th class="highlight">아시아 (원/GB)</th>
-                                <th class="highlight">글로벌 (원/GB)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>~1TB</td>
-                                <td class="price">70</td>
-                                <td class="price">100</td>
-                                <td class="price">150</td>
-                            </tr>
-                            <tr>
-                                <td>1TB ~ 10TB</td>
-                                <td class="price">65</td>
-                                <td class="price">90</td>
-                                <td class="price">130</td>
-                            </tr>
-                            <tr>
-                                <td>10TB ~ 50TB</td>
-                                <td class="price">55</td>
-                                <td class="price">80</td>
-                                <td class="price">110</td>
-                            </tr>
-                            <tr>
-                                <td>50TB 초과</td>
-                                <td class="price">협의</td>
-                                <td class="price">협의</td>
-                                <td class="price">협의</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">Object Storage</div>
-                    <p class="section-note">* S3 호환 API로 쉽게 연동 가능합니다.</p>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>단위</th>
-                                <th class="highlight">월 요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>스토리지 저장</td>
-                                <td>1GB당</td>
-                                <td class="price">33원</td>
-                            </tr>
-                            <tr>
-                                <td>API 요청 (PUT/COPY/POST/LIST)</td>
-                                <td>10,000건당</td>
-                                <td class="price">55원</td>
-                            </tr>
-                            <tr>
-                                <td>API 요청 (GET, 기타)</td>
-                                <td>10,000건당</td>
-                                <td class="price">44원</td>
-                            </tr>
-                            <tr>
-                                <td>데이터 전송 (외부)</td>
-                                <td>1GB당</td>
-                                <td class="price">100원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">Block Storage</div>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>타입</th>
-                                <th>성능</th>
-                                <th class="highlight">월 요금 (10GB당)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>SSD</td>
-                                <td>고성능 (IOPS 최대 16,000)</td>
-                                <td class="price">1,100원</td>
-                            </tr>
-                            <tr>
-                                <td>HDD</td>
-                                <td>표준 (IOPS 최대 3,000)</td>
-                                <td class="price">550원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">주요 특징</div>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h4><i class="fas fa-globe"></i> CDN 특징</h4>
-                            <table class="info-card-table">
+                    <div class="content-section">
+                        <div class="section-title">추가 스토리지</div>
+                        <table class="pricing-table">
+                            <thead>
                                 <tr>
-                                    <td>국내 PoP</td>
-                                    <td>서울, 부산, 대전</td>
+                                    <th>타입</th>
+                                    <th>단위</th>
+                                    <th class="highlight">월 요금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SSD 스토리지</td>
+                                    <td>10GB당</td>
+                                    <td class="price">1,100원</td>
                                 </tr>
                                 <tr>
-                                    <td>해외 PoP</td>
-                                    <td>도쿄, 싱가포르, LA 등</td>
+                                    <td>백업 스토리지</td>
+                                    <td>10GB당</td>
+                                    <td class="price">550원</td>
                                 </tr>
-                                <tr>
-                                    <td>지원 프로토콜</td>
-                                    <td>HTTP/HTTPS, HLS</td>
-                                </tr>
-                            </table>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">주요 기능</div>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4><i class="fas fa-sync-alt"></i> 자동 백업</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>기능</td>
+                                        <td>매일 자동 백업</td>
+                                    </tr>
+                                    <tr>
+                                        <td>보관 기간</td>
+                                        <td>최대 7일</td>
+                                    </tr>
+                                    <tr>
+                                        <td>비용</td>
+                                        <td>무료</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-copy"></i> 읽기 복제본</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>기능</td>
+                                        <td>읽기 부하 분산</td>
+                                    </tr>
+                                    <tr>
+                                        <td>최대 개수</td>
+                                        <td>5개</td>
+                                    </tr>
+                                    <tr>
+                                        <td>비용</td>
+                                        <td>DB 인스턴스 요금과 동일</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-shield-alt"></i> 고가용성 (HA)</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>기능</td>
+                                        <td>자동 장애 조치</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SLA</td>
+                                        <td>99.9%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>추가 비용</td>
+                                        <td>기본 요금의 50%</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-database"></i> Object Storage</h4>
-                            <table class="info-card-table">
+                    </div>
+
+                </div>
+                <div id="storage" class="cloud-tab">
+                    <div class="content-header">
+                        <h2><i class="fas fa-hdd"></i> CDN / Storage</h2>
+                        <p>글로벌 콘텐츠 전송 및 대용량 오브젝트 스토리지 서비스</p>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">CDN (Content Delivery Network)</div>
+                        <p class="section-note">* 국내 및 해외 PoP을 통해 콘텐츠를 빠르게 전송합니다.</p>
+                        <table class="pricing-table">
+                            <thead>
                                 <tr>
-                                    <td>호환성</td>
-                                    <td>AWS S3 API</td>
+                                    <th>트래픽 구간</th>
+                                    <th class="highlight">국내 (원/GB)</th>
+                                    <th class="highlight">아시아 (원/GB)</th>
+                                    <th class="highlight">글로벌 (원/GB)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>~1TB</td>
+                                    <td class="price">70</td>
+                                    <td class="price">100</td>
+                                    <td class="price">150</td>
                                 </tr>
                                 <tr>
-                                    <td>내구성</td>
-                                    <td>99.999999999%</td>
+                                    <td>1TB ~ 10TB</td>
+                                    <td class="price">65</td>
+                                    <td class="price">90</td>
+                                    <td class="price">130</td>
                                 </tr>
                                 <tr>
-                                    <td>최대 객체 크기</td>
-                                    <td>5TB</td>
+                                    <td>10TB ~ 50TB</td>
+                                    <td class="price">55</td>
+                                    <td class="price">80</td>
+                                    <td class="price">110</td>
                                 </tr>
-                            </table>
+                                <tr>
+                                    <td>50TB 초과</td>
+                                    <td class="price">협의</td>
+                                    <td class="price">협의</td>
+                                    <td class="price">협의</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">Object Storage</div>
+                        <p class="section-note">* S3 호환 API로 쉽게 연동 가능합니다.</p>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>단위</th>
+                                    <th class="highlight">월 요금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>스토리지 저장</td>
+                                    <td>1GB당</td>
+                                    <td class="price">33원</td>
+                                </tr>
+                                <tr>
+                                    <td>API 요청 (PUT/COPY/POST/LIST)</td>
+                                    <td>10,000건당</td>
+                                    <td class="price">55원</td>
+                                </tr>
+                                <tr>
+                                    <td>API 요청 (GET, 기타)</td>
+                                    <td>10,000건당</td>
+                                    <td class="price">44원</td>
+                                </tr>
+                                <tr>
+                                    <td>데이터 전송 (외부)</td>
+                                    <td>1GB당</td>
+                                    <td class="price">100원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">Block Storage</div>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>타입</th>
+                                    <th>성능</th>
+                                    <th class="highlight">월 요금 (10GB당)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SSD</td>
+                                    <td>고성능 (IOPS 최대 16,000)</td>
+                                    <td class="price">1,100원</td>
+                                </tr>
+                                <tr>
+                                    <td>HDD</td>
+                                    <td>표준 (IOPS 최대 3,000)</td>
+                                    <td class="price">550원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">주요 특징</div>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4><i class="fas fa-globe"></i> CDN 특징</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>국내 PoP</td>
+                                        <td>서울, 부산, 대전</td>
+                                    </tr>
+                                    <tr>
+                                        <td>해외 PoP</td>
+                                        <td>도쿄, 싱가포르, LA 등</td>
+                                    </tr>
+                                    <tr>
+                                        <td>지원 프로토콜</td>
+                                        <td>HTTP/HTTPS, HLS</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-database"></i> Object Storage</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>호환성</td>
+                                        <td>AWS S3 API</td>
+                                    </tr>
+                                    <tr>
+                                        <td>내구성</td>
+                                        <td>99.999999999%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>최대 객체 크기</td>
+                                        <td>5TB</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-hdd"></i> Block Storage</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>최대 용량</td>
+                                        <td>16TB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>스냅샷</td>
+                                        <td>지원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>암호화</td>
+                                        <td>AES-256</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-hdd"></i> Block Storage</h4>
-                            <table class="info-card-table">
+                    </div>
+
+                </div>
+                <div id="network" class="cloud-tab">
+                    <div class="content-header">
+                        <h2><i class="fas fa-network-wired"></i> Network</h2>
+                        <p>안전하고 유연한 네트워크 구성으로 클라우드 인프라를 최적화하세요.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">Load Balancer</div>
+                        <p class="section-note">* 트래픽을 여러 서버에 분산하여 고가용성을 확보합니다.</p>
+                        <table class="pricing-table">
+                            <thead>
                                 <tr>
-                                    <td>최대 용량</td>
-                                    <td>16TB</td>
+                                    <th>타입</th>
+                                    <th>처리량</th>
+                                    <th class="highlight">월 요금</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Small</td>
+                                    <td>100 Mbps</td>
+                                    <td class="price">33,000원</td>
+                                </tr>
+                                <tr>
+                                    <td>Medium</td>
+                                    <td>500 Mbps</td>
+                                    <td class="price">110,000원</td>
+                                </tr>
+                                <tr>
+                                    <td>Large</td>
+                                    <td>1 Gbps</td>
+                                    <td class="price">220,000원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">VPC (Virtual Private Cloud)</div>
+                        <p class="section-note">* 논리적으로 격리된 가상 네트워크를 구성합니다.</p>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>리소스</th>
+                                    <th>기본 제공</th>
+                                    <th class="highlight">추가 요금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>VPC</td>
+                                    <td>1개 무료</td>
+                                    <td class="price">추가 시 11,000원/월</td>
+                                </tr>
+                                <tr>
+                                    <td>Subnet</td>
+                                    <td>5개 무료</td>
+                                    <td class="price">추가 시 협의</td>
+                                </tr>
+                                <tr>
+                                    <td>NAT Gateway</td>
+                                    <td>-</td>
+                                    <td class="price">22,000원/월</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">DNS</div>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>기준</th>
+                                    <th class="highlight">요금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>호스팅 존</td>
+                                    <td>1개당</td>
+                                    <td class="price">1,100원/월</td>
+                                </tr>
+                                <tr>
+                                    <td>쿼리</td>
+                                    <td>100만 건당</td>
+                                    <td class="price">550원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">네트워크 서비스 특징</div>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4><i class="fas fa-balance-scale"></i> Load Balancer</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>L4/L7</td>
+                                        <td>지원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Health Check</td>
+                                        <td>자동</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SSL Offloading</td>
+                                        <td>지원</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-project-diagram"></i> VPC</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>CIDR 범위</td>
+                                        <td>사용자 정의</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Peering</td>
+                                        <td>지원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VPN 연동</td>
+                                        <td>지원</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="management" class="cloud-tab">
+                    <div class="content-header">
+                        <h2><i class="fas fa-tasks"></i> Management</h2>
+                        <p>클라우드 리소스를 효율적으로 관리하고 자동화하세요.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">Auto Scaling</div>
+                        <p class="section-note">* 트래픽에 따라 자동으로 서버를 확장/축소합니다.</p>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>설명</th>
+                                    <th class="highlight">요금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Auto Scaling 기능</td>
+                                    <td>설정 및 관리</td>
+                                    <td class="price">무료</td>
+                                </tr>
+                                <tr>
+                                    <td>서버 인스턴스</td>
+                                    <td>생성된 서버</td>
+                                    <td class="price">서버 요금 적용</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">Backup</div>
+                        <p class="section-note">* 정기적인 백업으로 데이터를 안전하게 보호합니다.</p>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>타입</th>
+                                    <th>보관 기간</th>
+                                    <th class="highlight">요금 (10GB당)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <td>스냅샷</td>
-                                    <td>지원</td>
-                                </tr>
-                                <tr>
-                                    <td>암호화</td>
-                                    <td>AES-256</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="network" class="cloud-tab">
-                <div class="content-header">
-                    <h2><i class="fas fa-network-wired"></i> Network</h2>
-                    <p>안전하고 유연한 네트워크 구성으로 클라우드 인프라를 최적화하세요.</p>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">Load Balancer</div>
-                    <p class="section-note">* 트래픽을 여러 서버에 분산하여 고가용성을 확보합니다.</p>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>타입</th>
-                                <th>처리량</th>
-                                <th class="highlight">월 요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Small</td>
-                                <td>100 Mbps</td>
-                                <td class="price">33,000원</td>
-                            </tr>
-                            <tr>
-                                <td>Medium</td>
-                                <td>500 Mbps</td>
-                                <td class="price">110,000원</td>
-                            </tr>
-                            <tr>
-                                <td>Large</td>
-                                <td>1 Gbps</td>
-                                <td class="price">220,000원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">VPC (Virtual Private Cloud)</div>
-                    <p class="section-note">* 논리적으로 격리된 가상 네트워크를 구성합니다.</p>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>리소스</th>
-                                <th>기본 제공</th>
-                                <th class="highlight">추가 요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>VPC</td>
-                                <td>1개 무료</td>
-                                <td class="price">추가 시 11,000원/월</td>
-                            </tr>
-                            <tr>
-                                <td>Subnet</td>
-                                <td>5개 무료</td>
-                                <td class="price">추가 시 협의</td>
-                            </tr>
-                            <tr>
-                                <td>NAT Gateway</td>
-                                <td>-</td>
-                                <td class="price">22,000원/월</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">DNS</div>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>항목</th>
-                                <th>기준</th>
-                                <th class="highlight">요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>호스팅 존</td>
-                                <td>1개당</td>
-                                <td class="price">1,100원/월</td>
-                            </tr>
-                            <tr>
-                                <td>쿼리</td>
-                                <td>100만 건당</td>
-                                <td class="price">550원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">네트워크 서비스 특징</div>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h4><i class="fas fa-balance-scale"></i> Load Balancer</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>L4/L7</td>
-                                    <td>지원</td>
-                                </tr>
-                                <tr>
-                                    <td>Health Check</td>
-                                    <td>자동</td>
-                                </tr>
-                                <tr>
-                                    <td>SSL Offloading</td>
-                                    <td>지원</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-project-diagram"></i> VPC</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>CIDR 범위</td>
-                                    <td>사용자 정의</td>
-                                </tr>
-                                <tr>
-                                    <td>Peering</td>
-                                    <td>지원</td>
-                                </tr>
-                                <tr>
-                                    <td>VPN 연동</td>
-                                    <td>지원</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="management" class="cloud-tab">
-                <div class="content-header">
-                    <h2><i class="fas fa-tasks"></i> Management</h2>
-                    <p>클라우드 리소스를 효율적으로 관리하고 자동화하세요.</p>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">Auto Scaling</div>
-                    <p class="section-note">* 트래픽에 따라 자동으로 서버를 확장/축소합니다.</p>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>항목</th>
-                                <th>설명</th>
-                                <th class="highlight">요금</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Auto Scaling 기능</td>
-                                <td>설정 및 관리</td>
-                                <td class="price">무료</td>
-                            </tr>
-                            <tr>
-                                <td>서버 인스턴스</td>
-                                <td>생성된 서버</td>
-                                <td class="price">서버 요금 적용</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">Backup</div>
-                    <p class="section-note">* 정기적인 백업으로 데이터를 안전하게 보호합니다.</p>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>타입</th>
-                                <th>보관 기간</th>
-                                <th class="highlight">요금 (10GB당)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>스냅샷</td>
-                                <td>무제한</td>
-                                <td class="price">550원/월</td>
-                            </tr>
-                            <tr>
-                                <td>자동 백업</td>
-                                <td>7일</td>
-                                <td class="price">무료 (기본)</td>
-                            </tr>
-                            <tr>
-                                <td>장기 보관</td>
-                                <td>30일+</td>
-                                <td class="price">330원/월</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <div class="section-title">관리 콘솔 기능</div>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h4><i class="fas fa-chart-bar"></i> ucloud Watch</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>CPU/메모리 모니터링</td>
-                                    <td>무료</td>
-                                </tr>
-                                <tr>
-                                    <td>알림 설정</td>
-                                    <td>무료</td>
-                                </tr>
-                                <tr>
-                                    <td>로그 수집</td>
-                                    <td>1GB당 100원</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-terminal"></i> CLI/API</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>CLI 도구</td>
-                                    <td>무료</td>
-                                </tr>
-                                <tr>
-                                    <td>REST API</td>
-                                    <td>무료</td>
-                                </tr>
-                                <tr>
-                                    <td>API 호출</td>
                                     <td>무제한</td>
+                                    <td class="price">550원/월</td>
                                 </tr>
-                            </table>
+                                <tr>
+                                    <td>자동 백업</td>
+                                    <td>7일</td>
+                                    <td class="price">무료 (기본)</td>
+                                </tr>
+                                <tr>
+                                    <td>장기 보관</td>
+                                    <td>30일+</td>
+                                    <td class="price">330원/월</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="section-title">관리 콘솔 기능</div>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4><i class="fas fa-chart-bar"></i> ucloud Watch</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>CPU/메모리 모니터링</td>
+                                        <td>무료</td>
+                                    </tr>
+                                    <tr>
+                                        <td>알림 설정</td>
+                                        <td>무료</td>
+                                    </tr>
+                                    <tr>
+                                        <td>로그 수집</td>
+                                        <td>1GB당 100원</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-terminal"></i> CLI/API</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>CLI 도구</td>
+                                        <td>무료</td>
+                                    </tr>
+                                    <tr>
+                                        <td>REST API</td>
+                                        <td>무료</td>
+                                    </tr>
+                                    <tr>
+                                        <td>API 호출</td>
+                                        <td>무제한</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-key"></i> IAM</h4>
+                                <table class="info-card-table">
+                                    <tr>
+                                        <td>사용자 관리</td>
+                                        <td>무료</td>
+                                    </tr>
+                                    <tr>
+                                        <td>역할 기반 접근 제어</td>
+                                        <td>지원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MFA</td>
+                                        <td>지원</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                        <div class="info-card">
-                            <h4><i class="fas fa-key"></i> IAM</h4>
-                            <table class="info-card-table">
-                                <tr>
-                                    <td>사용자 관리</td>
-                                    <td>무료</td>
-                                </tr>
-                                <tr>
-                                    <td>역할 기반 접근 제어</td>
-                                    <td>지원</td>
-                                </tr>
-                                <tr>
-                                    <td>MFA</td>
-                                    <td>지원</td>
-                                </tr>
-                            </table>
+                    </div>
+
+                </div>
+                <div id="vdi" class="cloud-tab">
+                    <div class="content-header">
+                        <h2>VDI (Virtual Desktop Infrastructure)</h2>
+                        <p>가상 데스크톱 인프라(VDI)는 데이터센터에서 가상 머신을 호스팅하여 사용자에게 데스크톱 환경을 제공하는 기술입니다.
+                            언제 어디서나 동일한 업무 환경에 안전하게 접속할 수 있습니다.</p>
+                    </div>
+
+                    <!-- Feature Grid -->
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>강력한 보안</h3>
+                            <p>모든 데이터가 중앙 데이터센터에 저장되어 정보 유출 위험을 최소화합니다.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-globe"></i>
+                            <h3>어디서나 접속</h3>
+                            <p>인터넷만 연결되면 어느 기기에서든 동일한 업무환경에 접속 가능합니다.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-tools"></i>
+                            <h3>간편한 관리</h3>
+                            <p>중앙 집중식 관리로 소프트웨어 배포 및 업데이트가 용이합니다.</p>
                         </div>
                     </div>
-                </div>
 
-            </div>
-            <div id="vdi" class="cloud-tab">
-                <div class="content-header">
-                    <h2>VDI (Virtual Desktop Infrastructure)</h2>
-                    <p>가상 데스크톱 인프라(VDI)는 데이터센터에서 가상 머신을 호스팅하여 사용자에게 데스크톱 환경을 제공하는 기술입니다.
-                        언제 어디서나 동일한 업무 환경에 안전하게 접속할 수 있습니다.</p>
-                </div>
-
-                <!-- Feature Grid -->
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>강력한 보안</h3>
-                        <p>모든 데이터가 중앙 데이터센터에 저장되어 정보 유출 위험을 최소화합니다.</p>
+                    <!-- VDI Benefits -->
+                    <div class="content-section">
+                        <div class="section-title">VDI 도입 효과</div>
+                        <ul class="info-list">
+                            <li>보안 강화: 데이터가 중앙 서버에 저장되어 외부 유출 위험 최소화</li>
+                            <li>비용 절감: 고사양 PC 구매 없이 저사양 단말기로 업무 수행 가능</li>
+                            <li>업무 연속성: 재택근무, 출장 시에도 동일한 업무환경 이용</li>
+                            <li>유연한 확장: 필요에 따라 가상 데스크톱 추가/삭제 가능</li>
+                            <li>관리 효율화: OS 및 소프트웨어 중앙 관리로 IT 부서 업무 부담 감소</li>
+                            <li>재해 복구: 데이터센터 백업으로 신속한 업무 복구 가능</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-globe"></i>
-                        <h3>어디서나 접속</h3>
-                        <p>인터넷만 연결되면 어느 기기에서든 동일한 업무환경에 접속 가능합니다.</p>
+
+                    <!-- Use Cases -->
+                    <div class="content-section">
+                        <div class="section-title">활용 사례</div>
+                        <ul class="info-list">
+                            <li>금융기관: 민감한 금융 데이터 보호 및 컴플라이언스 준수</li>
+                            <li>의료기관: 환자 정보 보안 및 원격 진료 환경 구축</li>
+                            <li>콜센터: 다수의 상담원 PC 일괄 관리 및 보안 강화</li>
+                            <li>재택근무: 안전한 원격 업무환경 제공</li>
+                            <li>교육기관: 실습실 PC 통합 관리 및 소프트웨어 라이선스 절감</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-tools"></i>
-                        <h3>간편한 관리</h3>
-                        <p>중앙 집중식 관리로 소프트웨어 배포 및 업데이트가 용이합니다.</p>
+
+                </div>
+                <div id="private" class="cloud-tab">
+                    <div class="content-header">
+                        <h2>Private Cloud</h2>
+                        <p>Private Cloud는 기업 전용으로 구축된 클라우드 인프라로, 퍼블릭 클라우드의 유연성과
+                            온프레미스의 보안성을 동시에 제공합니다. 민감한 데이터를 다루는 기업에 최적화된 솔루션입니다.</p>
                     </div>
-                </div>
 
-                <!-- VDI Benefits -->
-                <div class="content-section">
-                    <div class="section-title">VDI 도입 효과</div>
-                    <ul class="info-list">
-                        <li>보안 강화: 데이터가 중앙 서버에 저장되어 외부 유출 위험 최소화</li>
-                        <li>비용 절감: 고사양 PC 구매 없이 저사양 단말기로 업무 수행 가능</li>
-                        <li>업무 연속성: 재택근무, 출장 시에도 동일한 업무환경 이용</li>
-                        <li>유연한 확장: 필요에 따라 가상 데스크톱 추가/삭제 가능</li>
-                        <li>관리 효율화: OS 및 소프트웨어 중앙 관리로 IT 부서 업무 부담 감소</li>
-                        <li>재해 복구: 데이터센터 백업으로 신속한 업무 복구 가능</li>
-                    </ul>
-                </div>
-
-                <!-- Use Cases -->
-                <div class="content-section">
-                    <div class="section-title">활용 사례</div>
-                    <ul class="info-list">
-                        <li>금융기관: 민감한 금융 데이터 보호 및 컴플라이언스 준수</li>
-                        <li>의료기관: 환자 정보 보안 및 원격 진료 환경 구축</li>
-                        <li>콜센터: 다수의 상담원 PC 일괄 관리 및 보안 강화</li>
-                        <li>재택근무: 안전한 원격 업무환경 제공</li>
-                        <li>교육기관: 실습실 PC 통합 관리 및 소프트웨어 라이선스 절감</li>
-                    </ul>
-                </div>
-
-            </div>
-            <div id="private" class="cloud-tab">
-                <div class="content-header">
-                    <h2>Private Cloud</h2>
-                    <p>Private Cloud는 기업 전용으로 구축된 클라우드 인프라로, 퍼블릭 클라우드의 유연성과
-                        온프레미스의 보안성을 동시에 제공합니다. 민감한 데이터를 다루는 기업에 최적화된 솔루션입니다.</p>
-                </div>
-
-                <!-- Feature Grid -->
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-lock"></i>
-                        <h3>독립적 보안</h3>
-                        <p>전용 인프라로 다른 고객과 격리된 환경에서 운영됩니다.</p>
+                    <!-- Feature Grid -->
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-lock"></i>
+                            <h3>독립적 보안</h3>
+                            <p>전용 인프라로 다른 고객과 격리된 환경에서 운영됩니다.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-sliders-h"></i>
+                            <h3>맞춤 설정</h3>
+                            <p>기업 요구사항에 맞게 인프라를 자유롭게 구성할 수 있습니다.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <h3>안정적 성능</h3>
+                            <p>전용 자원으로 일관된 고성능을 보장합니다.</p>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-sliders-h"></i>
-                        <h3>맞춤 설정</h3>
-                        <p>기업 요구사항에 맞게 인프라를 자유롭게 구성할 수 있습니다.</p>
+
+                    <!-- Comparison -->
+                    <div class="content-section">
+                        <div class="section-title">Public vs Private Cloud 비교</div>
+                        <table class="compare-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>Public Cloud</th>
+                                    <th>Private Cloud</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>인프라</td>
+                                    <td>공유 인프라</td>
+                                    <td>전용 인프라</td>
+                                </tr>
+                                <tr>
+                                    <td>보안</td>
+                                    <td>표준 보안</td>
+                                    <td>강화된 보안</td>
+                                </tr>
+                                <tr>
+                                    <td>커스터마이징</td>
+                                    <td>제한적</td>
+                                    <td>자유로움</td>
+                                </tr>
+                                <tr>
+                                    <td>비용</td>
+                                    <td>사용량 기반</td>
+                                    <td>고정 비용</td>
+                                </tr>
+                                <tr>
+                                    <td>컴플라이언스</td>
+                                    <td>일반</td>
+                                    <td>규제 산업 대응</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <h3>안정적 성능</h3>
-                        <p>전용 자원으로 일관된 고성능을 보장합니다.</p>
+
+                    <!-- Benefits -->
+                    <div class="content-section">
+                        <div class="section-title">Private Cloud 장점</div>
+                        <ul class="info-list">
+                            <li>규제 준수: 금융, 공공, 의료 등 규제 산업의 컴플라이언스 요구사항 충족</li>
+                            <li>데이터 주권: 데이터가 지정된 위치에만 저장되어 법적 요구사항 충족</li>
+                            <li>성능 보장: 전용 하드웨어로 "노이지 네이버" 문제 없음</li>
+                            <li>보안 강화: 물리적, 논리적 격리로 최고 수준의 보안 제공</li>
+                            <li>유연한 확장: 필요에 따라 인프라를 유연하게 확장 가능</li>
+                        </ul>
                     </div>
-                </div>
 
-                <!-- Comparison -->
-                <div class="content-section">
-                    <div class="section-title">Public vs Private Cloud 비교</div>
-                    <table class="compare-table">
-                        <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>Public Cloud</th>
-                                <th>Private Cloud</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>인프라</td>
-                                <td>공유 인프라</td>
-                                <td>전용 인프라</td>
-                            </tr>
-                            <tr>
-                                <td>보안</td>
-                                <td>표준 보안</td>
-                                <td>강화된 보안</td>
-                            </tr>
-                            <tr>
-                                <td>커스터마이징</td>
-                                <td>제한적</td>
-                                <td>자유로움</td>
-                            </tr>
-                            <tr>
-                                <td>비용</td>
-                                <td>사용량 기반</td>
-                                <td>고정 비용</td>
-                            </tr>
-                            <tr>
-                                <td>컴플라이언스</td>
-                                <td>일반</td>
-                                <td>규제 산업 대응</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <!-- Use Cases -->
+                    <div class="content-section">
+                        <div class="section-title">적합한 기업</div>
+                        <ul class="info-list">
+                            <li>금융기관: 고객 금융정보 보호 및 금융위원회 규정 준수</li>
+                            <li>공공기관: 국가 보안 요구사항 충족 및 데이터 주권 확보</li>
+                            <li>의료기관: 환자 정보 보호 및 HIPAA 등 규정 준수</li>
+                            <li>대기업: 민감한 기업 데이터 보호 및 맞춤형 인프라 구축</li>
+                            <li>연구기관: 연구 데이터 보안 및 고성능 컴퓨팅 환경</li>
+                        </ul>
+                    </div>
 
-                <!-- Benefits -->
-                <div class="content-section">
-                    <div class="section-title">Private Cloud 장점</div>
-                    <ul class="info-list">
-                        <li>규제 준수: 금융, 공공, 의료 등 규제 산업의 컴플라이언스 요구사항 충족</li>
-                        <li>데이터 주권: 데이터가 지정된 위치에만 저장되어 법적 요구사항 충족</li>
-                        <li>성능 보장: 전용 하드웨어로 "노이지 네이버" 문제 없음</li>
-                        <li>보안 강화: 물리적, 논리적 격리로 최고 수준의 보안 제공</li>
-                        <li>유연한 확장: 필요에 따라 인프라를 유연하게 확장 가능</li>
-                    </ul>
                 </div>
+                <div id="limits" class="cloud-tab">
+                    <div class="content-header">
+                        <h2>서비스별 제한사항</h2>
+                        <p>KT Cloud 서비스를 이용하시기 전에 아래 제한사항을 확인하시기 바랍니다.
+                            제한사항은 서비스 안정성과 공정한 자원 배분을 위해 설정되어 있습니다.</p>
+                    </div>
 
-                <!-- Use Cases -->
-                <div class="content-section">
-                    <div class="section-title">적합한 기업</div>
-                    <ul class="info-list">
-                        <li>금융기관: 고객 금융정보 보호 및 금융위원회 규정 준수</li>
-                        <li>공공기관: 국가 보안 요구사항 충족 및 데이터 주권 확보</li>
-                        <li>의료기관: 환자 정보 보호 및 HIPAA 등 규정 준수</li>
-                        <li>대기업: 민감한 기업 데이터 보호 및 맞춤형 인프라 구축</li>
-                        <li>연구기관: 연구 데이터 보안 및 고성능 컴퓨팅 환경</li>
-                    </ul>
+                    <!-- Server Limits -->
+                    <div class="content-section">
+                        <div class="section-title">Server 서비스 제한사항</div>
+                        <table class="limit-table">
+                            <thead>
+                                <tr>
+                                    <th class="service-name">항목</th>
+                                    <th>기본 제한</th>
+                                    <th>확장 요청 시</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>VM 최대 생성 수</td>
+                                    <td>계정당 50대</td>
+                                    <td>요청 시 확장 가능</td>
+                                </tr>
+                                <tr>
+                                    <td>vCPU 최대 수</td>
+                                    <td>VM당 32 vCore</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Memory 최대 용량</td>
+                                    <td>VM당 256GB</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Data Disk 최대 용량</td>
+                                    <td>VM당 2TB</td>
+                                    <td>추가 디스크 연결 가능</td>
+                                </tr>
+                                <tr>
+                                    <td>Public IP 개수</td>
+                                    <td>계정당 10개</td>
+                                    <td>요청 시 추가 할당</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Database Limits -->
+                    <div class="content-section">
+                        <div class="section-title">Database 서비스 제한사항</div>
+                        <table class="limit-table">
+                            <thead>
+                                <tr>
+                                    <th class="service-name">항목</th>
+                                    <th>기본 제한</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DB 인스턴스 수</td>
+                                    <td>계정당 20개</td>
+                                    <td>요청 시 확장</td>
+                                </tr>
+                                <tr>
+                                    <td>스토리지 최대 용량</td>
+                                    <td>인스턴스당 1TB</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>동시 연결 수</td>
+                                    <td>사양에 따라 다름</td>
+                                    <td>MySQL 기준 150~1000</td>
+                                </tr>
+                                <tr>
+                                    <td>백업 보관 기간</td>
+                                    <td>최대 30일</td>
+                                    <td>자동 백업 기준</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Storage Limits -->
+                    <div class="content-section">
+                        <div class="section-title">Storage/CDN 서비스 제한사항</div>
+                        <table class="limit-table">
+                            <thead>
+                                <tr>
+                                    <th class="service-name">항목</th>
+                                    <th>기본 제한</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Object Storage 용량</td>
+                                    <td>계정당 100TB</td>
+                                    <td>요청 시 확장</td>
+                                </tr>
+                                <tr>
+                                    <td>단일 파일 용량</td>
+                                    <td>5TB</td>
+                                    <td>멀티파트 업로드 사용 시</td>
+                                </tr>
+                                <tr>
+                                    <td>CDN 도메인 수</td>
+                                    <td>계정당 20개</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>CDN 캐시 갱신</td>
+                                    <td>1,000 URL/일</td>
+                                    <td>Purge 요청 기준</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Network Limits -->
+                    <div class="content-section">
+                        <div class="section-title">Network 서비스 제한사항</div>
+                        <table class="limit-table">
+                            <thead>
+                                <tr>
+                                    <th class="service-name">항목</th>
+                                    <th>기본 제한</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>VPC 개수</td>
+                                    <td>계정당 5개</td>
+                                    <td>Zone별</td>
+                                </tr>
+                                <tr>
+                                    <td>Subnet 개수</td>
+                                    <td>VPC당 10개</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Load Balancer</td>
+                                    <td>계정당 10개</td>
+                                    <td>요청 시 추가</td>
+                                </tr>
+                                <tr>
+                                    <td>방화벽 규칙</td>
+                                    <td>그룹당 100개</td>
+                                    <td>Inbound + Outbound</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="notes-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 참고사항</h4>
+                        <p>• 위 제한사항은 KT Cloud 정책에 따라 변경될 수 있습니다.</p>
+                        <p>• 추가 자원이 필요한 경우 고객센터(02-418-7766)로 문의해 주세요.</p>
+                        <p>• 일부 서비스는 Zone에 따라 제한사항이 다를 수 있습니다.</p>
+                        <p>• 자세한 내용은 KT Cloud 공식 문서를 참조하시기 바랍니다.</p>
+                    </div>
+
                 </div>
-
-            </div>
-            <div id="limits" class="cloud-tab">
-                <div class="content-header">
-                    <h2>서비스별 제한사항</h2>
-                    <p>KT Cloud 서비스를 이용하시기 전에 아래 제한사항을 확인하시기 바랍니다.
-                        제한사항은 서비스 안정성과 공정한 자원 배분을 위해 설정되어 있습니다.</p>
-                </div>
-
-                <!-- Server Limits -->
-                <div class="content-section">
-                    <div class="section-title">Server 서비스 제한사항</div>
-                    <table class="limit-table">
-                        <thead>
-                            <tr>
-                                <th class="service-name">항목</th>
-                                <th>기본 제한</th>
-                                <th>확장 요청 시</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>VM 최대 생성 수</td>
-                                <td>계정당 50대</td>
-                                <td>요청 시 확장 가능</td>
-                            </tr>
-                            <tr>
-                                <td>vCPU 최대 수</td>
-                                <td>VM당 32 vCore</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Memory 최대 용량</td>
-                                <td>VM당 256GB</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Data Disk 최대 용량</td>
-                                <td>VM당 2TB</td>
-                                <td>추가 디스크 연결 가능</td>
-                            </tr>
-                            <tr>
-                                <td>Public IP 개수</td>
-                                <td>계정당 10개</td>
-                                <td>요청 시 추가 할당</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Database Limits -->
-                <div class="content-section">
-                    <div class="section-title">Database 서비스 제한사항</div>
-                    <table class="limit-table">
-                        <thead>
-                            <tr>
-                                <th class="service-name">항목</th>
-                                <th>기본 제한</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>DB 인스턴스 수</td>
-                                <td>계정당 20개</td>
-                                <td>요청 시 확장</td>
-                            </tr>
-                            <tr>
-                                <td>스토리지 최대 용량</td>
-                                <td>인스턴스당 1TB</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>동시 연결 수</td>
-                                <td>사양에 따라 다름</td>
-                                <td>MySQL 기준 150~1000</td>
-                            </tr>
-                            <tr>
-                                <td>백업 보관 기간</td>
-                                <td>최대 30일</td>
-                                <td>자동 백업 기준</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Storage Limits -->
-                <div class="content-section">
-                    <div class="section-title">Storage/CDN 서비스 제한사항</div>
-                    <table class="limit-table">
-                        <thead>
-                            <tr>
-                                <th class="service-name">항목</th>
-                                <th>기본 제한</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Object Storage 용량</td>
-                                <td>계정당 100TB</td>
-                                <td>요청 시 확장</td>
-                            </tr>
-                            <tr>
-                                <td>단일 파일 용량</td>
-                                <td>5TB</td>
-                                <td>멀티파트 업로드 사용 시</td>
-                            </tr>
-                            <tr>
-                                <td>CDN 도메인 수</td>
-                                <td>계정당 20개</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>CDN 캐시 갱신</td>
-                                <td>1,000 URL/일</td>
-                                <td>Purge 요청 기준</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Network Limits -->
-                <div class="content-section">
-                    <div class="section-title">Network 서비스 제한사항</div>
-                    <table class="limit-table">
-                        <thead>
-                            <tr>
-                                <th class="service-name">항목</th>
-                                <th>기본 제한</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>VPC 개수</td>
-                                <td>계정당 5개</td>
-                                <td>Zone별</td>
-                            </tr>
-                            <tr>
-                                <td>Subnet 개수</td>
-                                <td>VPC당 10개</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Load Balancer</td>
-                                <td>계정당 10개</td>
-                                <td>요청 시 추가</td>
-                            </tr>
-                            <tr>
-                                <td>방화벽 규칙</td>
-                                <td>그룹당 100개</td>
-                                <td>Inbound + Outbound</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Notes -->
-                <div class="notes-box">
-                    <h4><i class="fas fa-exclamation-triangle"></i> 참고사항</h4>
-                    <p>• 위 제한사항은 KT Cloud 정책에 따라 변경될 수 있습니다.</p>
-                    <p>• 추가 자원이 필요한 경우 고객센터(02-418-7766)로 문의해 주세요.</p>
-                    <p>• 일부 서비스는 Zone에 따라 제한사항이 다를 수 있습니다.</p>
-                    <p>• 자세한 내용은 KT Cloud 공식 문서를 참조하시기 바랍니다.</p>
-                </div>
-
-            </div>
-        </main>
-    </div>
+            </main>
+        </div>
+    </main>
 
     <div id="footer-placeholder"></div>
     <script src="components/loader.js?v=3.18"></script>
@@ -1849,6 +1862,7 @@
         }
     </script>
     <script src="js/subpage-canvas.js"></script>
+    <script src="js/navigation.js"></script>
 </body>
 
 </html>

@@ -20,815 +20,819 @@
 
 
     <!-- Hero Section -->
-    <section class="sw-hero" style="background-color: #0f172a; position: relative; overflow: hidden;">
-        <!-- Last Updated: 2025-12-14 14:35:00 (KST) - Red Security Comet -->
+    <main id="main-content">
+        <section class="sw-hero" style="background-color: #0f172a; position: relative; overflow: hidden;">
+            <!-- Last Updated: 2025-12-14 14:35:00 (KST) - Red Security Comet -->
 
-        <canvas id="space-canvas"
-            style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+            <canvas id="space-canvas"
+                style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
 
-        <div class="container" style="position: relative; z-index: 10;">
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
-                보안 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> Security
-            </div>
+            <div class="container" style="position: relative; z-index: 10;">
+                <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                    보안 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> Security
+                </div>
 
-            <h1
-                style="font-size: 48px; font-weight: 900; margin-bottom: 20px; letter-spacing: -1px; color: white; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-                Security</h1>
+                <h1
+                    style="font-size: 48px; font-weight: 900; margin-bottom: 20px; letter-spacing: -1px; color: white; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                    Security</h1>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const version = '251214.1435';
-                    console.log(`%cSecurity Effect Loaded: ${version}`, 'background: #7f1d1d; color: #fca5a5; font-size: 12px; padding: 4px;');
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const version = '251214.1435';
+                        console.log(`%cSecurity Effect Loaded: ${version}`, 'background: #7f1d1d; color: #fca5a5; font-size: 12px; padding: 4px;');
 
-                    const canvas = document.getElementById('space-canvas');
-                    const hero = document.querySelector('.sw-hero');
+                        const canvas = document.getElementById('space-canvas');
+                        const hero = document.querySelector('.sw-hero');
 
-                    if (!canvas || !hero) return;
+                        if (!canvas || !hero) return;
 
-                    const ctx = canvas.getContext('2d');
-                    let width, height;
+                        const ctx = canvas.getContext('2d');
+                        let width, height;
 
-                    // --- Config (Security Red/Gold Theme) ---
-                    const STAR_COUNT = 150;
-                    const COMET_SPEED = 0.28;
-                    const TRAIL_RATE = 10;
-                    const SPARK_RATE = 8;  // Very fiery
+                        // --- Config (Security Red/Gold Theme) ---
+                        const STAR_COUNT = 150;
+                        const COMET_SPEED = 0.28;
+                        const TRAIL_RATE = 10;
+                        const SPARK_RATE = 8;  // Very fiery
 
-                    const stars = [];
-                    const particles = [];
-                    const sparks = [];
+                        const stars = [];
+                        const particles = [];
+                        const sparks = [];
 
-                    const comet = {
-                        x: 0, y: 0,
-                        targetX: 0, targetY: 0,
-                        angle: 0,
-                        autoMode: true
-                    };
+                        const comet = {
+                            x: 0, y: 0,
+                            targetX: 0, targetY: 0,
+                            angle: 0,
+                            autoMode: true
+                        };
 
-                    // --- Classes ---
-                    class Star {
-                        constructor() {
-                            this.reset();
-                            this.y = Math.random() * height;
-                        }
-                        reset() {
-                            this.x = Math.random() * width;
-                            this.y = -10;
-                            this.size = Math.random() * 2 + 0.5;
-                            this.speed = Math.random() * 0.5 + 0.1;
-                            this.alpha = Math.random();
-                            this.twinkleDir = Math.random() > 0.5 ? 0.02 : -0.02;
-                        }
-                        update() {
-                            this.y += this.speed;
-                            this.alpha += this.twinkleDir;
-                            if (this.alpha > 1 || this.alpha < 0.2) this.twinkleDir *= -1;
-                            if (this.y > height) {
-                                this.y = -10;
+                        // --- Classes ---
+                        class Star {
+                            constructor() {
+                                this.reset();
+                                this.y = Math.random() * height;
+                            }
+                            reset() {
                                 this.x = Math.random() * width;
+                                this.y = -10;
+                                this.size = Math.random() * 2 + 0.5;
+                                this.speed = Math.random() * 0.5 + 0.1;
+                                this.alpha = Math.random();
+                                this.twinkleDir = Math.random() > 0.5 ? 0.02 : -0.02;
+                            }
+                            update() {
+                                this.y += this.speed;
+                                this.alpha += this.twinkleDir;
+                                if (this.alpha > 1 || this.alpha < 0.2) this.twinkleDir *= -1;
+                                if (this.y > height) {
+                                    this.y = -10;
+                                    this.x = Math.random() * width;
+                                }
+                            }
+                            draw() {
+                                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
                             }
                         }
-                        draw() {
-                            ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                            ctx.beginPath();
-                            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                            ctx.fill();
+
+                        class TrailParticle {
+                            constructor(x, y, angle) {
+                                this.x = x;
+                                this.y = y;
+                                this.life = 1.0;
+                                this.decay = Math.random() * 0.005 + 0.005;
+
+                                const spread = (Math.random() - 0.5) * 0.4;
+                                const speed = Math.random() * 0.2;
+
+                                this.vx = Math.cos(angle + Math.PI + spread) * speed;
+                                this.vy = Math.sin(angle + Math.PI + spread) * speed;
+
+                                this.size = Math.random() * 4 + 1;
+                                // Red/Gold/Orange Palette
+                                const r = Math.random();
+                                this.color = r > 0.7 ? '#EF4444' : (r > 0.4 ? '#F59E0B' : '#ffffff');
+                            }
+                            update() {
+                                this.x += this.vx;
+                                this.y += this.vy;
+                                this.life -= this.decay;
+                                if (this.size > 0.5) this.size *= 0.98;
+                            }
+                            draw() {
+                                ctx.fillStyle = this.color;
+                                ctx.globalAlpha = this.life * 0.8;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                                ctx.globalAlpha = 1.0;
+                            }
                         }
-                    }
 
-                    class TrailParticle {
-                        constructor(x, y, angle) {
-                            this.x = x;
-                            this.y = y;
-                            this.life = 1.0;
-                            this.decay = Math.random() * 0.005 + 0.005;
+                        class Spark {
+                            constructor(x, y, angle) {
+                                this.x = x;
+                                this.y = y;
+                                this.life = 1.0;
+                                this.decay = Math.random() * 0.04 + 0.02;
 
-                            const spread = (Math.random() - 0.5) * 0.4;
-                            const speed = Math.random() * 0.2;
+                                const ejectAngle = angle + Math.PI + (Math.random() - 0.5) * 2.8;
+                                const speed = Math.random() * 4 + 2;
 
-                            this.vx = Math.cos(angle + Math.PI + spread) * speed;
-                            this.vy = Math.sin(angle + Math.PI + spread) * speed;
+                                this.vx = Math.cos(ejectAngle) * speed;
+                                this.vy = Math.sin(ejectAngle) * speed;
 
-                            this.size = Math.random() * 4 + 1;
-                            // Red/Gold/Orange Palette
-                            const r = Math.random();
-                            this.color = r > 0.7 ? '#EF4444' : (r > 0.4 ? '#F59E0B' : '#ffffff');
+                                this.size = Math.random() * 3 + 1;
+                                this.color = Math.random() > 0.5 ? '#FCA5A5' : '#FEF3C7';
+                            }
+                            update() {
+                                this.x += this.vx;
+                                this.y += this.vy;
+                                this.life -= this.decay;
+                                this.size *= 0.95;
+                            }
+                            draw() {
+                                ctx.fillStyle = this.color;
+                                ctx.globalAlpha = this.life;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                                ctx.globalAlpha = 1.0;
+                            }
                         }
-                        update() {
-                            this.x += this.vx;
-                            this.y += this.vy;
-                            this.life -= this.decay;
-                            if (this.size > 0.5) this.size *= 0.98;
+
+                        function resize() {
+                            const rect = hero.getBoundingClientRect();
+                            width = canvas.width = rect.width;
+                            height = canvas.height = rect.height;
+
+                            stars.length = 0;
+                            for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+
+                            if (comet.x === 0) {
+                                comet.x = -50;
+                                comet.y = height * 0.5;
+                            }
                         }
-                        draw() {
-                            ctx.fillStyle = this.color;
-                            ctx.globalAlpha = this.life * 0.8;
-                            ctx.beginPath();
-                            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0;
-                        }
-                    }
+                        window.addEventListener('resize', resize);
+                        resize();
 
-                    class Spark {
-                        constructor(x, y, angle) {
-                            this.x = x;
-                            this.y = y;
-                            this.life = 1.0;
-                            this.decay = Math.random() * 0.04 + 0.02;
-
-                            const ejectAngle = angle + Math.PI + (Math.random() - 0.5) * 2.8;
-                            const speed = Math.random() * 4 + 2;
-
-                            this.vx = Math.cos(ejectAngle) * speed;
-                            this.vy = Math.sin(ejectAngle) * speed;
-
-                            this.size = Math.random() * 3 + 1;
-                            this.color = Math.random() > 0.5 ? '#FCA5A5' : '#FEF3C7';
-                        }
-                        update() {
-                            this.x += this.vx;
-                            this.y += this.vy;
-                            this.life -= this.decay;
-                            this.size *= 0.95;
-                        }
-                        draw() {
-                            ctx.fillStyle = this.color;
-                            ctx.globalAlpha = this.life;
-                            ctx.beginPath();
-                            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0;
-                        }
-                    }
-
-                    function resize() {
-                        const rect = hero.getBoundingClientRect();
-                        width = canvas.width = rect.width;
-                        height = canvas.height = rect.height;
-
-                        stars.length = 0;
-                        for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
-
-                        if (comet.x === 0) {
-                            comet.x = -50;
-                            comet.y = height * 0.5;
-                        }
-                    }
-                    window.addEventListener('resize', resize);
-                    resize();
-
-                    hero.addEventListener('mousemove', (e) => {
-                        const rect = hero.getBoundingClientRect();
-                        comet.targetX = e.clientX - rect.left;
-                        comet.targetY = e.clientY - rect.top;
-                        comet.autoMode = false;
-                    });
-
-                    hero.addEventListener('mouseleave', () => {
-                        comet.autoMode = true;
-                    });
-
-                    function animate() {
-                        ctx.clearRect(0, 0, width, height);
-
-                        stars.forEach(star => {
-                            star.update();
-                            star.draw();
+                        hero.addEventListener('mousemove', (e) => {
+                            const rect = hero.getBoundingClientRect();
+                            comet.targetX = e.clientX - rect.left;
+                            comet.targetY = e.clientY - rect.top;
+                            comet.autoMode = false;
                         });
 
-                        if (comet.autoMode) {
-                            const t = Date.now() / 1000;
-                            // Move left for variety? Or keep right but different pattern?
-                            // Let's go Right but sharper/jagged for Security feels
-                            const speedPixelPerSec = width * 0.25;
-                            comet.targetX = (t * speedPixelPerSec) % (width + 300) - 150;
+                        hero.addEventListener('mouseleave', () => {
+                            comet.autoMode = true;
+                        });
 
-                            // Y: Square-ish wave / Patrol path
-                            const p = (t % 10) / 10;
-                            // patrol up and down
-                            comet.targetY = (height * 0.5) + Math.sin(t * 2) * (height * 0.2);
+                        function animate() {
+                            ctx.clearRect(0, 0, width, height);
 
-                            if (comet.targetX < -140 && comet.x > width) {
+                            stars.forEach(star => {
+                                star.update();
+                                star.draw();
+                            });
+
+                            if (comet.autoMode) {
+                                const t = Date.now() / 1000;
+                                // Move left for variety? Or keep right but different pattern?
+                                // Let's go Right but sharper/jagged for Security feels
+                                const speedPixelPerSec = width * 0.25;
+                                comet.targetX = (t * speedPixelPerSec) % (width + 300) - 150;
+
+                                // Y: Square-ish wave / Patrol path
+                                const p = (t % 10) / 10;
+                                // patrol up and down
+                                comet.targetY = (height * 0.5) + Math.sin(t * 2) * (height * 0.2);
+
+                                if (comet.targetX < -140 && comet.x > width) {
+                                    comet.x = comet.targetX;
+                                    comet.y = comet.targetY;
+                                }
+                            }
+
+                            const dx = comet.targetX - comet.x;
+                            const dy = comet.targetY - comet.y;
+
+                            if (Math.abs(dx) > width * 0.9) {
                                 comet.x = comet.targetX;
                                 comet.y = comet.targetY;
+                            } else {
+                                comet.x += dx * (comet.autoMode ? 0.2 : COMET_SPEED);
+                                comet.y += dy * (comet.autoMode ? 0.2 : COMET_SPEED);
                             }
+
+                            comet.angle = Math.atan2(dy, dx);
+                            const vTotal = Math.sqrt(dx * dx + dy * dy);
+
+                            const steps = Math.min(20, Math.floor(vTotal * 0.5) + 1);
+                            for (let i = 0; i < TRAIL_RATE; i++) {
+                                const p = Math.random();
+                                const jx = comet.x - (Math.cos(comet.angle) * vTotal * p * 0.5);
+                                const jy = comet.y - (Math.sin(comet.angle) * vTotal * p * 0.5);
+                                particles.push(new TrailParticle(jx, jy, comet.angle));
+                            }
+
+                            const sparkCount = SPARK_RATE + Math.floor(vTotal * 0.2);
+                            for (let i = 0; i < sparkCount; i++) {
+                                sparks.push(new Spark(comet.x, comet.y, comet.angle));
+                            }
+
+                            ctx.globalCompositeOperation = 'screen';
+
+                            for (let i = particles.length - 1; i >= 0; i--) {
+                                particles[i].update();
+                                particles[i].draw();
+                                if (particles[i].life <= 0) particles.splice(i, 1);
+                            }
+
+                            for (let i = sparks.length - 1; i >= 0; i--) {
+                                sparks[i].update();
+                                sparks[i].draw();
+                                if (sparks[i].life <= 0) sparks.splice(i, 1);
+                            }
+
+                            ctx.globalCompositeOperation = 'source-over';
+
+                            // Head Draw (Red/Fire)
+                            ctx.save();
+                            ctx.translate(comet.x, comet.y);
+                            ctx.rotate(comet.angle);
+
+                            const grad = ctx.createRadialGradient(0, 0, 2, 0, 0, 35);
+                            grad.addColorStop(0, 'rgba(255,255,255,1)');
+                            grad.addColorStop(0.2, 'rgba(252, 165, 165, 0.8)'); // Red-ish
+                            grad.addColorStop(0.6, 'rgba(239, 68, 68, 0.4)'); // Deep Red
+                            grad.addColorStop(1, 'rgba(0,0,0,0)');
+                            ctx.fillStyle = grad;
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 35, 0, Math.PI * 2);
+                            ctx.fill();
+
+                            // Shockwave (Red)
+                            ctx.strokeStyle = 'rgba(252, 165, 165, 0.6)';
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 18, -Math.PI / 3, Math.PI / 3);
+                            ctx.stroke();
+
+                            ctx.fillStyle = '#ffffff';
+                            ctx.beginPath();
+                            ctx.ellipse(5, 0, 8, 5, 0, 0, Math.PI * 2);
+                            ctx.fill();
+
+                            ctx.restore();
+
+                            requestAnimationFrame(animate);
                         }
+                        animate();
+                    });
+                </script>
+                <p style="max-width: 800px; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                    기업의 소중한 자산을 지키는 최적의 보안 솔루션
+                </p>
+                <!-- Visible Version Indicator -->
+                <div
+                    style="position: absolute; bottom: 0; left: 0; padding: 20px; font-size: 11px; color: rgba(255,255,255,0.8); font-family: monospace;">
+                    Ver. 251214.1440</div>
+            </div>
+        </section>
 
-                        const dx = comet.targetX - comet.x;
-                        const dy = comet.targetY - comet.y;
+        <!-- Main Content -->
+        <div class="sub-content py-16">
+            <div class="container">
+                <div class="cloud-layout">
+                    <!-- Sidebar -->
+                    <aside class="cloud-sidebar">
+                        <ul class="sidebar-menu">
+                            <li class="active"><a href="javascript:void(0)" onclick="switchSecurityTab('waf', this)"><i
+                                        class="fas fa-shield-alt"></i> WAF (웹방화벽)</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchSecurityTab('waf-pro', this)"><i
+                                        class="fas fa-plus-square"></i> WAF Pro</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchSecurityTab('clean-zone', this)"><i
+                                        class="fas fa-filter"></i> 클린존</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchSecurityTab('private-ca', this)"><i
+                                        class="fas fa-certificate"></i> Private CA</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchSecurityTab('cert-manager', this)"><i
+                                        class="fas fa-lock"></i> SSL 인증서</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchSecurityTab('v3-server', this)"><i
+                                        class="fas fa-laptop-medical"></i> V3 Net Server</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchSecurityTab('dbsafer', this)"><i
+                                        class="fas fa-database"></i> DBSAFER</a></li>
+                        </ul>
+                    </aside>
 
-                        if (Math.abs(dx) > width * 0.9) {
-                            comet.x = comet.targetX;
-                            comet.y = comet.targetY;
-                        } else {
-                            comet.x += dx * (comet.autoMode ? 0.2 : COMET_SPEED);
-                            comet.y += dy * (comet.autoMode ? 0.2 : COMET_SPEED);
-                        }
+                    <!-- Content Area -->
+                    <main class="cloud-content">
 
-                        comet.angle = Math.atan2(dy, dx);
-                        const vTotal = Math.sqrt(dx * dx + dy * dy);
+                        <!-- 1. WAF -->
+                        <div id="waf" class="security-content active">
+                            <div class="content-header">
+                                <h3>WAF (웹방화벽)</h3>
+                                <p>Web Service에 대한 HTTP/HTTPS 공격을 탐지 및 차단하는 지능형 방화벽 서비스</p>
+                            </div>
 
-                        const steps = Math.min(20, Math.floor(vTotal * 0.5) + 1);
-                        for (let i = 0; i < TRAIL_RATE; i++) {
-                            const p = Math.random();
-                            const jx = comet.x - (Math.cos(comet.angle) * vTotal * p * 0.5);
-                            const jy = comet.y - (Math.sin(comet.angle) * vTotal * p * 0.5);
-                            particles.push(new TrailParticle(jx, jy, comet.angle));
-                        }
-
-                        const sparkCount = SPARK_RATE + Math.floor(vTotal * 0.2);
-                        for (let i = 0; i < sparkCount; i++) {
-                            sparks.push(new Spark(comet.x, comet.y, comet.angle));
-                        }
-
-                        ctx.globalCompositeOperation = 'screen';
-
-                        for (let i = particles.length - 1; i >= 0; i--) {
-                            particles[i].update();
-                            particles[i].draw();
-                            if (particles[i].life <= 0) particles.splice(i, 1);
-                        }
-
-                        for (let i = sparks.length - 1; i >= 0; i--) {
-                            sparks[i].update();
-                            sparks[i].draw();
-                            if (sparks[i].life <= 0) sparks.splice(i, 1);
-                        }
-
-                        ctx.globalCompositeOperation = 'source-over';
-
-                        // Head Draw (Red/Fire)
-                        ctx.save();
-                        ctx.translate(comet.x, comet.y);
-                        ctx.rotate(comet.angle);
-
-                        const grad = ctx.createRadialGradient(0, 0, 2, 0, 0, 35);
-                        grad.addColorStop(0, 'rgba(255,255,255,1)');
-                        grad.addColorStop(0.2, 'rgba(252, 165, 165, 0.8)'); // Red-ish
-                        grad.addColorStop(0.6, 'rgba(239, 68, 68, 0.4)'); // Deep Red
-                        grad.addColorStop(1, 'rgba(0,0,0,0)');
-                        ctx.fillStyle = grad;
-                        ctx.beginPath();
-                        ctx.arc(0, 0, 35, 0, Math.PI * 2);
-                        ctx.fill();
-
-                        // Shockwave (Red)
-                        ctx.strokeStyle = 'rgba(252, 165, 165, 0.6)';
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.arc(0, 0, 18, -Math.PI / 3, Math.PI / 3);
-                        ctx.stroke();
-
-                        ctx.fillStyle = '#ffffff';
-                        ctx.beginPath();
-                        ctx.ellipse(5, 0, 8, 5, 0, 0, Math.PI * 2);
-                        ctx.fill();
-
-                        ctx.restore();
-
-                        requestAnimationFrame(animate);
-                    }
-                    animate();
-                });
-            </script>
-            <p style="max-width: 800px; color: rgba(255,255,255,0.8); line-height: 1.6;">
-                기업의 소중한 자산을 지키는 최적의 보안 솔루션
-            </p>
-            <!-- Visible Version Indicator -->
-            <div
-                style="position: absolute; bottom: 0; left: 0; padding: 20px; font-size: 11px; color: rgba(255,255,255,0.8); font-family: monospace;">
-                Ver. 251214.1440</div>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="sub-content py-16">
-        <div class="container">
-            <div class="cloud-layout">
-                <!-- Sidebar -->
-                <aside class="cloud-sidebar">
-                    <ul class="sidebar-menu">
-                        <li class="active"><a href="javascript:void(0)" onclick="switchSecurityTab('waf', this)"><i
-                                    class="fas fa-shield-alt"></i> WAF (웹방화벽)</a></li>
-                        <li><a href="javascript:void(0)" onclick="switchSecurityTab('waf-pro', this)"><i
-                                    class="fas fa-plus-square"></i> WAF Pro</a></li>
-                        <li><a href="javascript:void(0)" onclick="switchSecurityTab('clean-zone', this)"><i
-                                    class="fas fa-filter"></i> 클린존</a></li>
-                        <li><a href="javascript:void(0)" onclick="switchSecurityTab('private-ca', this)"><i
-                                    class="fas fa-certificate"></i> Private CA</a></li>
-                        <li><a href="javascript:void(0)" onclick="switchSecurityTab('cert-manager', this)"><i
-                                    class="fas fa-lock"></i> SSL 인증서</a></li>
-                        <li><a href="javascript:void(0)" onclick="switchSecurityTab('v3-server', this)"><i
-                                    class="fas fa-laptop-medical"></i> V3 Net Server</a></li>
-                        <li><a href="javascript:void(0)" onclick="switchSecurityTab('dbsafer', this)"><i
-                                    class="fas fa-database"></i> DBSAFER</a></li>
-                    </ul>
-                </aside>
-
-                <!-- Content Area -->
-                <main class="cloud-content">
-
-                    <!-- 1. WAF -->
-                    <div id="waf" class="security-content active">
-                        <div class="content-header">
-                            <h3>WAF (웹방화벽)</h3>
-                            <p>Web Service에 대한 HTTP/HTTPS 공격을 탐지 및 차단하는 지능형 방화벽 서비스</p>
-                        </div>
-
-                        <!-- Detail -->
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    WAF(Web Application Firewall)는 웹 애플리케이션 보안 전문 솔루션으로, SQL Injection, Cross-Site
-                                    Scripting(XSS) 등
-                                    웹 공격을 탐지하고 차단합니다. 고성능 웹 방화벽을 통해 지능형 웹 공격으로부터 고객의 웹 서버를 안전하게 보호하세요.
-                                </p>
-                                <div class="key-features-grid">
-                                    <div class="kf-item">
-                                        <i class="fas fa-shield-alt"></i>
-                                        <strong>강력한 보안성</strong>
-                                        <span>OWASP Top 10 취약점에 대한 방어 및 국정원 권고안 준수</span>
+                            <!-- Detail -->
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        WAF(Web Application Firewall)는 웹 애플리케이션 보안 전문 솔루션으로, SQL Injection, Cross-Site
+                                        Scripting(XSS) 등
+                                        웹 공격을 탐지하고 차단합니다. 고성능 웹 방화벽을 통해 지능형 웹 공격으로부터 고객의 웹 서버를 안전하게 보호하세요.
+                                    </p>
+                                    <div class="key-features-grid">
+                                        <div class="kf-item">
+                                            <i class="fas fa-shield-alt"></i>
+                                            <strong>강력한 보안성</strong>
+                                            <span>OWASP Top 10 취약점에 대한 방어 및 국정원 권고안 준수</span>
+                                        </div>
+                                        <div class="kf-item">
+                                            <i class="fas fa-globe"></i>
+                                            <strong>Multi 사이트 지원</strong>
+                                            <span>하나의 WAF 장비로 여러 개의 웹사이트 도메인을 동시에 보호</span>
+                                        </div>
+                                        <div class="kf-item">
+                                            <i class="fas fa-cog"></i>
+                                            <strong>유연한 정책 설정</strong>
+                                            <span>사용자 정의 룰셋 적용 및 예외 처리 지원</span>
+                                        </div>
+                                        <div class="kf-item">
+                                            <i class="fas fa-chart-line"></i>
+                                            <strong>실시간 모니터링</strong>
+                                            <span>공격 로그 실시간 분석 및 직관적인 대시보드 제공</span>
+                                        </div>
                                     </div>
-                                    <div class="kf-item">
-                                        <i class="fas fa-globe"></i>
-                                        <strong>Multi 사이트 지원</strong>
-                                        <span>하나의 WAF 장비로 여러 개의 웹사이트 도메인을 동시에 보호</span>
-                                    </div>
-                                    <div class="kf-item">
-                                        <i class="fas fa-cog"></i>
-                                        <strong>유연한 정책 설정</strong>
-                                        <span>사용자 정의 룰셋 적용 및 예외 처리 지원</span>
-                                    </div>
-                                    <div class="kf-item">
-                                        <i class="fas fa-chart-line"></i>
-                                        <strong>실시간 모니터링</strong>
-                                        <span>공격 로그 실시간 분석 및 직관적인 대시보드 제공</span>
-                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pricing -->
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for WAF -->
+                                <div id="pricing-waf" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(3, 1fr) !important;">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pricing -->
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for WAF -->
-                            <div id="pricing-waf" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(3, 1fr) !important;">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                        <!-- 2. WAF Pro -->
+                        <div id="waf-pro" class="security-content">
+                            <div class="content-header">
+                                <h3>WAF Pro (Managed Security)</h3>
+                                <p>전문 보안 관제 인력이 24/365 운영 및 관리를 대행해주는 프리미엄 WAF 서비스</p>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- 2. WAF Pro -->
-                    <div id="waf-pro" class="security-content">
-                        <div class="content-header">
-                            <h3>WAF Pro (Managed Security)</h3>
-                            <p>전문 보안 관제 인력이 24/365 운영 및 관리를 대행해주는 프리미엄 WAF 서비스</p>
-                        </div>
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        WAF Pro는 보안 전문가가 없는 기업을 위해 WAF 장비의 임대뿐만 아니라 정책 설정, 실시간 관제,
+                                        침해 사고 대응, 월간 보고서 제공 등 웹 보안 운영 전반을 책임지는 매니지드 보안 서비스입니다.
+                                    </p>
+                                    <div class="key-features-grid">
+                                        <div class="kf-item">
+                                            <i class="fas fa-user-shield"></i>
+                                            <strong>전문가 관제</strong>
+                                            <span>보안 전문 인력의 24/365 실시간 모니터링 및 대응</span>
+                                        </div>
+                                        <div class="kf-item">
+                                            <i class="fas fa-file-alt"></i>
+                                            <strong>월간 보고서</strong>
+                                            <span>공격 이력 및 차단 현황에 대한 상세 분석 리포트 제공</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    WAF Pro는 보안 전문가가 없는 기업을 위해 WAF 장비의 임대뿐만 아니라 정책 설정, 실시간 관제,
-                                    침해 사고 대응, 월간 보고서 제공 등 웹 보안 운영 전반을 책임지는 매니지드 보안 서비스입니다.
-                                </p>
-                                <div class="key-features-grid">
-                                    <div class="kf-item">
-                                        <i class="fas fa-user-shield"></i>
-                                        <strong>전문가 관제</strong>
-                                        <span>보안 전문 인력의 24/365 실시간 모니터링 및 대응</span>
-                                    </div>
-                                    <div class="kf-item">
-                                        <i class="fas fa-file-alt"></i>
-                                        <strong>월간 보고서</strong>
-                                        <span>공격 이력 및 차단 현황에 대한 상세 분석 리포트 제공</span>
-                                    </div>
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for WAF Pro -->
+                                <div id="pricing-waf-pro" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(2, 1fr) !important;">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for WAF Pro -->
-                            <div id="pricing-waf-pro" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(2, 1fr) !important;">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                        <!-- 3. Clean Zone -->
+                        <div id="clean-zone" class="security-content">
+                            <div class="content-header">
+                                <h3>클린존 (Anti-DDoS)</h3>
+                                <p>대규모 DDoS 공격으로부터 고객의 서비스를 보호하는 대용량 트래픽 정화 서비스</p>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- 3. Clean Zone -->
-                    <div id="clean-zone" class="security-content">
-                        <div class="content-header">
-                            <h3>클린존 (Anti-DDoS)</h3>
-                            <p>대규모 DDoS 공격으로부터 고객의 서비스를 보호하는 대용량 트래픽 정화 서비스</p>
-                        </div>
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        HUMECCA 백본망 상단에 위치한 대용량 Anti-DDoS 장비를 통해 비정상적인 트래픽(Flooding, Spoofing 등)을
+                                        사전에 탐지 및 차단하고, 깨끗한 정상 트래픽만 고객 서버로 전송하여 서비스 가용성을 보장합니다.
+                                    </p>
+                                    <div class="key-features-grid">
+                                        <div class="kf-item">
+                                            <i class="fas fa-filter"></i>
+                                            <strong>강력한 필터링</strong>
+                                            <span>대용량 공격 트래픽도 거뜬히 방어하는 고성능 정화 시스템</span>
+                                        </div>
+                                        <div class="kf-item">
+                                            <i class="fas fa-network-wired"></i>
+                                            <strong>서비스 연속성</strong>
+                                            <span>공격 발생 시에도 끊김 없는 서비스 운영 보장</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    HUMECCA 백본망 상단에 위치한 대용량 Anti-DDoS 장비를 통해 비정상적인 트래픽(Flooding, Spoofing 등)을
-                                    사전에 탐지 및 차단하고, 깨끗한 정상 트래픽만 고객 서버로 전송하여 서비스 가용성을 보장합니다.
-                                </p>
-                                <div class="key-features-grid">
-                                    <div class="kf-item">
-                                        <i class="fas fa-filter"></i>
-                                        <strong>강력한 필터링</strong>
-                                        <span>대용량 공격 트래픽도 거뜬히 방어하는 고성능 정화 시스템</span>
-                                    </div>
-                                    <div class="kf-item">
-                                        <i class="fas fa-network-wired"></i>
-                                        <strong>서비스 연속성</strong>
-                                        <span>공격 발생 시에도 끊김 없는 서비스 운영 보장</span>
-                                    </div>
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for Clean Zone -->
+                                <div id="pricing-cleanzone" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(2, 1fr) !important;">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for Clean Zone -->
-                            <div id="pricing-cleanzone" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(2, 1fr) !important;">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                        <!-- 4. Private CA -->
+                        <div id="private-ca" class="security-content">
+                            <div class="content-header">
+                                <h3>Private CA</h3>
+                                <p>사설 인증서(Private Certificate)를 쉽고 안전하게 발급 및 관리하는 서비스</p>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- 4. Private CA -->
-                    <div id="private-ca" class="security-content">
-                        <div class="content-header">
-                            <h3>Private CA</h3>
-                            <p>사설 인증서(Private Certificate)를 쉽고 안전하게 발급 및 관리하는 서비스</p>
-                        </div>
-
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    복잡한 PKI(Public Key Infrastructure) 인프라를 직접 구축할 필요 없이, 클라우드 환경에서
-                                    나만의 사설 CA(Certificate Authority)를 생성하고 운영할 수 있습니다.
-                                    내부 시스템 간 통신 암호화, IoT 기기 인증 등에 필요한 사설 인증서를 안전하게 발급하세요.
-                                </p>
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        복잡한 PKI(Public Key Infrastructure) 인프라를 직접 구축할 필요 없이, 클라우드 환경에서
+                                        나만의 사설 CA(Certificate Authority)를 생성하고 운영할 수 있습니다.
+                                        내부 시스템 간 통신 암호화, IoT 기기 인증 등에 필요한 사설 인증서를 안전하게 발급하세요.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for Private CA -->
-                            <div id="pricing-private-ca" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(2, 1fr) !important;">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. Certificate Manager -->
-                    <div id="cert-manager" class="security-content">
-                        <div class="content-header">
-                            <h3>SSL 인증서 (Certificate Manager)</h3>
-                            <p>공인 SSL 보안 인증서를 간편하게 구매하고 수명 주기를 관리하는 서비스</p>
-                        </div>
-
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    웹 브라우저와 웹 서버 간 암호화 통신을 위한 글로벌 공인 SSL 인증서를 저렴하게 제공합니다.
-                                    Certificate Manager 서비스를 통해 인증서의 구매부터 발급, 갱신, 관리까지의 전체 라이프사이클을 손쉽게 관리할 수 있습니다.
-                                </p>
-                                <p style="font-size:14px; color:#666;">* Certificate Manager 서비스 자체 이용료는 무료입니다.</p>
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for Private CA -->
+                                <div id="pricing-private-ca" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(2, 1fr) !important;">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for SSL -->
-                            <div id="pricing-ssl" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(3, 1fr) !important;">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                        <!-- 5. Certificate Manager -->
+                        <div id="cert-manager" class="security-content">
+                            <div class="content-header">
+                                <h3>SSL 인증서 (Certificate Manager)</h3>
+                                <p>공인 SSL 보안 인증서를 간편하게 구매하고 수명 주기를 관리하는 서비스</p>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- 6. V3 Net Server -->
-                    <div id="v3-server" class="security-content">
-                        <div class="content-header">
-                            <h3>V3 Net Server</h3>
-                            <p>국내 No.1 안티바이러스 솔루션으로 서버 내 악성코드를 실시간 탐지 및 치료</p>
-                        </div>
-
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    AhnLab V3 Net은 서버 전용 백신 프로그램으로, 바이러스, 웜, 트로이목마 등 다양한 악성코드를 실시간으로
-                                    진단하고 치료하여 서버의 안정성을 확보합니다. 최소한의 리소스 사용으로 서버 성능에 영향을 주지 않으면서 강력한 보안을 제공합니다.
-                                </p>
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        웹 브라우저와 웹 서버 간 암호화 통신을 위한 글로벌 공인 SSL 인증서를 저렴하게 제공합니다.
+                                        Certificate Manager 서비스를 통해 인증서의 구매부터 발급, 갱신, 관리까지의 전체 라이프사이클을 손쉽게 관리할 수 있습니다.
+                                    </p>
+                                    <p style="font-size:14px; color:#666;">* Certificate Manager 서비스 자체 이용료는 무료입니다.</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for V3 -->
-                            <div id="pricing-v3" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(1, 1fr) !important; max-width: 500px">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 7. DBSAFER -->
-                    <div id="dbsafer" class="security-content">
-                        <div class="content-header">
-                            <h3>DBSAFER (접근제어)</h3>
-                            <p>데이터베이스 및 시스템에 대한 접근 권한을 통제하고 로그를 기록하는 통합 보안 솔루션</p>
-                        </div>
-
-                        <div class="section-container">
-                            <div class="feature-box">
-                                <h4>서비스 개요</h4>
-                                <p>
-                                    DBSAFER는 DB 접근 제어(DBSAFER DB)와 시스템 접근 제어(DBSAFER AM)를 통합한 보안 솔루션입니다.
-                                    사용자별 권한 관리, 접근 통제, 명령어 실행 통제, 감사 로그 위변조 방지 등의 기능을 통해
-                                    개인정보보호법 등 IT 컴플라이언스를 완벽하게 지원합니다.
-                                </p>
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for SSL -->
+                                <div id="pricing-ssl" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(3, 1fr) !important;">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="section-container mt-50">
-                            <!-- Pricing Grid for DBSAFER -->
-                            <div id="pricing-dbsafer" class="pricing-grid-custom compact-pricing"
-                                style="grid-template-columns: repeat(2, 1fr) !important;">
-                                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
-                                        class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                        <!-- 6. V3 Net Server -->
+                        <div id="v3-server" class="security-content">
+                            <div class="content-header">
+                                <h3>V3 Net Server</h3>
+                                <p>국내 No.1 안티바이러스 솔루션으로 서버 내 악성코드를 실시간 탐지 및 치료</p>
+                            </div>
+
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        AhnLab V3 Net은 서버 전용 백신 프로그램으로, 바이러스, 웜, 트로이목마 등 다양한 악성코드를 실시간으로
+                                        진단하고 치료하여 서버의 안정성을 확보합니다. 최소한의 리소스 사용으로 서버 성능에 영향을 주지 않으면서 강력한 보안을 제공합니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for V3 -->
+                                <div id="pricing-v3" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(1, 1fr) !important; max-width: 500px">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </main>
+                        <!-- 7. DBSAFER -->
+                        <div id="dbsafer" class="security-content">
+                            <div class="content-header">
+                                <h3>DBSAFER (접근제어)</h3>
+                                <p>데이터베이스 및 시스템에 대한 접근 권한을 통제하고 로그를 기록하는 통합 보안 솔루션</p>
+                            </div>
+
+                            <div class="section-container">
+                                <div class="feature-box">
+                                    <h4>서비스 개요</h4>
+                                    <p>
+                                        DBSAFER는 DB 접근 제어(DBSAFER DB)와 시스템 접근 제어(DBSAFER AM)를 통합한 보안 솔루션입니다.
+                                        사용자별 권한 관리, 접근 통제, 명령어 실행 통제, 감사 로그 위변조 방지 등의 기능을 통해
+                                        개인정보보호법 등 IT 컴플라이언스를 완벽하게 지원합니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="section-container mt-50">
+                                <!-- Pricing Grid for DBSAFER -->
+                                <div id="pricing-dbsafer" class="pricing-grid-custom compact-pricing"
+                                    style="grid-template-columns: repeat(2, 1fr) !important;">
+                                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;"><i
+                                            class="fas fa-spinner fa-spin"></i> 로딩 중...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+                </div>
             </div>
 
-            <style>
-                /* Security Page Styles */
-                .content-header h3 {
-                    font-size: 28px;
-                    font-weight: 700;
-                    color: #111827;
-                    margin-bottom: 12px;
-                }
+    </main>
 
-                .content-header p {
-                    color: #4b5563;
-                    font-size: 16px;
-                    margin-bottom: 40px;
-                    border-bottom: 1px solid #e5e7eb;
-                    padding-bottom: 20px;
-                }
+    <style>
+        /* Security Page Styles */
+        .content-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+        }
 
-                /* Add-on Menu Styles */
-                .dropdown-item.icon-left {
-                    display: flex;
-                    align-items: flex-start;
-                    padding: 12px 20px;
-                    border-bottom: 1px solid #f9fafb;
-                    text-decoration: none;
-                }
+        .content-header p {
+            color: #4b5563;
+            font-size: 16px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 20px;
+        }
 
-                .dropdown-item.icon-left:last-child {
-                    border-bottom: none;
-                }
+        /* Add-on Menu Styles */
+        .dropdown-item.icon-left {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f9fafb;
+            text-decoration: none;
+        }
 
-                .dropdown-item.icon-left:hover {
-                    background-color: #fef2f2;
-                }
+        .dropdown-item.icon-left:last-child {
+            border-bottom: none;
+        }
 
-                .dropdown-item.icon-left .icon-box {
-                    width: 40px;
-                    height: 40px;
-                    background-color: #fee2e2;
-                    color: #dc2626;
-                    border-radius: 8px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-right: 15px;
-                    flex-shrink: 0;
-                    font-size: 18px;
-                }
+        .dropdown-item.icon-left:hover {
+            background-color: #fef2f2;
+        }
 
-                .dropdown-item.icon-left .text-box {
-                    display: flex;
-                    flex-direction: column;
-                }
+        .dropdown-item.icon-left .icon-box {
+            width: 40px;
+            height: 40px;
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
 
-                .dropdown-item.icon-left .title {
-                    font-weight: 700;
-                    color: #1f2937;
-                    font-size: 15px;
-                    margin-bottom: 2px;
-                    display: block;
-                }
+        .dropdown-item.icon-left .text-box {
+            display: flex;
+            flex-direction: column;
+        }
 
-                .dropdown-item.icon-left .desc {
-                    font-size: 13px;
-                    color: #6b7280;
-                    line-height: 1.4;
-                    display: block;
-                }
+        .dropdown-item.icon-left .title {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+            margin-bottom: 2px;
+            display: block;
+        }
 
-                /* Section Spacing */
-                .section-container {
-                    margin-bottom: 30px;
-                }
+        .dropdown-item.icon-left .desc {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.4;
+            display: block;
+        }
 
-                .mt-50 {
-                    margin-top: 50px;
-                }
+        /* Section Spacing */
+        .section-container {
+            margin-bottom: 30px;
+        }
 
-                /* Feature Box */
-                .feature-box h4,
-                .pricing-box h4 {
-                    font-size: 20px;
-                    font-weight: 700;
-                    color: #1f2937;
-                    margin-bottom: 20px;
-                    display: flex;
-                    align-items: center;
-                }
+        .mt-50 {
+            margin-top: 50px;
+        }
 
-                .feature-box h4::before,
-                .pricing-box h4::before {
-                    content: '';
-                    display: block;
-                    width: 4px;
-                    height: 18px;
-                    background: #dc2626;
-                    margin-right: 10px;
-                }
+        /* Feature Box */
+        .feature-box h4,
+        .pricing-box h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
 
-                .feature-box p {
-                    font-size: 16px;
-                    line-height: 1.7;
-                    color: #4b5563;
-                    margin-bottom: 30px;
-                }
+        .feature-box h4::before,
+        .pricing-box h4::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 18px;
+            background: #dc2626;
+            margin-right: 10px;
+        }
 
-                .key-features-grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 20px;
-                    margin-top: 30px;
-                }
+        .feature-box p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #4b5563;
+            margin-bottom: 30px;
+        }
 
-                .kf-item {
-                    background: #f9fafb;
-                    padding: 24px;
-                    border-radius: 12px;
-                    border: 1px solid #f3f4f6;
-                    transition: transform 0.2s;
-                }
+        .key-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-                .kf-item:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                }
+        .kf-item {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #f3f4f6;
+            transition: transform 0.2s;
+        }
 
-                .kf-item i {
-                    font-size: 24px;
-                    color: #dc2626;
-                    margin-bottom: 12px;
-                    display: block;
-                }
+        .kf-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
-                .kf-item strong {
-                    font-size: 18px;
-                    font-weight: 700;
-                    color: #1f2937;
-                    display: block;
-                    margin-bottom: 8px;
-                }
+        .kf-item i {
+            font-size: 24px;
+            color: #dc2626;
+            margin-bottom: 12px;
+            display: block;
+        }
 
-                .kf-item span {
-                    font-size: 14px;
-                    color: #6b7280;
-                }
+        .kf-item strong {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            display: block;
+            margin-bottom: 8px;
+        }
 
-                /* Pricing Table */
-                .price-unit {
-                    text-align: right;
-                    font-size: 13px;
-                    color: #6b7280;
-                    margin-bottom: 10px;
-                }
+        .kf-item span {
+            font-size: 14px;
+            color: #6b7280;
+        }
 
-                .pricing-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    border-top: 2px solid #1f2937;
-                    margin-bottom: 20px;
-                    background: white;
-                }
+        /* Pricing Table */
+        .price-unit {
+            text-align: right;
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
 
-                .pricing-table th {
-                    background: #f8fafc;
-                    padding: 16px;
-                    border-bottom: 1px solid #e2e8f0;
-                    font-weight: 700;
-                    color: #1f2937;
-                    text-align: center;
-                }
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 2px solid #1f2937;
+            margin-bottom: 20px;
+            background: white;
+        }
 
-                .pricing-table td {
-                    padding: 16px;
-                    border-bottom: 1px solid #e2e8f0;
-                    text-align: center;
-                    color: #4b5563;
-                    font-size: 15px;
-                }
+        .pricing-table th {
+            background: #f8fafc;
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+        }
 
-                .pricing-table td.fw-bold {
-                    font-weight: 600;
-                    color: #1f2937;
-                }
+        .pricing-table td {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+            color: #4b5563;
+            font-size: 15px;
+        }
 
-                .pricing-table td.price-text {
-                    color: #dc2626;
-                    font-weight: 700;
-                    font-size: 16px;
-                }
+        .pricing-table td.fw-bold {
+            font-weight: 600;
+            color: #1f2937;
+        }
 
-                .d-list {
-                    padding-left: 20px;
-                    margin: 0;
-                }
+        .pricing-table td.price-text {
+            color: #dc2626;
+            font-weight: 700;
+            font-size: 16px;
+        }
 
-                .d-list li {
-                    font-size: 14px;
-                    color: #6b7280;
-                    margin-bottom: 8px;
-                    line-height: 1.5;
-                    list-style-type: disc;
-                }
+        .d-list {
+            padding-left: 20px;
+            margin: 0;
+        }
 
-                @media (max-width: 768px) {
-                    .key-features-grid {
-                        grid-template-columns: 1fr;
-                    }
-                }
-            </style>
+        .d-list li {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            list-style-type: disc;
+        }
 
-            <script>
-                function switchSecurityTab(id, el) {
-                    // Sidebar active state
-                    document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
-                    if (el.closest('li')) el.closest('li').classList.add('active');
+        @media (max-width: 768px) {
+            .key-features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 
-                    // Hide all content sections
-                    document.querySelectorAll('.security-content').forEach(div => div.style.display = 'none');
+    <script>
+        function switchSecurityTab(id, el) {
+            // Sidebar active state
+            document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
+            if (el.closest('li')) el.closest('li').classList.add('active');
 
-                    // Show target content
-                    const target = document.getElementById(id);
-                    if (target) {
-                        target.style.display = 'block';
-                        window.scrollTo(0, 0); // Scroll to top when switching
-                    }
-                }
+            // Hide all content sections
+            document.querySelectorAll('.security-content').forEach(div => div.style.display = 'none');
 
-                // Default Tab Open (Tab from URL hash if present)
-                document.addEventListener('DOMContentLoaded', () => {
-                    const hash = window.location.hash.substring(1); // e.g., 'waf-pro'
-                    if (hash) {
-                        const link = document.querySelector(`.sidebar-menu a[onclick*="${hash}"]`);
-                        if (link) link.click();
-                    } else {
-                        // Default to first tab if no hash
-                        const firstLink = document.querySelector('.sidebar-menu li.active a');
-                        if (firstLink) firstLink.click();
-                    }
-                });
+            // Show target content
+            const target = document.getElementById(id);
+            if (target) {
+                target.style.display = 'block';
+                window.scrollTo(0, 0); // Scroll to top when switching
+            }
+        }
 
-                // Dropdown Handling Fix
-                const navItems = document.querySelectorAll('.nav-item');
-                navItems.forEach(item => {
-                    const menu = item.querySelector('.dropdown-menu');
-                    if (!menu) return;
+        // Default Tab Open (Tab from URL hash if present)
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1); // e.g., 'waf-pro'
+            if (hash) {
+                const link = document.querySelector(`.sidebar-menu a[onclick*="${hash}"]`);
+                if (link) link.click();
+            } else {
+                // Default to first tab if no hash
+                const firstLink = document.querySelector('.sidebar-menu li.active a');
+                if (firstLink) firstLink.click();
+            }
+        });
 
-                    item.addEventListener('mouseenter', () => {
-                        menu.style.display = 'block';
-                        setTimeout(() => menu.style.opacity = '1', 10);
-                    });
-                    item.addEventListener('mouseleave', () => {
-                        menu.style.opacity = '0';
-                        setTimeout(() => menu.style.display = 'none', 300);
-                    });
-                });
-            </script>
-        </div>
+        // Dropdown Handling Fix
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const menu = item.querySelector('.dropdown-menu');
+            if (!menu) return;
+
+            item.addEventListener('mouseenter', () => {
+                menu.style.display = 'block';
+                setTimeout(() => menu.style.opacity = '1', 10);
+            });
+            item.addEventListener('mouseleave', () => {
+                menu.style.opacity = '0';
+                setTimeout(() => menu.style.display = 'none', 300);
+            });
+        });
+    </script>
+    </div>
     </main>
 
     <!-- Footer -->
@@ -854,6 +858,7 @@
     </script>
 
 
+    <script src="js/navigation.js"></script>
 </body>
 
 </html>

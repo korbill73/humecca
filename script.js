@@ -3,31 +3,12 @@
  * Optimized for performance and stability
  */
 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("HUMECCA Scripts Loaded");
-
-    // ===================================
-    // Mobile Menu Toggle
-    // ===================================
-
-
-    // ===================================
-    // Contact Form (Simple Alert)
-    // ===================================
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            alert('상담 신청이 접수되었습니다. 담당자가 확인 후 빠르게 연락드리겠습니다.');
-            contactForm.reset();
-        });
-    }
-
-    // ===================================
-    // Hero Slider Logic (Robust)
-    // ===================================
+// Global Initialization Functions
+window.initHeroSlider = function () {
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.hero-dot');
+
+    console.log("Checking for Hero Slider...");
 
     // Only run if slider exists
     if (slides.length > 0) {
@@ -96,20 +77,23 @@ document.addEventListener('DOMContentLoaded', function () {
         // Event Listeners: Dot Clicks
         if (dots.length > 0) {
             dots.forEach((dot, index) => {
-                dot.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent jump
+                // Remove old listeners to prevent duplicates (cloning element trick if needed, but simple add is risky if run multiple times without cleanup. 
+                // For simplicity in this context, we assume clean DOM or idempotency via closures, but safer to re-clone or just add. 
+                // Since we replace DOM, new elements don't have listeners. Perfect.)
+                dot.onclick = (e) => {
+                    e.preventDefault();
                     stopSlideTimer();
                     showSlide(index);
                     startSlideTimer();
-                });
+                };
             });
         }
 
         // Event Listeners: Pause on Hover
         const heroContent = document.querySelector('.hero-content');
         if (heroContent) {
-            heroContent.addEventListener('mouseenter', stopSlideTimer);
-            heroContent.addEventListener('mouseleave', startSlideTimer);
+            heroContent.onmouseenter = stopSlideTimer;
+            heroContent.onmouseleave = startSlideTimer;
         }
 
         // Event Listeners: Arrows
@@ -117,122 +101,137 @@ document.addEventListener('DOMContentLoaded', function () {
         const nextBtn = document.querySelector('.hero-arrow.next');
 
         if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
+            prevBtn.onclick = (e) => {
                 e.preventDefault();
                 stopSlideTimer();
                 showSlide(currentSlide - 1);
                 startSlideTimer();
-            });
+            };
         }
         if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
+            nextBtn.onclick = (e) => {
                 e.preventDefault();
                 stopSlideTimer();
                 nextSlide();
                 startSlideTimer();
-            });
+            };
         }
 
-        // Initialize (Show first slide explicitly to set dots)
-        // Note: HTML usually has first slide active, but JS needs to sync dots.
-        // We'll trust HTML 'active' state for LCP, but run showSlide(0) to ensure dots sync IF not set.
-        // Actually, preventing restart of animation is better.
-        // We'll just start timer. 
-        // Sync dots for initial state:
+        // Initialize
         showSlide(0);
         startSlideTimer();
     }
-    // ===================================
-    // Customer Logos Grid (Supabase Integration)
-    // ===================================
-    const logoGrid = document.getElementById('customer-logos-grid');
+};
 
-    async function loadCustomerLogos() {
-        if (!logoGrid) return;
+window.loadCustomerLogos = async function () {
+    const grid = document.getElementById('customer-logos-grid');
+    if (!grid) return;
 
-        // Wait for Supabase to be available
-        if (typeof supabase === 'undefined' && window.sb) {
-            window.supabase = window.sb; // Fallback
-        }
-
-        if (typeof supabase === 'undefined') {
-            console.warn('⚠️ Supabase client not found. Skipping customer logo fetch.');
-            return;
-        }
-
-        try {
-            console.log('🔄 Fetching customer logos from DB...');
+    try {
+        console.log("Loading Customer Logos...");
+        let customers = [];
+        if (typeof supabase !== 'undefined') {
             const { data, error } = await supabase
                 .from('customers')
                 .select('*')
-                .order('created_at', { ascending: false })
-                .limit(15);
-
-            if (error) throw error;
-
-            if (data && data.length > 0) {
-                logoGrid.innerHTML = ''; // Clear existing content
-
-                data.forEach(customer => {
-                    const logoCard = document.createElement('div');
-                    logoCard.className = 'logo-card';
-                    // Inline styles removed to rely on styles.css for premium hover effects
-
-
-                    // Check for logo_url or logo_path
-                    const logoUrl = customer.logo_url || customer.logo_path || customer.logo;
-
-                    if (logoUrl) {
-                        const img = document.createElement('img');
-                        img.src = logoUrl;
-                        img.alt = customer.name;
-                        img.style.maxHeight = '40px';
-                        img.style.maxWidth = '80%';
-                        img.style.objectFit = 'contain';
-
-                        // Error fallback to text
-                        img.onerror = function () {
-                            this.style.display = 'none';
-                            const text = document.createElement('span');
-                            text.textContent = customer.name;
-                            text.style.cssText = 'color: #64748b; font-weight: 600; font-size: 14px; text-align: center; padding: 0 10px; word-break: keep-all;';
-                            logoCard.appendChild(text);
-                        };
-
-                        logoCard.appendChild(img);
-                    } else {
-                        const text = document.createElement('span');
-                        text.textContent = customer.name;
-                        text.style.cssText = `
-                            color: #64748b;
-                            font-weight: 600;
-                            font-size: 14px;
-                            text-align: center;
-                            padding: 0 10px;
-                            word-break: keep-all;
-                        `;
-                        logoCard.appendChild(text);
-                    }
-                    logoGrid.appendChild(logoCard);
-                });
-                console.log(`✅ Loaded ${data.length} customers from DB.`);
-            } else {
-                console.log('ℹ️ No customers found in DB.');
-                logoGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #94a3b8;">등록된 고객사가 없습니다.</p>';
+                .order('created_at', { ascending: false });
+            if (!error && data) {
+                customers = data;
             }
-
-        } catch (err) {
-            console.error('❌ Failed to fetch customers:', err);
-            // Optional: fallback to hardcoded list if DB fails? 
-            // For now, just log error as requested.
         }
+
+        if (customers.length === 0) {
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #9ca3af;">등록된 고객사가 없습니다.</p>';
+            return;
+        }
+
+        grid.innerHTML = customers.map((customer, index) => `
+            <div class="logo-card" style="
+                background: rgba(255,255,255,0.95);
+                backdrop-filter: blur(8px);
+                padding: 20px 16px;
+                border-radius: 12px;
+                border: 1px solid rgba(226,232,240,0.8);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 90px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+                animation: fadeInUp 0.6s ease-out ${index * 0.08}s backwards;
+            ">
+                <div style="
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                    transform: translateX(-100%);
+                    transition: transform 0.6s;
+                    pointer-events: none;
+                " class="shine-overlay"></div>
+                <div style="
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center; 
+                    min-height: 52px;
+                    position: relative;
+                    z-index: 1;
+                ">
+                    ${customer.logo_url ?
+                `<img src="${customer.logo_url}" alt="${customer.name}" style="max-width: 100%; max-height: 52px; object-fit: contain;">` :
+                `<span style="color: #475569; font-size: 14px; font-weight: 700; text-align: center;">${customer.name}</span>`
+            }
+                </div>
+            </div>
+        `).join('');
+
+        // Add hover effects
+        setTimeout(() => {
+            const logoCards = document.querySelectorAll('.logo-card');
+            logoCards.forEach(card => {
+                card.onmouseenter = function () {
+                    const shineOverlay = this.querySelector('.shine-overlay');
+                    if (shineOverlay) shineOverlay.style.transform = 'translateX(100%)';
+                    this.style.background = 'rgba(255,245,245,1)';
+                    this.style.boxShadow = '0 12px 40px rgba(239,68,68,0.15)';
+                    this.style.borderColor = 'rgba(239,68,68,0.3)';
+                };
+                card.onmouseleave = function () {
+                    const shineOverlay = this.querySelector('.shine-overlay');
+                    if (shineOverlay) shineOverlay.style.transform = 'translateX(-100%)';
+                    this.style.background = 'rgba(255,255,255,0.95)';
+                    this.style.boxShadow = '0 4px 20px rgba(0,0,0,0.04)';
+                    this.style.borderColor = 'rgba(226,232,240,0.8)';
+                };
+            });
+        }, 100);
+
+    } catch (error) {
+        console.error('Failed to load customer logos:', error);
     }
+};
 
-    // specific call
-    loadCustomerLogos();
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("HUMECCA Scripts Loaded");
+
+    // Initialize Components
+    window.initHeroSlider();
+    window.loadCustomerLogos();
+
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('상담 신청이 접수되었습니다. 담당자가 확인 후 빠르게 연락드리겠습니다.');
+            contactForm.reset();
+        });
+    }
 });
-
-// ===================================
-// Console Signature
-// ===================================
-console.log('%c HUMECCA ', 'background: #1a237e; color: white; padding: 4px 8px; border-radius: 4px;');
