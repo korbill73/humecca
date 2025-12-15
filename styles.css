@@ -3616,6 +3616,31 @@ main.sub-content {
     [class*="plan"] {
         padding: 24px 20px !important;
     }
+
+    /* 서브 페이지 Hero 섹션 모바일 최적화 */
+    .sw-hero {
+        min-height: 300px !important;
+        padding: 40px 0 !important;
+    }
+
+    .sw-hero .container {
+        padding: 0 20px !important;
+    }
+
+    .sw-hero h1 {
+        font-size: 32px !important;
+        line-height: 1.2 !important;
+    }
+
+    .sw-hero p {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+    }
+
+    /* 브레드크럼 폰트 크기 조정 */
+    .sw-hero div[style*="font-size: 13px"] {
+        font-size: 12px !important;
+    }
 }
 
 /* Small Mobile (480px 이하) */
