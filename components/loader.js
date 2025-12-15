@@ -5,7 +5,7 @@
 
 // [Configuration] Current Application Version
 // Update this value manually whenever a deployment/update occurs
-const APP_VERSION = 'v.20251215.1551';
+const APP_VERSION = 'v.20251215.1602';
 
 
 
@@ -183,42 +183,87 @@ function initHeaderScripts() {
 
     navItems.forEach(item => {
         const menu = item.querySelector('.dropdown-menu');
+        const navLink = item.querySelector('.nav-link');
 
+        // Desktop: Mouse hover events
         // When mouse enters a nav-item
         item.addEventListener('mouseenter', () => {
-            // First, force hide ALL dropdowns immediately
-            hideAllDropdowns();
+            // Only apply desktop hover behavior on larger screens
+            if (window.innerWidth > 768) {
+                // First, force hide ALL dropdowns immediately
+                hideAllDropdowns();
 
-            // Then reset this item's dropdown to let CSS show it
-            if (menu) {
-                // Small delay to ensure clean transition
-                setTimeout(() => {
-                    resetDropdownStyles(menu);
-                }, 10);
+                // Then reset this item's dropdown to let CSS show it
+                if (menu) {
+                    // Small delay to ensure clean transition
+                    setTimeout(() => {
+                        resetDropdownStyles(menu);
+                    }, 10);
+                }
             }
         });
 
         // When mouse leaves a nav-item
         item.addEventListener('mouseleave', () => {
-            if (menu) {
-                // Force hide immediately
-                menu.style.opacity = '0';
-                menu.style.visibility = 'hidden';
-                menu.style.pointerEvents = 'none';
+            // Only apply desktop hover behavior on larger screens
+            if (window.innerWidth > 768) {
+                if (menu) {
+                    // Force hide immediately
+                    menu.style.opacity = '0';
+                    menu.style.visibility = 'hidden';
+                    menu.style.pointerEvents = 'none';
 
-                // Reset after animation completes
-                setTimeout(() => {
-                    resetDropdownStyles(menu);
-                }, 200);
+                    // Reset after animation completes
+                    setTimeout(() => {
+                        resetDropdownStyles(menu);
+                    }, 200);
+                }
             }
         });
+
+        // Mobile: Click/Touch events for nav links with dropdowns
+        if (navLink && menu) {
+            navLink.addEventListener('click', (e) => {
+                // Only intercept clicks on mobile
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+
+                    // Toggle mobile-active class on this nav-item
+                    const isActive = item.classList.contains('mobile-active');
+
+                    // Close all other dropdowns
+                    navItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('mobile-active');
+                        }
+                    });
+
+                    // Toggle current dropdown
+                    item.classList.toggle('mobile-active');
+                }
+            });
+        }
 
         // When clicking a link inside dropdown
         if (menu) {
             const links = menu.querySelectorAll('a.dropdown-item');
             links.forEach(link => {
                 link.addEventListener('click', () => {
-                    hideAllDropdowns();
+                    // Close menu on mobile after clicking a dropdown item
+                    if (window.innerWidth <= 768) {
+                        // Close the mobile menu
+                        if (nav) nav.classList.remove('active');
+                        if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+
+                        // Remove all mobile-active classes
+                        navItems.forEach(item => {
+                            item.classList.remove('mobile-active');
+                        });
+                    } else {
+                        // Desktop: just hide dropdowns
+                        hideAllDropdowns();
+                    }
                 });
             });
         }
@@ -226,6 +271,7 @@ function initHeaderScripts() {
 
     console.log('Header scripts initialized with improved menu control');
 }
+
 
 
 

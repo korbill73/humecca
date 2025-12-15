@@ -3323,3 +3323,283 @@ main.sub-content {
 .logo-card:hover span {
     color: #EF4444 !important;
 }
+
+/* ========================================== */
+/* 모바일 반응형 스타일 */
+/* ========================================== */
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    /* 데스크톱에서는 숨김 */
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #334155;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 10000;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    /* iOS tap 하이라이트 제거 */
+}
+
+.mobile-menu-btn:hover {
+    color: var(--primary-red);
+}
+
+.mobile-menu-btn:active {
+    color: var(--primary-red);
+    transform: scale(0.95);
+}
+
+/* 햄버거 메뉴 아이콘 애니메이션 */
+.mobile-menu-btn.active {
+    color: var(--primary-red);
+}
+
+/* Tablet & Mobile (1024px 이하) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 40px;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .mega-menu {
+        min-width: 360px;
+    }
+}
+
+/* Mobile Only (768px 이하) */
+@media (max-width: 768px) {
+
+    /* Container */
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Header */
+    .header-container {
+        height: 60px;
+    }
+
+    /* Logo */
+    .logo-link img {
+        height: 32px;
+    }
+
+    /* Mobile Menu Button - 표시 */
+    .mobile-menu-btn {
+        display: block !important;
+        margin-left: auto;
+    }
+
+    /* Desktop Navigation - 기본 숨김 */
+    .nav {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        margin: 0;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        z-index: 9998;
+    }
+
+    /* 메뉴 열림 상태 */
+    .nav.active {
+        display: flex !important;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link {
+        padding: 16px 0;
+        font-size: 16px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Header Buttons - 모바일에서 숨김 */
+    .header-buttons {
+        display: none !important;
+    }
+
+    /* Dropdown menus - 모바일에서 재구성 */
+    .dropdown-menu {
+        position: static !important;
+        display: none !important;
+        box-shadow: none;
+        border: none;
+        border-left: 3px solid var(--primary-red);
+        margin: 8px 0 8px 0;
+        padding: 8px 0 8px 16px;
+        background: #f8fafc;
+        border-radius: 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        min-width: auto;
+    }
+
+    /* 모바일에서 드롭다운 활성화 */
+    .nav-item.mobile-active .dropdown-menu {
+        display: block !important;
+    }
+
+    /* 드롭다운 아이템 모바일 스타일 */
+    .dropdown-item {
+        padding: 10px 8px;
+    }
+
+    .dropdown-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .dropdown-title {
+        font-size: 14px;
+    }
+
+    .dropdown-desc {
+        font-size: 11px;
+    }
+
+    /* Mega Menu 모바일 조정 */
+    .mega-menu {
+        min-width: auto !important;
+        width: 100%;
+    }
+
+    .mega-grid {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .mega-section-title {
+        margin: 8px 0 4px 8px;
+        font-size: 10px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        min-height: 500px;
+        padding: 30px 0 20px 0;
+        background-attachment: scroll;
+        /* 모바일에서 fixed는 퍼포먼스 이슈 */
+    }
+
+    .hero-title {
+        font-size: 32px;
+        line-height: 1.3;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .glass-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 24px;
+    }
+
+    .glass-card h3 {
+        font-size: 20px;
+    }
+
+    /* Hero Buttons */
+    .hero-buttons {
+        flex-wrap: wrap;
+    }
+
+    /* 기타 섹션 */
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 32px;
+    }
+}
+
+/* Small Mobile (480px 이하) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .header-container {
+        padding: 0 16px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .glass-card {
+        padding: 16px 20px;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+/* 메뉴 열렸을 때 body 스크롤 방지 */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* iOS Safari에서 메뉴 버튼 터치 개선 */
+@supports (-webkit-touch-callout: none) {
+    .mobile-menu-btn {
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
