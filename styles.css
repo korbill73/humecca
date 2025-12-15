@@ -3359,6 +3359,7 @@ main.sub-content {
 
     /* 3. Navigation Container (The Slide-out Menu) */
     .nav {
+        display: block !important;
         position: fixed;
         top: 60px;
         /* Below header */

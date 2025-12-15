@@ -5,7 +5,7 @@
 
 // [Configuration] Current Application Version
 // Update this value manually whenever a deployment/update occurs
-const APP_VERSION = 'v.20251215.1900';
+const APP_VERSION = 'v.20251215.1930';
 
 
 
@@ -164,6 +164,31 @@ function initHeaderScripts() {
         }
     });
 
+    // [Mobile] Mobile Submenu Toggle (Delegated)
+    document.addEventListener('click', function (e) {
+        if (window.innerWidth > 768) return; // Only for mobile
+
+        const link = e.target.closest('.nav-link');
+        if (!link) return;
+
+        const item = link.closest('.nav-item');
+        if (!item) return;
+
+        const menu = item.querySelector('.dropdown-menu');
+        if (menu) {
+            // It has a submenu, so toggle it
+            e.preventDefault();
+
+            // Close other open items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(i => {
+                if (i !== item) i.classList.remove('open');
+            });
+
+            item.classList.toggle('open');
+        }
+    });
+
     // Improved Menu Interaction - Ensure only one dropdown is visible at a time
     const navItems = document.querySelectorAll('.nav-item');
     const allDropdowns = document.querySelectorAll('.dropdown-menu');
@@ -192,29 +217,7 @@ function initHeaderScripts() {
         const menu = item.querySelector('.dropdown-menu');
         const link = item.querySelector('.nav-link');
 
-        // [Mobile] Click to Toggle
-        if (link && menu) {
-            link.addEventListener('click', (e) => {
-                // If mobile menu is active (check width or body class)
-                if (window.innerWidth <= 768) {
-                    e.preventDefault(); // Prevent navigation
 
-                    // Toggle 'open' class
-                    const isOpen = item.classList.contains('open');
-
-                    // Close others
-                    navItems.forEach(i => {
-                        if (i !== item) i.classList.remove('open');
-                    });
-
-                    if (isOpen) {
-                        item.classList.remove('open');
-                    } else {
-                        item.classList.add('open');
-                    }
-                }
-            });
-        }
 
         // [Desktop] Hover Interaction
         if (window.innerWidth > 768) {
