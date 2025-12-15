@@ -685,6 +685,18 @@ body {
     padding-left: 0;
 }
 
+/* 데스크톱에서만 오버랩 레이아웃 적용 */
+@media (min-width: 769px) {
+    .hero-content {
+        margin-left: -137px;
+    }
+
+    .glass-card {
+        margin-right: -98px;
+        margin-left: auto;
+    }
+}
+
 .hero-slider-stack {
     text-align: left;
 }
