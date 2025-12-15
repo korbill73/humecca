@@ -150,16 +150,19 @@ function loadComponentViaFallback(placeholderId, componentPath, callback) {
  */
 function initHeaderScripts() {
     // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('.nav');
-
-    if (mobileMenuBtn && nav) {
-        mobileMenuBtn.addEventListener('click', function () {
-            this.classList.toggle('active');
-            nav.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-    }
+    // Mobile Menu Toggle (Delegated for robustness)
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.mobile-menu-btn');
+        if (btn) {
+            e.preventDefault(); // Prevent default touch/click behavior
+            const nav = document.querySelector('.nav');
+            if (nav) {
+                btn.classList.toggle('active');
+                nav.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            }
+        }
+    });
 
     // Improved Menu Interaction - Ensure only one dropdown is visible at a time
     const navItems = document.querySelectorAll('.nav-item');

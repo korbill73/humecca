@@ -9,16 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===================================
     // Mobile Menu Toggle
     // ===================================
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('.nav');
 
-    if (mobileMenuBtn && nav) {
-        mobileMenuBtn.addEventListener('click', function () {
-            this.classList.toggle('active');
-            nav.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-    }
 
     // ===================================
     // Contact Form (Simple Alert)
