@@ -352,6 +352,17 @@ async function loadApplications() {
 
     const { data: allData, error } = await query;
 
+    // Fetch Product Plans for Price Lookup (Retroactive Fix)
+    const { data: plans } = await supabase.from('product_plans').select('plan_name, price');
+    window.adminPriceMap = {};
+    if (plans) {
+        plans.forEach(p => {
+            if (p.plan_name && p.price) {
+                window.adminPriceMap[p.plan_name] = p.price;
+            }
+        });
+    }
+
     if (error) {
         listEl.innerHTML = `<tr><td colspan="7" align="center" style="color:#ef4444; padding:20px;">Error: ${error.message}</td></tr>`;
         return;
@@ -422,11 +433,41 @@ async function loadApplications() {
         const dateMain = `${d.getFullYear().toString().slice(2)}. ${d.getMonth() + 1}. ${d.getDate()}.`;
         const dateSub = d.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-        // Parsing for List Display (Show simpler name)
+        // Parsing for List Display
         let rawName = item.product_name || '-';
         let priceMatch = rawName.match(/\((₩[\d,]+)\)/);
         let priceText = priceMatch ? priceMatch[1] : '';
         let fullCleanName = rawName.replace(/\((₩[\d,]+)\)/, '').trim();
+
+        // Dynamic Lookup if Price is Missing
+        if (!priceText) {
+            // Try to find matching plan
+            // Extract base name: "Full Rack (Details)" -> "Full Rack"
+            // Or just try fullCleanName which already removed (Price)
+            // But fullCleanName might still have (Details).
+
+            // Heuristic 1: Exact Match
+            let foundPrice = window.adminPriceMap ? window.adminPriceMap[fullCleanName] : null;
+
+            // Heuristic 2: Split by ' (' to remove details
+            if (!foundPrice && fullCleanName.includes(' (')) {
+                const baseName = fullCleanName.split(' (')[0].trim();
+                foundPrice = window.adminPriceMap ? window.adminPriceMap[baseName] : null;
+            }
+
+            // Heuristic 3: Check simple contains for keys (Reverse lookup) - Optional/Risky
+
+            if (foundPrice) {
+                // Format Price
+                if (foundPrice === '문의') priceText = '문의';
+                else {
+                    const n = Number(String(foundPrice).replace(/,/g, ''));
+                    if (!isNaN(n)) priceText = '₩' + n.toLocaleString();
+                    else priceText = foundPrice;
+                }
+            }
+        }
+
         // In list, if name is super long with `/`, show first part + "..."
         let displayName = fullCleanName.split('/')[0].trim();
         if (fullCleanName.includes('/')) displayName += '...';
@@ -551,6 +592,26 @@ window.openApplicationDetail = async (id) => {
     let priceMatch = rawName.match(/\((₩[\d,]+)\)/);
     let priceText = priceMatch ? priceMatch[1] : '';
     let cleanName = rawName.replace(/\((₩[\d,]+)\)/, '').trim();
+
+    // Dynamic Lookup if Price is Missing (Detail View)
+    if (!priceText && window.adminPriceMap) {
+        let lookupName = cleanName;
+        let foundPrice = window.adminPriceMap[lookupName];
+
+        if (!foundPrice && lookupName.includes(' (')) {
+            lookupName = lookupName.split(' (')[0].trim();
+            foundPrice = window.adminPriceMap[lookupName];
+        }
+
+        if (foundPrice) {
+            if (foundPrice === '문의') priceText = '문의';
+            else {
+                const n = Number(String(foundPrice).replace(/,/g, ''));
+                if (!isNaN(n)) priceText = '₩' + n.toLocaleString();
+                else priceText = foundPrice;
+            }
+        }
+    }
 
     if (cleanName.includes('(CPU:')) cleanName = cleanName.replace('(CPU:', '/ CPU:');
 
@@ -1147,6 +1208,10 @@ window.resetForm = (type) => {
                 commonData.ram = getVal('h-ram');
                 commonData.storage = getVal('h-storage');
                 commonData.traffic = getVal('h-traffic');
+            } else if (type === 'colocation') {
+                // Map Colocation Space/Power to CPU/RAM columns
+                commonData.cpu = getVal('c-cpu'); // Space
+                commonData.ram = getVal('c-ram'); // Power
             } else if (type === 'vpn') {
                 commonData.speed = getVal('v-speed');
                 commonData.sites = getVal('v-sites');

@@ -182,7 +182,7 @@ function renderAddon(container, plans) {
                     ${featureListHtml}
                 </ul>
                 <button class="plan-btn solid js-open-modal" 
-                    data-name="${escName}" data-type="addon" data-details="${escDetails}"
+                    data-name="${escName}" data-type="addon" data-details="${escDetails}" data-price="${plan.price}"
                     style="width:100%; border:none; cursor:pointer;">신청하기</button>
             </div>
         `;
@@ -260,7 +260,7 @@ function renderVpn(container, plans) {
                 <div class="plan-price">${displayPrice}</div>
                 <ul class="plan-features">${featureHtml}</ul>
                 <button class="plan-btn solid js-open-modal"
-                    data-name="${escName}" data-type="vpn" data-details="${escSummary}"
+                    data-name="${escName}" data-type="vpn" data-details="${escSummary}" data-price="${p.price}"
                     style="width:100%; border:none; cursor:pointer;">신청하기</button>
             </div>
         `;
@@ -285,7 +285,7 @@ function renderColocation(container, plans) {
                 <div class="plan-price">${displayPrice}</div>
                 <ul class="plan-features">${featureHtml}</ul>
                 <button class="plan-btn solid js-open-modal"
-                    data-name="${escName}" data-type="colocation" data-details="${escSummary}"
+                    data-name="${escName}" data-type="colocation" data-details="${escSummary}" data-price="${p.price}"
                     style="width:100%; border:none; cursor:pointer;">신청하기</button>
             </div>
         `;

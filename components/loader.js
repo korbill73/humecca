@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.head.appendChild(script);
     });
 
+    // [App Modal] Load application modal
+    loadComponent('app-modal-placeholder', 'components/app_modal.html');
+
     // [New] Web Analytics Logging
     // Supabase가 로드되었는지 확인 후 없으면 CDN 로드 후 실행 (admin.html 등에서 중복 로드 방지)
     if (typeof supabase === 'undefined') {

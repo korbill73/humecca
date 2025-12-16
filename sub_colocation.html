@@ -601,40 +601,76 @@
             </script>
         </section>
 
-        <!-- Features -->
-        <section class="idc-section bg-gray">
+        <!-- KT Kangnam IDC Highlight (Relocated Content) -->
+        <style>
+            .kt-highlight-box {
+                transition: all 0.3s ease;
+                cursor: default;
+            }
+
+            .kt-highlight-box:hover {
+                transform: translateY(-5px);
+                background: rgba(255, 255, 255, 0.15) !important;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+                border-color: rgba(255, 255, 255, 0.4) !important;
+            }
+
+            .kt-highlight-box i {
+                transition: transform 0.5s ease;
+            }
+
+            .kt-highlight-box:hover i {
+                transform: rotateY(360deg);
+            }
+        </style>
+        <section class="idc-section">
             <div class="idc-container">
-                <div class="idc-sec-header">
-                    <span class="idc-sec-sub">INFRASTRUCTURE</span>
-                    <h2 class="idc-sec-title">주요 특징</h2>
-                    <p class="idc-sec-desc">최첨단 설비와 보안 시스템으로 완벽한 운영 환경을 보장합니다</p>
-                </div>
-                <div class="feat-grid">
-                    <div class="feat-card">
-                        <div class="feat-icon"><i class="fas fa-building"></i></div>
-                        <h3 class="feat-title">Tier 3+ 데이터센터</h3>
-                        <p class="feat-desc">국제 기준 Tier 3+ 등급의 안정성이 검증된<br>최신 설비를 갖추고 있습니다.</p>
+                <div
+                    style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; padding: 60px 40px; color: white; position: relative; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.3);">
+                    <!-- Background Pattern -->
+                    <div style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; opacity: 0.1;">
+                        <i class="fas fa-server"
+                            style="font-size: 300px; color: white; transform: rotate(-15deg); position: absolute; right: -50px; bottom: -50px;"></i>
                     </div>
-                    <div class="feat-card">
-                        <div class="feat-icon"><i class="fas fa-bolt"></i></div>
-                        <h3 class="feat-title">이중화 전력 시스템</h3>
-                        <p class="feat-desc">UPS 이중화 및 비상 발전기 구축으로<br>무중단 전력 공급을 실현합니다.</p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon"><i class="fas fa-fingerprint"></i></div>
-                        <h3 class="feat-title">다중 보안 시스템</h3>
-                        <p class="feat-desc">생체 인식, CCTV, 24시간 보안 요원 상주 등<br>철저한 물리적 보안을 유지합니다.</p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon"><i class="fas fa-headset"></i></div>
-                        <h3 class="feat-title">24/7 원격 지원</h3>
-                        <p class="feat-desc">전문 엔지니어가 365일 24시간 상주하여<br>장애 발생 시 즉각 대응합니다.</p>
+
+                    <div
+                        style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: start; max-width: 800px;">
+                        <span
+                            style="background: #ef4444; color: white; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; margin-bottom: 20px;">PREMIUM
+                            LOCATION</span>
+                        <h2 style="font-size: 2.2rem; font-weight: 800; margin: 0 0 20px;">KT 강남 IDC 코로케이션</h2>
+                        <div style="width: 60px; height: 4px; background: #ef4444; margin-bottom: 24px;"></div>
+                        <p
+                            style="font-size: 1.1rem; color: #cbd5e1; line-height: 1.7; margin-bottom: 30px; word-break: keep-all;">
+                            대한민국 인터넷의 심장, <strong style="color:white;">KT 강남 IDC</strong>는 국내 최다 ISP가 상호 연동되는
+                            <strong>대한민국 트래픽의 핵심 교환 지점(IX)</strong>입니다. 휴메카는 이곳에 <strong>자체 운영 센터</strong>를 구축하여, 단순 상면
+                            임대가 아닌 전문 엔지니어의 1:1 밀착 관리 서비스를 제공합니다.
+                        </p>
+
+                        <div style="display: flex; flex-wrap: wrap; gap: 20px; width: 100%;">
+                            <div class="kt-highlight-box"
+                                style="display: flex; gap: 15px; align-items: center; background: rgba(255,255,255,0.05); padding: 16px 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                                <i class="fas fa-network-wired" style="color: #60a5fa; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 700; color: white;">최적의 네트워크</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">국내 최다 ISP 연동</div>
+                                </div>
+                            </div>
+                            <div class="kt-highlight-box"
+                                style="display: flex; gap: 15px; align-items: center; background: rgba(255,255,255,0.05); padding: 16px 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                                <i class="fas fa-user-shield" style="color: #60a5fa; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 700; color: white;">휴메카 전문 운영</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">24/7 전문 엔지니어 상주</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Pricing -->
+        <!-- Pricing (Moved to Top as Requested) -->
         <section class="idc-section">
             <div class="idc-container">
                 <div class="idc-sec-header">
@@ -643,85 +679,543 @@
                     <p class="idc-sec-desc">필요한 공간만큼 합리적으로 이용하세요</p>
                 </div>
                 <div class="pricing-grid compact-pricing" id="pricing-grid-colocation">
-                    <!-- Static Content for Stability -->
-                    <!-- Quarter Rack -->
-                    <div class="plan-card">
-                        <span class="plan-badge">STARTUP</span>
-                        <h3 class="plan-title">Quarter Rack</h3>
-                        <div class="plan-price">
-                            <span class="amount">₩400,000</span> <span class="period">/월</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 10U 공간 제공</li>
-                            <li><i class="fas fa-check"></i> 2.2A 전력 제공</li>
-                            <li><i class="fas fa-check"></i> 1Gbps Shared 회선</li>
-                            <li><i class="fas fa-check"></i> 기본 보안 서비스</li>
-                        </ul>
-                        <button class="plan-btn outline"
-                            onclick="openAppModal('코로케이션 상담', 'colocation', 'Quarter Rack')"
-                            style="border:none; cursor:pointer;">신청하기</button>
-                    </div>
-
-                    <!-- Half Rack -->
-                    <div class="plan-card popular">
-                        <span class="plan-badge">POPULAR</span>
-                        <h3 class="plan-title">Half Rack</h3>
-                        <div class="plan-price">
-                            <span class="amount">₩750,000</span> <span class="period">/월</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 20U 공간 제공</li>
-                            <li><i class="fas fa-check"></i> 4.4A 전력 제공</li>
-                            <li><i class="fas fa-check"></i> 1Gbps Dedicated 회선</li>
-                            <li><i class="fas fa-check"></i> 24/7 기술지원</li>
-                        </ul>
-                        <button class="plan-btn solid" onclick="openAppModal('코로케이션 상담', 'colocation', 'Half Rack')"
-                            style="cursor:pointer;">신청하기</button>
-                    </div>
-
-                    <!-- Full Rack -->
-                    <div class="plan-card">
-                        <span class="plan-badge">ENTERPRISE</span>
-                        <h3 class="plan-title">Full Rack</h3>
-                        <div class="plan-price">
-                            <span class="amount">₩1,400,000</span> <span class="period">/월</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 42U 전체 공간 제공</li>
-                            <li><i class="fas fa-check"></i> 8.8A (2KW) 전력 제공</li>
-                            <li><i class="fas fa-check"></i> 10Gbps Uplink 지원</li>
-                            <li><i class="fas fa-check"></i> VIP 전담 엔지니어</li>
-                        </ul>
-                        <button class="plan-btn outline" onclick="openAppModal('코로케이션 상담', 'colocation', 'Full Rack')"
-                            style="border:none; cursor:pointer;">신청하기</button>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <i class="fas fa-spinner fa-spin fa-2x" style="color: #cbd5e1;"></i>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA -->
-        <section class="idc-section" style="padding-top:0; border:none;">
+        <!-- Service Concept Image -->
+        <section class="idc-section" style="padding-top: 20px; padding-bottom: 20px;">
             <div class="idc-container">
-                <div class="cta-box">
-                    <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">견적
-                        상담이 필요하신가요?</h2>
-                    <p style="color: var(--text-sub); margin-bottom: 2rem;">서버 수량과 전력량을 알려주시면 최적의 견적을 제안해 드립니다.</p>
-                    <div class="cta-btn-wrap">
-                        <button onclick="openAppModal('코로케이션 상담', 'colocation')" class="cta-btn-main"
-                            style="border:none; cursor:pointer;">간편 견적 문의 <i class="fas fa-chevron-right"></i></button>
+                <div style="text-align: center; max-width: 1000px; margin: 0 auto;">
+                    <h2 class="idc-sec-title" style="margin-bottom: 30px;">코로케이션의 필요성</h2>
+                    <img src="images/colocation/colocation_concept.png" alt="Office vs Colocation Comparison"
+                        style="display: block; width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Construction vs Colocation Analysis -->
+        <section class="idc-section bg-gray">
+            <div class="idc-container">
+                <div class="idc-sec-header">
+                    <span class="idc-sec-sub">ECONOMY & EFFICIENCY</span>
+                    <h2 class="idc-sec-title">자체 구축 vs 코로케이션</h2>
+                    <p class="idc-sec-desc">막대한 초기 구축 비용과 운영 리스크, 코로케이션으로 해결할 수 있습니다.</p>
+                </div>
+
+                <!-- Updated Comparison Image (2025-12-17 Final) -->
+                <!-- Premium Comparison Section (HTML Implementation) -->
+                <style>
+                    .comp-container {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 40px;
+                        margin-top: 40px;
+                    }
+
+                    @media (min-width: 900px) {
+                        .comp-container {
+                            grid-template-columns: 1fr 1fr;
+                        }
+                    }
+
+                    /* Left Panel */
+                    .comp-panel-left {
+                        background: white;
+                        border-radius: 20px;
+                        padding: 30px;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+                        border: 1px solid #e2e8f0;
+                    }
+
+                    .comp-grid {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 20px;
+                        margin-top: 20px;
+                    }
+
+                    @media (max-width: 480px) {
+                        .comp-grid {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+
+                    .comp-card {
+                        background: #f8fafc;
+                        padding: 20px;
+                        border-radius: 12px;
+                        text-align: center;
+                        border: 1px solid #f1f5f9;
+                        transition: transform 0.2s;
+                    }
+
+                    .comp-card:hover {
+                        transform: translateY(-3px);
+                        border-color: #cbd5e1;
+                    }
+
+                    .comp-icon {
+                        font-size: 24px;
+                        color: #475569;
+                        margin-bottom: 12px;
+                    }
+
+                    .comp-card h4 {
+                        font-size: 0.95rem;
+                        font-weight: 700;
+                        margin: 0 0 8px;
+                        color: #1e293b;
+                    }
+
+                    .comp-card p {
+                        font-size: 0.8rem;
+                        color: #64748b;
+                        margin: 0;
+                        line-height: 1.4;
+                        word-break: keep-all;
+                    }
+
+                    /* Right Panel */
+                    .comp-panel-right {
+                        background: #f8fafc;
+                        border-radius: 20px;
+                        padding: 40px 30px;
+                        position: relative;
+                        overflow: hidden;
+                        border: 1px solid #e2e8f0;
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .tco-chart {
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        gap: 60px;
+                        height: 300px;
+                        margin: 40px 0;
+                        position: relative;
+                        padding-bottom: 40px;
+                    }
+
+                    /* Savings Triangle Background */
+                    .tco-savings-area {
+                        position: absolute;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 280px;
+                        height: 260px;
+                        background: linear-gradient(180deg, rgba(203, 213, 225, 0.3) 0%, rgba(241, 245, 249, 0.1) 100%);
+                        clip-path: polygon(0 0, 100% 65%, 100% 100%, 0% 100%);
+                        z-index: 1;
+                        border-radius: 10px;
+                    }
+
+                    .tco-bar-group {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 110px;
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    .tco-bar {
+                        width: 100%;
+                        color: white;
+                        font-size: 0.9rem;
+                        font-weight: 700;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                    }
+
+                    .bar-red {
+                        background: #ef4444;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                    }
+
+                    .bar-blue {
+                        background: #2563eb;
+                        border-radius: 8px 8px 0 0;
+                    }
+
+                    .tco-label {
+                        position: absolute;
+                        bottom: -40px;
+                        font-weight: 700;
+                        color: #1e293b;
+                        font-size: 1rem;
+                        width: 140px;
+                        text-align: center;
+                    }
+
+                    .tco-top-label {
+                        margin-bottom: 12px;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        text-align: center;
+                        font-weight: 600;
+                        line-height: 1.3;
+                    }
+
+                    .savings-badge {
+                        position: absolute;
+                        top: 90px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        z-index: 3;
+                        background: white;
+                        padding: 6px 14px;
+                        border-radius: 20px;
+                        border: 1px solid #cbd5e1;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                        font-size: 0.85rem;
+                        font-weight: 800;
+                        color: #2563eb;
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                    }
+
+                    .check-list {
+                        list-style: none;
+                        padding: 0;
+                        margin-top: auto;
+                        border-top: 1px solid #e2e8f0;
+                        padding-top: 25px;
+                    }
+
+                    .check-list li {
+                        margin-bottom: 12px;
+                        font-size: 0.95rem;
+                        color: #334155;
+                        display: flex;
+                        align-items: start;
+                        gap: 10px;
+                        font-weight: 500;
+                    }
+
+                    .check-list i {
+                        color: #2563eb;
+                        margin-top: 4px;
+                    }
+                </style>
+
+                <div class="comp-container">
+                    <!-- Left: Reality -->
+                    <div class="comp-panel-left">
+                        <h3
+                            style="text-align: center; font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: #1e293b;">
+                            자체 데이터센터 구축, 현실은 이렇습니다</h3>
+                        <div class="comp-grid">
+                            <div class="comp-card">
+                                <i class="fas fa-temperature-low comp-icon"></i>
+                                <h4>항온항습기</h4>
+                                <p>365일 일정한 온도/습도<br>유지 필수</p>
+                            </div>
+                            <div class="comp-card">
+                                <i class="fas fa-battery-full comp-icon"></i>
+                                <h4>UPS (전원장치)</h4>
+                                <p>정전 시에도 안정적인<br>전원 공급</p>
+                            </div>
+                            <div class="comp-card">
+                                <i class="fas fa-chart-line comp-icon"></i>
+                                <h4>트래픽 모니터링</h4>
+                                <p>실시간 네트워크 현황<br>감시 및 대응</p>
+                            </div>
+                            <div class="comp-card">
+                                <i class="fas fa-tachometer-alt comp-icon"></i>
+                                <h4>최대 접속속도</h4>
+                                <p>빠르고 안정적인<br>네트워크 대역폭 확보</p>
+                            </div>
+                            <div class="comp-card">
+                                <i class="fas fa-bolt comp-icon"></i>
+                                <h4>전기료</h4>
+                                <p>서버/냉방 가동을 위한<br>막대한 전력 비용</p>
+                            </div>
+                            <div class="comp-card">
+                                <i class="fas fa-users-cog comp-icon"></i>
+                                <h4>전문 운영인력</h4>
+                                <p>24시간 365일 전문<br>엔지니어 상주 필요</p>
+                            </div>
+                        </div>
+                        <div
+                            style="margin-top: 20px; padding: 15px; background: #fef2f2; border-radius: 10px; color: #991b1b; font-weight: 700; text-align: center; font-size: 0.95rem; border:1px solid #fecaca;">
+                            이 모든 것을 자체적으로 구축하고 관리하려면<br>막대한 비용과 인력 부담이 발생합니다!
+                        </div>
+                    </div>
+
+                    <!-- Right: Solution -->
+                    <div class="comp-panel-right">
+                        <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; color: #1e293b;">휴메카 코로케이션,
+                            스마트한 선택</h3>
+                        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 10px; line-height: 1.6;">
+                            비용은 줄이고, 초기 투자 없이,<br>운영 부담을 덜고 비즈니스 확장에 집중하세요.
+                        </p>
+
+                        <!-- Stylized CSS Chart -->
+                        <div class="tco-chart">
+                            <!-- Background Savings Viz -->
+                            <div class="tco-savings-area"></div>
+
+                            <!-- Savings Badge -->
+                            <div class="savings-badge">
+                                <i class="fas fa-arrow-down"></i> 비용 절감
+                            </div>
+
+                            <!-- Bar 1: Legacy -->
+                            <div class="tco-bar-group">
+                                <div class="tco-top-label">막대한 초기투자<br>& 지속적 운영비</div>
+                                <div class="tco-bar bar-red"
+                                    style="height: 55px; background: #ef4444; border-radius: 8px 8px 0 0;">초기구축</div>
+                                <div class="tco-bar bar-red" style="height: 75px; background: #dc2626;">운영비</div>
+                                <div class="tco-bar bar-red"
+                                    style="height: 55px; background: #b91c1c; border-radius: 0 0 8px 8px;">인건비</div>
+                                <div class="tco-label">자체 구축<br><span
+                                        style="font-size:0.8rem; color:#94a3b8; font-weight:400;">(Before)</span></div>
+                            </div>
+
+                            <!-- Bar 2: Humecaa -->
+                            <div class="tco-bar-group">
+                                <div class="tco-top-label" style="margin-top:auto;">인프라 완비<br>초기비용 0원</div>
+                                <div class="tco-bar bar-blue"
+                                    style="height: 85px; display: flex; flex-direction: column; line-height: 1.2;">
+                                    <span>합리적인</span>
+                                    <span style="font-size:0.75rem; font-weight:400; opacity:0.9;">월 이용료</span>
+                                </div>
+                                <div class="tco-label">휴메카<br><span
+                                        style="font-size:0.8rem; color:#94a3b8; font-weight:400;">(After)</span></div>
+                            </div>
+                        </div>
+
+                        <ul class="check-list">
+                            <li><i class="fas fa-check-circle"></i> 최고 수준의 데이터센터 인프라 즉시 이용</li>
+                            <li><i class="fas fa-check-circle"></i> 검증된 전문 엔지니어의 24시간 기술 지원</li>
+                            <li><i class="fas fa-check-circle"></i> 유연한 확장성 및 탄력적인 비용 운영</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
+
+
+
+        <!-- Network Architecture Diagram (New) -->
+        <section class="idc-section bg-gray">
+            <div class="idc-container">
+                <div class="idc-sec-header">
+                    <span class="idc-sec-sub">NETWORK ARCHITECTURE</span>
+                    <h2 class="idc-sec-title">100G 초광대역 백본망</h2>
+                    <p class="idc-sec-desc">수도권을 하나로 잇는 One DC 구조로 압도적인 트래픽 처리 능력을 제공합니다</p>
+                </div>
+                <!-- Diagram Container -->
+                <div
+                    style="background:white; border-radius:20px; padding:40px; box-shadow:0 10px 30px rgba(0,0,0,0.05); text-align:center; overflow:hidden;">
+                    <img src="images/colocation/100g_backbone_diagram.png" alt="100G Backbone Network Diagram"
+                        style="max-width:100%; height:auto;border-radius:10px; border:1px solid #e2e8f0;">
+                    <div
+                        style="display:grid; grid-template-columns: 1fr 1fr; gap:30px; margin-top:40px; text-align:left;">
+                        <div style="padding:20px; background:#f8fafc; border-radius:15px;">
+                            <h4 style="font-size:1.1rem; font-weight:700; color:#ef4444; margin-bottom:10px;">기존 (10G
+                                기반)</h4>
+                            <p style="font-size:0.9rem; color:#64748b;">· 대형 트래픽 수용 요구에 즉각 대처 어려움<br>· 회선 증가로 인한 운영 비용 및
+                                관리 부담 증가</p>
+                        </div>
+                        <div style="padding:20px; background:#eff6ff; border-radius:15px; border:1px solid #bfdbfe;">
+                            <h4 style="font-size:1.1rem; font-weight:700; color:#2563eb; margin-bottom:10px;">New (100G
+                                One DC)</h4>
+                            <p style="font-size:0.9rem; color:#1e293b;">· <strong>Full Mesh 구조</strong>로 안정성 극대화<br>·
+                                대용량 트래픽의 실시간 확장 가능<br>· SDN 기반 Anywhere Connectivity 제공</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KT IDC Key Features (Images Updated) -->
+        <section class="idc-section">
+            <div class="idc-container">
+                <div class="idc-sec-header">
+                    <span class="idc-sec-sub">Why kt cloud DC?</span>
+                    <h2 class="idc-sec-title">국내 1위 데이터센터 인프라</h2>
+                    <p class="idc-sec-desc">검증된 안정성과 압도적인 규모의 kt cloud DC를 만나보세요</p>
+                    <style>
+                        @keyframes iconSpin {
+                            from {
+                                transform: rotate(0deg);
+                            }
+
+                            to {
+                                transform: rotate(360deg);
+                            }
+                        }
+
+                        .rotate-icon {
+                            animation: iconSpin 10s linear infinite;
+                        }
+
+                        .feat-icon-box {
+                            width: 80px;
+                            height: 80px;
+                            background: #f1f5f9;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0 auto 20px;
+                        }
+                    </style>
+                </div>
+                <div class="feat-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feat-card">
+                        <div class="feat-icon-box">
+                            <i class="fas fa-server rotate-icon" style="font-size:32px; color:#3b82f6;"></i>
+                        </div>
+                        <h3 class="feat-title">국내 최대 규모 DC</h3>
+                        <p class="feat-desc">서울권 Hyperscale 용산 DC를 포함하여<br>전국 13개의 국내 최대 규모 DC를<br>보유하고 운영합니다.</p>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon-box">
+                            <i class="fas fa-project-diagram rotate-icon" style="font-size:32px; color:#ef4444;"></i>
+                        </div>
+                        <h3 class="feat-title">100G 백본 네트워크</h3>
+                        <p class="feat-desc">수도권을 하나로 잇는 'One DC' 구조로<br>국내 최초 100G급 초광대역<br>백본망을 제공합니다.</p>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon-box">
+                            <i class="fas fa-sliders-h rotate-icon" style="font-size:32px; color:#10b981;"></i>
+                        </div>
+                        <h3 class="feat-title">맞춤형 DC 서비스</h3>
+                        <p class="feat-desc">금융(여의도), IT/게임(남구로),<br>글로벌 고집적(김해) 등 비즈니스 특성에<br>최적화된 존을 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Specs (New Section) -->
+        <section class="idc-section">
+            <div class="idc-container">
+                <div class="idc-sec-header">
+                    <span class="idc-sec-sub">SERVICE SPECIFICATIONS</span>
+                    <h2 class="idc-sec-title">서비스 상세 구성</h2>
+                    <p class="idc-sec-desc">고객의 요구사항에 맞춰 유연하게 구성 가능한 인프라</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px;">
+                    <!-- Rack Specs -->
+                    <div
+                        style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 40px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+                        <div style="display:flex; align-items:center; gap:15px; margin-bottom:24px;">
+                            <div
+                                style="width:50px; height:50px; background:#eff6ff; border-radius:12px; display:flex; align-items:center; justify-content:center; color:#2563eb; font-size:24px;">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3 style="font-size:1.5rem; font-weight:700; margin:0;">상면 서비스 (Rack)</h3>
+                        </div>
+                        <ul style="list-style:none; padding:0; display:grid; gap:16px;">
+                            <li style="display:flex; gap:12px; align-items:start;">
+                                <i class="fas fa-check-circle" style="color:var(--accent); margin-top:4px;"></i>
+                                <div>
+                                    <strong style="display:block; color:#1e293b; margin-bottom:4px;">맞춤형 Rack
+                                        제공</strong>
+                                    <span style="color:#64748b; font-size:0.95rem;">Standard Rack, 고집적 Rack, Cage 등 다양한
+                                        형태 지원</span>
+                                </div>
+                            </li>
+                            <li style="display:flex; gap:12px; align-items:start;">
+                                <i class="fas fa-check-circle" style="color:var(--accent); margin-top:4px;"></i>
+                                <div>
+                                    <strong style="display:block; color:#1e293b; margin-bottom:4px;">고전력 인프라</strong>
+                                    <span style="color:#64748b; font-size:0.95rem;">Rack당 2.2kW ~ 최대 12kW 고전력 수용
+                                        가능</span>
+                                </div>
+                            </li>
+                            <li style="display:flex; gap:12px; align-items:start;">
+                                <i class="fas fa-check-circle" style="color:var(--accent); margin-top:4px;"></i>
+                                <div>
+                                    <strong style="display:block; color:#1e293b; margin-bottom:4px;">운영 편의성</strong>
+                                    <span style="color:#64748b; font-size:0.95rem;">운영자 전용 OP Room 및 IP 16개 (기본)
+                                        제공</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Network Specs -->
+                    <div
+                        style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 40px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+                        <div style="display:flex; align-items:center; gap:15px; margin-bottom:24px;">
+                            <div
+                                style="width:50px; height:50px; background:#fff1f2; border-radius:12px; display:flex; align-items:center; justify-content:center; color:#e11d48; font-size:24px;">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 style="font-size:1.5rem; font-weight:700; margin:0;">네트워크 서비스</h3>
+                        </div>
+                        <ul style="list-style:none; padding:0; display:grid; gap:16px;">
+                            <li style="display:flex; gap:12px; align-items:start;">
+                                <i class="fas fa-check-circle" style="color:var(--accent); margin-top:4px;"></i>
+                                <div>
+                                    <strong style="display:block; color:#1e293b; margin-bottom:4px;">초고속 백본망</strong>
+                                    <span style="color:#64748b; font-size:0.95rem;">10Mbps ~ 100Gbps 대역폭 유연 제공</span>
+                                </div>
+                            </li>
+                            <li style="display:flex; gap:12px; align-items:start;">
+                                <i class="fas fa-check-circle" style="color:var(--accent); margin-top:4px;"></i>
+                                <div>
+                                    <strong style="display:block; color:#1e293b; margin-bottom:4px;">다양한 구성 방식</strong>
+                                    <span style="color:#64748b; font-size:0.95rem;">Main / Backup / Load Balancing 구성
+                                        지원</span>
+                                </div>
+                            </li>
+                            <li style="display:flex; gap:12px; align-items:start;">
+                                <i class="fas fa-check-circle" style="color:var(--accent); margin-top:4px;"></i>
+                                <div>
+                                    <strong style="display:block; color:#1e293b; margin-bottom:4px;">글로벌 트래픽</strong>
+                                    <span style="color:#64748b; font-size:0.95rem;">국제 IX 연동 및 전용 회선 제공 (1G당 추가
+                                        대역폭)</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <section class="idc-section" style="padding-top:0; border:none;">
+                <div class="idc-container">
+                    <div class="cta-box">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">
+                            견적
+                            상담이 필요하신가요?</h2>
+                        <p style="color: var(--text-sub); margin-bottom: 2rem;">서버 수량과 전력량을 알려주시면 최적의 견적을 제안해 드립니다.</p>
+                        <div class="cta-btn-wrap">
+                            <button onclick="openAppModal('코로케이션 상담', 'colocation')" class="cta-btn-main"
+                                style="border:none; cursor:pointer;">간편 견적 문의 <i
+                                    class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
     </main>
 
     <!-- Footer -->
     <div id="footer-placeholder"></div>
+    <!-- App Modal Placeholder -->
+    <div id="app-modal-placeholder"></div>
 
     <!-- Supabase Integration -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase_config.js"></script>
     <script src="components/loader.js?v=3.18"></script>
+    <script src="js/application_modal.js"></script>
     <script src="js/data_loader.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
