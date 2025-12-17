@@ -461,9 +461,36 @@ select option {
 .back-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-weight: 600;
+    color: var(--primary-color);
 }
 
-.back-link:hover {
-    color: var(--primary-color);
+/* Customer Grid Layout */
+.customer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    /* Responsive Grid */
+    gap: 16px;
+    padding: 24px 0;
+    /* Adjusted padding */
+}
+
+.customer-card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.2s;
+    height: 100%;
+    /* Full height */
+}
+
+.customer-card:hover {
+    border-color: var(--primary-color);
+    background: rgba(30, 41, 59, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

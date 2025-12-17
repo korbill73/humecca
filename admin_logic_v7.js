@@ -1404,17 +1404,18 @@ window.resetForm = (type) => {
 window.loadTermEditor = async (type) => {
     currentTermType = type;
     // Update Tab UI
-    ['privacy', 'terms', 'member'].forEach(t => {
+    const types = ['privacy', 'terms', 'member'];
+    console.log(`Switching Term Tab to: ${type}`);
+
+    types.forEach(t => {
         const btn = document.getElementById(`btn-${t}`);
         if (btn) {
-            // Remove legacy classes just in case
-            btn.classList.remove('btn-primary', 'btn-secondary');
+            // Force remove first
+            btn.classList.remove('active');
 
-            // Toggle Active State
+            // Add if match
             if (t === type) {
                 btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
             }
         }
     });
@@ -1449,24 +1450,49 @@ window.saveCurrentTerm = async () => {
     }
 
     // Save to Supabase DB only
+    // Save to Supabase DB
     try {
-        const { error } = await supabase
+        // 1. Check if exists
+        const { data: existing, error: fetchError } = await supabase
             .from('terms')
-            .upsert({
-                type: currentTermType,
-                content: content,
-                title: currentTermType === 'privacy' ? '개인정보처리방침' :
-                    currentTermType === 'terms' ? '이용약관' : '회원약관'
-            }, {
-                onConflict: 'type'
-            });
+            .select('id')
+            .eq('type', currentTermType)
+            .single();
+
+        if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 is 'Row not found'
+            throw fetchError;
+        }
+
+        let error;
+        if (existing) {
+            // Update
+            const { error: updateError } = await supabase
+                .from('terms')
+                .update({
+                    content: content,
+                    updated_at: new Date()
+                })
+                .eq('type', currentTermType);
+            error = updateError;
+        } else {
+            // Insert
+            const { error: insertError } = await supabase
+                .from('terms')
+                .insert([{
+                    type: currentTermType,
+                    content: content,
+                    title: currentTermType === 'privacy' ? '개인정보처리방침' :
+                        currentTermType === 'terms' ? '이용약관' : '회원약관'
+                }]);
+            error = insertError;
+        }
 
         if (error) throw error;
 
         alert('저장되었습니다!');
     } catch (err) {
         console.error('저장 실패:', err);
-        alert('저장 실패: ' + err.message + '\n\nSupabase 테이블 설정을 확인해주세요.');
+        alert('저장 실패: ' + err.message);
     }
 };
 
