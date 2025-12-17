@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기 - HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+            <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="sw-hero" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="container">
+            <span
+                style="display:inline-block; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); font-size: 14px; margin-bottom: 20px; color: #cbd5e1;">
+                Contact Us
+            </span>
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                고객센터 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> 문의하기
+            </div>
+            <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-envelope" style="font-size: 30px; color: white;"></i>
+            </div>
+<h1>문의하기</h1>
+            <p>궁금한 사항이 있으시면 언제든지 문의해주세요.<br>전문 상담원이 신속하게 답변드리겠습니다.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" style="padding: 80px 0;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <!-- Success/Error Message -->
+                <div id="inquiry-message"
+                    style="display: none; padding: 20px; border-radius: 12px; margin-bottom: 30px; text-align: center;">
+                </div>
+
+                <!-- Inquiry Form -->
+                <div class="card"
+                    style="background: white; padding: 50px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                    <h2
+                        style="font-size: 2rem; font-weight: 700; color: #111827; margin-bottom: 10px; text-align: center;">
+                        <i class="fas fa-envelope" style="color: #dc2626; margin-right: 10px;"></i>
+                        문의 양식
+                    </h2>
+                    <p style="text-align: center; color: #6b7280; margin-bottom: 40px;">
+                        아래 정보를 입력해주시면 빠르게 답변드리겠습니다.
+                    </p>
+
+                    <form id="inquiry-form">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
+                            <div class="form-group">
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                    이름 <span style="color: #dc2626;">*</span>
+                                </label>
+                                <input type="text" id="name" required
+                                    style="width: 100%; padding: 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                                    placeholder="홍길동">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                    연락처
+                                </label>
+                                <input type="tel" id="phone"
+                                    style="width: 100%; padding: 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                                    placeholder="010-1234-5678">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                이메일 <span style="color: #dc2626;">*</span>
+                            </label>
+                            <input type="email" id="email" required
+                                style="width: 100%; padding: 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                                placeholder="example@email.com">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                제목 <span style="color: #dc2626;">*</span>
+                            </label>
+                            <input type="text" id="subject" required
+                                style="width: 100%; padding: 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                                placeholder="문의 제목을 입력하세요">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                문의 내용 <span style="color: #dc2626;">*</span>
+                            </label>
+                            <textarea id="message" required rows="8"
+                                style="width: 100%; padding: 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; resize: vertical; transition: all 0.3s;"
+                                placeholder="문의 내용을 상세히 입력해주세요."></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn"
+                            style="width: 100%; padding: 18px; background: #dc2626; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-paper-plane"></i>
+                            문의 보내기
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div style="text-align: center; padding: 30px; background: #f9fafb; border-radius: 12px;">
+                        <i class="fas fa-phone-alt" style="font-size: 2rem; color: #dc2626; margin-bottom: 15px;"></i>
+                        <h4 style="font-weight: 700; color: #111827; margin-bottom: 10px;">전화 문의</h4>
+                        <p style="color: #6b7280;">02-418-7766</p>
+                        <p style="color: #9ca3af; font-size: 0.9rem;">평일 09:00 - 18:00</p>
+                    </div>
+
+                    <div style="text-align: center; padding: 30px; background: #f9fafb; border-radius: 12px;">
+                        <i class="fas fa-envelope" style="font-size: 2rem; color: #dc2626; margin-bottom: 15px;"></i>
+                        <h4 style="font-weight: 700; color: #111827; margin-bottom: 10px;">이메일 문의</h4>
+                        <p style="color: #6b7280;">support@humecca.co.kr</p>
+                        <p style="color: #9ca3af; font-size: 0.9rem;">24시간 접수</p>
+                    </div>
+
+                    <div style="text-align: center; padding: 30px; background: #f9fafb; border-radius: 12px;">
+                        <i class="fas fa-clock" style="font-size: 2rem; color: #dc2626; margin-bottom: 15px;"></i>
+                        <h4 style="font-weight: 700; color: #111827; margin-bottom: 10px;">운영 시간</h4>
+                        <p style="color: #6b7280;">평일 09:00 - 18:00</p>
+                        <p style="color: #9ca3af; font-size: 0.9rem;">주말/공휴일 휴무</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+
+    <script>
+        // 입력 필드 포커스 효과
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.style.borderColor = '#3b82f6';
+                input.style.outline = 'none';
+            });
+
+            input.addEventListener('blur', () => {
+                input.style.borderColor = '#e5e7eb';
+            });
+        });
+
+        // 제출 버튼 호버 효과
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.addEventListener('mouseenter', () => {
+            submitBtn.style.background = '#b91c1c';
+            submitBtn.style.transform = 'translateY(-2px)';
+            submitBtn.style.boxShadow = '0 4px 12px rgba(220, 38, 38, 0.3)';
+        });
+
+        submitBtn.addEventListener('mouseleave', () => {
+            submitBtn.style.background = '#dc2626';
+            submitBtn.style.transform = 'translateY(0)';
+            submitBtn.style.boxShadow = 'none';
+        });
+
+        // 폼 제출
+        document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!supabase) {
+                showMessage('오류: 시스템을 초기화할 수 없습니다.', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 전송 중...';
+            submitBtn.disabled = true;
+
+            const inquiryData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || null,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                status: 'pending',
+                is_read: false
+            };
+
+            try {
+                const { data, error } = await supabase
+                    .from('inquiries')
+                    .insert([inquiryData]);
+
+                if (error) throw error;
+
+                showMessage('✅ 문의가 성공적으로 전송되었습니다!<br>빠른 시일 내에 답변드리겠습니다.', 'success');
+                document.getElementById('inquiry-form').reset();
+
+                console.log('✅ 문의 전송 완료');
+
+            } catch (error) {
+                console.error('문의 전송 오류:', error);
+                showMessage('❌ 문의 전송 중 오류가 발생했습니다.<br>' + error.message, 'error');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('inquiry-message');
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = message;
+
+            if (type === 'success') {
+                messageDiv.style.background = '#d1fae5';
+                messageDiv.style.color = '#065f46';
+                messageDiv.style.border = '2px solid #10b981';
+            } else {
+                messageDiv.style.background = '#fee2e2';
+                messageDiv.style.color = '#991b1b';
+                messageDiv.style.border = '2px solid #dc2626';
+            }
+
+            // 5초 후 메시지 숨기기
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+
+            // 메시지 위치로 스크롤
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

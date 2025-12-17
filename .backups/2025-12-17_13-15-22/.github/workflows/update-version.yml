@@ -1,0 +1,52 @@
+name: Update Version on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set timezone to Seoul
+        run: |
+          sudo timedatectl set-timezone Asia/Seoul
+          
+      - name: Update version in header and loader
+        run: |
+          # Generate version string: YYYYMMDD.HHMM (Seoul time)
+          VERSION=$(TZ=Asia/Seoul date +'%Y%m%d.%H%M')
+          echo "Generated version: v.$VERSION"
+          
+          # Update header.html
+          sed -i "s/v\.[0-9]\{8\}\.[0-9]\{4\}/v.$VERSION/g" components/header.html
+          
+          # Update loader.js (APP_VERSION constant)
+          sed -i "s/const APP_VERSION = 'v\.[0-9]\{8\}\.[0-9]\{4\}'/const APP_VERSION = 'v.$VERSION'/g" components/loader.js
+          
+          echo "Updated version to v.$VERSION in both files"
+      
+      - name: Check if version was updated
+        id: check_changes
+        run: |
+          if git diff --quiet components/header.html components/loader.js; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push if changed
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add components/header.html components/loader.js
+          git commit -m "chore: auto-update version to $(TZ=Asia/Seoul date +'%Y.%m.%d %H:%M')"
+          git push

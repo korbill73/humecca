@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA - NAVER WORKS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="theme-green">
+    <!-- Header -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <!-- Hero -->
+    <section class="sw-hero"
+        style="background-image: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('images/hero_mail.jpg');">
+        <div class="container">
+            <!-- Breadcrumb (Standardized) -->
+            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                기업솔루션 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> NAVER WORKS
+            </div>
+
+            <!-- Icon Box (Standardized) -->
+            <div
+                style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-comments" style="font-size: 30px; color: #03C75A;"></i> <!-- Naver Works Green Icon -->
+            </div>
+
+            <h1>NAVER WORKS</h1>
+            <p style="max-width: 800px; color: rgba(255,255,255,0.8); line-height: 1.6;">네이버의 기술력으로 완성된 올인원 비즈니스 협업 플랫폼
+            </p>
+        </div>
+    </section>
+
+    <div class="container" style="padding: 80px 15px;">
+        <div class="section-header">
+            <h2>업무가 쉬워지는 협업 도구</h2>
+            <p>메일, 메신저, 화상회의, 드라이브까지 하나의 앱에서 해결하세요.<br>친숙한 사용성으로 별도의 교육 없이 바로 사용할 수 있습니다.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-comments feature-icon" style="color:#03C75A;"></i>
+                <h3>메시지 (Message)</h3>
+                <p>LINE과 유사한 친숙한 UI<br>메시지 읽음 확인 및 회수 기능</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-envelope feature-icon" style="color:#03C75A;"></i>
+                <h3>네이버 메일 (Mail)</h3>
+                <p>강력한 스팸 차단 및 보안<br>파파고 실시간 번역 지원</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-calendar-alt feature-icon" style="color:#03C75A;"></i>
+                <h3>캘린더 (Calendar)</h3>
+                <p>팀원 일정 공유 및 빈 시간 찾기<br>회의실 예약 연동</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-cloud feature-icon" style="color:#03C75A;"></i>
+                <h3>드라이브 (Drive)</h3>
+                <p>랜섬웨어 걱정 없는 안전한 보관<br>사내/외 파일 공유 링크 생성</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-video feature-icon" style="color:#03C75A;"></i>
+                <h3>화상회의 (Video)</h3>
+                <p>별도 설치 없는 고화질 화상회의<br>최대 200명 동시 참여</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-robot feature-icon" style="color:#03C75A;"></i>
+                <h3>AI 비서 (WORKS AI)</h3>
+                <p>메일 요약 및 답장 추천<br>중요 메시지 자동 알림 (CLOVA)</p>
+            </div>
+        </div>
+
+        <div class="section-header" style="margin-top:80px;">
+            <h2>서비스 요금제</h2>
+            <p>기업의 규모와 필요에 맞는 최적의 플랜을 선택하세요.</p>
+        </div>
+
+        <div class="pricing-grid compact-pricing">
+            <!-- Lite -->
+            <div class="plan-card popular">
+                <h3 class="plan-title">Lite</h3>
+                <div class="plan-price">
+                    <span class="amount">3,000</span> <span class="period">원 / 월</span>
+                </div>
+                <div class="plan-summary">(연간 계약 기준, 1인)</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> <strong>메시지/홈/설문</strong></li>
+                    <li><i class="fas fa-check"></i> 캘린더/주소록/할 일</li>
+                    <li><i class="fas fa-check"></i> 화상회의 (최대 200명)</li>
+                    <li><i class="fas fa-check"></i> 공용 용량 10GB (인당)</li>
+                </ul>
+                <button onclick="openAppModal('Naver Works - Lite', 'sol-groupware')" class="plan-btn solid"
+                    style="width:100%; border:none; cursor:pointer;">도입 문의</button>
+            </div>
+
+            <!-- Standard -->
+            <div class="plan-card popular">
+                <div class="plan-badge">BEST</div>
+                <h3 class="plan-title">Standard</h3>
+                <div class="plan-price">
+                    <span class="amount">7,000</span> <span class="period">원 / 월</span>
+                </div>
+                <div class="plan-summary">(연간 계약 기준, 1인)</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> <strong>Lite 기능 전체 포함</strong></li>
+                    <li><i class="fas fa-check"></i> <strong>기업용 메일</strong> (보안/아카이빙)</li>
+                    <li><i class="fas fa-check"></i> 드라이브 (1TB 대용량)</li>
+                    <li><i class="fas fa-check"></i> 메일 용량 100GB (인당)</li>
+                </ul>
+                <button onclick="openAppModal('Naver Works - Standard', 'sol-groupware')" class="plan-btn solid"
+                    style="width:100%; border:none; cursor:pointer;">도입 문의</button>
+            </div>
+
+            <!-- Standard Plus -->
+            <div class="plan-card popular">
+                <h3 class="plan-title">Standard Plus</h3>
+                <div class="plan-price">
+                    <span class="amount">11,000</span> <span class="period">원 / 월</span>
+                </div>
+                <div class="plan-summary">(연간 계약 기준, 1인)</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> <strong>Standard 기능 전체 포함</strong></li>
+                    <li><i class="fas fa-check"></i> <strong>AI 기능 (CLOVA)</strong> 지원</li>
+                    <li><i class="fas fa-check"></i> 메일 용량 3TB (인당)</li>
+                    <li><i class="fas fa-check"></i> 아카이빙 (10년 보관)</li>
+                </ul>
+                <button onclick="openAppModal('Naver Works - Standard Plus', 'sol-groupware')" class="plan-btn solid"
+                    style="width:100%; border:none; cursor:pointer;">도입 문의</button>
+            </div>
+        </div>
+
+        <div
+            style="margin-top:20px; text-align:center; color:#666; font-size:14px; background:#f9fafb; padding:15px; border-radius:8px;">
+            <i class="fas fa-info-circle"></i> 휴메카는 네이버클라우드 공식 파트너로서, 네이버웍스 도입 컨설팅 및 기술 지원을 제공합니다.
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <!-- App Modal Placeholder -->
+    <div id="app-modal-placeholder"></div>
+    <script src="components/loader.js?v=3.18"></script>
+
+    <script src="js/application_modal.js"></script>
+    <script src="js/data_loader.js"></script>
+</body>
+
+</html>

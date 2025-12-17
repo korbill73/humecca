@@ -1,21 +1,37 @@
-/* Admin Dashboard Styles - Redesign V2 (Premium Humecca Red) */
+/* Admin Dashboard Styles - Redesign V3 (Dark & Futuristic) */
 :root {
-    --primary-color: #E94D36;
-    /* Humecca Red */
-    --primary-light: #FFF1F2;
-    /* Light Red BG */
-    --primary-hover: #d13a24;
-    --secondary-color: #1E293B;
+    /* Theme Colors (Matches Calculator) */
+    --primary-color: #3b82f6;
+    /* Blue 500 */
+    --primary-light: #1e293b;
+    /* Slate 800 (used for headers) */
+    --primary-hover: #2563eb;
+    /* Blue 600 */
+    --secondary-color: #94a3b8;
+    /* Slate 400 */
+
+    /* Backgrounds */
+    --bg-color: #0f172a;
+    /* Dark Navy */
+    --card-bg: #1e293b;
     /* Slate 800 */
-    --bg-color: #F8FAFC;
+    --input-bg: #0f172a;
+    /* Darker input bg */
+
+    /* Borders */
+    --border-color: #334155;
+    /* Slate 700 */
+
+    /* Text */
+    --text-primary: #f8fafc;
     /* Slate 50 */
-    --card-bg: #FFFFFF;
-    --border-color: #E2E8F0;
-    --text-primary: #1E293B;
-    --text-secondary: #64748B;
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 10px 30px -3px rgba(0, 0, 0, 0.08);
-    /* Premium Soft Shadow */
+    --text-secondary: #94a3b8;
+    /* Slate 400 */
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 30px -3px rgba(0, 0, 0, 0.5);
+
     --radius-lg: 20px;
     --radius-md: 12px;
 }
@@ -27,11 +43,11 @@
 }
 
 body {
-    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-family: 'Outfit', 'Pretendard', sans-serif;
+    /* Added Outfit */
     background-color: var(--bg-color);
     color: var(--text-primary);
     font-size: 15px;
-    /* Slightly larger for modern feel */
     line-height: 1.6;
 }
 
@@ -44,10 +60,13 @@ body {
 
 /* Header */
 .admin-header {
-    background: var(--card-bg);
+    background: rgba(30, 41, 59, 0.8);
+    /* Glassy Slate */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 24px 0;
     margin-bottom: 40px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -82,12 +101,18 @@ body {
     margin-bottom: 8px;
 }
 
+.page-subtitle {
+    color: var(--text-secondary);
+}
+
 .admin-header h1 {
     font-size: 28px;
     font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 24px;
     text-align: center;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    /* Neon glow */
 }
 
 /* Tabs - Pill Style */
@@ -96,11 +121,13 @@ body {
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    background: #F1F5F9;
+    background: rgba(255, 255, 255, 0.05);
+    /* Subtle container */
     padding: 6px;
     border-radius: 99px;
     max-width: fit-content;
     margin: 0 auto;
+    border: 1px solid var(--border-color);
 }
 
 .admin-tab {
@@ -116,22 +143,21 @@ body {
 }
 
 .admin-tab:hover {
-    color: var(--primary-color);
-    background: rgba(255, 255, 255, 0.5);
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .admin-tab.active {
     background: var(--primary-color);
-    /* Red Pill */
     color: white;
-    box-shadow: 0 4px 10px rgba(233, 77, 54, 0.3);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
 }
 
-/* Sub Tabs (Product Menu) - Underline Style */
+/* Sub Tabs */
 .tabs {
     display: flex;
     gap: 0;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 30px;
     margin-top: 10px;
 }
@@ -142,20 +168,21 @@ body {
     font-weight: 500;
     color: var(--text-secondary);
     border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
     font-size: 15px;
     transition: all 0.2s;
 }
 
 .tab:hover {
-    color: var(--text-primary);
-    background-color: #f8fafc;
+    color: white;
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .tab.active {
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-color);
     font-weight: 700;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
 }
 
 /* Cards */
@@ -170,10 +197,9 @@ body {
 }
 
 .card:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
     transform: translateY(-2px);
-    border-color: #FECACA;
-    /* Light Red Border on Hover */
+    border-color: var(--primary-color);
 }
 
 .card-header {
@@ -181,7 +207,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
-    border-bottom: 2px solid #F1F5F9;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding-bottom: 16px;
 }
 
@@ -206,25 +232,27 @@ label {
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 10px;
-    letter-spacing: -0.01em;
 }
 
 .form-control,
 .form-input,
-select.form-control {
+select.form-control,
+textarea.form-control {
     width: 100%;
     padding: 14px 18px;
-    border: 1px solid #CBD5E1;
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     font-size: 15px;
     transition: all 0.2s;
-    background: white;
+    background: var(--input-bg);
+    /* Dark Input */
+    color: white;
 }
 
 .form-control:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(233, 77, 54, 0.1);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
 small {
@@ -251,39 +279,42 @@ small {
 .btn-primary {
     background: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 10px rgba(233, 77, 54, 0.2);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
     background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(233, 77, 54, 0.3);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .btn-secondary {
-    background: #F1F5F9;
+    background: rgba(255, 255, 255, 0.05);
+    /* Low opacity white */
     color: var(--text-primary);
+    border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-    background: #E2E8F0;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-secondary);
 }
 
 /* Tables */
 .admin-table {
     width: 100%;
     border-collapse: separate;
-    /* For rounded corners */
     border-spacing: 0;
 }
 
 .admin-table th {
-    background: var(--primary-light);
+    background: rgba(15, 23, 42, 0.5);
+    /* Darker than card */
     color: var(--primary-color);
     padding: 16px;
     text-align: left;
     font-weight: 700;
-    border-bottom: 1px solid #FECACA;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .admin-table th:first-child {
@@ -296,12 +327,18 @@ small {
 
 .admin-table td {
     padding: 16px;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     color: var(--text-primary);
 }
 
-.admin-table tr:last-child td {
-    border-bottom: none;
+.admin-table tr:hover td {
+    background-color: rgba(59, 130, 246, 0.05);
+    /* Subtle blue tint */
+}
+
+.admin-table tr:hover {
+    transform: none;
+    /* Removed transform to keep it stable */
 }
 
 /* Badges & Icons */
@@ -313,13 +350,13 @@ small {
 }
 
 .badge-blue {
-    background: #EFF6FF;
-    color: #3B82F6;
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
 }
 
 .badge-red {
-    background: #FEF2F2;
-    color: #EF4444;
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
 }
 
 /* Grid Helpers */
@@ -341,68 +378,19 @@ small {
     gap: 16px;
 }
 
-/* Customer List Specific */
-.customer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.customer-card {
-    background: white;
-    border: 1px solid #E2E8F0;
-    border-radius: var(--radius-md);
-    padding: 24px;
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    box-shadow: var(--shadow-sm);
-}
-
-.customer-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 20px rgba(233, 77, 54, 0.1);
-    transform: translateY(-5px);
-}
-
-/* Modal */
+/* Modal (Overriding global if needed) */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.5);
-    backdrop-filter: blur(4px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    /* Darker overlay */
 }
 
 .modal-box {
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.3s ease;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
 }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Utilities & Alerts */
+/* Alerts */
 .alert {
     padding: 14px 18px;
     border-radius: var(--radius-md);
@@ -415,45 +403,64 @@ small {
 }
 
 .alert-success {
-    background: #d1fae5;
-    color: #065f46;
-    border: 1px solid #6ee7b7;
+    background: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .alert-info {
-    background: #eff6ff;
-    color: #1e3a8a;
-    border: 1px solid #bfdbfe;
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* === Contrast Fixes/Overrides === */
+
+/* Fix Quill Editor Visibility (White layout needs black text) */
+#editor-container .ql-editor {
+    color: #1e293b !important;
+    /* Dark Slate Text */
+    background-color: white !important;
+}
+
+.ql-toolbar {
+    background: #f1f5f9;
+    border-radius: 12px 12px 0 0;
+    border-color: var(--border-color) !important;
+}
+
+.ql-container {
+    border-radius: 0 0 12px 12px;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix Select Option Visibility */
+select option {
+    background-color: var(--card-bg);
+    color: white;
 }
 
 .delete-btn {
-    background: #FEF2F2;
-    color: #EF4444;
-    border: 1px solid #FECACA;
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
     border-radius: 6px;
     width: 28px;
     height: 28px;
-    cursor: pointer;
-    font-size: 13px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    cursor: pointer;
 }
 
 .delete-btn:hover {
-    background: #EF4444;
+    background: #ef4444;
     color: white;
 }
 
 .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     color: var(--text-secondary);
     text-decoration: none;
-    margin-bottom: 20px;
-    font-size: 14px;
     font-weight: 600;
 }
 

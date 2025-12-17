@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA - 상품 관리자</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1f3c;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #1a1f3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #E94D36;
+        }
+
+        .status-msg {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <div class="admin-container">
+        <h1><i class="fas fa-boxes"></i> 상품 등록 관리자</h1>
+
+        <form id="productForm">
+            <div class="form-group">
+                <label for="category">카테고리</label>
+                <select id="category" required>
+                    <option value="">카테고리 선택</option>
+                    <option value="server">서버 호스팅</option>
+                    <option value="security">보안 서비스</option>
+                    <option value="cloud">클라우드</option>
+                    <option value="solution">솔루션</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="name">상품명 (서비스명)</label>
+                <input type="text" id="name" placeholder="예: 스탠다드 서버, 24시간 관제" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">간단 설명</label>
+                <input type="text" id="description" placeholder="예: 합리적인 가격의 고성능 서버" required>
+            </div>
+
+            <div class="form-group">
+                <label for="details">상세 내용 (줄바꿈 가능)</label>
+                <textarea id="details" placeholder="상품의 상세 스펙이나 설명을 입력하세요."></textarea>
+            </div>
+
+            <button type="submit">상품 등록하기</button>
+        </form>
+
+        <div id="statusMsg" class="status-msg"></div>
+    </div>
+
+    <!-- Supabase Config Load -->
+    <script src="./supabase_config.js"></script>
+
+    <script>
+        const productForm = document.getElementById('productForm');
+        const statusMsg = document.getElementById('statusMsg');
+
+        productForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Check if Supabase is initialized
+            if (!supabase) {
+                statusMsg.textContent = '오류: Supabase 연결 설정이 되어있지 않습니다. supabase_config.js를 확인해주세요.';
+                statusMsg.className = 'status-msg error';
+                return;
+            }
+
+            const category = document.getElementById('category').value;
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const details = document.getElementById('details').value;
+
+            statusMsg.textContent = '등록 중...';
+            statusMsg.className = 'status-msg';
+
+            try {
+                const { data, error } = await supabase
+                    .from('products')
+                    .insert([
+                        { category, name, description, details }
+                    ]);
+
+                if (error) throw error;
+
+                statusMsg.textContent = '✅ 상품이 성공적으로 등록되었습니다!';
+                statusMsg.className = 'status-msg success';
+                productForm.reset();
+
+            } catch (err) {
+                console.error('Error:', err);
+                statusMsg.textContent = '등록 실패: ' + err.message;
+                statusMsg.className = 'status-msg error';
+            }
+        });
+    </script>
+</body>
+
+</html>

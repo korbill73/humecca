@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN 전용선 - HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <script src="js/vpn_data.js"></script>
+
+    <style>
+        /* IDC Style Background Override for Hero */
+        .vpn-hero {
+            background-color: #0f172a;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        /* VPN Specific Styles (Full Width Design) */
+        .vpn-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .vpn-feature-card {
+            padding: 30px;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .vpn-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-color: #ffdacc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header (Using existing header code) -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+
+
+    <!-- Hero Section -->
+    <main id="main-content">
+        <section class="sw-hero" style="background-color: #0f172a; position: relative; overflow: hidden;">
+            <!-- Last Updated: 2025-12-14 14:15:00 (KST) - Sparking Head & Dynamic Path -->
+
+            <!-- Full Width Canvas Background -->
+            <canvas id="space-canvas"
+                style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+
+            <div class="container" style="position: relative; z-index: 10;">
+                <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                    네트워크 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> VPN 전용선
+                </div>
+
+                <h1
+                    style="font-size: 48px; font-weight: 900; margin-bottom: 20px; letter-spacing: -1px; color: white; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                    VPN 전용선 서비스</h1>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const version = '251214.1430';
+                        console.log(`%cVPN Effect Loaded: ${version}`, 'background: #222; color: #bada55; font-size: 12px; padding: 4px;');
+
+                        const canvas = document.getElementById('space-canvas');
+                        const hero = document.querySelector('.sw-hero');
+
+                        if (!canvas || !hero) return;
+
+                        const ctx = canvas.getContext('2d');
+                        let width, height;
+
+                        // --- Config ---
+                        const STAR_COUNT = 150;
+                        const COMET_SPEED = 0.3; // Even Faster
+                        const TRAIL_RATE = 12; // Denser trail
+                        const SPARK_RATE = 6;  // More sparks
+
+                        // --- State ---
+                        const stars = [];
+                        const particles = []; // Trail
+                        const sparks = [];    // Explosive Sparks
+                        const comet = {
+                            x: 0,
+                            y: 0,
+                            targetX: 0,
+                            targetY: 0,
+                            angle: 0,
+                            autoMode: true
+                        };
+
+                        // --- Classes ---
+                        class Star {
+                            constructor() {
+                                this.reset();
+                                this.y = Math.random() * height;
+                            }
+                            reset() {
+                                this.x = Math.random() * width;
+                                this.y = -10;
+                                this.size = Math.random() * 2 + 0.5;
+                                this.speed = Math.random() * 0.5 + 0.1;
+                                this.alpha = Math.random();
+                                this.twinkleDir = Math.random() > 0.5 ? 0.02 : -0.02;
+                            }
+                            update() {
+                                this.y += this.speed;
+                                this.alpha += this.twinkleDir;
+                                if (this.alpha > 1 || this.alpha < 0.2) this.twinkleDir *= -1;
+                                if (this.y > height) {
+                                    this.y = -10;
+                                    this.x = Math.random() * width;
+                                }
+                            }
+                            draw() {
+                                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        }
+
+                        class TrailParticle {
+                            constructor(x, y, angle) {
+                                this.x = x;
+                                this.y = y;
+                                this.life = 1.0;
+                                this.decay = Math.random() * 0.005 + 0.005; // Medium-Long Life
+
+                                // Spread for beam tail
+                                const spread = (Math.random() - 0.5) * 0.3;
+                                const speed = Math.random() * 0.2;
+
+                                this.vx = Math.cos(angle + Math.PI + spread) * speed;
+                                this.vy = Math.sin(angle + Math.PI + spread) * speed;
+
+                                this.size = Math.random() * 4 + 1;
+                                // Cool colors
+                                const r = Math.random();
+                                this.color = r > 0.6 ? '#60A5FA' : (r > 0.3 ? '#00ffff' : '#ffffff');
+                            }
+                            update() {
+                                this.x += this.vx;
+                                this.y += this.vy;
+                                this.life -= this.decay;
+                                if (this.size > 0.5) this.size *= 0.98;
+                            }
+                            draw() {
+                                ctx.fillStyle = this.color;
+                                ctx.globalAlpha = this.life * 0.8;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                                ctx.globalAlpha = 1.0;
+                            }
+                        }
+
+                        class Spark {
+                            constructor(x, y, angle) {
+                                this.x = x;
+                                this.y = y;
+                                this.life = 1.0;
+                                this.decay = Math.random() * 0.04 + 0.02; // Short & Violent
+
+                                // Eject sparks mostly backwards but with wide angle (splashing)
+                                // Angle is the comet's forward angle.
+                                // Sparks fly in range: angle + PI +/- 1.5 rad (mostly back)
+                                const ejectAngle = angle + Math.PI + (Math.random() - 0.5) * 2.5;
+                                const speed = Math.random() * 4 + 2; // Fast ejection
+
+                                this.vx = Math.cos(ejectAngle) * speed;
+                                this.vy = Math.sin(ejectAngle) * speed;
+
+                                this.size = Math.random() * 3 + 1;
+                                this.color = Math.random() > 0.5 ? '#ffffff' : '#A5F3FC';
+                            }
+                            update() {
+                                this.x += this.vx;
+                                this.y += this.vy;
+                                this.life -= this.decay;
+                                this.size *= 0.95;
+                            }
+                            draw() {
+                                ctx.fillStyle = this.color;
+                                ctx.globalAlpha = this.life;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                                ctx.globalAlpha = 1.0;
+                            }
+                        }
+
+                        // --- Init ---
+                        function resize() {
+                            const rect = hero.getBoundingClientRect();
+                            width = canvas.width = rect.width;
+                            height = canvas.height = rect.height;
+
+                            stars.length = 0;
+                            for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+
+                            // Start pos if clean
+                            if (comet.x === 0) {
+                                comet.x = -50;
+                                comet.y = height * 0.5;
+                            }
+                        }
+                        window.addEventListener('resize', resize);
+                        resize();
+
+                        // --- Interaction ---
+                        hero.addEventListener('mousemove', (e) => {
+                            const rect = hero.getBoundingClientRect();
+                            comet.targetX = e.clientX - rect.left;
+                            comet.targetY = e.clientY - rect.top;
+                            comet.autoMode = false;
+                        });
+
+                        hero.addEventListener('mouseleave', () => {
+                            comet.autoMode = true;
+                        });
+
+                        // --- Loop ---
+                        function animate() {
+                            ctx.clearRect(0, 0, width, height);
+
+                            stars.forEach(star => {
+                                star.update();
+                                star.draw();
+                            });
+
+                            if (comet.autoMode) {
+                                const t = Date.now() / 1000;
+                                // X: Move constantly right
+                                const speedPixelPerSec = width * 0.3;
+                                comet.targetX = (t * speedPixelPerSec) % (width + 300) - 150;
+
+                                // Y: Organic Path
+                                comet.targetY = (height * 0.5)
+                                    + Math.sin(t * 1.2) * (height * 0.15)
+                                    + Math.cos(t * 2.5) * (height * 0.08);
+
+                                // Snap if wrapping
+                                if (comet.targetX < -140 && comet.x > width) {
+                                    comet.x = comet.targetX;
+                                    comet.y = comet.targetY;
+                                }
+                            }
+
+                            // Movement Physics
+                            const dx = comet.targetX - comet.x;
+                            const dy = comet.targetY - comet.y;
+
+                            if (Math.abs(dx) > width * 0.9) {
+                                comet.x = comet.targetX;
+                                comet.y = comet.targetY;
+                            } else {
+                                // High inertia follow
+                                comet.x += dx * (comet.autoMode ? 0.2 : COMET_SPEED);
+                                comet.y += dy * (comet.autoMode ? 0.2 : COMET_SPEED);
+                            }
+
+                            comet.angle = Math.atan2(dy, dx);
+                            const vTotal = Math.sqrt(dx * dx + dy * dy); // Speed magnitude
+
+                            // 1. Emit Trail (Beam Body)
+                            // Fill gaps
+                            const steps = Math.min(20, Math.floor(vTotal * 0.5) + 1);
+                            for (let s = 0; s < steps; s++) {
+                                const ratio = s / steps;
+                                // Interpolated position
+                                const ix = comet.x - (comet.x - (comet.x - dx * 0.2)) * ratio; // Approximation
+                                // Simply emit at comet.x is fine if rate is high,
+                                // but for smoothness, we scatter slightly along the velocity vector?
+                                // No, just jitter emit.
+                            }
+
+                            for (let i = 0; i < TRAIL_RATE; i++) {
+                                const p = Math.random();
+                                // Back-propagate emission
+                                const jx = comet.x - (Math.cos(comet.angle) * vTotal * p * 0.5);
+                                const jy = comet.y - (Math.sin(comet.angle) * vTotal * p * 0.5);
+                                particles.push(new TrailParticle(jx, jy, comet.angle));
+                            }
+
+                            // 2. Emit Sparks (Splashing Head)
+                            // More sparks if moving fast
+                            const sparkCount = SPARK_RATE + Math.floor(vTotal * 0.2);
+                            for (let i = 0; i < sparkCount; i++) {
+                                sparks.push(new Spark(comet.x, comet.y, comet.angle));
+                            }
+
+                            // Update particles
+                            ctx.globalCompositeOperation = 'screen';
+
+                            for (let i = particles.length - 1; i >= 0; i--) {
+                                particles[i].update();
+                                particles[i].draw();
+                                if (particles[i].life <= 0) particles.splice(i, 1);
+                            }
+
+                            for (let i = sparks.length - 1; i >= 0; i--) {
+                                sparks[i].update();
+                                sparks[i].draw();
+                                if (sparks[i].life <= 0) sparks.splice(i, 1);
+                            }
+
+                            ctx.globalCompositeOperation = 'source-over';
+
+                            // 3. Draw Dynamic Head
+                            ctx.save();
+                            ctx.translate(comet.x, comet.y);
+                            ctx.rotate(comet.angle);
+
+                            // Core Glow
+                            const grad = ctx.createRadialGradient(0, 0, 2, 0, 0, 35);
+                            grad.addColorStop(0, 'rgba(255,255,255,1)');
+                            grad.addColorStop(0.2, 'rgba(165, 243, 252, 0.8)'); // Cyan
+                            grad.addColorStop(0.5, 'rgba(56, 189, 248, 0.4)'); // Blue
+                            grad.addColorStop(1, 'rgba(0,0,0,0)');
+                            ctx.fillStyle = grad;
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 35, 0, Math.PI * 2);
+                            ctx.fill();
+
+                            // "Shockwave" Arc (Front)
+                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 18, -Math.PI / 3, Math.PI / 3); // 120 deg arc facing right (0)
+                            ctx.stroke();
+
+                            // Solid Core
+                            ctx.fillStyle = '#ffffff';
+                            ctx.beginPath();
+                            ctx.ellipse(5, 0, 8, 5, 0, 0, Math.PI * 2); // Elongated slightly forward
+                            ctx.fill();
+
+                            ctx.restore();
+
+                            requestAnimationFrame(animate);
+                        }
+                        animate();
+                    });
+                </script>
+
+                <p style="max-width: 800px; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                    본사-지사 간 안전하고 빠른 네트워크 연결을 위한 최고의 선택.<br>
+                    HUMECCA가 제공하는 차세대 기업 통신망을 경험하세요.
+                </p>
+                <!-- Visible Version Indicator -->
+                <div
+                    style="position: absolute; bottom: 0; left: 0; padding: 20px; font-size: 11px; color: rgba(255,255,255,0.8); font-family: monospace;">
+                    Ver. 251214.1440</div>
+            </div>
+        </section>
+
+        <!-- Main Content (Full Width) -->
+        <div style="padding: 80px 0; background: white;">
+            <div class="container">
+
+                <div style="text-align:center; max-width:800px; margin:0 auto 80px;">
+                    <h2 style="font-size:36px; font-weight:800; margin-bottom:15px; color:#111827;">Why HUMECCA VPN?
+                    </h2>
+                    <p style="color:#666; font-size:18px;">비용은 줄이고 보안은 강화하는 최적의 네트워크 솔루션</p>
+                </div>
+
+                <!-- Global Features (Generic) -->
+                <div class="vpn-features-grid">
+                    <div class="vpn-feature-card">
+                        <div
+                            style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">IPSec / SSL VPN
+                        </h3>
+                        <p style="color:#666; font-size:16px; line-height:1.6;">표준 IPSec 및 SSL 프로토콜을 모두 지원하여 다양한 네트워크
+                            환경에
+                            유연하게 대응합니다.</p>
+                    </div>
+
+                    <div class="vpn-feature-card">
+                        <div
+                            style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">AES-256 암호화</h3>
+                        <p style="color:#666; font-size:16px; line-height:1.6;">금융권 수준의 강력한 AES-256 암호화 알고리즘을 적용하여 데이터를
+                            안전하게
+                            보호합니다.</p>
+                    </div>
+
+                    <div class="vpn-feature-card">
+                        <div
+                            style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">Mesh 네트워크</h3>
+                        <p style="color:#666; font-size:16px; line-height:1.6;">본사와 여러 지사 간의 다중 거점 연결(Mesh) 구성을 손쉽고
+                            안정적으로
+                            처리합니다.</p>
+                    </div>
+
+                    <div class="vpn-feature-card">
+                        <div
+                            style="color:#E94D36; margin-bottom:25px; font-size:32px; background:#fff1f0; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3 style="font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;">대역폭 100% 보장</h3>
+                        <p style="color:#666; font-size:16px; line-height:1.6;">계약된 속도(CIR)를 100% 보장하여 트래픽이 몰려도 끊김 없는 업무
+                            환경을
+                            제공합니다.</p>
+                    </div>
+                </div>
+
+                <div style="margin: 120px 0 60px; text-align:center;">
+                    <h2 style="font-size:36px; font-weight:800; margin-bottom:15px; color:#111827;">서비스 요금제</h2>
+                    <p style="color:#666; font-size:18px;">합리적인 가격으로 기업 전용선을 구축하세요.</p>
+                </div>
+
+                <!-- Dynamic Product List (Restored) -->
+                <div id="vpn-list-container" class="pricing-grid compact-pricing">
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-spinner fa-spin"></i> 상품 정보를 불러오는 중입니다...
+                    </div>
+                </div>
+
+                <!-- Bottom CTA -->
+                <div
+                    style="margin-top:120px; background:#111827; padding:80px; border-radius:24px; text-align:center; color:white; background-image: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); background-size:cover; background-position:center;">
+                    <h3 style="font-size:32px; font-weight:700; margin-bottom:20px;">맞춤형 네트워크 설계가 필요하신가요?</h3>
+                    <p
+                        style="color:#e5e7eb; margin-bottom:40px; font-size:18px; max-width:600px; margin-left:auto; margin-right:auto;">
+                        전문 네트워크 엔지니어가 귀사의 비즈니스 환경과 예산에 맞춰<br>최적의 VPN 구성을 무료로 제안해 드립니다.</p>
+                    <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+                        <button onclick="openAppModal('VPN 상담', 'vpn')" class="btn btn-primary"
+                            style="padding:16px 40px; font-size:18px; background:#E94D36; color:white; border-radius:8px; display:inline-block; font-weight:600; border:none; transition:all 0.3s; box-shadow: 0 4px 15px rgba(233,77,54,0.4); cursor:pointer; font-family:inherit;">무료
+                            상담 신청</button>
+                        <a href="tel:02-1234-5678"
+                            style="padding:16px 40px; font-size:18px; background:transparent; color:white; border:2px solid white; border-radius:8px; text-decoration:none; display:inline-block; font-weight:600; transition:all 0.3s;">전화
+                            문의하기</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Correct Footer ID for Loader -->
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <!-- App Modal Placeholder -->
+    <div id="app-modal-placeholder"></div>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="js/application_modal.js"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            console.log('Window loaded. VPN static content ready.');
+
+            // 1. Data Loader Enabled
+            if (typeof loadProductData === 'function') {
+                loadProductData('vpn');
+            }
+
+            // 2. Mobile Menu Logic (Preserving existing logic)
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('.nav');
+            if (mobileBtn) {
+                // Remove existing listeners to avoid duplicates if any
+                const newBtn = mobileBtn.cloneNode(true);
+                mobileBtn.parentNode.replaceChild(newBtn, mobileBtn);
+
+                newBtn.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+
+    <!-- Load Header and Footer -->
+    <!-- Load Header and Footer -->
+    <!-- Removed duplicate loader.js -->
+
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

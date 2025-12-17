@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디딤모니터링 - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+            <div id="header-placeholder"></div>
+
+
+    <section class="cloud-hero">
+        <div class="container">
+            <span class="badge">KT Cloud Partner</span>
+            <h1>디딤모니터링</h1>
+            <p>KT Cloud 기반 통합 모니터링 서비스</p>
+            <a href="https://login.humecca.co.kr" class="hero-shortcut" target="_blank"><i
+                    class="fas fa-sign-in-alt"></i> 서비스 바로가기</a>
+        </div>
+    </section>
+
+    <div class="cloud-layout">
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html"><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html"><i class="fas fa-ban"></i> 서비스별 제한사항</a></li>
+                <!-- Monitoring specific link addition if needed or reuse existing slot? 
+                     Wait, the sidebar items in sub_cloud_monitoring.html (Step 931) did NOT list Monitoring explicitly in the list 
+                     lines 32-40: Intro, Server, DB, Storage, Network, Management, VDI, Private, Limits.
+                     Where IS Monitoring?
+                     It is MISSING from the sidebar!
+                -->
+            </ul>
+            <a href="https://login.humecca.co.kr" class="sidebar-shortcut" target="_blank"><i
+                    class="fas fa-external-link-alt"></i> 클라우드 콘솔 바로가기</a>
+        </aside>
+
+        <main class="cloud-content">
+            <div class="content-header">
+                <h2><i class="fas fa-chart-line"></i> 디딤모니터링</h2>
+                <p>365일 24시간 실시간 장애 감지 및 알림 서비스</p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">서비스 요금</div>
+                <p class="section-note">* 모니터링 대상 서버 수에 따라 과금됩니다.</p>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>서비스</th>
+                            <th>내용</th>
+                            <th class="highlight">월 요금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basic</td>
+                            <td>서버 1~5대</td>
+                            <td class="price">55,000원</td>
+                        </tr>
+                        <tr>
+                            <td>Standard</td>
+                            <td>서버 6~20대</td>
+                            <td class="price">165,000원</td>
+                        </tr>
+                        <tr>
+                            <td>Premium</td>
+                            <td>서버 21대 이상</td>
+                            <td class="price">협의</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">모니터링 항목</div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4><i class="fas fa-server"></i> 서버 모니터링</h4>
+                        <ul class="feature-list">
+                            <li>CPU/메모리 사용률</li>
+                            <li>디스크 I/O</li>
+                            <li>네트워크 트래픽</li>
+                            <li>프로세스 상태</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-globe"></i> 서비스 모니터링</h4>
+                        <ul class="feature-list">
+                            <li>HTTP/HTTPS 응답</li>
+                            <li>포트 상태 확인</li>
+                            <li>SSL 인증서 만료</li>
+                            <li>도메인 만료</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-bell"></i> 알림 채널</h4>
+                        <ul class="feature-list">
+                            <li>SMS/이메일 알림</li>
+                            <li>카카오톡 알림</li>
+                            <li>Slack 연동</li>
+                            <li>전화 알림 (Premium)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== FOOTER (공통 컴포넌트) ========== -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="script.js"></script>
+
+
+    <script>
+        // Improved Menu Interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+
+                // When link inside menu is clicked, hide menu immediately
+                const links = menu.querySelectorAll('a.dropdown-item');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.style.display = 'none'; // Force hide to prevent ghosting
+                    });
+                });
+
+                // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+                // This ensures that next time the user hovers, CSS :hover works again.
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = '';
+                    menu.style.opacity = '';
+                    menu.style.visibility = '';
+                });
+
+                // Safety: Ensure it's clean (visible) when mouse enters
+                item.addEventListener('mouseenter', () => {
+                    menu.style.display = '';
+                });
+            });
+        });
+    </script>
+
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+

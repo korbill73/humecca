@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 문제 해결 가이드</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.8;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #EF4444;
+            border-bottom: 3px solid #EF4444;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #1e293b;
+            margin-top: 30px;
+        }
+
+        .warning {
+            background: #fef2f2;
+            border-left: 4px solid #EF4444;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .step {
+            background: #f8fafc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .step strong {
+            color: #3b82f6;
+        }
+
+        kbd {
+            background: #1e293b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #EF4444;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 20px 10px 20px 0;
+            font-weight: 600;
+        }
+
+        .button:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 메뉴 문제 해결 가이드</h1>
+
+        <div class="warning">
+            <strong>⚠️ 증상:</strong> 클라우드 메뉴에서 다른 메뉴로 이동시 이전 메뉴 내용이 일부 보이거나 클릭이 안되는 현상
+        </div>
+
+        <h2>✅ 해결 방법</h2>
+
+        <div class="success">
+            <strong>✓ 완료:</strong> 코드 수정이 완료되었습니다! 이제 브라우저 캐시만 삭제하면 됩니다.
+        </div>
+
+        <h2>📋 단계별 해결 방법</h2>
+
+        <div class="step">
+            <strong>방법 1: 강력 새로고침 (가장 빠름)</strong><br>
+            페이지에서 다음 키를 누르세요:<br>
+            • Windows: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd><br>
+            • Mac: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd>
+        </div>
+
+        <div class="step">
+            <strong>방법 2: 브라우저 캐시 완전 삭제</strong><br>
+            1. <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Delete</kbd> 누르기<br>
+            2. "캐시된 이미지 및 파일" 선택<br>
+            3. 기간: "전체 기간" 선택<br>
+            4. "데이터 삭제" 클릭
+        </div>
+
+        <div class="step">
+            <strong>방법 3: 개발자 도구 사용 (확실함)</strong><br>
+            1. <kbd>F12</kbd> 눌러서 개발자 도구 열기<br>
+            2. Network 탭 클릭<br>
+            3. "Disable cache" 체크박스 체크<br>
+            4. 페이지 새로고침 (<kbd>F5</kbd>)
+        </div>
+
+        <h2>🎯 수정된 내용</h2>
+        <ul>
+            <li><strong>index.html</strong>: 중복 헤더 제거, 캐시 버스팅 추가</li>
+            <li><strong>styles.css</strong>: 드롭다운 완전히 숨기는 CSS 추가</li>
+            <li><strong>loader.js</strong>: 모든 드롭다운 강제 숨김 로직 추가</li>
+        </ul>
+
+        <h2>✨ 기대 결과</h2>
+        <p>캐시 삭제 후:</p>
+        <ul>
+            <li>✓ 클라우드 → 보안: 보안 메뉴만 표시</li>
+            <li>✓ 클라우드 → 부가서비스: 부가서비스 메뉴만 표시</li>
+            <li>✓ 클라우드 → 기업솔루션: 기업솔루션 메뉴만 표시</li>
+            <li>✓ 모든 메뉴 항목 클릭 가능</li>
+            <li>✓ 이전 메뉴 내용 완전히 사라짐</li>
+        </ul>
+
+        <div class="success">
+            <strong>💡 팁:</strong> 문제가 계속되면 브라우저를 완전히 닫았다가 다시 여세요.
+        </div>
+
+        <a href="index.html" class="button">메인 페이지로 이동</a>
+        <a href="javascript:location.reload(true)" class="button" style="background:#3b82f6;">강력 새로고침</a>
+    </div>
+
+    <script>
+        // 자동으로 캐시 무효화
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+        }
+
+        // 콘솔에 안내 메시지
+        console.log('%c메뉴 시스템 업데이트 완료!', 'color: #EF4444; font-size: 16px; font-weight: bold;');
+        console.log('문제가 계속되면 Ctrl+Shift+R로 강력 새로고침하세요.');
+    </script>
+</body>
+
+</html>

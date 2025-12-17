@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ucloud Server - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+            <div id="header-placeholder"></div>
+
+
+    <!-- ========== CLOUD HERO ========== -->
+    <section class="cloud-hero">
+        <div class="container">
+            <!-- Standardized Hero -->
+            <div class="cloud-badgetext">KT Cloud Partner</div>
+
+            <h1>ucloud Server</h1>
+            <p>KT Cloud 기반 고성능 가상 서버</p>
+        </div>
+    </section>
+
+    <!-- ========== CLOUD LAYOUT ========== -->
+    <div class="cloud-layout">
+        <!-- Left Sidebar -->
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html" ><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html" class="active"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html"><i class="fas fa-ban"></i> 서비스별 제한사항</a></li>
+            </ul>
+            <a href="https://login.humecca.co.kr" class="sidebar-shortcut" target="_blank"><i
+                    class="fas fa-external-link-alt"></i> 클라우드 콘솔 바로가기</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cloud-content">
+
+
+            <div class="content-header">
+                <h2>ucloud Server</h2>
+                <p>kt 클라우드 플랫폼 기반에서 신속하고 안정적인 고품질의 클라우드 서버 자원 (CPU, Memory, Disk, Network)을 제공하는 서비스로, 웹 인터페이스를 통하여 사용자가
+                    매우 간단하게 필요한 컴퓨팅 자원을 구성할 수 있습니다.</p>
+            </div>
+
+            <div style="height:40px;"></div>
+
+            <!-- Server Pricing Section -->
+            <div class="content-section">
+                <div class="section-title">표준 server 및 High memory server 요금표 (G1/G2)</div>
+
+
+                <div class="engine-tabs">
+                    <span class="engine-tab active" onclick="showTab('standard')">표준 Memory Server</span>
+                    <span class="engine-tab" onclick="showTab('highmem')">High Memory Server</span>
+                </div>
+
+                <!-- Standard Server Tab -->
+                <div id="standard" class="tab-content active">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">구분</th>
+                                <th rowspan="2">CPU<br>(vCore)</th>
+                                <th rowspan="2">Memory<br>(GB)</th>
+                                <th colspan="2" class="highlight">G1 (기존 Zone)</th>
+                                <th colspan="2" class="highlight">G2 (Seoul M2)</th>
+                            </tr>
+                            <tr>
+                                <th class="highlight-sub">소비자가격</th>
+                                <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                                <th class="highlight-sub">소비자가격</th>
+                                <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="16" class="row-header">표준<br>Memory<br>Server</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>22,500원</td>
+                                <td class="price">20,250원</td>
+                                <td>22,500원</td>
+                                <td class="price">20,250원</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>38,500원</td>
+                                <td class="price">34,650원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>49,500원</td>
+                                <td class="price">44,550원</td>
+                                <td>46,700원</td>
+                                <td class="price">42,030원</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>79,500원</td>
+                                <td class="price">71,550원</td>
+                                <td>77,300원</td>
+                                <td class="price">69,570원</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>101,500원</td>
+                                <td class="price">91,350원</td>
+                                <td>93,500원</td>
+                                <td class="price">84,150원</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>163,500원</td>
+                                <td class="price">147,150원</td>
+                                <td>154,600원</td>
+                                <td class="price">139,140원</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>207,100원</td>
+                                <td class="price">186,750원</td>
+                                <td>187,100원</td>
+                                <td class="price">168,390원</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>16</td>
+                                <td>329,500원</td>
+                                <td class="price">296,550원</td>
+                                <td>309,300원</td>
+                                <td class="price">278,370원</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>16</td>
+                                <td>373,500원</td>
+                                <td class="price">336,150원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>32</td>
+                                <td>550,080원</td>
+                                <td class="price">495,072원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>16</td>
+                                <td>418,500원</td>
+                                <td class="price">376,650원</td>
+                                <td>374,300원</td>
+                                <td class="price">336,870원</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>32</td>
+                                <td>663,500원</td>
+                                <td class="price">597,150원</td>
+                                <td>618,600원</td>
+                                <td class="price">556,740원</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td>20</td>
+                                <td>558,300원</td>
+                                <td class="price">502,470원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td>40</td>
+                                <td>761,580원</td>
+                                <td class="price">685,422원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>24</td>
+                                <td>670,660원</td>
+                                <td class="price">603,594원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>48</td>
+                                <td>914,590원</td>
+                                <td class="price">823,131원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- High Memory Server Tab (New Data) -->
+                <div id="highmem" class="tab-content">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">구분</th>
+                                <th rowspan="2">CPU<br>(vCore)</th>
+                                <th rowspan="2">Memory<br>(GB)</th>
+                                <th colspan="2" class="highlight">G1 (기존 Zone)</th>
+                                <th colspan="2" class="highlight">G2 (Seoul M2)</th>
+                            </tr>
+                            <tr>
+                                <th class="highlight-sub">소비자가격</th>
+                                <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                                <th class="highlight-sub">소비자가격</th>
+                                <th class="highlight-sub">제공가격<br>(10% 할인)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="9" class="row-header">High<br>Memory<br>Server</td>
+                                <td>2</td>
+                                <td>8</td>
+                                <td>107,850원</td>
+                                <td class="price">97,065원</td>
+                                <td>98,800원</td>
+                                <td class="price">88,920원</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>16</td>
+                                <td>166,500원</td>
+                                <td class="price">149,850원</td>
+                                <td>120,400원</td>
+                                <td class="price">108,360원</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>16</td>
+                                <td>218,350원</td>
+                                <td class="price">196,515원</td>
+                                <td>197,700원</td>
+                                <td class="price">177,930원</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>32</td>
+                                <td>338,200원</td>
+                                <td class="price">304,380원</td>
+                                <td>240,800원</td>
+                                <td class="price">216,720원</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>32</td>
+                                <td>439,350원</td>
+                                <td class="price">395,415원</td>
+                                <td>395,500원</td>
+                                <td class="price">355,950원</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>62</td>
+                                <td>653,500원</td>
+                                <td class="price">583,550원</td>
+                                <td>470,000원</td>
+                                <td class="price">423,000원</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>62</td>
+                                <td>842,500원</td>
+                                <td class="price">758,250원</td>
+                                <td>773,100원</td>
+                                <td class="price">695,790원</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>124</td>
+                                <td>1,322,500원</td>
+                                <td class="price">1,190,250원</td>
+                                <td>940,100원</td>
+                                <td class="price">848,090원</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>160</td>
+                                <td>1,460,120원</td>
+                                <td class="price">1,314,108원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" class="row-header">High<br>Memory</td>
+                                <td>20</td>
+                                <td>80</td>
+                                <td>1,027,690원</td>
+                                <td class="price">924,921원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td>160</td>
+                                <td>1,559,910원</td>
+                                <td class="price">1,403,919원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>96</td>
+                                <td>1,233,930원</td>
+                                <td class="price">1,110,537원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>160</td>
+                                <td>1,659,700원</td>
+                                <td class="price">1,493,730원</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" class="row-header">High<br>Memory<br>(D1)</td>
+                                <td>32</td>
+                                <td>124</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>1,546,200원</td>
+                                <td class="price">1,391,580원</td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td>160</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>1,869,500원</td>
+                                <td class="price">1,682,550원</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="notes-list">
+                    <p>※ Data Disk 미제공: OS영역을 위한 기본디스크(Linux 20GB, Windows 50GB)만 제공, Data DISK는 미제공되며 DISK를 추가하실 수
+                        있습니다.</p>
+                    <p>※ 각 cloud 서버 사양별 선택 가능한 OS가 다르니, 반드시 확인하시기 바랍니다.</p>
+                    <p>※ 서버 사용요금은 서버 해지 전까지 이용요금이 발생합니다. 다만, 서버를 정지 시 정지요금으로 반영됩니다.</p>
+                    <p>※ server 정지 시에는 정지요금만 부과되며(12,000원/월) 월요금제는 일단위로(약 400원/일) 입니다.</p>
+                    <p>※ server 정지 시에는 VM 별로 제공되는 네트워크 무료 트래픽(1TB~2TB)도 정지 기간만큼 조정되어 제공됩니다.</p>
+                    <p>※ 124GB 이상의 High-Memory server는 추후제공합니다. 운영센터/컨설팅담당자께 문의해주세요.</p>
+                </div>
+            </div>
+
+            <!-- Network Section -->
+            <div class="content-section">
+                <div class="section-title">네트워크 (Outbound 트래픽)</div>
+                <div class="section-subtitle">Inbound 트래픽은 무료, Outbound만 과금 (단위: 원/월, 부가세별도)<br>국내 기준 (Seoul-M zone,
+                    Central-A/B zone, HA zone)</div>
+
+                <p style="font-size: 13px; color: #374151; margin-bottom: 8px;"><strong>16GB Memory 이상 VM:</strong> 월
+                    사용량 2TB 이하 무료</p>
+
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">구분</th>
+                            <th colspan="4" class="highlight">사용 구간</th>
+                        </tr>
+                        <tr>
+                            <th>Cloud 서버 당 2TB 이하</th>
+                            <th>2TB ~ 10TB</th>
+                            <th>10TB ~ 20TB</th>
+                            <th>20TB 이상</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>종량제 (GB당)</td>
+                            <td class="price">무료</td>
+                            <td>90원</td>
+                            <td>80원</td>
+                            <td>70원</td>
+                        </tr>
+                        <tr>
+                            <td>정액제 30TB</td>
+                            <td colspan="4">2,000,000원/월</td>
+                        </tr>
+                        <tr>
+                            <td>정액제 50TB</td>
+                            <td colspan="4">3,000,000원/월</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 13px; color: #374151; margin-top: 16px; margin-bottom: 8px;"><strong>16GB Memory 미만
+                        VM:</strong> 월 사용량 1TB 이하 무료</p>
+
+                <div class="notes-list">
+                    <p>* 예시) 동일계정에서 4vCore 4GB 1대, 4vCore 16GB 1대를 사용하면 해당계정의 트래픽은 outbound 총 3TB(1TB + 2TB)까지 무료입니다.
+                    </p>
+                    <p>* server 정지 시에는 VM 별로 제공되는 네트워크 무료 트래픽(1TB~2TB)이 정지 기간만큼 조정되어 제공됩니다.</p>
+                </div>
+            </div>
+
+            <!-- DISK Section -->
+            <div class="content-section">
+                <div class="section-title">ucloud server용 DISK</div>
+                <div class="section-subtitle">단위: 원/월, 부가세별도</div>
+
+                <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">NAS (Network
+                    Attached Storage)</h4>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">고성능의 NAS를 네트워크를 통해 복수의 ucloud server에
+                    공유 구성할 수 있는 서비스</p>
+
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>상품유형</th>
+                            <th>월요금</th>
+                            <th>IOPS 참고</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">HDD NAS</td>
+                            <td>기본용량 (1,000GB)</td>
+                            <td class="price">70,000원</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>추가용량 (100GB)</td>
+                            <td class="price">7,000원</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">SSD NAS</td>
+                            <td>기본용량 (1,000GB)</td>
+                            <td class="price">210,000원</td>
+                            <td>4,000 ~ 10,000</td>
+                            <td>seoul-M2 존 우선 제공</td>
+                        </tr>
+                        <tr>
+                            <td>추가용량 (100GB)</td>
+                            <td class="price">21,000원</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">Server Disk</h4>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>상품유형</th>
+                            <th>월요금</th>
+                            <th>IOPS 참고</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HDD(일반) DISK</td>
+                            <td>10GB</td>
+                            <td class="price">700원</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>SSD DISK</td>
+                            <td>10GB</td>
+                            <td class="price">1,400원</td>
+                            <td>4,000 ~ 10,000</td>
+                            <td>seoul-M2 존 우선 제공</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="font-size: 18px; font-weight: 600; color: #374151; margin: 32px 0 12px;">SSD-Provisioned (구
+                    SSD Volume)</h4>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>월요금</th>
+                            <th>구간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>용량 (100GB 당)</td>
+                            <td class="price">10,000원</td>
+                            <td>100GB ~ 800GB 선택</td>
+                        </tr>
+                        <tr>
+                            <td>성능 (1,000 IOPS 당)</td>
+                            <td class="price">35,000원</td>
+                            <td>6,000 IOPS ~ 20,000 IOPS 선택</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- IP Section -->
+            <div class="content-section">
+                <div class="table-grid">
+                    <div class="table-grid-item">
+                        <div class="section-title" style="font-size:20px;">공인 IP 추가</div>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>단위</th>
+                                    <th>월요금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>공인 IP 추가</td>
+                                    <td>1 IP당</td>
+                                    <td class="price">5,000원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-grid-item">
+                        <div class="section-title" style="font-size:20px;">CIP 추가</div>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>단위</th>
+                                    <th>월요금</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cloud DC 내부 CIP</td>
+                                    <td>1 CIP당</td>
+                                    <td class="price">20,000원</td>
+                                    <td style="text-align: left; font-size: 11px;">Subnet 별 차등</td>
+                                </tr>
+                                <tr>
+                                    <td>Cloud DC 외부 CIP</td>
+                                    <td>1 CIP당</td>
+                                    <td class="price">100,000원</td>
+                                    <td style="text-align: left; font-size: 11px;">Inter-AZ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OS Section -->
+            <div class="content-section">
+                <div class="section-title">Operating System (OS)</div>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>운영체제</th>
+                            <th>버전</th>
+                            <th>월요금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-header">Windows</td>
+                            <td>Windows Server 2008 / 2012 / 2016 / 2019</td>
+                            <td class="price">25,300원</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Linux</td>
+                            <td>CentOS, Ubuntu, Debian</td>
+                            <td class="price" style="color:#16a34a !important;">무료</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div id="footer-placeholder"></div>
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="script.js"></script>
+    <script>
+        // Tab function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.engine-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            // Highlight button
+            // If caller was the button click
+            if (window.event && window.event.target.classList.contains('engine-tab')) {
+                window.event.target.classList.add('active');
+            }
+        }
+    </script>
+
+
+    <script>
+        // Improved Menu Interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+
+                // When link inside menu is clicked, hide menu immediately
+                const links = menu.querySelectorAll('a.dropdown-item');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.style.display = 'none'; // Force hide to prevent ghosting
+                    });
+                });
+
+                // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+                // This ensures that next time the user hovers, CSS :hover works again.
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = '';
+                    menu.style.opacity = '';
+                    menu.style.visibility = '';
+                });
+
+                // Safety: Ensure it's clean (visible) when mouse enters
+                item.addEventListener('mouseenter', () => {
+                    menu.style.display = '';
+                });
+            });
+        });
+    </script>
+
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+

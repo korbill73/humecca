@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코로케이션 - HUMECCA</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="styles.css?v=3.18">
+
+    <style>
+        /* IDC White Theme Copy */
+        :root {
+            --bg-white: #ffffff;
+            --bg-gray-50: #f8fafc;
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --accent: #E94D36;
+            /* Brand Red */
+            --accent-hover: #d93d2b;
+            --border-light: #e2e8f0;
+            --footer-bg: #0f172a;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .idc-wrapper {
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            background-color: var(--bg-white);
+        }
+
+        .idc-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .idc-hero {
+            background-color: var(--footer-bg);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .idc-hero h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .idc-hero h1 {
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            line-height: 1.1;
+            margin: 0 0 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .idc-hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .idc-section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .idc-section.bg-gray {
+            background-color: var(--bg-gray-50);
+            border-top: none;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .idc-sec-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .idc-sec-sub {
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .idc-sec-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 0 0 16px;
+        }
+
+        .idc-sec-desc {
+            font-size: 1.15rem;
+            color: var(--text-sub);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Feature Grid */
+        .feat-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .feat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .feat-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .feat-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s;
+        }
+
+        .feat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent);
+        }
+
+        .feat-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .feat-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .feat-desc {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 32px;
+            align-items: start;
+        }
+
+        @media (min-width: 900px) {
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .plan-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .plan-card:hover {
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--border-light);
+        }
+
+        .plan-card.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 20px 40px -5px rgba(233, 77, 54, 0.15);
+        }
+
+        .plan-card.popular:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .plan-badge {
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plan-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 24px;
+        }
+
+        .plan-price {
+            margin-bottom: 32px;
+            color: var(--accent);
+        }
+
+        .amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .period {
+            font-size: 1rem;
+            color: var(--text-sub);
+            font-weight: 400;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-gray-50);
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features i {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .plan-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        .plan-btn.outline {
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+            background: white;
+        }
+
+        .plan-btn.outline:hover {
+            border-color: var(--text-main);
+            background: var(--bg-gray-50);
+        }
+
+        .plan-btn.solid {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .plan-btn.solid:hover {
+            background: var(--accent-hover);
+        }
+
+        /* CTA Centered */
+        .cta-box {
+            background: var(--bg-gray-50);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cta-btn-wrap {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn-main {
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .cta-btn-main:hover {
+            background: var(--accent-hover);
+        }
+
+        @media(max-width:600px) {
+            .idc-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .plan-card.popular {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <div class="idc-wrapper">
+        <!-- Hero -->
+        <section class="idc-hero">
+            <div class="idc-container">
+                            <!-- Standardized Hero -->
+            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                IDC 서비스 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> Colocation
+            </div>
+            <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-building" style="font-size: 30px; color: white;"></i>
+            </div>
+<h1>코로케이션</h1>
+                <p>국내 최고 수준의 Tier 3+ 데이터센터에 귀사의 서버를 안전하게 입주하세요.<br>안정적인 전력과 네트워크, 24시간 보안을 제공합니다.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="idc-section bg-gray">
+            <div class="idc-container">
+                <div class="idc-sec-header">
+                    <span class="idc-sec-sub">INFRASTRUCTURE</span>
+                    <h2 class="idc-sec-title">주요 특징</h2>
+                    <p class="idc-sec-desc">최첨단 설비와 보안 시스템으로 완벽한 운영 환경을 보장합니다</p>
+                </div>
+                <div class="feat-grid">
+                    <div class="feat-card">
+                        <div class="feat-icon"><i class="fas fa-building"></i></div>
+                        <h3 class="feat-title">Tier 3+ 데이터센터</h3>
+                        <p class="feat-desc">국제 기준 Tier 3+ 등급의 안정성이 검증된<br>최신 설비를 갖추고 있습니다.</p>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon"><i class="fas fa-bolt"></i></div>
+                        <h3 class="feat-title">이중화 전력 시스템</h3>
+                        <p class="feat-desc">UPS 이중화 및 비상 발전기 구축으로<br>무중단 전력 공급을 실현합니다.</p>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon"><i class="fas fa-fingerprint"></i></div>
+                        <h3 class="feat-title">다중 보안 시스템</h3>
+                        <p class="feat-desc">생체 인식, CCTV, 24시간 보안 요원 상주 등<br>철저한 물리적 보안을 유지합니다.</p>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon"><i class="fas fa-headset"></i></div>
+                        <h3 class="feat-title">24/7 원격 지원</h3>
+                        <p class="feat-desc">전문 엔지니어가 365일 24시간 상주하여<br>장애 발생 시 즉각 대응합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="idc-section">
+            <div class="idc-container">
+                <div class="idc-sec-header">
+                    <span class="idc-sec-sub">PRICING PLANS</span>
+                    <h2 class="idc-sec-title">상면 임대 요금</h2>
+                    <p class="idc-sec-desc">필요한 공간만큼 합리적으로 이용하세요</p>
+                </div>
+                <div class="pricing-grid" id="pricing-grid-colocation">
+                    <!-- Loaded via data_loader.js -->
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-spinner fa-spin"></i> 로딩 중...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="idc-section" style="padding-top:0; border:none;">
+            <div class="idc-container">
+                <div class="cta-box">
+                    <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">견적
+                        상담이 필요하신가요?</h2>
+                    <p style="color: var(--text-sub); margin-bottom: 2rem;">서버 수량과 전력량을 알려주시면 최적의 견적을 제안해 드립니다.</p>
+                    <div class="cta-btn-wrap">
+                        <a href="sub_support.html" class="cta-btn-main">간편 견적 문의 <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('colocation');
+        });
+    </script>
+    <script src="script.js"></script>
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

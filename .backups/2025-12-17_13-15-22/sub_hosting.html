@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서버호스팅 - HUMECCA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.21">
+
+
+</head>
+
+<body>
+    <!-- HEADER (Same as colocation) -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+    <main id="main-content">
+        <div class="idc-wrapper">
+            <section class="idc-hero" style="background-color: #0f172a; position: relative; overflow: hidden;">
+                <!-- IDC Space Effect -->
+                <canvas id="idc-canvas"
+                    style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+
+                <div class="idc-container" style="position: relative; z-index: 10;">
+                    <!-- Standardized Hero -->
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                        IDC 서비스 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> 서버호스팅
+                    </div>
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                        <i class="fas fa-server" style="font-size: 30px; color: white;"></i>
+                    </div>
+                    <h1>서버호스팅</h1>
+                    <p>고성능 전용 서버를 단독으로 사용하여<br>타협 없는 최고의 퍼포먼스를 경험하세요.</p>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const canvas = document.getElementById('idc-canvas');
+                        const hero = document.querySelector('.idc-hero');
+                        if (!canvas || !hero) return;
+
+                        const ctx = canvas.getContext('2d');
+                        let width, height;
+
+                        // --- Config (IDC Blue/Cyan Theme) ---
+                        // Different from Security (Red) and VPN (Blue-Green)
+                        // This will be a calm, tech-blue network feel
+                        const STAR_COUNT = 120; // Slightly less than Security
+                        const NODE_COUNT = 40;  // Network nodes
+                        const CONNECTION_DIST = 150;
+
+                        const stars = [];
+                        const nodes = [];
+
+                        class Star {
+                            constructor() {
+                                this.reset();
+                                this.y = Math.random() * height;
+                            }
+                            reset() {
+                                this.x = Math.random() * width;
+                                this.y = -10;
+                                this.size = Math.random() * 1.5 + 0.5;
+                                this.speed = Math.random() * 0.3 + 0.1; // Slower, stable
+                                this.alpha = Math.random() * 0.5 + 0.2;
+                            }
+                            update() {
+                                this.y += this.speed;
+                                if (this.y > height) this.reset();
+                            }
+                            draw() {
+                                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        }
+
+                        class Node {
+                            constructor() {
+                                this.x = Math.random() * width;
+                                this.y = Math.random() * height;
+                                this.vx = (Math.random() - 0.5) * 0.5;
+                                this.vy = (Math.random() - 0.5) * 0.5;
+                                this.size = Math.random() * 2 + 1;
+                                this.color = Math.random() > 0.5 ? '#60A5FA' : '#38BDF8'; // Blue/Sky
+                            }
+                            update() {
+                                this.x += this.vx;
+                                this.y += this.vy;
+
+                                // Bounce
+                                if (this.x < 0 || this.x > width) this.vx *= -1;
+                                if (this.y < 0 || this.y > height) this.vy *= -1;
+                            }
+                            draw() {
+                                ctx.fillStyle = this.color;
+                                ctx.beginPath();
+                                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        }
+
+                        function resize() {
+                            const rect = hero.getBoundingClientRect();
+                            width = canvas.width = rect.width;
+                            height = canvas.height = rect.height;
+
+                            stars.length = 0;
+                            nodes.length = 0;
+
+                            for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+                            for (let i = 0; i < NODE_COUNT; i++) nodes.push(new Node());
+                        }
+
+                        window.addEventListener('resize', resize);
+                        // Initial sizing needs a slight delay or check
+                        setTimeout(resize, 0);
+
+                        function animate() {
+                            ctx.clearRect(0, 0, width, height);
+
+                            // Draw Stars (Background)
+                            stars.forEach(s => { s.update(); s.draw(); });
+
+                            // Draw Nodes & Connections (Foreground Network)
+                            nodes.forEach((node, i) => {
+                                node.update();
+                                node.draw();
+
+                                // Connections
+                                for (let j = i + 1; j < nodes.length; j++) {
+                                    const other = nodes[j];
+                                    const dx = node.x - other.x;
+                                    const dy = node.y - other.y;
+                                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                                    if (dist < CONNECTION_DIST) {
+                                        ctx.beginPath();
+                                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / CONNECTION_DIST * 1.5})`; // Fade out
+                                        ctx.lineWidth = 0.5;
+                                        ctx.moveTo(node.x, node.y);
+                                        ctx.lineTo(other.x, other.y);
+                                        ctx.stroke();
+                                    }
+                                }
+                            });
+
+                            requestAnimationFrame(animate);
+                        }
+                        animate();
+                    });
+                </script>
+            </section>
+
+            <section class="idc-section">
+                <div class="idc-container">
+                    <div class="idc-sec-header">
+                        <span class="idc-sec-sub">PRICING PLANS</span>
+                        <h2 class="idc-sec-title">요금제 안내</h2>
+                        <p class="idc-sec-desc">비즈니스 규모에 맞게 선택하세요.</p>
+                    </div>
+
+                    <!-- Dynamic Product Container -->
+                    <div class="pricing-grid compact-pricing" id="pricing-container">
+                        <!-- Loading State -->
+                        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #94a3b8;">
+                            <i class="fas fa-spinner fa-spin fa-2x"></i><br><br>상품 정보를 불러오는 중입니다...
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- NEW: What is Server Hosting Section -->
+            <section class="idc-section bg-gray">
+                <div class="idc-container">
+                    <div class="idc-sec-header" style="margin-bottom: 50px;">
+                        <h2 class="idc-sec-title" style="font-size: 2rem;">서버호스팅이란?</h2>
+                        <p class="idc-sec-desc" style="max-width: 800px; margin-bottom: 30px;">
+                            "나만의 단독 주택을 갖는 것과 같습니다"
+                        </p>
+
+                        <!-- Intro Key Points (Box Layout) -->
+                        <div class="intro-key-points">
+                            <div class="intro-point-box">
+                                <div class="intro-point-icon"><i class="fas fa-home"></i></div>
+                                <div class="intro-point-title">단독 사용</div>
+                                <div class="intro-point-desc">
+                                    쉐어하우스(웹호스팅)와 달리<br>서버 한 대를 통째로 사용합니다.
+                                </div>
+                            </div>
+                            <div class="intro-point-box">
+                                <div class="intro-point-icon"><i class="fas fa-user-shield"></i></div>
+                                <div class="intro-point-title">완벽한 독립성</div>
+                                <div class="intro-point-desc">
+                                    타인의 간섭이나 소음 없이<br>모든 자원을 독점합니다.
+                                </div>
+                            </div>
+                            <div class="intro-point-box">
+                                <div class="intro-point-icon"><i class="fas fa-smile"></i></div>
+                                <div class="intro-point-title">쾌적하고 안전</div>
+                                <div class="intro-point-desc">
+                                    독립된 환경으로 보안이 뛰어나며<br>성능 저하가 없습니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Infographic Image Section -->
+                    <div class="server-diagram-box"
+                        style="padding: 40px; background: transparent; border: none; box-shadow: none;">
+                        <img src="images/server_hosting_intro_final.png" alt="Server Hosting Comparison Infographic"
+                            style="width: 100%; max-width: 900px; margin: 0 auto; display: block; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1)); border-radius: 20px;">
+                    </div>
+
+                    <div style="margin-top: 60px;">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">
+                            이런
+                            고객에게 서버호스팅을 추천합니다</h3>
+                        <ul
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; list-style: none; padding: 0;">
+                            <li
+                                style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border-light); display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-check-circle" style="color: var(--accent); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-sub);">타사와 서버 자원을 공유하지 않는 단독 환경 필요</span>
+                            </li>
+                            <li
+                                style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border-light); display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-check-circle" style="color: var(--accent); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-sub);">고성능 DB 서버 또는 대용량 트래픽 처리 필요</span>
+                            </li>
+                            <li
+                                style="background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border-light); display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-check-circle" style="color: var(--accent); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-sub);">보안상 물리적으로 분리된 서버 환경 필요</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="idc-section" style="padding-top:0; border:none;">
+                <div class="idc-container">
+                    <div class="cta-box">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">
+                            맞춤형
+                            서버가 필요하신가요?</h2>
+                        <p style="color: var(--text-sub); margin-bottom: 2rem;">GPU 서버, 고용량 스토리지 서버 등 특수 목적 서버 견적을
+                            받아보세요.
+                        </p>
+                        <div class="cta-btn-wrap">
+                            <div class="cta-btn-wrap">
+                                <button onclick="openAppModal('서버호스팅 상담', 'hosting', '')" class="cta-btn-main"
+                                    style="border:none; cursor:pointer;">견적 문의하기 <i
+                                        class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- [Dedicated Premium Modal for Hosting Page] -->
+    <div id="app-modal-hosting"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+        <div class="app-modal-content"
+            style="background: white; width: 90%; max-width: 520px; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: translateY(20px); transition: transform 0.3s ease; font-family: 'Pretendard', sans-serif;">
+
+            <!-- Header -->
+            <div
+                style="background: #1e293b; padding: 24px 30px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #334155;">
+                <div>
+                    <h3 style="color: white; font-size: 1.25rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">
+                        견적/상담 신청</h3>
+                    <p style="color: #94a3b8; font-size: 0.875rem; margin: 6px 0 0; line-height: 1.4;">전문 엔지니어가 빠르고 정확하게
+                        안내해 드립니다.</p>
+                </div>
+                <button onclick="closeAppModal()"
+                    style="background: rgba(255,255,255,0.1); border: none; color: #cbd5e1; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;">
+                    <i class="fas fa-times" style="font-size: 16px;"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div style="padding: 30px; max-height: 80vh; overflow-y: auto;">
+                <!-- Product Summary -->
+                <div
+                    style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                    <label
+                        style="display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">선택한
+                        서비스</label>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div
+                            style="width: 40px; height: 40px; background: #e0f2fe; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #0284c7;">
+                            <i class="fas fa-server" style="font-size: 18px;"></i>
+                        </div>
+                        <div>
+                            <div id="app-product-name-display"
+                                style="font-weight: 700; color: #0f172a; font-size: 1rem;">서버 호스팅</div>
+                            <div id="app-product-details-display"
+                                style="font-size: 0.85rem; color: #475569; margin-top: 2px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="application-form" onsubmit="submitApplication(event)">
+                    <input type="hidden" id="app-product-type" name="product_type">
+                    <input type="hidden" id="app-product-name" name="product_name">
+                    <input type="hidden" id="app-product-details" name="product_details">
+                    <div style="display:none; position:absolute; left:-9999px;">
+                        <label for="app-website-url">Website</label>
+                        <input type="text" id="app-website-url" name="website_url" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">회사명
+                            / 단체명 <span style="color:#ef4444">*</span></label>
+                        <input type="text" id="app-company" name="company" required placeholder="예: (주)휴메카"
+                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none;">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">담당자
+                                성함 <span style="color:#ef4444">*</span></label>
+                            <input type="text" id="app-name" name="name" required placeholder="홍길동"
+                                style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none;">
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">연락처
+                                <span style="color:#ef4444">*</span></label>
+                            <input type="tel" id="app-phone" name="phone" required placeholder="010-0000-0000"
+                                style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">이메일
+                            <span style="color:#ef4444">*</span></label>
+                        <input type="email" id="app-email" name="email" required placeholder="example@company.com"
+                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none;">
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: #334155;">문의
+                            / 요청사항</label>
+                        <textarea id="app-memo" name="memo" rows="3" placeholder="궁금하신 점이나 추가 요청사항을 적어주세요."
+                            style="width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; resize: vertical; outline: none;"></textarea>
+                    </div>
+
+                    <!-- Math Challenge -->
+                    <div
+                        style="background: #f1f5f9; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+                        <label
+                            style="font-size: 0.875rem; font-weight: 600; color: #475569; display: flex; align-items: center; gap: 6px;"><i
+                                class="fas fa-shield-alt"></i> 자동입력 방지</label>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span id="math-challenge-q"
+                                style="background: white; padding: 6px 12px; border-radius: 6px; font-weight: bold; color: #334155; font-family: monospace; border: 1px solid #cbd5e1;"></span>
+                            <input type="number" id="math-challenge-a" required placeholder="정답"
+                                style="width: 70px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; text-align: center; font-weight: 600; outline: none;">
+                        </div>
+                        <input type="hidden" id="math-challenge-real">
+                    </div>
+
+                    <button type="submit" id="btn-app-submit"
+                        style="width: 100%; background: #dc2626; color: white; padding: 16px; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);">상담
+                        신청하기</button>
+                </form>
+
+                <!-- Success View -->
+                <div id="app-success-view" style="display: none; padding: 40px 30px; text-align: center;">
+                    <div
+                        style="width: 80px; height: 80px; background: #dcfce7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                        <i class="fas fa-check"
+                            style="font-size: 40px; color: #16a34a; opacity: 0; animation: checkPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.2s;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 12px;">신청이 완료되었습니다!
+                    </h3>
+                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 30px;">담당자가 내용을 확인 후<br><span
+                            style="color: #1e293b; font-weight: 600;">빠르게 연락드리겠습니다.</span></p>
+
+                    <div
+                        style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 30px; text-align: left;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 8px; font-size: 13px;">
+                            <span style="color: #94a3b8; width: 60px;">상품명</span>
+                            <span style="color: #334155; font-weight: 600;" id="success-product-name">-</span>
+                        </div>
+                        <div style="display: flex; gap: 10px; font-size: 13px;">
+                            <span style="color: #94a3b8; width: 60px;">접수번호</span>
+                            <span style="color: #334155; font-weight: 600;" id="success-ref-id">-</span>
+                        </div>
+                    </div>
+
+                    <button onclick="closeAppModal()"
+                        style="width: 100%; background: #1e293b; color: white; padding: 16px; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s;">확인</button>
+                    <style>
+                        @keyframes checkPop {
+                            0% {
+                                transform: scale(0);
+                                opacity: 0;
+                            }
+
+                            100% {
+                                transform: scale(1);
+                                opacity: 1;
+                            }
+                        }
+                    </style>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            console.log('Window loaded. Initializing product data...');
+            if (typeof loadProductData === 'function') {
+                loadProductData('hosting');
+            } else {
+                console.error('Error: loadProductData function not found!');
+                const container = document.getElementById('pricing-container');
+                if (container) container.innerHTML = '<div style="text-align:center; padding:40px;">데이터 로드 실패 (새로고침 해주세요)</div>';
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+
+    <script src="js/subpage-canvas.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

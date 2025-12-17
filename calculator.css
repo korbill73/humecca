@@ -1,0 +1,373 @@
+/* =========================================
+   HUMECCA Calculator Theme (Dark & Futuristic)
+   ========================================= */
+
+:root {
+    --calc-bg: #0f172a;
+    --calc-card-bg: #1e293b;
+    --calc-border: #334155;
+    --calc-primary: #3b82f6;
+    /* Blue 500 */
+    --calc-accent: #60a5fa;
+    /* Blue 400 - Neon Glow */
+    --calc-text: #f8fafc;
+    --calc-text-muted: #94a3b8;
+    --calc-success: #10b981;
+}
+
+/* Base Container */
+.calc-container {
+    padding: 40px 0;
+    font-family: 'Outfit', sans-serif;
+    color: var(--calc-text);
+    background: var(--calc-bg);
+    min-height: 80vh;
+}
+
+.calc-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .calc-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   Left Column: Steps & Content
+   ========================================= */
+
+/* Step Navigation */
+.calc-steps {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--calc-border);
+    padding-bottom: 1px;
+    overflow-x: auto;
+}
+
+.calc-step-btn {
+    background: transparent;
+    border: none;
+    color: var(--calc-text-muted);
+    font-size: 1rem;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+}
+
+.calc-step-btn:hover {
+    color: white;
+}
+
+.calc-step-btn.active {
+    color: var(--calc-accent);
+    border-bottom-color: var(--calc-accent);
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+/* Cards Grid */
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Product Card */
+.calc-card {
+    background: var(--calc-card-bg);
+    border: 1px solid var(--calc-border);
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.calc-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--calc-accent);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+}
+
+.calc-card.active {
+    border-color: var(--calc-accent);
+    background: linear-gradient(145deg, rgba(30, 41, 59, 1), rgba(59, 130, 246, 0.1));
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.3), inset 0 0 10px rgba(96, 165, 250, 0.1);
+}
+
+.calc-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.calc-card p {
+    color: var(--calc-text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+}
+
+.calc-card .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--calc-accent);
+}
+
+.card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--calc-primary);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+/* Add-on Inputs */
+.addon-row {
+    background: var(--calc-card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--calc-border);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addon-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-control {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--calc-border);
+    background: var(--calc-bg);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-control:hover {
+    border-color: var(--calc-accent);
+}
+
+/* =========================================
+   Right Column: Sticky Quote
+   ========================================= */
+
+.quote-sidebar {
+    position: sticky;
+    top: 100px;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.quote-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+.quote-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+}
+
+.quote-items {
+    flex: 1;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.quote-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.total-section {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--calc-text-muted);
+}
+
+.total-row.final {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--calc-accent);
+    margin-bottom: 0;
+}
+
+.btn-reset {
+    background: transparent;
+    color: var(--calc-text-muted);
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-print {
+    width: 100%;
+    padding: 16px;
+    background: var(--calc-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.btn-print:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* =========================================
+   Print Styles (White Theme)
+   ========================================= */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    #header-placeholder,
+    #footer-placeholder,
+    .calc-steps,
+    /* Hide steps */
+    .calc-content-left,
+    /* Hide left selection area */
+    .btn-reset,
+    .btn-print,
+    .cloud-hero,
+    .mobile-menu-btn {
+        display: none !important;
+    }
+
+    .calc-container {
+        padding: 0;
+        margin: 0;
+        background: white;
+    }
+
+    .calc-layout {
+        display: block;
+    }
+
+    /* Expand sidebar to full page quote */
+    .quote-sidebar {
+        position: static;
+        background: white;
+        border: 2px solid #000;
+        box-shadow: none;
+        backdrop-filter: none;
+        color: black;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .quote-title {
+        color: black;
+        text-align: center;
+        font-size: 2rem;
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+    }
+
+    .quote-title::before {
+        content: "견적서 (Quote)";
+        display: block;
+    }
+
+    /* Hide original title text if needed or keep it pure */
+
+    .quote-items {
+        color: black;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .quote-item {
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 5px;
+    }
+
+    .total-section {
+        background: transparent;
+        border: 1px solid #000;
+        margin-top: 40px;
+    }
+
+    .total-row {
+        color: black;
+    }
+
+    .total-row.final {
+        color: black;
+    }
+
+    /* Print Footer */
+    .quote-sidebar::after {
+        content: "HUMMECCA | www.humecca.co.kr | Tel: 1544-0000";
+        display: block;
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #666;
+        border-top: 1px solid #ccc;
+        padding-top: 20px;
+    }
+}

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA Admin Dashboard</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-900 text-white flex flex-col shadow-xl z-20 hidden md:flex">
+        <div class="p-6 border-b border-gray-800 flex items-center gap-3">
+            <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center font-bold text-lg">H</div>
+            <span class="font-bold text-xl tracking-tight">HUMECCA Admin</span>
+        </div>
+        <nav class="flex-1 py-6 space-y-1">
+            <a
+                class="flex items-center px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"><i
+                    class="fas fa-home w-6"></i> 대시보드</a>
+            <a
+                class="flex items-center px-6 py-3 bg-gray-800 text-white border-l-4 border-red-500 transition-colors cursor-pointer"><i
+                    class="fas fa-server w-6"></i> 상품 관리 (호스팅)</a>
+            <a
+                class="flex items-center px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"><i
+                    class="fas fa-ticket-alt w-6"></i> 티켓/문의 관리</a>
+            <a
+                class="flex items-center px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"><i
+                    class="fas fa-users w-6"></i> 회원 관리</a>
+            <a
+                class="flex items-center px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"><i
+                    class="fas fa-chart-line w-6"></i> 통계 / 분석</a>
+        </nav>
+        <div class="p-4 border-t border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center"><i
+                        class="fas fa-user"></i></div>
+                <div>
+                    <div class="text-sm font-semibold">Administrator</div>
+                    <div class="text-xs text-gray-500">Super Admin</div>
+                </div>
+            </div>
+            <a href="index.html" target="_blank"
+                class="mt-4 block text-center text-xs text-blue-400 hover:text-blue-300">홈페이지 바로가기 <i
+                    class="fas fa-external-link-alt ml-1"></i></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        <!-- Top Header for Mobile -->
+        <header class="bg-white shadow-sm z-10 h-16 flex items-center justify-between px-6 md:hidden">
+            <div class="font-bold text-lg text-slate-800">상품 관리</div>
+            <button class="text-gray-500 hover:text-gray-800"><i class="fas fa-bars text-xl"></i></button>
+        </header>
+
+        <!-- Content Area -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-800">상품 관리</h1>
+                        <p class="text-slate-500 text-sm mt-1">서버호스팅 및 코로케이션 상품을 등록하고 관리합니다.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="exportData()"
+                            class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white hover:bg-slate-700 font-medium transition flex items-center gap-2 shadow-sm">
+                            <i class="fas fa-save"></i> 데이터 적용 (저장)
+                        </button>
+                        <button onclick="openModal()"
+                            class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition shadow-md font-medium text-sm flex items-center gap-2">
+                            <i class="fas fa-plus"></i> 상품 등록
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-slate-800" id="stat-total">0</div>
+                            <div class="text-xs text-slate-500 font-medium uppercase tracking-wide">총 등록 상품</div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xl">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-slate-800" id="stat-active">0</div>
+                            <div class="text-xs text-slate-500 font-medium uppercase tracking-wide">활성 상품</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase tracking-wider">
+                                    <th class="px-6 py-4 font-semibold">정렬</th>
+                                    <th class="px-6 py-4 font-semibold">상품정보</th>
+                                    <th class="px-6 py-4 font-semibold">가격</th>
+                                    <th class="px-6 py-4 font-semibold">상태</th>
+                                    <th class="px-6 py-4 font-semibold">스펙 요약</th>
+                                    <th class="px-6 py-4 font-semibold text-right">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody id="product-list-body" class="divide-y divide-slate-100 text-sm text-slate-600">
+                                <!-- JS Generated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="max-w-6xl mx-auto px-6 mb-12">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex gap-3 text-blue-900">
+                        <i class="fas fa-info-circle mt-1"></i>
+                        <div>
+                            <p class="font-bold text-sm mb-1">변경사항 저장 안내</p>
+                            <p class="text-xs opacity-80 leading-relaxed">
+                                브라우저 보안 정책상 자동 저장이 되지 않습니다. 편집 후 반드시 상단의 <span class="font-bold">[데이터 적용]</span> 버튼을 눌러
+                                <strong>설정 파일(hosting_data.js)을 다운로드</strong>하여 원본 파일에 덮어쓰기 해주세요.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="modal-overlay"
+        class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all scale-95 opacity-0"
+            id="modal-content">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-2xl">
+                <h3 class="text-xl font-bold text-slate-800" id="modal-title">새 상품 등록</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600"><i
+                        class="fas fa-times text-xl"></i></button>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <input type="hidden" id="edit-index">
+
+                <!-- Row 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">상품명</label>
+                        <input type="text" id="inp-name"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                            placeholder="예: 비즈니스">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">고유 ID (영어)</label>
+                        <input type="text" id="inp-id"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                            placeholder="예: biz_01">
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="col-span-1">
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">가격</label>
+                        <input type="text" id="inp-price"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500"
+                            placeholder="예: 199,000">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">기간 단위</label>
+                        <select id="inp-period"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500">
+                            <option value="월">월 (Month)</option>
+                            <option value="년">년 (Year)</option>
+                            <option value="건">건 (One-time)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">뱃지 (선택)</label>
+                        <input type="text" id="inp-badge"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5"
+                            placeholder="예: BEST, NEW">
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">한줄 요약</label>
+                    <input type="text" id="inp-summary"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5"
+                        placeholder="예: 중소기업을 위한 최적의 선택">
+                </div>
+
+                <!-- Specifications -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-3">서버 스펙 상세</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="inp-cpu"
+                            class="bg-white border border-slate-200 rounded px-3 py-2 text-sm"
+                            placeholder="CPU (예: Xeon Silver)">
+                        <input type="text" id="inp-ram"
+                            class="bg-white border border-slate-200 rounded px-3 py-2 text-sm"
+                            placeholder="RAM (예: 64GB DDR4)">
+                        <input type="text" id="inp-storage"
+                            class="bg-white border border-slate-200 rounded px-3 py-2 text-sm"
+                            placeholder="Storage (예: 1TB NVMe)">
+                        <input type="text" id="inp-traffic"
+                            class="bg-white border border-slate-200 rounded px-3 py-2 text-sm"
+                            placeholder="Traffic (예: 10Gbps)">
+                    </div>
+                </div>
+
+                <!-- Feature List -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">주요 기능 (줄바꿈으로 구분)</label>
+                    <textarea id="inp-features"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 h-24 focus:outline-none focus:border-blue-500 resize-none"
+                        placeholder="RAID 1 지원&#13;&#10;기술지원 포함&#13;&#10;무료 백업"></textarea>
+                </div>
+
+                <!-- Toggles -->
+                <div class="flex gap-8 border-t border-slate-100 pt-6">
+                    <label class="flex items-center gap-3 cursor-pointer select-none">
+                        <input type="checkbox" id="inp-active"
+                            class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                        <span class="text-sm font-semibold text-slate-700">판매중 (활성화)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer select-none">
+                        <input type="checkbox" id="inp-popular"
+                            class="w-5 h-5 text-red-600 rounded focus:ring-red-500 border-gray-300">
+                        <span class="text-sm font-semibold text-slate-700">인기상품 강조</span>
+                    </label>
+                    <div class="flex-1 flex justify-end items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase">순서</span>
+                        <input type="number" id="inp-order"
+                            class="w-16 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end gap-3">
+                <button onclick="closeModal()"
+                    class="px-5 py-2.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium transition">취소</button>
+                <button onclick="saveData()"
+                    class="px-5 py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-medium shadow-md transition transform active:scale-95">저장하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="export-overlay" class="fixed inset-0 bg-slate-900/70 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl h-[80vh] flex flex-col">
+            <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-slate-50 rounded-t-xl">
+                <div>
+                    <h3 class="font-bold text-lg text-slate-800">데이터 적용 방법 선택</h3>
+                    <p class="text-xs text-slate-500 mt-1">원하는 방식을 선택하여 홈페이지에 적용하세요.</p>
+                </div>
+                <button onclick="document.getElementById('export-overlay').classList.add('hidden')"
+                    class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-xl"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col md:flex-row">
+                <!-- Method 1: JS Data File -->
+                <div class="flex-1 p-6 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col">
+                    <div class="mb-4">
+                        <span
+                            class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold mb-2">권장
+                            방식</span>
+                        <h4 class="font-bold text-slate-800">데이터 파일 업데이트</h4>
+                        <p class="text-sm text-slate-500 mt-1"><code>hosting_data.js</code> 파일을 다운로드하여 덮어씁니다.<br>가장 간편하고
+                            안전한 방법입니다.</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-4 relative group flex-1 overflow-hidden flex flex-col mb-4">
+                        <div
+                            class="absolute top-0 left-0 right-0 bg-slate-900/50 p-2 text-center text-xs text-slate-400">
+                            hosting_data.js 미리보기</div>
+                        <textarea id="export-code"
+                            class="w-full h-full bg-transparent text-blue-300 text-xs font-mono resize-none focus:outline-none pt-8"
+                            readonly></textarea>
+                    </div>
+
+                    <button onclick="downloadJS()"
+                        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fas fa-download"></i> hosting_data.js 다운로드
+                    </button>
+                    <p class="text-xs text-center text-slate-400 mt-2">다운로드 후 <code>js/</code> 폴더에 덮어쓰기 하세요.</p>
+                </div>
+
+                <!-- Method 2: HTML Hardcoding -->
+                <div class="flex-1 p-6 flex flex-col bg-slate-50">
+                    <div class="mb-4">
+                        <span
+                            class="inline-block px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-bold mb-2">하드코딩
+                            방식</span>
+                        <h4 class="font-bold text-slate-800">HTML 코드 생성</h4>
+                        <p class="text-sm text-slate-500 mt-1">완성된 HTML 태그를 복사합니다.<br>스크립트 없이 순수 HTML로 사용하고 싶을 때 적합합니다.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 relative group flex-1 overflow-hidden flex flex-col mb-4">
+                        <div
+                            class="absolute top-0 left-0 right-0 bg-gray-50 p-2 text-center text-xs text-gray-400 border-b border-gray-100">
+                            HTML 미리보기</div>
+                        <textarea id="export-html"
+                            class="w-full h-full bg-transparent text-emerald-600 text-xs font-mono resize-none focus:outline-none pt-8"
+                            readonly></textarea>
+                        <button onclick="copyHTML()"
+                            class="absolute bottom-4 right-4 bg-gray-900 text-white px-3 py-1.5 rounded text-xs shadow hover:bg-black transition">Copy
+                            HTML</button>
+                    </div>
+
+                    <button onclick="downloadHTML()"
+                        class="w-full py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg transition flex items-center justify-center gap-2">
+                        <i class="fas fa-file-code"></i> HTML 파일로 저장 (.txt)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logic -->
+    <script src="js/hosting_data.js"></script>
+    <script>
+        let products = Array.isArray(hostingProducts) ? hostingProducts : [];
+        if (localStorage.getItem('hostingProducts')) {
+            try { products = JSON.parse(localStorage.getItem('hostingProducts')); } catch (e) { }
+        }
+
+        // Render function
+        function render() {
+            const tbody = document.getElementById('product-list-body');
+            tbody.innerHTML = '';
+
+            // Sort
+            products.sort((a, b) => (a.sortOrder || 99) - (b.sortOrder || 99));
+
+            // Stats
+            document.getElementById('stat-total').innerText = products.length;
+            document.getElementById('stat-active').innerText = products.filter(p => p.isActive).length;
+
+            products.forEach((p, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition border-b border-slate-50 last:border-0";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-mono text-xs text-slate-400">#${p.sortOrder}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="text-sm font-bold text-slate-800">${p.name}</div>
+                            ${p.badge ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-600">${p.badge}</span>` : ''}
+                            ${p.popular ? `<i class="fas fa-star text-yellow-400 text-xs"></i>` : ''}
+                        </div>
+                        <div class="text-xs text-slate-400 mt-0.5">${p.summary || '-'}</div>
+                    </td>
+                    <td class="px-6 py-4 font-medium text-slate-700">
+                        ₩${p.price} <span class="text-xs text-slate-400">/${p.period}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        ${p.isActive
+                        ? '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> 판매중</span>'
+                        : '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> 중지</span>'}
+                    </td>
+                    <td class="px-6 py-4 text-xs text-slate-500">
+                        CPU: ${p.specs?.cpu || '-'}<br>RAM: ${p.specs?.ram || '-'}
+                    </td>
+                    <td class="px-6 py-4 text-right space-x-2">
+                        <button onclick="editProduct(${index})" class="text-blue-500 hover:text-blue-700 hover:bg-blue-50 px-2 py-1 rounded transition"><i class="fas fa-pencil-alt"></i></button>
+                        <button onclick="deleteProduct(${index})" class="text-red-400 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded transition"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Save to local for demo persistence
+            localStorage.setItem('hostingProducts', JSON.stringify(products));
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('modal-overlay');
+        const content = document.getElementById('modal-content');
+
+        function openModal(idx = -1) {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            const isEdit = idx !== -1;
+            document.getElementById('modal-title').innerText = isEdit ? '상품 수정' : '새 상품 등록';
+            document.getElementById('edit-index').value = idx;
+
+            if (isEdit) {
+                const p = products[idx];
+                document.getElementById('inp-name').value = p.name;
+                document.getElementById('inp-id').value = p.id;
+                document.getElementById('inp-price').value = p.price;
+                document.getElementById('inp-period').value = p.period;
+                document.getElementById('inp-badge').value = p.badge;
+                document.getElementById('inp-summary').value = p.summary;
+                document.getElementById('inp-cpu').value = p.specs?.cpu || '';
+                document.getElementById('inp-ram').value = p.specs?.ram || '';
+                document.getElementById('inp-storage').value = p.specs?.storage || '';
+                document.getElementById('inp-traffic').value = p.specs?.traffic || '';
+                document.getElementById('inp-features').value = (p.features || []).join('\n');
+                document.getElementById('inp-active').checked = p.isActive;
+                document.getElementById('inp-popular').checked = p.popular;
+                document.getElementById('inp-order').value = p.sortOrder || 0;
+            } else {
+                // Reset
+                document.querySelectorAll('input, textarea').forEach(i => i.value = '');
+                document.getElementById('inp-active').checked = true;
+                document.getElementById('inp-period').value = '월';
+                document.getElementById('inp-order').value = products.length + 1;
+                document.getElementById('inp-id').value = 'prd_' + Date.now().toString().slice(-4);
+            }
+        }
+
+        function closeModal() {
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 200);
+        }
+
+        function saveData() {
+            const idx = parseInt(document.getElementById('edit-index').value);
+            const data = {
+                id: document.getElementById('inp-id').value || 'id_' + Date.now(),
+                name: document.getElementById('inp-name').value,
+                price: document.getElementById('inp-price').value,
+                period: document.getElementById('inp-period').value,
+                badge: document.getElementById('inp-badge').value,
+                summary: document.getElementById('inp-summary').value,
+                popular: document.getElementById('inp-popular').checked,
+                isActive: document.getElementById('inp-active').checked,
+                sortOrder: parseInt(document.getElementById('inp-order').value),
+                specs: {
+                    cpu: document.getElementById('inp-cpu').value,
+                    ram: document.getElementById('inp-ram').value,
+                    storage: document.getElementById('inp-storage').value,
+                    traffic: document.getElementById('inp-traffic').value,
+                },
+                features: document.getElementById('inp-features').value.split('\n').filter(t => t.trim() !== '')
+            };
+
+            if (idx === -1) products.push(data);
+            else products[idx] = data;
+
+            closeModal();
+            render();
+        }
+
+        function deleteProduct(idx) {
+            if (confirm('이 상품을 삭제하시겠습니까?')) {
+                products.splice(idx, 1);
+                render();
+            }
+        }
+
+        function editProduct(idx) {
+            openModal(idx);
+        }
+
+        // Export Functions
+        function exportData() {
+            // 1. Generate JS Code
+            const json = JSON.stringify(products, null, 4);
+            const jsCode = `/**
+ * HUMECCA 호스팅 상품 데이터
+ * Generated by Admin: ${new Date().toLocaleString()}
+ */
+
+var hostingProducts = ${json};
+
+// 로컬 스토리지 테스트 데이터 확인 (개발용)
+if (typeof localStorage !== 'undefined' && localStorage.getItem("hostingProducts")) {
+    try {
+        hostingProducts = JSON.parse(localStorage.getItem("hostingProducts"));
+    } catch (e) {
+        console.error("Local data parsing error", e);
+    }
+}`;
+            document.getElementById('export-code').value = jsCode;
+
+            // 2. Generate HTML Code
+            const activeProducts = products.filter(p => p.isActive).sort((a, b) => (a.sortOrder || 99) - (b.sortOrder || 99));
+            const htmlCode = activeProducts.map(p => `
+                <!-- Product: ${p.name} -->
+                <div class="plan-card ${p.popular ? 'popular' : ''}">
+                    ${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
+                    <h3 class="plan-title">${p.name}</h3>
+                    <div class="plan-summary">${p.summary || ''}</div>
+                    <div class="plan-price">
+                        <span class="amount">₩${p.price}</span><span class="period">/${p.period}</span>
+                    </div>
+                    
+                    <div class="specs-list">
+                        <div class="spec-item"><span class="spec-label">CPU</span><span class="spec-value">${p.specs?.cpu || '-'}</span></div>
+                        <div class="spec-item"><span class="spec-label">RAM</span><span class="spec-value">${p.specs?.ram || '-'}</span></div>
+                        <div class="spec-item"><span class="spec-label">STORAGE</span><span class="spec-value">${p.specs?.storage || '-'}</span></div>
+                        <div class="spec-item"><span class="spec-label">TRAFFIC</span><span class="spec-value">${p.specs?.traffic || '-'}</span></div>
+                    </div>
+
+                    <ul class="plan-features">
+                        ${(p.features || []).map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
+                    </ul>
+                    <a href="sub_support.html" class="plan-btn ${p.popular ? 'solid' : 'outline'}">신청하기</a>
+                </div>`).join('\n');
+            document.getElementById('export-html').value = htmlCode;
+
+            document.getElementById('export-overlay').classList.remove('hidden');
+        }
+
+        function downloadJS() {
+            const content = document.getElementById('export-code').value;
+            const blob = new Blob([content], { type: 'text/javascript' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hosting_data.js';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function copyHTML() {
+            const copyText = document.getElementById("export-html");
+            copyText.select();
+            document.execCommand("copy");
+            alert("HTML 코드가 복사되었습니다!");
+        }
+
+        function downloadHTML() {
+            const content = document.getElementById('export-html').value;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hosting_products_snippet.html';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Init
+        render();
+    </script>
+</body>
+
+</html>
+```

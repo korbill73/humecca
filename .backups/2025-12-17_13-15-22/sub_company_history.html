@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+            <div id="header-placeholder"></div>
+
+
+    <!-- Subpage Hero -->
+    <section class="sw-hero" style="background: #1a1f3c;">
+        <div class="container">
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                회사소개 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> 연혁
+            </div>
+            <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-history" style="font-size: 30px; color: white;"></i>
+            </div>
+<h1>연혁</h1>
+            <p>HUMECCA History</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="page-content" style="padding: 80px 0">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span
+                    style="color: #dc2626; font-weight: 600; font-size: 14px; display: block; margin-bottom: 10px;">History</span>
+                <h2 style="font-size: 2.25rem; font-weight: 700; color: #111827;">회사 연혁</h2>
+                <p style="color: #64748b; margin-top: 10px;">휴메카의 성장 이야기</p>
+            </div>
+
+            <div id="history-timeline" style="max-width: 900px; margin: 0 auto; position: relative;">
+                <!-- Vertical Line -->
+                <div
+                    style="position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #dc2626, #e5e7eb); transform: translateX(-50%);">
+                </div>
+
+                <!-- Loading Message -->
+                <div id="history-loading" style="text-align: center; padding: 60px; color: #9ca3af;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <p>연혁을 불러오는 중...</p>
+                </div>
+
+                <!-- History items will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- ========== FOOTER (공통 컴포넌트) ========== -->
+    <div id="footer-placeholder"></div>
+
+    <script src="components/loader.js?v=3.18"></script>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+
+    <script>
+        // ==================== CSS Injection for Animations ====================
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes slideUpFade {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .history-item-anim {
+                opacity: 0;
+            }
+            .history-item-anim.visible {
+                animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // ==================== 연혁 불러오기 ====================
+        async function loadHistory() {
+            if (!supabase) {
+                console.error('Supabase not initialized');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('company_history')
+                    .select('*')
+                    .eq('active', true)
+                    .order('year', { ascending: false })
+                    .order('month', { ascending: false, nullsFirst: false })
+                    .order('sort_order', { ascending: true });
+
+                if (error) throw error;
+
+                const timeline = document.getElementById('history-timeline');
+                const loading = document.getElementById('history-loading');
+
+                if (!data || data.length === 0) {
+                    loading.innerHTML = '<p style="color: #9ca3af;">등록된 연혁이 없습니다.</p>';
+                    return;
+                }
+
+                loading.remove();
+
+                const groupedByYear = {};
+                data.forEach(item => {
+                    if (!groupedByYear[item.year]) groupedByYear[item.year] = [];
+                    groupedByYear[item.year].push(item);
+                });
+
+                const years = Object.keys(groupedByYear).sort((a, b) => b - a);
+                const currentYear = new Date().getFullYear();
+
+                years.forEach((year, index) => {
+                    const isRecent = parseInt(year) >= currentYear - 2;
+                    const isLast = index === years.length - 1;
+                    const isOdd = index % 2 === 0;
+                    const events = groupedByYear[year];
+
+                    const yearDiv = document.createElement('div');
+                    yearDiv.className = 'history-item-anim';
+                    yearDiv.style.cssText = 'display: flex; justify-content: space-between; margin-bottom: 60px; position: relative;';
+
+                    const yearHTML = `
+                        <div style="color: ${isRecent ? '#dc2626' : '#6b7280'}; margin-bottom: 5px;">
+                            <span style="font-size: 3.5rem; font-weight: 800; line-height: 1; letter-spacing: -2px;">${year}</span>
+                        </div>
+                    `;
+
+                    const eventsHTML = events.map(event => {
+                        const monthText = event.month ? `${String(event.month).padStart(2, '0')}.` : '';
+                        return `
+                            <li style="margin-bottom: 20px; padding-left: 20px; border-left: 2px solid ${isRecent ? '#fee2e2' : '#f3f4f6'};">
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #1f2937; margin-bottom: 4px;">
+                                    <span style="color: #dc2626; margin-right: 8px;">${monthText}</span>${event.title}
+                                </div>
+                                ${event.description ? `<div style="color: #6b7280; font-size: 0.95rem; line-height: 1.6;">${event.description}</div>` : ''}
+                            </li>
+                        `;
+                    }).join('');
+
+                    const dotColor = isRecent ? '#dc2626' : '#9ca3af';
+                    const listHTML = `<ul style="list-style: none; padding: 0;">${eventsHTML}</ul>`;
+
+                    yearDiv.innerHTML = `
+                        <div style="width: 45%; text-align: right; padding-right: 40px;">
+                            ${isOdd ? yearHTML : listHTML}
+                        </div>
+                        <div style="position: absolute; left: 50%; top: 10px; width: 16px; height: 16px; background: white; border-radius: 50%; transform: translateX(-50%); border: 3px solid ${dotColor}; box-shadow: 0 0 0 4px white;"></div>
+                        <div style="width: 45%; padding-left: 40px;">
+                            ${isOdd ? listHTML : yearHTML}
+                        </div>
+                    `;
+
+                    timeline.appendChild(yearDiv);
+                });
+
+                // Intersection Observer for Animation
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.history-item-anim').forEach(item => observer.observe(item));
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadHistory, 500);
+
+            // Menu Fixes
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+
+                // Hide on click
+                menu.querySelectorAll('a.dropdown-item').forEach(l => l.addEventListener('click', () => menu.style.display = 'none'));
+
+                // Mouse logic
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = ''; menu.style.opacity = '';
+                });
+            });
+        });
+    </script>
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

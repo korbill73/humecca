@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA - Load Balancing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        .content-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        @media (max-width: 640px) {}
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+    <div id="header-placeholder"></div>
+
+
+    <!-- Hero -->
+    <section class="sw-hero" style="background-color: #1a237e; position: relative; overflow: hidden;">
+
+        <!-- Canvas Background for Light Ray Effect -->
+        <canvas id="addon-canvas"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+
+        <div class="container" style="position: relative; z-index: 10;">
+            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                부가서비스 <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i> 로드밸런싱
+            </div>
+            <div
+                style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-wave-square" style="font-size: 30px; color: white;"></i>
+            </div>
+
+
+            <h1>로드밸런싱 (Load Balancing)</h1>
+            <p style="max-width: 800px; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                여러 대의 서버를 마치 한 대의 대용량 고성능 서버처럼 운영하세요.<br>
+                트래픽을 효율적으로 분산하여 서비스 응답 속도와 안정성을 높입니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container" style="position: relative; z-index: 10;">
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <!-- Left Content -->
+                <div style="flex: 1; min-width: 600px;">
+                    <!-- Key Features -->
+                    <div style="margin-bottom: 60px;">
+                        <h2 style="font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 24px;">주요 기능</h2>
+                        <div style="background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 32px;">
+                            <ul
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0; padding: 0; list-style: none;">
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> L4/L7 로드밸런싱
+                                </li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> Round Robin /
+                                    Weighted 알고리즘</li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> 헬스체크 기반 자동 장애
+                                    우회</li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> SSL
+                                    Offloading 지원</li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> 세션
+                                    Persistence (Sticky Session)</li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> 실시간 트래픽 모니터링
+                                </li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> DDoS 방어 서비스
+                                    연계</li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> Auto Scaling
+                                    연동 가능</li>
+                                <li style="display: flex; gap: 10px; font-size: 15px; color: #4b5563;"><i
+                                        class="fas fa-check" style="color: #EF4444; margin-top: 4px;"></i> 무제한 동시 접속 처리
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Intro Effects -->
+                    <div>
+                        <h2 style="font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 24px;">도입 효과</h2>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div
+                                style="background: #fff5f5; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                                <div
+                                    style="width: 32px; height: 32px; background: #fee2e2; color: #EF4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                    1</div>
+                                <span style="font-weight: 600; color: #374151;">트래픽 폭주 시에도 안정적 서비스</span>
+                            </div>
+                            <div
+                                style="background: #fff5f5; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                                <div
+                                    style="width: 32px; height: 32px; background: #fee2e2; color: #EF4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                    2</div>
+                                <span style="font-weight: 600; color: #374151;">웹 서버 부하 감소 및 응답 속도 향상</span>
+                            </div>
+                            <div
+                                style="background: #fff5f5; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                                <div
+                                    style="width: 32px; height: 32px; background: #fee2e2; color: #EF4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                    3</div>
+                                <span style="font-weight: 600; color: #374151;">유연한 서버 확장/축소(Scale-out)</span>
+                            </div>
+                            <div
+                                style="background: #fff5f5; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                                <div
+                                    style="width: 32px; height: 32px; background: #fee2e2; color: #EF4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                    4</div>
+                                <span style="font-weight: 600; color: #374151;">보안성 강화 및 관리 편의성 증대</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div style="width: 320px; flex-shrink: 0;">
+                    <div
+                        style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 32px; position: sticky; top: 100px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                        <h3 style="font-size: 20px; font-weight: 700; color: #111827; margin-bottom: 16px;">무료 상담 신청
+                        </h3>
+                        <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 24px;">
+                            로드밸런싱 서비스에 대해 궁금하신 점이 있으시면 언제든 문의해 주세요.
+                        </p>
+                        <button onclick="openAppModal('로드밸런싱 상담', 'addon-lb')"
+                            style="display: block; width: 100%; height: 48px; background: #EF4444; color: white; border-radius: 6px; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; border:none; cursor:pointer; margin-bottom: 24px; transition: background 0.2s; font-family:inherit;">
+                            상담 신청하기 <i class="fas fa-chevron-right" style="margin-left: 8px; font-size: 12px;"></i>
+                        </button>
+                        <div style="text-align: center; border-top: 1px solid #f3f4f6; padding-top: 20px;">
+                            <span style="font-size: 13px; color: #9ca3af; display: block; margin-bottom: 4px;">전화
+                                상담</span>
+                            <span style="font-size: 18px; font-weight: 700; color: #EF4444;">02-418-7766</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / CTA -->
+    <!-- Pricing Table -->
+    <section class="pricing-section" style="padding: 80px 0; background: #ffffff;">
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="section-header">
+                <h2>서비스 요금 안내</h2>
+                <p>트래픽 규모와 서비스 유형에 맞는 최적의 로드밸런싱 요금제입니다.</p>
+            </div>
+
+            <div id="pricing-grid-lb" class="pricing-grid compact-pricing">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin"></i> 로딩 중...
+                </div>
+            </div>
+            <div style="margin-top: 40px; background: #f9fafb; padding: 20px; border-radius: 8px; text-align: center;">
+                <p style="margin: 0; color: #666; font-size: 14px;">
+                    * SSL 인증서는 별도 구매가 필요합니다. 대용량 트래픽의 경우 별도 협의가 필요합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+    <!-- App Modal Placeholder -->
+    <div id="app-modal-placeholder"></div>
+    <script src="components/loader.js?v=3.18"></script>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="js/application_modal.js"></script>
+    <script src="js/data_loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductData('addon-lb');
+        });
+    </script>
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>

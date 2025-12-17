@@ -2,6 +2,67 @@
 
 let currentTermType = 'privacy';
 
+// Global Quill Instance
+let quill;
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Tab Initialization
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        showTab(hash);
+    }
+
+    // Chart.js Dark Theme Config
+    if (typeof Chart !== 'undefined') {
+        Chart.defaults.color = '#94a3b8'; // Slate 400
+        Chart.defaults.borderColor = '#334155'; // Slate 700 grid lines
+    }
+
+    if (document.getElementById('editor-container')) {
+        quill = new Quill('#editor-container', {
+            theme: 'snow',
+            placeholder: '공지사항 내용을 작성하세요...',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
+            }
+        });
+    }
+
+    // Existing Init Logic
+    if (typeof refreshNoticeList === 'function') refreshNoticeList();
+    if (typeof refreshFaqList === 'function') refreshFaqList();
+});
+
+// Tab Switching Logic
+window.showTab = (tabId) => {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+
+    // Show target tab
+    const target = document.getElementById('tab-' + tabId);
+    // Find button by onclick attribute since data-tab is missing in some versions
+    const btn = document.querySelector(`.admin-tab[onclick="showTab('${tabId}')"]`);
+
+    if (target) target.classList.add('active');
+    if (btn) btn.classList.add('active');
+
+    // Update URL hash without scrolling
+    history.pushState(null, null, '#' + tabId);
+
+    // Layout Fix (Chart.js resize issue)
+    if (tabId === 'analytics' && typeof renderAnalytics === 'function') renderAnalytics();
+};
+
 let logsChart = null;
 
 // ===========================
@@ -419,11 +480,11 @@ async function loadApplications() {
                 break;
             case 'completed':
                 badgeHtml = `<span class="badge-pill badge-green" title="${statusTitle}" style="width:32px; height:32px; justify-content:center; padding:0; border-radius:50%;"><i class="fas fa-check"></i></span>`;
-                rowStyle = 'background-color:#f8fafc; opacity:0.8;';
+                rowStyle = 'opacity:0.6;'; // Dim rows but keep dark background
                 break;
             case 'cancelled':
                 badgeHtml = `<span class="badge-pill badge-gray" title="${statusTitle}" style="width:32px; height:32px; justify-content:center; padding:0; border-radius:50%;"><i class="fas fa-ban"></i></span>`;
-                rowStyle = 'color:#94a3b8; background-color:#f9fafb;';
+                rowStyle = 'opacity:0.5; text-decoration:line-through; color:#94a3b8;';
                 break;
             default:
                 badgeHtml = `<span class="badge-pill badge-gray" title="${statusTitle}">${item.status}</span>`;
@@ -805,7 +866,16 @@ async function renderAnnouncements() {
         container.innerHTML = `
         <div style="overflow-x:auto;">
             <table class="admin-table">
-                <thead><tr><th width="50">#</th><th>제목</th><th width="80">중요</th><th width="100">작성일</th><th width="100">관리</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th width="60" style="text-align:center;">#</th>
+                        <th width="20%">제목</th>
+                        <th>내용(미리보기)</th>
+                        <th width="80" style="text-align:center;">중요</th>
+                        <th width="120" style="text-align:center;">작성일</th>
+                        <th width="140" style="text-align:center;">관리</th>
+                    </tr>
+                </thead>
                 <tbody id="notice-table-body"></tbody>
             </table>
         </div>`;
@@ -815,39 +885,128 @@ async function renderAnnouncements() {
     const body = document.getElementById('notice-table-body');
     body.innerHTML = '';
 
-    if (!data || !data.length) { body.innerHTML = '<tr><td colspan="5" align="center">등록된 공지사항이 없습니다.</td></tr>'; return; }
+    if (!data || !data.length) { body.innerHTML = '<tr><td colspan="6" align="center">등록된 공지사항이 없습니다.</td></tr>'; return; }
 
     data.forEach((item, idx) => {
+        // Truncate content for preview (remove HTML tags first if possible, or just raw)
+        // Simple HTML strip
+        let plainText = item.content.replace(/<[^>]*>?/g, ' ').substring(0, 50);
+        if (item.content.replace(/<[^>]*>?/g, '').length > 50) plainText += '...';
+
+        // Storing data in button attribute for easy access or just passing ID
+        // For simplicity, we'll fetch or we can pass proper valid JSON but escaping is tricky. 
+        // Better: store in window map or just fetch by ID again? 
+        // Optimization: We already have 'data'. We can find by ID in memory if we keep it. 
+        // For now, let's just use a function that finds it from the 'data' array we have in this scope? No, scope issue.
+        // We'll attach the item to the window object temporarily or just pass properties.
+
+        // Safest: Pass ID so function can find it or re-fetch. But re-fetch is slow.
+        // Let's attach full object to the button using a data property is messy with strings.
+        // Solution: Create a global map or simply use editNotice to load form and we add a view button?
+        // User wants "View Detail Modal", distinct from Edit.
+
         body.innerHTML += `
             <tr>
-                <td>${idx + 1}</td>
-                <td><strong>${item.title}</strong></td>
-                <td>${item.is_pinned ? '<span class="badge badge-red">중요</span>' : '-'}</td>
-                <td>${new Date(item.created_at).toLocaleDateString()}</td>
-                <td>
+                <td style="text-align:center;">${idx + 1}</td>
+                <td style="font-weight:bold; color:var(--text-primary); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 200px;" onclick="viewNoticeDetail('${item.id}')">${item.title}</td>
+                <td style="color:var(--text-secondary); font-size:0.9rem; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 300px;" onclick="viewNoticeDetail('${item.id}')">${item.content.replace(/<[^>]*>?/g, ' ')}</td>
+                <td style="text-align:center;">${item.is_pinned ? '<span class="badge badge-red">중요</span>' : '-'}</td>
+                <td style="text-align:center;">${new Date(item.created_at).toLocaleDateString()}</td>
+                <td style="text-align:center;">
                     <button class="btn btn-secondary" onclick="editNotice(${item.id})" style="padding:4px 8px; font-size:12px;">수정</button>
                     <button class="delete-btn" onclick="deleteNotice(${item.id})"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>`;
     });
+
+    // Cache data for modal usage
+    window.currentNoticeList = data;
 }
+
+// Global View Function
+window.viewNoticeDetail = (id) => {
+    const notice = window.currentNoticeList?.find(n => n.id == id);
+    if (!notice) return;
+
+    const modalTitle = document.getElementById('admin-modal-title');
+    const modalBody = document.getElementById('admin-modal-body');
+    const modal = document.getElementById('admin-common-modal');
+
+    modalTitle.innerText = notice.title;
+
+    // Format Date & Author
+    const date = new Date(notice.created_at).toLocaleString();
+    const pinBadge = notice.is_pinned ? '<span class="badge badge-red">중요 공지</span>' : '';
+
+    modalBody.innerHTML = `
+        <div style="border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                ${pinBadge}
+                <span style="color:#64748b; font-size:0.9rem; margin-left:10px;"><i class="far fa-calendar-alt"></i> ${date}</span>
+                <span style="color:#64748b; font-size:0.9rem; margin-left:15px;"><i class="fas fa-user-circle"></i> ${notice.author || '관리자'}</span>
+            </div>
+            <span style="color:#94a3b8; font-size:0.85rem;">ID: ${notice.id}</span>
+        </div>
+        <div style="min-height:200px; color:#334155; line-height:1.6;">
+            ${notice.content}
+        </div>
+        <div style="text-align:right; margin-top:30px; border-top:1px solid #e2e8f0; padding-top:20px;">
+            <button class="btn btn-primary" onclick="editNotice(${notice.id}); closeAdminModal();">수정하기</button>
+            <button class="btn btn-secondary" onclick="closeAdminModal()">닫기</button>
+        </div>
+    `;
+
+    modal.style.display = 'block';
+};
+
+// Notice CRUD handlers match typical form IDs (notice-form, notice-title...)
 // Notice CRUD handlers match typical form IDs (notice-form, notice-title...)
 document.getElementById('notice-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const id = document.getElementById('notice-edit-id').value;
-    const title = document.getElementById('notice-title').value;
-    const content = document.getElementById('notice-content').value;
-    const author = document.getElementById('notice-author').value;
-    const is_pinned = document.getElementById('notice-pinned').checked;
-    const active = document.getElementById('notice-active').checked;
-    const payload = { title, content, author, is_pinned, active };
 
-    if (id) await supabase.from('notices').update(payload).eq('id', id);
-    else await supabase.from('notices').insert([payload]);
+    // UI Loading State
+    const submitBtn = document.getElementById('notice-submit-btn');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = '저장 중...';
+    submitBtn.disabled = true;
 
-    alert('저장되었습니다.');
-    resetNoticeForm();
-    renderAnnouncements();
+    try {
+        const id = document.getElementById('notice-edit-id').value;
+        const title = document.getElementById('notice-title').value;
+
+        // Editor Content
+        let content = quill ? quill.root.innerHTML : document.getElementById('notice-content').value;
+        // If empty content (just <p><br></p>), treat as empty
+        if (content === '<p><br></p>') content = '';
+
+        const author = document.getElementById('notice-author').value;
+        const is_pinned = document.getElementById('notice-pinned').checked;
+        const active = document.getElementById('notice-active').checked;
+        const payload = { title, content, author, is_pinned, active };
+
+        if (!content) throw new Error("내용을 입력해주세요.");
+
+        let error;
+        if (id) {
+            const res = await supabase.from('notices').update(payload).eq('id', id);
+            error = res.error;
+        } else {
+            const res = await supabase.from('notices').insert([payload]);
+            error = res.error;
+        }
+
+        if (error) throw error;
+
+        alert('저장되었습니다.');
+        resetNoticeForm();
+        renderAnnouncements();
+    } catch (err) {
+        console.error('Notice Save Error:', err);
+        alert('저장 중 오류가 발생했습니다: ' + (err.message || err));
+    } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+    }
 });
 window.deleteNotice = async (id) => { if (confirm('삭제?')) { await supabase.from('notices').delete().eq('id', id); renderAnnouncements(); } };
 window.editNotice = async (id) => {
@@ -1360,17 +1519,28 @@ async function renderCustomers() {
     // Let's assume ID desc for now if sort_order is null
 
     data?.forEach(c => {
-        el.innerHTML += `<div class="customer-card" style="position:relative; display:flex; flex-direction:column; align-items:center; gap:10px;">
-            <div style="font-weight:bold; font-size:1.1rem;">${c.name}</div>
-            ${c.logo_url ? `<img src="${c.logo_url}" style="height:50px; object-fit:contain; margin:10px 0;">` : '<div style="height:50px; display:flex; align-items:center; color:#ccc;">No Logo</div>'}
+        el.innerHTML += `<div class="customer-card">
+            <div style="font-weight:bold; font-size:1.1rem; color:var(--text-primary); margin-bottom:15px;">${c.name}</div>
+            ${c.logo_url ? `<img src="${c.logo_url}" style="height:50px; object-fit:contain; margin-bottom:15px;">` : '<div style="height:50px; display:flex; align-items:center; justify-content:center; color:var(--text-secondary); margin-bottom:15px;">No Logo</div>'}
             
-            <div style="display:flex; gap:8px; margin-top:auto; width:100%;">
-                 <button class="btn btn-secondary" onclick="editCustomer(${c.id})" style="flex:1; padding:6px; font-size:12px;">수정</button>
-                 <button class="delete-btn" onclick="deleteCustomer(${c.id})" style="flex:1; padding:6px; font-size:12px; height:auto; width:auto; background:#fee2e2; color:#dc2626; border:1px solid #fecaca;"><i class="fas fa-trash"></i> 삭제</button>
-            </div>
-        </div>`;
+            <div style="display:flex; gap:5px; width:100%; margin-top:auto; justify-content: flex-end;">
+             <button class="btn btn-secondary" onclick="editCustomer(${c.id})" style="padding:4px 8px; font-size:12px; flex:1;">수정</button>
+             <button class="delete-btn" onclick="deleteCustomer(${c.id})" style="padding:4px 8px; font-size:12px; height:auto; border-radius:4px; flex:1;"><i class="fas fa-trash"></i> 삭제</button>
+        </div>
+    </div>`;
     });
 }
+
+// Toggle Notice Form
+window.toggleNoticeForm = () => {
+    const el = document.getElementById('notice-form-container');
+    if (el.style.display === 'none') {
+        el.style.display = 'block';
+        // Reset form when opening fresh? Maybe optional.
+    } else {
+        el.style.display = 'none';
+    }
+};
 
 window.deleteCustomer = async (id) => {
     if (confirm('정말 삭제하시겠습니까?')) {
@@ -1478,30 +1648,177 @@ window.saveCurrentTerm = async () => {
 }
 
 // History
+// History
 async function renderTimeline() {
     const el = document.getElementById('history-list');
     if (!el) return;
-    const { data } = await supabase.from('company_history').select('*').order('year', { ascending: false });
+    const { data } = await supabase.from('company_history').select('*').order('year', { ascending: false }).order('month', { ascending: false }).order('sort_order', { ascending: true });
     el.innerHTML = '';
-    data?.forEach(h => {
-        el.innerHTML += `<div class="card" style="margin-bottom:10px; padding:15px;">
-            <div style="display:flex; justify-content:space-between;">
-                <div><b>${h.year}.${h.month || ''}</b> ${h.title}</div>
-                <button class="delete-btn" onclick="deleteHistory(${h.id})"><i class="fas fa-trash"></i></button>
+
+    if (!data || data.length === 0) {
+        el.innerHTML = '<div style="text-align:center; padding:20px; color:#999;">등록된 연혁이 없습니다.</div>';
+        return;
+    }
+
+    data.forEach(h => {
+        // Use a div that mimics the hover effect of table rows for consistency
+        el.innerHTML += `<div class="card history-item" style="margin-bottom:10px; padding:15px; position:relative; border-left: 4px solid transparent;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                    <span style="font-size:1.1em; font-weight:700; color:var(--primary-color); margin-right:8px;">${h.year}.${h.month ? h.month.toString().padStart(2, '0') : ''}</span>
+                    <span style="font-weight:600; color:var(--text-primary);">${h.title}</span>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn btn-secondary" onclick="editHistory(${h.id})" style="padding:4px 8px; font-size:12px;">수정</button>
+                    <button class="delete-btn" onclick="deleteHistory(${h.id})" style="padding:4px 8px; font-size:12px;"><i class="fas fa-trash"></i></button>
+                </div>
             </div>
-            <div style="font-size:0.9em; color:#666;">${h.description || ''}</div>
+            ${h.description ? `<div style="font-size:0.9em; color:var(--text-secondary); margin-top:6px; padding-left:4px;">${h.description}</div>` : ''}
         </div>`;
     });
 }
-window.deleteHistory = async (id) => { if (confirm('Delete?')) { await supabase.from('company_history').delete().eq('id', id); renderTimeline(); } };
+
+window.deleteHistory = async (id) => {
+    if (confirm('정말 삭제하시겠습니까?')) {
+        await supabase.from('company_history').delete().eq('id', id);
+        renderTimeline();
+        refreshDashboard();
+    }
+};
+
+
+
+// Edit Notice
+window.editNotice = async (id) => {
+    try {
+        const { data, error } = await supabase.from('notices').select('*').eq('id', id).single();
+        if (error) throw error;
+
+        document.getElementById('notice-edit-id').value = data.id;
+        document.getElementById('notice-title').value = data.title;
+        document.getElementById('notice-author').value = data.author;
+        document.getElementById('notice-pinned').checked = data.is_pinned;
+        document.getElementById('notice-active').checked = data.active;
+
+        // Set Editor Content
+        if (quill) {
+            quill.root.innerHTML = data.content;
+        } else {
+            document.getElementById('notice-content').value = data.content;
+        }
+
+        document.getElementById('notice-form-title').innerText = '공지사항 수정';
+        document.getElementById('notice-submit-btn').innerHTML = '<i class="fas fa-save"></i> 수정';
+        document.getElementById('notice-cancel-btn').style.display = 'inline-block';
+
+        // Scroll to form
+        document.getElementById('notice-form').scrollIntoView({ behavior: 'smooth' });
+
+    } catch (err) {
+        console.error(err);
+        alert('정보를 불러오지 못했습니다.');
+    }
+};
+
+// Reset Form
+window.resetNoticeForm = () => {
+    document.getElementById('notice-form').reset();
+    document.getElementById('notice-edit-id').value = '';
+
+    // Clear Editor
+    if (quill) quill.root.innerHTML = '';
+
+    document.getElementById('notice-form-title').innerText = '공지사항 작성';
+    document.getElementById('notice-submit-btn').innerHTML = '<i class="fas fa-plus"></i> 작성';
+    document.getElementById('notice-cancel-btn').style.display = 'none';
+};
+
+// Notice form submit handler
+document.getElementById('notice-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('notice-edit-id').value;
+    const title = document.getElementById('notice-title').value;
+    const author = document.getElementById('notice-author').value;
+    const is_pinned = document.getElementById('notice-pinned').checked;
+    const active = document.getElementById('notice-active').checked;
+
+    // Get content from Quill editor
+    const content = quill ? quill.root.innerHTML : document.getElementById('notice-content').value;
+
+    const payload = { title, author, content, is_pinned, active };
+
+    if (id) {
+        // Update
+        const { error } = await supabase.from('notices').update(payload).eq('id', id);
+        if (error) { alert('수정 실패: ' + error.message); return; }
+        alert('공지사항이 수정되었습니다.');
+    } else {
+        // Insert
+        const { error } = await supabase.from('notices').insert([payload]);
+        if (error) { alert('등록 실패: ' + error.message); return; }
+        alert('공지사항이 등록되었습니다.');
+    }
+
+    resetNoticeForm();
+    renderNotices(); // Assuming renderNotices exists to refresh the list
+    refreshDashboard(); // Assuming refreshDashboard exists
+});
+
+window.editHistory = async (id) => {
+    const { data } = await supabase.from('company_history').select('*').eq('id', id).single();
+    if (!data) return;
+
+    document.getElementById('history-year').value = data.year;
+    document.getElementById('history-month').value = data.month || '';
+    document.getElementById('history-title').value = data.title;
+    document.getElementById('history-description').value = data.description || '';
+    document.getElementById('history-sort').value = data.sort_order || 1;
+    document.getElementById('history-active').checked = data.active;
+
+    document.getElementById('history-edit-id').value = data.id;
+    document.getElementById('history-form-title').innerText = "연혁 수정";
+    document.getElementById('history-submit-btn').innerHTML = '<i class="fas fa-save"></i> 수정 저장';
+    document.getElementById('history-cancel-btn').style.display = 'inline-block'; // Show cancel button
+
+    document.getElementById('history-form').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.resetHistoryForm = () => {
+    document.getElementById('history-form').reset();
+    document.getElementById('history-edit-id').value = '';
+    document.getElementById('history-form-title').innerText = "연혁 추가";
+    document.getElementById('history-submit-btn').innerHTML = '<i class="fas fa-plus"></i> 추가';
+    document.getElementById('history-cancel-btn').style.display = 'none';
+};
+
 document.getElementById('history-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    await supabase.from('company_history').insert([{
+    const id = document.getElementById('history-edit-id').value;
+
+    const payload = {
         year: parseInt(document.getElementById('history-year').value),
-        month: document.getElementById('history-month').value,
+        month: document.getElementById('history-month').value ? parseInt(document.getElementById('history-month').value) : null,
         title: document.getElementById('history-title').value,
         description: document.getElementById('history-description').value,
+        sort_order: parseInt(document.getElementById('history-sort').value),
         active: document.getElementById('history-active').checked
-    }]);
-    e.target.reset(); renderTimeline();
+    };
+
+    if (id) {
+        // Update
+        const { error } = await supabase.from('company_history').update(payload).eq('id', id);
+        if (error) { alert('수정 실패: ' + error.message); return; }
+        alert('수정되었습니다.');
+    } else {
+        // Insert
+        const { error } = await supabase.from('company_history').insert([payload]);
+        if (error) { alert('등록 실패: ' + error.message); return; }
+        alert('등록되었습니다.');
+    }
+
+    resetHistoryForm();
+    renderTimeline();
+    refreshDashboard();
 });
+

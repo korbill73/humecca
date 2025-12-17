@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클라우드 서비스 개요 - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+    <link rel="stylesheet" href="service_premium.css">
+    <!-- Removed inline styles to rely on service_premium.css -->
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+            <div id="header-placeholder"></div>
+
+    <!-- ========== CLOUD HERO ========== -->
+    <section class="cloud-hero">
+        <div class="container">
+            <!-- Standardized Hero -->
+            <!-- Standardized Hero -->
+            <div class="cloud-badgetext">KT Cloud Partner</div>
+
+            <h1>클라우드 서비스 개요</h1>
+            <p>비즈니스 혁신을 위한 최적의 클라우드 플랫폼</p>
+            <a href="https://login.humecca.co.kr" class="hero-shortcut" target="_blank"><i
+                    class="fas fa-sign-in-alt"></i> 서비스 바로가기</a>
+        </div>
+    </section>
+
+    <!-- ========== CLOUD LAYOUT ========== -->
+    <div class="cloud-layout">
+        <!-- Left Sidebar -->
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html" class="active"><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html"><i class="fas fa-ban"></i> 서비스별 제한사항</a></li>
+            </ul>
+            <a href="https://login.humecca.co.kr" class="sidebar-shortcut" target="_blank"><i
+                    class="fas fa-external-link-alt"></i> 클라우드 콘솔 바로가기</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cloud-content">
+            <!-- 1. Intro Header -->
+            <div class="content-header">
+                <h2>서비스 개요</h2>
+                <p>
+                    Server는 안전하고 크기 조정이 가능한 컴퓨팅 인프라를 가상화하여 제공하는 서비스입니다.<br>
+                    웹 인터페이스나 API를 통해 필요한 서버 인프라를 간편하게 구성할 수 있습니다.<br>
+                    해당 서비스로 구성된 서버들의 리소스는 <strong style="color:#E94D36;">kt cloud</strong>에서 안전하게 관리하며, 고객 단독 사용이 보장됩니다.
+                </p>
+            </div>
+
+            <!-- 2. Features Grid (Premium Style) -->
+            <div class="content-section">
+                <div class="section-title">서비스 특징</div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                        <h3>확장성</h3>
+                        <p>· Open API/SDK 제공으로 유연한 연동<br>· 비즈니스 확장에 따른 즉각적 자원 증설<br>· Incubation Center 지원</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>안정성</h3>
+                        <p>· 실시간 Monitoring 및 알림 서비스<br>· Load Balancer, Auto Scaling 지원<br>· 안전한 VM 관리 및 백업</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-bolt"></i></div>
+                        <h3>신속성</h3>
+                        <p>· 수십 종의 검증된 서버 스펙/OS 제공<br>· 웹 콘솔을 통한 5분 내 서버 생성<br>· 즉시 사용 가능한 환경 제공</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-coins"></i></div>
+                        <h3>비용 절감</h3>
+                        <p>· 초기 투자비 및 유지보수 비용 0원<br>· 사용한 만큼 지불하는 종량제<br>· 저렴한 네트워크 전송 비용</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h3>고성능</h3>
+                        <p>· 최신 Intel CPU 및 고성능 SSD 적용<br>· 40Gbps 대역폭의 안정적인 백본망<br>· 벤치마크 상위권 성능 입증</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-lock"></i></div>
+                        <h3>보안</h3>
+                        <p>· VM별 방화벽(Firewall) 기본 제공<br>· 이중화된 백본망으로 재난 상황 대비<br>· 철저한 물리적/논리적 보안</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 서비스 구성 (서버 세대) - Restored with Images -->
+            <div class="content-section">
+                <div class="section-title">서비스 구성 (서버 세대)</div>
+                <div class="gen-grid">
+                    <div class="gen-card gen-1" style="text-align:center;">
+                        <img src="images/server_gen_1.png" alt="1st Gen Server"
+                            style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
+                        <h4 style="border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">1세대 서버 구성
+                        </h4>
+                        <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
+                            기존세대 Haswell CPU까지 적용되는 1세대 서버입니다. 고성능 I/O 서버 필요시 SSD Server를 신청 가능합니다.
+                        </p>
+                    </div>
+                    <div class="gen-card gen-2" style="text-align:center;">
+                        <img src="images/server_gen_2.png" alt="2nd Gen Server"
+                            style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
+                        <h4 style="border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">2세대 서버 구성
+                        </h4>
+                        <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
+                            Skylake, Broadwell 기반의 고성능 CPU 적용되는 2세대 서버 입니다. 기본적으로 SSD 루트 디스크가 제공되며, 데이터 디스크를 자유롭게 선택
+                            가능합니다.
+                        </p>
+                    </div>
+                    <div class="gen-card gen-3" style="text-align:center;">
+                        <img src="images/server_gen_3.png" alt="3rd Gen Server"
+                            style="height:100px; margin-bottom:15px; width:auto; mix-blend-mode:multiply;">
+                        <h4
+                            style="color:#d92e2e; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:15px;">
+                            3세대 서버 구성 (New)</h4>
+                        <p style="text-align:left; font-size:14px; color:#475569; line-height:1.7;">
+                            Cascade 기반의 고성능 CPU 적용되는 3세대 서버 입니다. Openstack플랫폼을 기반으로 고성능 VM을 제공합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 주요 기능 - Restored with Icons per Screenshot -->
+            <div class="content-section">
+                <div class="section-title">주요 기능</div>
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="feature-card" style="text-align:left; padding:25px;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <div class="process-icon-box" style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                    class="fas fa-server"></i></div>
+                            <h4 style="font-size:16px; margin:0;">VM 구성 및 관리</h4>
+                        </div>
+                        <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                            <li>가상화된 VM 생성 (CPU/Disk 자유 조회)</li>
+                            <li>최적화된 VM 템플릿 제공</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card" style="text-align:left; padding:25px;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <div class="process-icon-box" style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                    class="fas fa-network-wired"></i></div>
+                            <h4 style="font-size:16px; margin:0;">Network 제어</h4>
+                        </div>
+                        <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                            <li>방화벽 설정 및 포트포워딩</li>
+                            <li>WAF 연동 보안 강화 및 LB 구성</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card" style="text-align:left; padding:25px;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <div class="process-icon-box" style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                    class="fas fa-save"></i></div>
+                            <h4 style="font-size:16px; margin:0;">백업과 이중화</h4>
+                        </div>
+                        <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                            <li>스냅샷/이미지 백업 및 복원</li>
+                            <li>디스크, 백본망, 서버(HA) 이중화</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card" style="text-align:left; padding:25px;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <div class="process-icon-box" style="width:40px; height:40px; font-size:18px; margin:0;"><i
+                                    class="fas fa-chart-line"></i></div>
+                            <h4 style="font-size:16px; margin:0;">Monitoring</h4>
+                        </div>
+                        <ul style="padding-left:15px; color:#64748b; font-size:13px; line-height:1.6;">
+                            <li>로그 히스토리/트래픽 통계</li>
+                            <li>리소스 사용량 체크 및 알림(Watch)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 고객 성공 사례 -->
+            <div class="content-section">
+                <div class="section-title">고객 성공 사례</div>
+                <div
+                    style="background:#f8fafc; padding:30px; border-radius:16px; display:flex; gap:40px; margin-bottom:30px; align-items:center; border:1px solid #e2e8f0;">
+                    <div style="flex:1;">
+                        <span
+                            style="background:#eff6ff; color:#3b82f6; font-size:12px; font-weight:700; padding:4px 8px; border-radius:4px;">금융</span>
+                        <h4 style="font-size:20px; margin:10px 0;">증권사 솔루션 사례</h4>
+                        <ul style="color:#475569; line-height:1.8; font-size:14px; padding-left:20px;">
+                            <li><strong>Needs:</strong> 실시간 시세 제공을 위한 초저지연 급변 대응</li>
+                            <li><strong>Solution:</strong> API 스케줄링 자동화, Load Balancer 트래픽 분산</li>
+                        </ul>
+                        <div
+                            style="margin-top:15px; background:#e0f2fe; color:#0369a1; padding:10px; border-radius:8px; font-size:13px; font-weight:600;">
+                            기대효과: 예상치 못한 트래픽/장애에 빠른 대응 가능</div>
+                    </div>
+                    <div style="flex:1; text-align:center;">
+                        <img src="images/usecase_finance.png" alt="Finance Diagram"
+                            style="max-width:100%; border-radius:8px; border:1px solid #cbd5e1;">
+                    </div>
+                </div>
+
+                <div
+                    style="background:#f8fafc; padding:30px; border-radius:16px; display:flex; gap:40px; align-items:center; border:1px solid #e2e8f0;">
+                    <div style="flex:1;">
+                        <span
+                            style="background:#eff6ff; color:#3b82f6; font-size:12px; font-weight:700; padding:4px 8px; border-radius:4px;">교육</span>
+                        <h4 style="font-size:20px; margin:10px 0;">OO 어학원 솔루션 사례</h4>
+                        <ul style="color:#475569; line-height:1.8; font-size:14px; padding-left:20px;">
+                            <li><strong>Needs:</strong> 대형 VM 및 부하분산, 세션 폭주로 인한 다운 해결</li>
+                            <li><strong>Solution:</strong> 40대 서버 구성, CIP 연동, WAF 방화벽 안심</li>
+                        </ul>
+                        <div
+                            style="margin-top:15px; background:#e0f2fe; color:#0369a1; padding:10px; border-radius:8px; font-size:13px; font-weight:600;">
+                            고객 평가: "이벤트 성공적 진행 및 안정성 개선 효과"</div>
+                    </div>
+                    <div style="flex:1; text-align:center;">
+                        <img src="images/usecase_edu.png" alt="Edu Diagram"
+                            style="max-width:100%; border-radius:8px; border:1px solid #cbd5e1;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Server Pricing (Restored) -->
+            <div class="content-section">
+                <div class="section-title">Server 요금 비교</div>
+                <div
+                    style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                    <p style="margin: 0; color: #475569; font-size: 14px;">대용량 Linux 1년, 선 결제 없이 예약 30대 Outbound Network
+                        월 30TB 이용 시 타사와 월별 비용을 비교했을 때의 가격표입니다.</p>
+                </div>
+                <table class="table"
+                    style="width:100%; border-collapse:collapse; text-align:center; margin:0; border:1px solid #e2e8f0;">
+                    <thead>
+                        <tr style="background:#f1f5f9;">
+                            <th colspan="2" style="padding:15px; border-bottom:1px solid #cbd5e1;">kt cloud 예약모드</th>
+                            <th colspan="2" style="padding:15px; border-bottom:1px solid #cbd5e1;">A사</th>
+                        </tr>
+                        <tr style="font-size:14px; background:#f8fafc;">
+                            <td style="padding:10px; font-weight:600; border-bottom:1px solid #e2e8f0;">사양</td>
+                            <td style="padding:10px; font-weight:600; border-bottom:1px solid #e2e8f0;">요금</td>
+                            <td style="padding:10px; border-bottom:1px solid #e2e8f0; color:#64748b;">사양</td>
+                            <td style="padding:10px; border-bottom:1px solid #e2e8f0; color:#64748b;">요금</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:12px; border-bottom:1px solid #f1f5f9;">1core | 1GB</td>
+                            <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">948,000원</td>
+                            <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">T2.micro</td>
+                            <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">5,298,854 원</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:12px; border-bottom:1px solid #f1f5f9;">2core | 4GB</td>
+                            <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">2,219,000 원
+                            </td>
+                            <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">T3.medium</td>
+                            <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">6,568,270 원</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:12px; border-bottom:1px solid #f1f5f9;">4core | 8GB</td>
+                            <td style="color:#d92e2e; font-weight:bold; border-bottom:1px solid #f1f5f9;">4,638,000 원
+                            </td>
+                            <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">C5.xlarge</td>
+                            <td style="color:#64748b; border-bottom:1px solid #f1f5f9;">10,473,371 원</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:12px;">8core | 16GB</td>
+                            <td style="color:#d92e2e; font-weight:bold;">9,279,000 원</td>
+                            <td style="color:#64748b;">C5.2xlarge</td>
+                            <td style="color:#64748b;">15,975,050 원</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align:right; font-size:12px; color:#94a3b8; margin-top:10px;">* 각 사이트 요금 계산기 기준</p>
+            </div>
+            <!-- 5. Related Badges (Updated) -->
+            <div class="content-section" style="text-align:center;">
+                <div class="section-title">연관 상품</div>
+                <div class="related-badges">
+                    <div class="product-badge"><i class="fas fa-sync-alt"></i> Auto Scaling</div>
+                    <div class="product-badge"><i class="fas fa-random"></i> Load Balancer</div>
+                    <div class="product-badge"><i class="fas fa-project-diagram"></i> Connect Hub</div>
+                    <div class="product-badge"><i class="fas fa-database"></i> NAS</div>
+                    <div class="product-badge"><i class="fas fa-shield-alt"></i> WAF</div>
+                </div>
+            </div>
+
+            <div style="height:80px;"></div>
+        </main>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div id="footer-placeholder"></div>
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="script.js"></script>
+    <script>
+        // Menu Scripts (preserved)
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+                const links = menu.querySelectorAll('a.dropdown-item');
+                links.forEach(link => {
+                    link.addEventListener('click', () => { menu.style.display = 'none'; });
+                });
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = ''; menu.style.opacity = ''; menu.style.visibility = '';
+                });
+                item.addEventListener('mouseenter', () => { menu.style.display = ''; });
+            });
+        });
+    </script>
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

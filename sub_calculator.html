@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요금 계산기 - HUMECCA</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Pretendard:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="styles.css?v=3.18">
+    <link rel="stylesheet" href="service_premium.css">
+
+    <!-- Calculator Styles -->
+    <link rel="stylesheet" href="calculator.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="cloud-hero"
+            style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding-bottom: 60px;">
+            <div class="container">
+                <div class="cloud-badgetext"
+                    style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3);">
+                    Real-time Quote</div>
+                <h1>실시간 요금 계산기</h1>
+                <p>원하는 사양을 선택하여 예상 비용을 실시간으로 확인하세요.</p>
+            </div>
+        </section>
+
+        <!-- Calculator App -->
+        <div class="calc-container">
+            <div class="container">
+                <div class="calc-layout">
+
+                    <!-- Left: Selection Area -->
+                    <div class="calc-content-left">
+                        <!-- Navigation Steps -->
+                        <div class="calc-steps">
+                            <button class="calc-step-btn active" onclick="setStep(1)">1. 서버 선택</button>
+                            <button class="calc-step-btn" onclick="setStep(2)">2. 사양 변경</button>
+                            <button class="calc-step-btn" onclick="setStep(3)">3. 부가서비스</button>
+                            <button class="calc-step-btn" onclick="setStep(4)">4. 기간/할인</button>
+                        </div>
+
+                        <!-- Step 1: Server Select -->
+                        <div id="step-1" class="calc-step-content">
+                            <h2 class="section-title" style="color:white; font-size:1.5rem;">서비스 상품 선택</h2>
+                            <div class="tabs" style="margin-bottom:20px;">
+                                <div class="tab active" onclick="filterCategory('server')">서버 호스팅</div>
+                                <div class="tab" onclick="filterCategory('colocation')">코로케이션</div>
+                                <div class="tab" onclick="filterCategory('management')">매니지먼트</div>
+                            </div>
+                            <div id="product-list" class="calc-grid">
+                                <!-- JS Injected -->
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Specs (Add-ons Part 1) -->
+                        <div id="step-2" class="calc-step-content" style="display:none;">
+                            <h2 class="section-title" style="color:white; font-size:1.5rem;">사양 업그레이드</h2>
+                            <p style="color:#94a3b8; margin-bottom:20px;">기본 제공 사양 외에 추가로 필요한 자원을 선택하세요.</p>
+                            <div id="addon-list-specs">
+                                <!-- JS Injected (CPU, RAM, HDD) -->
+                            </div>
+                            <button class="btn btn-primary" onclick="setStep(3)" style="margin-top:20px;">다음 단계 <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+
+                        <!-- Step 3: Services (Add-ons Part 2) -->
+                        <div id="step-3" class="calc-step-content" style="display:none;">
+                            <h2 class="section-title" style="color:white; font-size:1.5rem;">부가서비스 / OS</h2>
+                            <p style="color:#94a3b8; margin-bottom:20px;">보안, 네트워크, 운영체제 라이선스를 선택하세요.</p>
+                            <div id="addon-list-services">
+                                <!-- JS Injected (Network, Security, OS) -->
+                            </div>
+                            <button class="btn btn-primary" onclick="setStep(4)" style="margin-top:20px;">다음 단계 <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+
+                        <!-- Step 4: Term -->
+                        <div id="step-4" class="calc-step-content" style="display:none;">
+                            <h2 class="section-title" style="color:white; font-size:1.5rem;">약정 기간 선택</h2>
+                            <p style="color:#94a3b8; margin-bottom:20px;">장기 약정 시 할인 혜택이 적용됩니다.</p>
+                            <div class="calc-grid" id="term-list">
+                                <!-- JS Injected -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right: Sticky Sidebar -->
+                    <div class="calc-sidebar">
+                        <div class="quote-sidebar">
+                            <div class="quote-header">
+                                <h3 class="quote-title">예상 견적서</h3>
+                                <div style="font-size:0.9rem; color:#94a3b8; margin-top:5px;">VAT 별도 금액입니다.</div>
+                            </div>
+
+                            <div id="quote-items" class="quote-items">
+                                <div style="text-align:center; color:#64748b; padding-top:40px;">
+                                    상품을 선택해주세요.
+                                </div>
+                            </div>
+
+                            <div class="total-section">
+                                <div class="total-row">
+                                    <span>설치비 (1회)</span>
+                                    <span id="total-setup">0원</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>월 기본료</span>
+                                    <span id="total-monthly">0원</span>
+                                </div>
+                                <div class="total-row" style="color:#ef4444;">
+                                    <span>할인 금액</span>
+                                    <span id="total-discount">-0원</span>
+                                </div>
+                                <div class="total-row final">
+                                    <span>월 예상 금액</span>
+                                    <span id="total-final">0원</span>
+                                </div>
+                            </div>
+
+                            <button class="btn-print" onclick="window.print()">
+                                <i class="fas fa-file-pdf"></i> 견적서 출력 / 저장
+                            </button>
+                            <button class="btn-reset" onclick="resetCalculator()">
+                                <i class="fas fa-undo"></i> 모든 선택 초기화
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase_config.js"></script>
+    <script src="components/loader.js"></script>
+    <script src="calculator_data.js"></script>
+    <script src="calculator.js"></script>
+</body>
+
+</html>

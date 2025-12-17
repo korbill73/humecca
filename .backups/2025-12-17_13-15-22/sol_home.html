@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-transition" content="same-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMECCA - 서버 호스팅</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./logo.png" alt="HUMECCA" id="logo-img">
+            </a>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item has-dropdown">
+                        <a href="index.html#idc" class="nav-link">IDC <i class="fas fa-chevron-down arrow-icon"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="idc_hosting.html" class="dropdown-item">서버 호스팅</a>
+                            <a href="idc_colocation.html" class="dropdown-item">코로케이션</a>
+                            <a href="idc_network.html" class="dropdown-item">IDC 네트워크</a>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="index.html#cloud" class="nav-link">클라우드 <i
+                                class="fas fa-chevron-down arrow-icon"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="cloud_kt.html" class="dropdown-item">KT 클라우드</a>
+                            <a href="cloud_storage.html" class="dropdown-item">클라우드 스토리지</a>
+                            <a href="cloud_os.html" class="dropdown-item">다양한 OS 지원</a>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="index.html#vpn" class="nav-link">VPN 전용선 <i
+                                class="fas fa-chevron-down arrow-icon"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="vpn_service.html" class="dropdown-item">VPN 서비스</a>
+                            <a href="vpn_line.html" class="dropdown-item">전용선</a>
+                            <a href="vpn_monitoring.html" class="dropdown-item">네트워크 모니터링</a>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="index.html#security" class="nav-link">보안 <i
+                                class="fas fa-chevron-down arrow-icon"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="sec_monitoring.html" class="dropdown-item">보안 모니터링</a>
+                            <a href="sec_ddos.html" class="dropdown-item">DDoS 방어</a>
+                            <a href="sec_ssl.html" class="dropdown-item">SSL/방화벽</a>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="index.html#additional" class="nav-link">부가서비스 <i
+                                class="fas fa-chevron-down arrow-icon"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="add_server.html" class="dropdown-item">서버 관리 대행</a>
+                            <a href="add_backup.html" class="dropdown-item">백업 & 복구</a>
+                            <a href="add_ha.html" class="dropdown-item">HA 호스팅</a>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="index.html#solutions" class="nav-link">기업솔루션 <i
+                                class="fas fa-chevron-down arrow-icon"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="sol_home.html" class="dropdown-item">맞춤형 홈페이지</a>
+                            <a href="sol_groupware.html" class="dropdown-item">네이버웍스</a>
+                            <a href="sol_ebiz.html" class="dropdown-item">e-Business 솔루션</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#about" class="nav-link">회사소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#support" class="nav-link">고객센터</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-utils">
+                <a href="#" class="util-link"><i class="fas fa-calculator"></i> 요금계산</a>
+                <a href="#" class="util-link">회원가입</a>
+                <a href="#" class="btn-login">로그인</a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="sw-hero" style="background: #1a1f3c;">
+        <div class="container">
+            <h1>맞춤형 홈페이지</h1>
+            <p>Customized Homepage Service</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="page-content" style="padding: 80px 0;">
+        <div class="container">
+            <div class="content-header" style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">등록된 상품</h2>
+                <p style="color: #666; font-size: 1.1rem;">Supabase에서 불러온 실시간 데이터입니다</p>
+            </div>
+
+            <!-- 상품 표시 영역 -->
+            <div id="productsContainer"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HUMECCA</h3>
+                    <p>믿을 수 있는 IDC 파트너</p>
+                    <p class="footer-copyright">© 2024 HUMECCA. All rights reserved.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="idc_hosting.html">서버 호스팅</a></li>
+                        <li><a href="idc_colocation.html">코로케이션</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>솔루션</h4>
+                    <ul>
+                        <li><a href="sol_home.html">홈페이지 제작</a></li>
+                        <li><a href="sol_groupware.html">그룹웨어</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>회사</h4>
+                    <ul>
+                        <li><a href="index.html#about">회사소개</a></li>
+                        <li><a href="index.html#support">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+
+
+    <script>
+        // Improved Menu Interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+
+                // When link inside menu is clicked, hide menu immediately
+                const links = menu.querySelectorAll('a.dropdown-item');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.style.display = 'none'; // Force hide to prevent ghosting
+                    });
+                });
+
+                // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+                // This ensures that next time the user hovers, CSS :hover works again.
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = '';
+                    menu.style.opacity = '';
+                    menu.style.visibility = '';
+                });
+
+                // Safety: Ensure it's clean (visible) when mouse enters
+                item.addEventListener('mouseenter', () => {
+                    menu.style.display = '';
+                });
+            });
+        });
+    </script>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase_config.js"></script>
+    <script src="./products.js"></script>
+    <script>
+        // 페이지 로드 시 'solution' 카테고리의 상품 불러오기
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts('solution', 'productsContainer');
+        });
+    </script>
+
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>

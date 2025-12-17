@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서비스별 제한사항 - HUMECCA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=3.18">
+</head>
+
+<body>
+    <!-- ========== HEADER PLACEHOLDER (Loaded via loader.js) ========== -->
+            <div id="header-placeholder"></div>
+
+
+    <!-- ========== CLOUD HERO ========== -->
+    <section class="cloud-hero">
+        <div class="container">
+            <!-- Standardized Hero -->
+            <div class="cloud-badgetext">KT Cloud Partner</div>
+
+            <h1>서비스별 제한사항</h1>
+            <p>KT Cloud 서비스별 리소스 제한 안내</p>
+            <a href="https://login.humecca.co.kr" class="hero-shortcut" target="_blank"><i
+                    class="fas fa-sign-in-alt"></i> 서비스 바로가기</a>
+        </div>
+    </section>
+
+    <!-- ========== CLOUD LAYOUT ========== -->
+    <div class="cloud-layout">
+        <!-- Left Sidebar -->
+        <aside class="cloud-sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sub_cloud_intro.html"><i class="fas fa-info-circle"></i> 서비스 개요</a></li>
+                <li><a href="sub_cloud_server.html"><i class="fas fa-server"></i> Server</a></li>
+                <li><a href="sub_cloud_db.html"><i class="fas fa-database"></i> 데이터베이스</a></li>
+                <li><a href="sub_cloud_storage.html"><i class="fas fa-hdd"></i> 스토리지/CDN</a></li>
+
+                <li><a href="sub_cloud_network.html"><i class="fas fa-network-wired"></i> 네트워크</a></li>
+                <li><a href="sub_cloud_management.html"><i class="fas fa-tasks"></i> 매니지먼트</a></li>
+                <li><a href="sub_cloud_vdi.html"><i class="fas fa-desktop"></i> VDI</a></li>
+                <li><a href="sub_cloud_private.html"><i class="fas fa-lock"></i> Private Cloud</a></li>
+                <li><a href="sub_cloud_limits.html" class="active"><i class="fas fa-info-circle"></i> 서비스별 제한사항</a></li>
+            </ul>
+            <a href="https://login.humecca.co.kr" class="sidebar-shortcut" target="_blank"><i
+                    class="fas fa-external-link-alt"></i> 클라우드 콘솔 바로가기</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cloud-content">
+            <div class="content-header">
+                <h2>서비스별 제한사항</h2>
+                <p>KT Cloud 서비스를 이용하시기 전에 아래 제한사항을 확인하시기 바랍니다.
+                    제한사항은 서비스 안정성과 공정한 자원 배분을 위해 설정되어 있습니다.</p>
+            </div>
+
+            <!-- Server Limits -->
+            <div class="content-section">
+                <div class="section-title">Server 서비스 제한사항</div>
+                <table class="limit-table">
+                    <thead>
+                        <tr>
+                            <th class="service-name">항목</th>
+                            <th>기본 제한</th>
+                            <th>확장 요청 시</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VM 최대 생성 수</td>
+                            <td>계정당 50대</td>
+                            <td>요청 시 확장 가능</td>
+                        </tr>
+                        <tr>
+                            <td>vCPU 최대 수</td>
+                            <td>VM당 32 vCore</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Memory 최대 용량</td>
+                            <td>VM당 256GB</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Data Disk 최대 용량</td>
+                            <td>VM당 2TB</td>
+                            <td>추가 디스크 연결 가능</td>
+                        </tr>
+                        <tr>
+                            <td>Public IP 개수</td>
+                            <td>계정당 10개</td>
+                            <td>요청 시 추가 할당</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Database Limits -->
+            <div class="content-section">
+                <div class="section-title">Database 서비스 제한사항</div>
+                <table class="limit-table">
+                    <thead>
+                        <tr>
+                            <th class="service-name">항목</th>
+                            <th>기본 제한</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DB 인스턴스 수</td>
+                            <td>계정당 20개</td>
+                            <td>요청 시 확장</td>
+                        </tr>
+                        <tr>
+                            <td>스토리지 최대 용량</td>
+                            <td>인스턴스당 1TB</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>동시 연결 수</td>
+                            <td>사양에 따라 다름</td>
+                            <td>MySQL 기준 150~1000</td>
+                        </tr>
+                        <tr>
+                            <td>백업 보관 기간</td>
+                            <td>최대 30일</td>
+                            <td>자동 백업 기준</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Storage Limits -->
+            <div class="content-section">
+                <div class="section-title">Storage/CDN 서비스 제한사항</div>
+                <table class="limit-table">
+                    <thead>
+                        <tr>
+                            <th class="service-name">항목</th>
+                            <th>기본 제한</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Object Storage 용량</td>
+                            <td>계정당 100TB</td>
+                            <td>요청 시 확장</td>
+                        </tr>
+                        <tr>
+                            <td>단일 파일 용량</td>
+                            <td>5TB</td>
+                            <td>멀티파트 업로드 사용 시</td>
+                        </tr>
+                        <tr>
+                            <td>CDN 도메인 수</td>
+                            <td>계정당 20개</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>CDN 캐시 갱신</td>
+                            <td>1,000 URL/일</td>
+                            <td>Purge 요청 기준</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Network Limits -->
+            <div class="content-section">
+                <div class="section-title">Network 서비스 제한사항</div>
+                <table class="limit-table">
+                    <thead>
+                        <tr>
+                            <th class="service-name">항목</th>
+                            <th>기본 제한</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VPC 개수</td>
+                            <td>계정당 5개</td>
+                            <td>Zone별</td>
+                        </tr>
+                        <tr>
+                            <td>Subnet 개수</td>
+                            <td>VPC당 10개</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Load Balancer</td>
+                            <td>계정당 10개</td>
+                            <td>요청 시 추가</td>
+                        </tr>
+                        <tr>
+                            <td>방화벽 규칙</td>
+                            <td>그룹당 100개</td>
+                            <td>Inbound + Outbound</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Notes -->
+            <div class="notes-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> 참고사항</h4>
+                <p>• 위 제한사항은 KT Cloud 정책에 따라 변경될 수 있습니다.</p>
+                <p>• 추가 자원이 필요한 경우 고객센터(02-418-7766)로 문의해 주세요.</p>
+                <p>• 일부 서비스는 Zone에 따라 제한사항이 다를 수 있습니다.</p>
+                <p>• 자세한 내용은 KT Cloud 공식 문서를 참조하시기 바랍니다.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div id="footer-placeholder"></div>
+    <script src="components/loader.js?v=3.18"></script>
+    <script src="script.js"></script>
+
+
+    <script>
+        // Improved Menu Interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const menu = item.querySelector('.dropdown-menu');
+                if (!menu) return;
+
+                // When link inside menu is clicked, hide menu immediately
+                const links = menu.querySelectorAll('a.dropdown-item');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.style.display = 'none'; // Force hide to prevent ghosting
+                    });
+                });
+
+                // CRITICAL FIX: When mouse leaves the parent li, reset the inline style 
+                // This ensures that next time the user hovers, CSS :hover works again.
+                item.addEventListener('mouseleave', () => {
+                    menu.style.display = '';
+                    menu.style.opacity = '';
+                    menu.style.visibility = '';
+                });
+
+                // Safety: Ensure it's clean (visible) when mouse enters
+                item.addEventListener('mouseenter', () => {
+                    menu.style.display = '';
+                });
+            });
+        });
+    </script>
+
+
+    <script src="js/subpage-canvas.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+

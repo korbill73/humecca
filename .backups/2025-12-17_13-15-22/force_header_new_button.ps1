@@ -1,0 +1,313 @@
+$ErrorActionPreference = "Stop"
+$RootPath = "."
+
+Write-Host "Starting New Button Injection..."
+
+# Embedded CSS to GUARANTEE styles (Bypassing external CSS cache issues)
+$CustomStyle = @'
+<style>
+    .btn-service-shortcut {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        padding: 14px 20px !important;
+        background-color: #EF4444 !important; /* KW Red */
+        color: #FFFFFF !important; /* WHITE TEXT FORCED */
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+        border: 2px solid #EF4444 !important;
+    }
+    .btn-service-shortcut:hover {
+        background-color: #DC2626 !important; /* Darker Red */
+        color: #FFFFFF !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+    .btn-service-shortcut i {
+        color: #FFFFFF !important; /* Icon White */
+    }
+</style>
+'@
+
+$HeaderHtml = @'
+    <header class="header">
+        <div class="header-container container">
+            <!-- Logo -->
+            <a href="index.html" class="logo-link">
+                <img src="images/humecca_logo.gif" alt="HUMECCA" style="height:40px;">
+            </a>
+
+            <!-- Main Navigation -->
+            <nav class="nav">
+                <ul class="nav-list">
+                    <!-- 1. Cloud (Mega Menu) -->
+                    <li class="nav-item">
+                        <a href="sub_cloud_intro.html" class="nav-link">
+                            클라우드 <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu" style="min-width: 720px;">
+                            <a href="sub_cloud_intro.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-cloud"></i></div>
+                                <div class="dropdown-text">
+                                    <span class="dropdown-title">클라우드 소개</span>
+                                    <span class="dropdown-desc">KT Cloud 기반 유연한 인프라</span>
+                                </div>
+                            </a>
+                            <p class="mega-section-title">KT Cloud 서비스</p>
+                            <div class="mega-grid">
+                                <a href="sub_cloud_server.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-server"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">Server</span></div>
+                                </a>
+                                <a href="sub_cloud_db.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-database"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">데이터베이스</span></div>
+                                </a>
+                                <a href="sub_cloud_storage.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-hdd"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">스토리지/CDN</span></div>
+                                </a>
+                                <a href="sub_cloud_network.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-network-wired"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">네트워크</span></div>
+                                </a>
+                                <a href="sub_cloud_management.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-tasks"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">매니지먼트</span></div>
+                                </a>
+                                <a href="sub_cloud_vdi.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-desktop"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">VDI</span></div>
+                                </a>
+                                <a href="sub_cloud_private.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-lock"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">Private Cloud</span></div>
+                                </a>
+                            </div>
+
+                            <div style="margin-top: 12px; border-top: 1px solid #eee; padding-top: 12px;">
+                                <a href="sub_cloud_limits.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-info-circle"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">서비스별 제한사항</span></div>
+                                </a>
+                            </div>
+
+                            <!-- NEW BUTTON SECTION -->
+                            <div class="mega-cta" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
+                                <!-- INJECTED CUSTOM STYLE -->
+                                ' + $CustomStyle + @'
+                                <a href="https://login.humecca.co.kr" target="_blank" class="btn-service-shortcut">
+                                    <i class="fas fa-cloud"></i> 서비스 콘솔 바로가기 <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- 2. IDC -->
+                    <li class="nav-item">
+                        <a href="sub_idc_intro.html" class="nav-link">IDC <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu" style="min-width:320px;">
+                            <a href="sub_idc_intro.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-building"></i></div>
+                                <div class="dropdown-text">
+                                    <span class="dropdown-title">HUMECCA IDC</span>
+                                    <span class="dropdown-desc">Tier 3+ 인증 IDC 센터</span>
+                                </div>
+                            </a>
+                            <a href="sub_hosting.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-server"></i></div>
+                                <div class="dropdown-text">
+                                    <span class="dropdown-title">서버호스팅</span>
+                                    <span class="dropdown-desc">고성능 전용 서버</span>
+                                </div>
+                            </a>
+                            <a href="sub_colocation.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dropdown-text">
+                                    <span class="dropdown-title">코로케이션</span>
+                                    <span class="dropdown-desc">안전한 서버 입주</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- 3. VPN -->
+                    <li class="nav-item"><a href="sub_vpn.html" class="nav-link">VPN 전용선</a></li>
+
+                    <!-- 4. Security -->
+                    <li class="nav-item">
+                        <a href="sub_security.html" class="nav-link">보안 <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu mega-menu" style="min-width: 500px;">
+                            <p class="mega-section-title">Network Security</p>
+                            <div class="mega-grid">
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">WAF (웹방화벽)</span></div>
+                                </a>
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-plus-square"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">WAF Pro</span></div>
+                                </a>
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-filter"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">클린존</span></div>
+                                </a>
+                            </div>
+                            <p class="mega-section-title"
+                                style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">System & Data
+                                Security</p>
+                            <div class="mega-grid">
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-certificate"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">Private CA</span></div>
+                                </a>
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-lock"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">Certificate Manager</span></div>
+                                </a>
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-laptop-medical"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">V3 Net Server</span></div>
+                                </a>
+                                <a href="sub_security.html" class="dropdown-item">
+                                    <div class="dropdown-icon"><i class="fas fa-database"></i></div>
+                                    <div class="dropdown-text"><span class="dropdown-title">DBSAFER</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- 5. Addon -->
+                    <li class="nav-item">
+                        <a href="sub_addon_software.html" class="nav-link">부가서비스 <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu mega-menu" style="min-width: 400px;">
+                            <div class="menu-list" style="padding: 10px 0;">
+                                <a href="sub_addon_software.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-window-maximize"></i></div>
+                                    <div class="text-box"><span class="title">소프트웨어</span><span class="desc">라이선스 임대</span>
+                                    </div>
+                                </a>
+                                <a href="sub_addon_backup.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-database"></i></div>
+                                    <div class="text-box"><span class="title">백업</span><span class="desc">데이터 보호</span>
+                                    </div>
+                                </a>
+                                <a href="sub_addon_ha.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+                                    <div class="text-box"><span class="title">HA(고가용성)</span><span class="desc">무중단
+                                            서비스</span></div>
+                                </a>
+                                <a href="sub_addon_loadbalancing.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-wave-square"></i></div>
+                                    <div class="text-box"><span class="title">로드밸런싱</span><span class="desc">트래픽 분산</span>
+                                    </div>
+                                </a>
+                                <a href="sub_addon_cdn.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                                    <div class="text-box"><span class="title">CDN</span><span class="desc">속도 가속</span>
+                                    </div>
+                                </a>
+                                <a href="sub_addon_recovery.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-undo"></i></div>
+                                    <div class="text-box"><span class="title">데이터 복구</span><span class="desc">데이터 손상
+                                            복원</span></div>
+                                </a>
+                                <a href="sub_addon_monitoring.html" class="dropdown-item icon-left">
+                                    <div class="icon-box"><i class="fas fa-desktop"></i></div>
+                                    <div class="text-box"><span class="title">모니터링</span><span class="desc">실시간 감시</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="menu-footer"
+                                style="border-top: 1px solid #f3f4f6; padding: 12px; text-align: center; background: #f9fafb;">
+                                <a href="sub_addon_software.html" style="color: #dc2626; font-size: 14px; font-weight: 500;">전체 부가서비스 보기</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- 6. Enterprise Solutions -->
+                    <li class="nav-item">
+                        <a href="sub_sol_ms365.html" class="nav-link">기업솔루션 <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="sub_sol_ms365.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fab fa-microsoft"></i></div>
+                                <div class="dropdown-text"><span class="dropdown-title">MS 365</span></div>
+                            </a>
+                            <a href="sub_sol_groupware.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-envelope-open-text"></i></div>
+                                <div class="dropdown-text"><span class="dropdown-title">네이버웍스</span></div>
+                            </a>
+                            <a href="sub_web_custom.html" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-laptop-code"></i></div>
+                                <div class="dropdown-text"><span class="dropdown-title">홈페이지 제작</span></div>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- 7. Company -->
+                    <li class="nav-item">
+                        <a href="sub_company_intro.html" class="nav-link">회사소개 <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="sub_company_intro.html#intro" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-info-circle"></i></div>
+                                <div class="dropdown-text"><span class="dropdown-title">회사소개</span></div>
+                            </a>
+                            <a href="sub_company_intro.html#history" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-history"></i></div>
+                                <div class="dropdown-text"><span class="dropdown-title">연혁</span></div>
+                            </a>
+                            <a href="sub_company_intro.html#location" class="dropdown-item">
+                                <div class="dropdown-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="dropdown-text"><span class="dropdown-title">오시는 길</span></div>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- 8. Customer Center -->
+                    <li class="nav-item">
+                        <a href="sub_support.html" class="nav-link">고객센터</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <a href="https://login.humecca.co.kr/" class="btn" style="color: #64748b; font-weight: 600;">
+                    <i class="fas fa-power-off" style="margin-right:6px; color:#EF4444;"></i> 로그인
+                </a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+'@
+
+$TargetFiles = Get-ChildItem -Path $RootPath | Where-Object { $_.Name -match "^sub_.*\.html$" -or $_.Name -eq "index.html" }
+
+foreach ($File in $TargetFiles) {
+    Write-Host "Re-Injecting New Button Header into $($File.Name)..."
+    $Content = Get-Content -Path $File.FullName -Raw -Encoding UTF8
+    
+    $Modified = $false
+    
+    # Check for placeholder
+    if ($Content -match 'id="header-placeholder"') {
+         $Content = $Content -replace '<div id="header-placeholder"></div>', $HeaderHtml
+         $Modified = $true
+    }
+    # Check for existing header
+    elseif ($Content -match '(?s)<header class="header">.*?</header>') {
+         $Content = $Content -replace '(?s)<header class="header">.*?</header>', $HeaderHtml
+         $Modified = $true
+    }
+
+    if ($Modified) {
+        $Content | Set-Content -Path $File.FullName -Encoding UTF8
+    }
+}
+Write-Host "New Button Injection Complete."

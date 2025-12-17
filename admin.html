@@ -14,21 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase_config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <!-- Inline styles removed to rely on admin_style.css -->
     <style>
-        :root {
-            --primary-color: #4f46e5;
-            /* Indigo 600 */
-            --primary-dark: #4338ca;
-            --bg-light: #f3f4f6;
-            --text-dark: #1f2937;
-            --text-gray: #6b7280;
-            --danger: #ef4444;
-            --success: #10b981;
-            --warning: #f59e0b;
-        }
-
-        /* === Premium Modal === */
+        /* === Premium Modal (Dark Theme Override) === */
         .modal {
             display: none;
             position: fixed;
@@ -38,19 +29,23 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
+            background-color: rgba(15, 23, 42, 0.7);
+            /* Darker backdrop */
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
-            background-color: #fff;
+            background-color: #1e293b;
+            /* Slate 800 */
             margin: 5% auto;
             width: 90%;
             max-width: 700px;
             border-radius: 16px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
+            border: 1px solid #334155;
             overflow: hidden;
             animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: #f8fafc;
         }
 
         @keyframes modalPop {
@@ -66,8 +61,8 @@
         }
 
         .premium-modal-header {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            /* Deep Blue/Slate */
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
             padding: 20px 30px;
             display: flex;
             justify-content: space-between;
@@ -79,10 +74,12 @@
             font-size: 1.25rem;
             font-weight: 700;
             letter-spacing: -0.5px;
+            color: #60a5fa;
+            /* Accent Color */
         }
 
         .premium-close {
-            color: rgba(255, 255, 255, 0.7);
+            color: #94a3b8;
             font-size: 28px;
             cursor: pointer;
             transition: color 0.2s;
@@ -90,10 +87,12 @@
 
         .premium-close:hover {
             color: white;
+            text-shadow: 0 0 10px white;
         }
 
         .premium-modal-body {
             padding: 30px;
+            background: #1e293b;
         }
 
         .info-group {
@@ -112,19 +111,20 @@
 
         .info-value {
             font-size: 1rem;
-            color: #334155;
+            color: #f8fafc;
             font-weight: 500;
             line-height: 1.6;
-            background: #f8fafc;
+            background: #0f172a;
+            /* Darker input-like bg */
             padding: 12px 16px;
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #334155;
         }
 
         .info-value.highlight {
-            background: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1e40af;
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            color: #60a5fa;
         }
 
         /* === Status Tabs (Dashboard) === */
@@ -179,12 +179,21 @@
         }
 
         .admin-table tbody tr:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            background-color: #fff !important;
-            /* Override striping */
+            transform: translateY(-3px) scale(1.005);
+            /* Slightly more lift */
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(59, 130, 246, 0.1);
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            /* Dark Blue Tint */
             z-index: 10;
             position: relative;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Bouncy Premium Feel */
+        }
+
+        /* Specific fix for left border to not mess up padding */
+        .admin-table tbody tr:hover td:first-child {
+            border-left: 4px solid #3b82f6;
         }
 
         /* Date Cell */
@@ -194,13 +203,15 @@
 
         .date-main {
             font-weight: 600;
-            color: #334155;
+            color: #f8fafc;
+            /* White */
             font-size: 0.9rem;
         }
 
         .date-sub {
             font-size: 0.8rem;
             color: #94a3b8;
+            /* Slate 400 */
         }
 
         /* Status Badges (Pills) */
@@ -216,36 +227,38 @@
         }
 
         .badge-red {
-            background: #fee2e2;
-            color: #991b1b;
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
         }
 
         .badge-yellow {
-            background: #fef3c7;
-            color: #92400e;
+            background: rgba(245, 158, 11, 0.1);
+            color: #fbbf24;
         }
 
         .badge-green {
-            background: #d1fae5;
-            color: #065f46;
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
         }
 
         .badge-gray {
-            background: #f3f4f6;
-            color: #4b5563;
+            background: rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
         }
 
         /* Product Info Cell */
         .prod-name {
             font-weight: 700;
             font-size: 1rem;
-            color: #1e293b;
+            color: #f8fafc;
+            /* White */
             margin-bottom: 4px;
         }
 
         .prod-sub {
             font-size: 0.85rem;
-            color: #64748b;
+            color: #94a3b8;
+            /* Slate 400 */
             display: flex;
             align-items: center;
             gap: 6px;
@@ -253,11 +266,12 @@
 
         .prod-price {
             color: #ef4444;
+            /* Keep Red as requested */
             font-weight: 600;
-            background: #fef2f2;
+            background: rgba(239, 68, 68, 0.1);
             padding: 2px 6px;
             border-radius: 4px;
-            border: 1px solid #fecaca;
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
         /* === Brand Style Interface (Red & White) === */
@@ -371,7 +385,7 @@
             display: none;
         }
 
-        /* === Context-Aware Tab Styling (For White Cards) === */
+        /* === Context-Aware Tab Styling (Fixed for Dark Theme) === */
         .card .admin-tabs {
             background: transparent !important;
             border: none;
@@ -381,17 +395,18 @@
 
         /* High Specificity for Terms Buttons */
         div.card div.admin-tabs button.admin-tab {
-            color: #111111 !important;
-            /* Pure Black for max visibility */
+            color: #94a3b8 !important;
+            /* Slate-400 for inactive */
             border: 1px solid transparent;
-            background: transparent !important;
+            background: rgba(30, 41, 59, 0.5) !important;
+            /* Darker bg */
             text-shadow: none !important;
             opacity: 1 !important;
         }
 
         div.card div.admin-tabs button.admin-tab:hover {
-            background: rgba(0, 0, 0, 0.05) !important;
-            color: #000000 !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #ffffff !important;
         }
 
         div.card div.admin-tabs button.admin-tab.active {
@@ -409,14 +424,11 @@
             <button class="admin-tab" onclick="showTab('notice')">공지사항</button>
             <button class="admin-tab" onclick="showTab('faq')">FAQ</button>
             <button class="admin-tab" onclick="showTab('inquiry')">문의 관리</button>
-            <button class="admin-tab" onclick="showTab('ticket')">티켓 관리</button>
             <button class="admin-tab" onclick="showTab('application')">신청 관리</button>
             <button class="admin-tab active" onclick="showTab('product')">상품 관리</button>
             <button class="admin-tab" onclick="showTab('history')">회사 연혁</button>
             <button class="admin-tab" onclick="showTab('customer')">고객사 로고</button>
-            <button class="admin-tab" onclick="showTab('webhook')">웹훅로닉스</button>
             <button class="admin-tab" onclick="showTab('terms')">약관 관리</button>
-            <button class="admin-tab" onclick="showTab('contact')">연락 관리</button>
             <button class="admin-tab" onclick="showTab('analytics')">웹로그 분석</button>
             <button class="admin-tab" onclick="showTab('backup')" id="btn-backup"
                 style="background:#334155; color:white; border-left:1px solid #475569;"><i class="fas fa-history"></i>
@@ -1412,55 +1424,61 @@
 
             <!-- 공지사항 등록 폼 -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title" id="notice-form-title">공지사항 작성</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3 class="card-title" id="notice-form-title">공지사항 관리</h3>
+                    <button class="btn btn-primary" onclick="toggleNoticeForm()">
+                        <i class="fas fa-pen"></i> 공지 글쓰기
+                    </button>
                 </div>
-                <form id="notice-form">
-                    <input type="hidden" id="notice-edit-id" value="">
-
-                    <div class="form-group">
-                        <label>제목 *</label>
-                        <input type="text" id="notice-title" class="form-control" placeholder="공지사항 제목을 입력하세요" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>내용 *</label>
-                        <textarea id="notice-content" class="form-control" rows="10"
-                            placeholder="공지사항 내용을 입력하세요 (HTML 사용 가능)" required></textarea>
-                        <small style="color: #999;">HTML 태그를 사용할 수 있습니다.</small>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
-                        <div class="form-group">
-                            <label>작성자</label>
-                            <input type="text" id="notice-author" class="form-control" value="HUMECCA"
-                                placeholder="관리자">
-                        </div>
-                        <div class="form-group">
-                            <label style="display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" id="notice-pinned">
-                                상단 고정
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label style="display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" id="notice-active" checked>
-                                활성화
-                            </label>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 10px; margin-top: 20px;">
-                        <button type="submit" class="btn btn-primary" id="notice-submit-btn">
-                            <i class="fas fa-plus"></i> 작성
-                        </button>
-                        <button type="button" class="btn btn-secondary" id="notice-cancel-btn"
-                            onclick="resetNoticeForm()" style="display: none;">
-                            <i class="fas fa-times"></i> 취소
-                        </button>
-                    </div>
-                </form>
             </div>
+            <!-- Form Container (Hidden by default) -->
+            <div id="notice-form-container" style="display:none; padding: 20px; border-top: 1px solid #e2e8f0;">
+                <input type="hidden" id="notice-edit-id" value="">
+
+                <div class="form-group">
+                    <label>제목 *</label>
+                    <input type="text" id="notice-title" class="form-control" placeholder="공지사항 제목을 입력하세요" required>
+                </div>
+
+                <div class="form-group">
+                    <label>내용 *</label>
+                    <!-- Quill Editor Container -->
+                    <div id="editor-container" style="height: 300px; background:white;"></div>
+                    <input type="hidden" id="notice-content">
+                    <small style="color: #999;">텍스트 스타일, 색상, 정렬 등을 자유롭게 편집할 수 있습니다.</small>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label>작성자</label>
+                    <input type="text" id="notice-author" class="form-control" value="HUMECCA" placeholder="관리자">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="notice-pinned">
+                        상단 고정
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="notice-active" checked>
+                        활성화
+                    </label>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button type="submit" class="btn btn-primary" id="notice-submit-btn">
+                    <i class="fas fa-plus"></i> 작성
+                </button>
+                <button type="button" class="btn btn-secondary" id="notice-cancel-btn" onclick="resetNoticeForm()"
+                    style="display: none;">
+                    <i class="fas fa-times"></i> 취소
+                </button>
+            </div>
+            </form>
+
 
             <!-- 공지사항 목록 -->
             <div class="card">
