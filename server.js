@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
 // Configuration
 const BACKUP_DIR = path.join(__dirname, '.backups');
@@ -152,10 +152,14 @@ app.post('/api/restore', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+// [수정 전]
+// app.listen(PORT, () => {
+
+// [수정 후] 0.0.0.0을 꼭 추가해야 밖에서도 접속됩니다!
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`=============================================`);
     console.log(`🚀 Smart Development Server Running!`);
-    console.log(`📡 URL: http://localhost:${PORT}`);
+    console.log(`📡 URL: http://0.0.0.0:${PORT}`); // 로그도 헷갈리지 않게 바꿈
     console.log(`📂 Working Dir: ${ROOT_DIR}`);
     console.log(`=============================================`);
 });
