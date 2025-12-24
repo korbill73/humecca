@@ -1,22 +1,53 @@
 /**
  * HUMECCA Calculator Logic
  * Handles rendering, state management, and real-time calculation.
+ * Now with database integration.
  */
 
 // State
 let calcState = {
     selectedProductId: null,
-    addons: {}, // { cpu: 2, ram: 16 (GB), ... }
+    addons: {},
     termMonths: 1
+};
+
+// Data loaded from DB (fallback to static data)
+let CALCULATOR_DATA = {
+    products: [],
+    addons: [],
+    discounts: []
 };
 
 // Intialize
 document.addEventListener('DOMContentLoaded', () => {
-    initCalculator();
+    loadCalculatorData();
 });
 
+async function loadCalculatorData() {
+    try {
+        const response = await fetch('/api/calculator/data');
+        if (response.ok) {
+            CALCULATOR_DATA = await response.json();
+            console.log('[Calculator] Data loaded from DB:', CALCULATOR_DATA);
+        } else {
+            console.warn('[Calculator] DB fetch failed, using fallback data');
+            loadFallbackData();
+        }
+    } catch (error) {
+        console.warn('[Calculator] Network error, using fallback data:', error);
+        loadFallbackData();
+    }
+    initCalculator();
+}
+
+function loadFallbackData() {
+    if (typeof window.CALCULATOR_DATA_STATIC !== 'undefined') {
+        CALCULATOR_DATA = window.CALCULATOR_DATA_STATIC;
+    }
+}
+
 function initCalculator() {
-    renderProducts('server'); // Default category
+    renderProducts('server');
     renderAddons();
     renderTerms();
     updateQuoteUI();

@@ -2,8 +2,13 @@ const express = require('express');
 const fs = require('fs-extra');
 const path = require('path');
 const cors = require('cors');
+const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+});
 
 // Configuration
 const BACKUP_DIR = path.join(__dirname, '.backups');
@@ -148,6 +153,52 @@ app.post('/api/restore', async (req, res) => {
         res.json({ success: true });
     } catch (error) {
         console.error('Restore Error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// [API] Calculator Data - Get all pricing data from DB
+app.get('/api/calculator/data', async (req, res) => {
+    try {
+        const productsResult = await pool.query(
+            'SELECT product_id as id, category, name, description as desc, price, setup_fee, specs, badge FROM calculator_products WHERE is_active = true ORDER BY category, price'
+        );
+        
+        const addonsResult = await pool.query(
+            'SELECT addon_id as id, name, addon_type as type, unit, price_per_unit, step, max_value as max, options, items FROM calculator_addons WHERE is_active = true'
+        );
+        
+        const discountsResult = await pool.query(
+            'SELECT months, rate::float, label FROM calculator_discounts ORDER BY months'
+        );
+        
+        const products = productsResult.rows.map(p => ({
+            ...p,
+            specs: p.specs || {}
+        }));
+        
+        const addons = addonsResult.rows.map(a => {
+            const addon = {
+                id: a.id,
+                name: a.name,
+                type: a.type
+            };
+            if (a.unit) addon.unit = a.unit;
+            if (a.price_per_unit) addon.price_per_unit = a.price_per_unit;
+            if (a.step) addon.step = a.step;
+            if (a.max) addon.max = a.max;
+            if (a.options) addon.options = a.options;
+            if (a.items) addon.items = a.items;
+            return addon;
+        });
+        
+        res.json({
+            products,
+            addons,
+            discounts: discountsResult.rows
+        });
+    } catch (error) {
+        console.error('Calculator API Error:', error);
         res.status(500).json({ error: error.message });
     }
 });
