@@ -141,16 +141,37 @@ body {
     height: 100%;
 }
 
-/* Fix for Loader Layout Shift */
-/* Fix for Loader Layout Shift */
+/* Fix for Loader Layout Shift - Prevent Header Flicker */
 #header-placeholder {
     min-height: 80px;
     display: block;
 }
 
+#header-placeholder .header {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease-out, visibility 0.15s ease-out;
+}
+
+#header-placeholder.header-loaded .header {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Logo fixed width to prevent layout shift */
+.logo-link img {
+    width: 180px;
+    height: 40px;
+    object-fit: contain;
+}
+
 @media (max-width: 768px) {
     #header-placeholder {
         min-height: 60px;
+    }
+    .logo-link img {
+        width: 140px;
+        height: 32px;
     }
 }
 
