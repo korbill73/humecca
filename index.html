@@ -14,6 +14,57 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase_config.js"></script>
     <style>
+        /* Critical Header CSS - Prevent Flicker */
+        .header {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+            height: 80px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+        }
+        .logo-link {
+            flex: 0 0 180px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-link img {
+            width: 100%;
+            max-width: 180px;
+            height: 40px;
+            object-fit: contain;
+        }
+        .nav { display: flex; align-items: center; }
+        .nav-list { display: flex; list-style: none; margin: 0; padding: 0; }
+        .nav-item { position: relative; }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 28px 18px;
+            color: #1f2937;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 1001; }
+        .header-buttons { display: flex; align-items: center; }
+        .mobile-menu-btn { display: none; }
+        @media (max-width: 768px) {
+            .header { height: 60px; }
+            .logo-link { flex: 0 0 140px; }
+            .nav { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
         /* Animation Removed */
         /* Add-on Menu Styles for index.html */
         .dropdown-item.icon-left {
