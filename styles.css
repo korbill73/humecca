@@ -147,13 +147,15 @@ body {
     display: block;
 }
 
-#header-placeholder .header {
+/* Dynamic loaded header: hidden until ready */
+#header-placeholder:not(.header-inline) .header {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.15s ease-out, visibility 0.15s ease-out;
 }
 
-#header-placeholder.header-loaded .header {
+#header-placeholder.header-loaded .header,
+#header-placeholder.header-inline .header {
     opacity: 1;
     visibility: visible;
 }

@@ -19,15 +19,22 @@ if (typeof window.openAppModal === 'undefined') {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // 헤더 로드
-    loadComponent('header-placeholder', 'components/header.html', function() {
+    // 헤더 로드 - 인라인 헤더가 있으면 스킵
+    const headerPlaceholder = document.getElementById('header-placeholder');
+    if (headerPlaceholder && headerPlaceholder.querySelector('.header')) {
+        // Inline header exists, just init scripts
         initHeaderScripts();
-        // Add loaded class after a brief delay to ensure rendering
-        requestAnimationFrame(() => {
-            const placeholder = document.getElementById('header-placeholder');
-            if (placeholder) placeholder.classList.add('header-loaded');
+        headerPlaceholder.classList.add('header-loaded');
+    } else {
+        // Dynamic load
+        loadComponent('header-placeholder', 'components/header.html', function() {
+            initHeaderScripts();
+            requestAnimationFrame(() => {
+                const placeholder = document.getElementById('header-placeholder');
+                if (placeholder) placeholder.classList.add('header-loaded');
+            });
         });
-    });
+    }
     // 푸터 로드
     loadComponent('footer-placeholder', 'components/footer.html', () => {
         // [EmailJS] Load SDK dynamically
