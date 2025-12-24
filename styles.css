@@ -159,8 +159,15 @@ body {
 }
 
 /* Logo fixed width to prevent layout shift */
+.logo-link {
+    flex: 0 0 180px;
+    display: flex;
+    align-items: center;
+}
+
 .logo-link img {
-    width: 180px;
+    width: 100%;
+    max-width: 180px;
     height: 40px;
     object-fit: contain;
 }
@@ -169,8 +176,11 @@ body {
     #header-placeholder {
         min-height: 60px;
     }
+    .logo-link {
+        flex: 0 0 140px;
+    }
     .logo-link img {
-        width: 140px;
+        max-width: 140px;
         height: 32px;
     }
 }
@@ -546,7 +556,6 @@ body {
 /* Logo */
 .logo-link img {
     height: 40px;
-    width: auto;
     display: block;
 }
 
