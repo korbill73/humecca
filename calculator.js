@@ -18,17 +18,28 @@ let CALCULATOR_DATA = {
     discounts: []
 };
 
-// Intialize
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize - Run immediately or wait for DOM
+console.log('[Calculator] Script loaded at', new Date().toISOString());
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('[Calculator] DOM ready via event');
+        loadCalculatorData();
+    });
+} else {
+    console.log('[Calculator] DOM already ready, loading immediately');
     loadCalculatorData();
-});
+}
 
 async function loadCalculatorData() {
+    console.log('[Calculator] loadCalculatorData called');
     try {
+        console.log('[Calculator] Fetching data from API...');
         const response = await fetch('/api/calculator/data');
+        console.log('[Calculator] Response status:', response.status);
         if (response.ok) {
             CALCULATOR_DATA = await response.json();
-            console.log('[Calculator] Data loaded from DB:', CALCULATOR_DATA);
+            console.log('[Calculator] Data loaded from DB, products count:', CALCULATOR_DATA.products?.length);
         } else {
             console.warn('[Calculator] DB fetch failed, using fallback data');
             loadFallbackData();
@@ -37,6 +48,7 @@ async function loadCalculatorData() {
         console.warn('[Calculator] Network error, using fallback data:', error);
         loadFallbackData();
     }
+    console.log('[Calculator] Calling initCalculator...');
     initCalculator();
 }
 
@@ -70,12 +82,16 @@ function renderProducts(category) {
         div.className = `calc-card ${calcState.selectedProductId === p.id ? 'active' : ''}`;
         div.onclick = () => selectProduct(p.id);
 
+        const specsHtml = p.specs && typeof p.specs === 'object' 
+            ? Object.entries(p.specs).map(([k, v]) => `<span>• ${v}</span>`).join('<br>')
+            : '';
+        
         div.innerHTML = `
             ${p.badge ? `<span class="card-badge">${p.badge}</span>` : ''}
             <h3>${p.name}</h3>
             <p>${p.desc}</p>
             <div style="font-size:0.9rem; margin-bottom:10px;">
-                ${Object.entries(p.specs).map(([k, v]) => `<span>• ${v}</span>`).join('<br>')}
+                ${specsHtml}
             </div>
             <div class="price">₩ ${p.price.toLocaleString()} /월</div>
         `;

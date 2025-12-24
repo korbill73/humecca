@@ -4327,6 +4327,43 @@ main.sub-content {
     color: #03C75A !important;
 }
 
+/* Theme Blue - Plan Card Base Styles */
+.theme-blue .plan-card.popular {
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+}
+
+.theme-blue .plan-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.15);
+}
+
+.theme-blue .compact-pricing .plan-card:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.theme-blue .plan-badge {
+    background: #2563eb;
+}
+
+.theme-blue .plan-card .amount {
+    color: #2563eb;
+}
+
+.theme-blue .plan-card ul li i {
+    color: #2563eb;
+}
+
+.theme-blue .plan-btn.solid {
+    background: #2563eb;
+}
+
+.theme-blue .plan-btn.outline {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
 /* Theme Blue - Badge Hover Fix */
 .theme-blue .plan-card:hover .plan-badge,
 .theme-blue .plan-card:hover .badge-rec {
