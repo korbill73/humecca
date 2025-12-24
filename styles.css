@@ -4311,15 +4311,18 @@ main.sub-content {
     background: white;
 }
 
-/* Badge Adjustment on Hover */
+/* Badge Adjustment on Hover - Default to Red Theme */
 .plan-card:hover .plan-badge,
 .plan-card:hover .badge-rec {
     background: white !important;
+    color: #EF4444 !important;
+    border-color: #EF4444 !important;
 }
 
 .theme-red .plan-card:hover .plan-badge,
 .theme-red .plan-card:hover .badge-rec {
     color: #EF4444 !important;
+    border-color: #EF4444 !important;
 }
 
 .theme-green .plan-card:hover .plan-badge,
@@ -4334,17 +4337,16 @@ main.sub-content {
 }
 
 .theme-blue .plan-card:hover {
-    border-color: #2563eb;
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.15);
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 20px 40px -5px rgba(37, 99, 235, 0.4) !important;
+    transform: translateY(-10px) scale(1.02);
+    z-index: 10;
 }
 
 .theme-blue .compact-pricing .plan-card:hover {
-    background-color: #2563eb;
-    border-color: #2563eb;
-}
-
-.theme-blue .plan-badge {
-    background: #2563eb;
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
 }
 
 .theme-blue .plan-card .amount {
@@ -4359,16 +4361,21 @@ main.sub-content {
     background: #2563eb;
 }
 
+/* Theme Blue - Text/Icon Inversion on Hover */
+.theme-blue .plan-card:hover .plan-title,
+.theme-blue .plan-card:hover .plan-price,
+.theme-blue .plan-card:hover .plan-summary,
+.theme-blue .plan-card:hover .plan-desc,
+.theme-blue .plan-card:hover .amount,
+.theme-blue .plan-card:hover .period,
+.theme-blue .plan-card:hover i,
+.theme-blue .plan-card:hover li {
+    color: white !important;
+}
+
 .theme-blue .plan-btn.outline {
     border-color: #2563eb;
     color: #2563eb;
-}
-
-/* Theme Blue - Badge Hover Fix */
-.theme-blue .plan-card:hover .plan-badge,
-.theme-blue .plan-card:hover .badge-rec {
-    color: #2563eb !important;
-    border: 2px solid #2563eb !important;
 }
 
 .theme-blue .plan-card:hover .plan-btn,
@@ -4376,20 +4383,58 @@ main.sub-content {
     color: #2563eb !important;
 }
 
-/* Badge Border Fix for All Themes on Hover */
+/* =========================================
+   Unified Badge Styles for All Themes
+   ========================================= */
+
+/* Base Badge Styles (Normal State) */
+.plan-badge,
+.badge-rec {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #EF4444;
+    color: white;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* Theme-specific badge colors (Normal State) */
+.theme-green .plan-badge,
+.theme-green .badge-rec {
+    background: #03C75A;
+}
+
+.theme-blue .plan-badge,
+.theme-blue .badge-rec {
+    background: #2563eb;
+}
+
+/* Badge Hover State - All Themes */
 .plan-card:hover .plan-badge,
 .plan-card:hover .badge-rec {
+    background: white !important;
     border: 2px solid currentColor !important;
 }
 
 .theme-red .plan-card:hover .plan-badge,
 .theme-red .plan-card:hover .badge-rec {
-    border: 2px solid #EF4444 !important;
+    color: #EF4444 !important;
+    border-color: #EF4444 !important;
 }
 
 .theme-green .plan-card:hover .plan-badge,
 .theme-green .plan-card:hover .badge-rec {
-    border: 2px solid #03C75A !important;
+    color: #03C75A !important;
+    border-color: #03C75A !important;
+}
+
+.theme-blue .plan-card:hover .plan-badge,
+.theme-blue .plan-card:hover .badge-rec {
+    color: #2563eb !important;
+    border-color: #2563eb !important;
 }
 
 /* FINAL RESPONSIVE OVERRIDES (Must be last) */

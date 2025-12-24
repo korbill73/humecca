@@ -59,23 +59,57 @@ function loadFallbackData() {
 }
 
 function initCalculator() {
-    renderProducts('server');
+    console.log('[Calculator] initCalculator called');
+    console.log('[Calculator] Products available:', CALCULATOR_DATA.products?.length || 0);
+    
+    const list = document.getElementById('product-list');
+    if (!list) {
+        console.error('[Calculator] product-list element not found!');
+        return;
+    }
+    
+    // Get first available category from data, fallback to 'server'
+    let defaultCategory = 'server';
+    if (CALCULATOR_DATA.products && CALCULATOR_DATA.products.length > 0) {
+        defaultCategory = CALCULATOR_DATA.products[0].category;
+        console.log('[Calculator] Using default category:', defaultCategory);
+    }
+    
+    renderProducts(defaultCategory);
     renderAddons();
     renderTerms();
     updateQuoteUI();
+    
+    console.log('[Calculator] Initialization complete');
 }
 
 // 1. Rendering
 function renderProducts(category) {
+    console.log('[Calculator] renderProducts called with category:', category);
+    
     const list = document.getElementById('product-list');
+    if (!list) {
+        console.error('[Calculator] product-list element not found');
+        return;
+    }
     list.innerHTML = '';
 
-    // Update tabs visual
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    // Simple check match text (fragile but works for now or use dataset)
-    // Actually simpler to filter data
+    // Update tabs visual based on category
+    const tabs = document.querySelectorAll('#step-1 .tab');
+    tabs.forEach(t => {
+        t.classList.remove('active');
+        if (t.innerText.includes('서버') && category === 'server') t.classList.add('active');
+        else if (t.innerText.includes('코로케이션') && category === 'colocation') t.classList.add('active');
+        else if (t.innerText.includes('매니지먼트') && category === 'management') t.classList.add('active');
+    });
 
     const filtered = CALCULATOR_DATA.products.filter(p => p.category === category);
+    console.log('[Calculator] Filtered products count:', filtered.length);
+
+    if (filtered.length === 0) {
+        list.innerHTML = '<p style="color:#94a3b8; text-align:center; padding:40px;">해당 카테고리에 상품이 없습니다.</p>';
+        return;
+    }
 
     filtered.forEach(p => {
         const div = document.createElement('div');
@@ -97,18 +131,11 @@ function renderProducts(category) {
         `;
         list.appendChild(div);
     });
+    console.log('[Calculator] Products rendered successfully');
 }
 
 function filterCategory(cat) {
-    // Update active tab styles manually
-    const tabs = document.querySelectorAll('#step-1 .tab');
-    tabs.forEach(t => {
-        if (t.innerText.includes('서버') && cat === 'server') t.classList.add('active');
-        else if (t.innerText.includes('코로케이션') && cat === 'colocation') t.classList.add('active');
-        else if (t.innerText.includes('매니지먼트') && cat === 'management') t.classList.add('active');
-        else t.classList.remove('active');
-    });
-
+    console.log('[Calculator] filterCategory called:', cat);
     renderProducts(cat);
 }
 
