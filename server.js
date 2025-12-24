@@ -172,9 +172,15 @@ app.get('/api/calculator/data', async (req, res) => {
             'SELECT months, rate::float, label FROM calculator_discounts ORDER BY months'
         );
         
+        const parseJSON = (val) => {
+            if (!val) return null;
+            if (typeof val === 'object') return val;
+            try { return JSON.parse(val); } catch { return val; }
+        };
+        
         const products = productsResult.rows.map(p => ({
             ...p,
-            specs: p.specs || {}
+            specs: parseJSON(p.specs) || {}
         }));
         
         const addons = addonsResult.rows.map(a => {
@@ -187,8 +193,8 @@ app.get('/api/calculator/data', async (req, res) => {
             if (a.price_per_unit) addon.price_per_unit = a.price_per_unit;
             if (a.step) addon.step = a.step;
             if (a.max) addon.max = a.max;
-            if (a.options) addon.options = a.options;
-            if (a.items) addon.items = a.items;
+            if (a.options) addon.options = parseJSON(a.options);
+            if (a.items) addon.items = parseJSON(a.items);
             return addon;
         });
         
