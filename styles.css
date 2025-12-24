@@ -4327,6 +4327,34 @@ main.sub-content {
     color: #03C75A !important;
 }
 
+/* Theme Blue - Badge Hover Fix */
+.theme-blue .plan-card:hover .plan-badge,
+.theme-blue .plan-card:hover .badge-rec {
+    color: #2563eb !important;
+    border: 2px solid #2563eb !important;
+}
+
+.theme-blue .plan-card:hover .plan-btn,
+.theme-blue .plan-card:hover .btn-price {
+    color: #2563eb !important;
+}
+
+/* Badge Border Fix for All Themes on Hover */
+.plan-card:hover .plan-badge,
+.plan-card:hover .badge-rec {
+    border: 2px solid currentColor !important;
+}
+
+.theme-red .plan-card:hover .plan-badge,
+.theme-red .plan-card:hover .badge-rec {
+    border: 2px solid #EF4444 !important;
+}
+
+.theme-green .plan-card:hover .plan-badge,
+.theme-green .plan-card:hover .badge-rec {
+    border: 2px solid #03C75A !important;
+}
+
 /* FINAL RESPONSIVE OVERRIDES (Must be last) */
 @media (max-width: 480px) {
     .plan-card:hover {
